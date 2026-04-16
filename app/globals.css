@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-songcry-bg: #080707;
+  --color-songcry-surface-100: #0C0C0C;
+  --color-songcry-surface-200: #121212;
+  --color-songcry-surface-300: #141414;
+  --color-songcry-surface-400: #1E1E1E;
+  --color-songcry-surface-500: #292929;
+  --color-songcry-accent: #F819C0;
+  --color-songcry-accent-dark: #D907A4;
+  --color-songcry-error: #F34655;
+  --color-songcry-text-primary: #FFFFFF;
+  --color-songcry-text-secondary: #ABABAB;
+  --color-songcry-text-tertiary: #6B6B6B;
+  --font-sans: var(--font-albert-sans), system-ui, sans-serif;
+  --border-radius-compact: 8px;
+  --border-radius-standard: 12px;
+  --border-radius-elevated: 16px;
+  --border-radius-max: 24px;
+}
+
+:root {
+  --bg: #080707;
+  --surface-100: #0C0C0C;
+  --surface-200: #121212;
+  --surface-300: #141414;
+  --surface-400: #1E1E1E;
+  --surface-500: #292929;
+  --text-primary: #FFFFFF;
+  --text-secondary: #ABABAB;
+  --text-tertiary: #6B6B6B;
+  --accent: #F819C0;
+  --accent-dark: #D907A4;
+  --border: rgba(255, 255, 255, 0.12);
+  --ease-standard: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --h1: clamp(2.25rem, 3vw + 1.25rem, 3.5rem);
+  --h2: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+  --h3: clamp(1.375rem, 1vw + 1rem, 1.75rem);
+  --body-lg: clamp(1.125rem, 0.5vw + 0.875rem, 1.25rem);
+  --body: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
+  --body-sm: clamp(0.875rem, 0.25vw + 0.75rem, 1rem);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #080707;
+  color: #FFFFFF;
+  font-family: var(--font-albert-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid #F819C0;
+  outline-offset: 2px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(-8px); }
+  50% { transform: translateY(8px); }
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes bounce-chevron {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(6px); opacity: 0.6; }
+}
+
+.bounce-chevron {
+  animation: bounce-chevron 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
