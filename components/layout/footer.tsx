@@ -24,9 +24,8 @@ export default function Footer() {
         >
           {/* Col 1: Brand */}
           <div>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', marginBottom: '12px' }}>
-              <Image src="/logo/songcry-flame-icon.svg" alt="Songcry flame" width={32} height={26} />
-              <span style={{ fontWeight: 600, fontSize: '16px', color: '#FFFFFF' }}>Songcry</span>
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', marginBottom: '12px' }}>
+              <Image src="/logo/songcry-logo-horizontal-white.png" alt="Songcry" width={98} height={28} />
             </Link>
             <p style={{ fontSize: '14px', color: '#6B6B6B', marginTop: '8px' }}>yours, not theirs</p>
           </div>

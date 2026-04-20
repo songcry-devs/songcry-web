@@ -31,9 +31,8 @@ export default function Nav() {
       }}
     >
       <div style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-          <Image src="/logo/songcry-flame-icon.svg" alt="Songcry flame" width={36} height={29} />
-          <span style={{ fontFamily: 'var(--font-albert-sans), system-ui, sans-serif', fontWeight: 600, fontSize: '18px', color: '#FFFFFF', letterSpacing: '-0.01em' }}>Songcry</span>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <Image src="/logo/songcry-logo-horizontal-white.png" alt="Songcry" width={112} height={32} priority />
         </Link>
         <Link
           href="#waitlist"
