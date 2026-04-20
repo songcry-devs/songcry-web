@@ -86,14 +86,6 @@ export default function FanHomepage() {
         >
           {/* Left: copy */}
           <div style={{ flex: '0 0 58%', maxWidth: '620px' }}>
-            <Image
-              src="/images/yours-not-theirs-script.png"
-              alt="Yours, Not Theirs"
-              width={320}
-              height={118}
-              priority
-              style={{ width: 'clamp(240px, 28vw, 340px)', height: 'auto', marginBottom: '20px' }}
-            />
             <h1
               style={{
                 fontSize: 'clamp(2.5rem, 5vw + 1rem, 4.5rem)',

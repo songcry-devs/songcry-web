@@ -24,10 +24,15 @@ export default function Footer() {
         >
           {/* Col 1: Brand */}
           <div>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', marginBottom: '12px' }}>
-              <Image src="/logo/songcry-logo-horizontal-white.png" alt="Songcry" width={98} height={28} />
+            <Link href="/" style={{ display: 'inline-block', textDecoration: 'none' }}>
+              <Image
+                src="/logo/songcry-footer-lockup.png"
+                alt="Songcry — yours, not theirs"
+                width={180}
+                height={53}
+                style={{ height: 'auto', maxWidth: '180px' }}
+              />
             </Link>
-            <p style={{ fontSize: '14px', color: '#6B6B6B', marginTop: '8px' }}>yours, not theirs</p>
           </div>
 
           {/* Col 2: Product */}
