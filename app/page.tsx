@@ -3,8 +3,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useRef } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
+import { KineticHeadline } from '@/components/motion/KineticHeadline'
+import { SectionReveal } from '@/components/motion/SectionReveal'
+import { WaveformDivider } from '@/components/visual/WaveformDivider'
 
 export default function FanHomepage() {
   const [name, setName] = useState('')
@@ -13,6 +17,7 @@ export default function FanHomepage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const formRef = useRef<HTMLFormElement>(null)
+  const reduce = useReducedMotion()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -86,57 +91,56 @@ export default function FanHomepage() {
         >
           {/* Left: copy */}
           <div style={{ flex: '0 0 58%', maxWidth: '620px' }}>
-            <h1
-              style={{
-                fontSize: 'clamp(2.5rem, 5vw + 1rem, 4.5rem)',
-                fontWeight: 700,
-                color: '#FFFFFF',
-                lineHeight: 1.08,
-                letterSpacing: '-0.02em',
-                marginBottom: '24px',
-              }}
+            <KineticHeadline
+              lines={[['Music', 'spreads'], ['through', 'fans.']]}
+              accent="fans"
+              className="mb-6"
+            />
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              animate={reduce ? undefined : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              Music spreads<br />through fans.
-            </h1>
-            <p
-              style={{
-                fontSize: 'clamp(1.125rem, 0.5vw + 0.875rem, 1.25rem)',
-                color: '#ABABAB',
-                lineHeight: 1.6,
-                marginBottom: '40px',
-                maxWidth: '520px',
-              }}
-            >
-              Songcry is where fans decide what rises. Discover music from artists in your city — before anyone else does.
-            </p>
-            <a
-              href="#waitlist"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: '#FFFFFF',
-                color: '#080707',
-                fontWeight: 600,
-                fontSize: '16px',
-                padding: '0 28px',
-                height: '52px',
-                borderRadius: '9999px',
-                textDecoration: 'none',
-                transition: 'opacity 150ms ease-out, transform 150ms ease-out',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLAnchorElement).style.opacity = '0.88'
-                ;(e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)'
-              }}
-              onMouseLeave={e => {
-                ;(e.currentTarget as HTMLAnchorElement).style.opacity = '1'
-                ;(e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)'
-              }}
-            >
-              Get Early Access
-              <Image src="/icons/arrow-right.svg" alt="" width={16} height={16} />
-            </a>
+              <p
+                style={{
+                  fontSize: 'clamp(1.125rem, 0.5vw + 0.875rem, 1.25rem)',
+                  color: '#ABABAB',
+                  lineHeight: 1.6,
+                  marginBottom: '40px',
+                  maxWidth: '520px',
+                }}
+              >
+                Songcry is where fans decide what rises. Discover music from artists in your city — before anyone else does.
+              </p>
+              <a
+                href="#waitlist"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  background: '#FFFFFF',
+                  color: '#080707',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  padding: '0 28px',
+                  height: '52px',
+                  borderRadius: '9999px',
+                  textDecoration: 'none',
+                  transition: 'opacity 150ms ease-out, transform 150ms ease-out',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.opacity = '0.88'
+                  ;(e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)'
+                }}
+                onMouseLeave={e => {
+                  ;(e.currentTarget as HTMLAnchorElement).style.opacity = '1'
+                  ;(e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)'
+                }}
+              >
+                Get Early Access
+                <Image src="/icons/arrow-right.svg" alt="" width={16} height={16} />
+              </a>
+            </motion.div>
           </div>
 
           {/* Right: phone mockup */}
@@ -176,6 +180,9 @@ export default function FanHomepage() {
         </div>
       </section>
 
+      {/* ─── Waveform divider ─── */}
+      <WaveformDivider />
+
       {/* ─── How Songcry Works ─── */}
       <section style={{ padding: '96px 0' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
@@ -214,9 +221,9 @@ export default function FanHomepage() {
                 title: 'Real Listeners',
                 body: 'Growth is driven by genuine fans who chose to listen. No bots, no paid plays, no shortcuts. Just music that earns its audience.',
               },
-            ].map(card => (
+            ].map((card, i) => (
+              <SectionReveal key={card.num} delay={i * 120}>
               <div
-                key={card.num}
                 style={{
                   background: 'rgba(255,255,255,0.03)',
                   border: '1px solid rgba(255,255,255,0.08)',
@@ -258,10 +265,14 @@ export default function FanHomepage() {
                   {card.body}
                 </p>
               </div>
+              </SectionReveal>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ─── Waveform divider ─── */}
+      <WaveformDivider />
 
       {/* ─── Waitlist Form ─── */}
       <section
@@ -271,6 +282,7 @@ export default function FanHomepage() {
           background: 'linear-gradient(to bottom, transparent, #0C0C0C 30%, #0C0C0C 70%, transparent)',
         }}
       >
+        <SectionReveal>
         <div
           style={{
             maxWidth: '1200px',
@@ -464,6 +476,7 @@ export default function FanHomepage() {
             </span>
           </div>
         </div>
+        </SectionReveal>
       </section>
 
       <Footer />
