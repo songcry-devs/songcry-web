@@ -1,22 +1,38 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
-import { cn } from '@/lib/cn'
+import { ReactNode } from 'react'
 
 type Props = {
-  children: React.ReactNode
-  className?: string
-  /** Delay before reveal begins (ms). */
+  children: ReactNode
+  /** Delay in ms before this block starts its reveal. */
   delay?: number
-  /** How far into the viewport before firing (framer-motion margin syntax). */
-  margin?: string
+  /** Optional className passthrough to the wrapper. */
+  className?: string
+  /** Y offset in px (default 24). */
+  y?: number
+  /** Blur amount in px (default 6). */
+  blur?: number
+  /** Reveal duration in ms (default 600). */
+  duration?: number
+  /** Viewport amount (0-1) required before firing. */
+  amount?: number
 }
 
 /**
- * Fades + blurs + translates a section into view on scroll.
- * Fires once (viewport.once). Respects prefers-reduced-motion.
+ * SectionReveal — consistent scroll-triggered reveal primitive.
+ * Fires once when the element reaches `amount` visibility.
+ * Respects prefers-reduced-motion (renders statically).
  */
-export function SectionReveal({ children, className, delay = 0, margin = '-80px' }: Props) {
+export function SectionReveal({
+  children,
+  delay = 0,
+  className,
+  y = 24,
+  blur = 6,
+  duration = 600,
+  amount = 0.25,
+}: Props) {
   const reduce = useReducedMotion()
 
   if (reduce) {
@@ -25,11 +41,11 @@ export function SectionReveal({ children, className, delay = 0, margin = '-80px'
 
   return (
     <motion.div
-      className={cn(className)}
-      initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
+      className={className}
+      initial={{ opacity: 0, y, filter: `blur(${blur}px)` }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin }}
-      transition={{ duration: 0.6, delay: delay / 1000, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, amount }}
+      transition={{ duration: duration / 1000, ease: [0.16, 1, 0.3, 1], delay: delay / 1000 }}
     >
       {children}
     </motion.div>
