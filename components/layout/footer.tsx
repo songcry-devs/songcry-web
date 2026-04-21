@@ -115,8 +115,8 @@ export default function Footer() {
             gap: '16px',
           }}
         >
-          <p style={{ fontSize: '13px', color: '#6B6B6B' }}>
-            &copy; 2025 Songcry. All rights reserved.
+          <p style={{ fontSize: '13px', color: '#ABABAB' }}>
+            &copy; 2026 Songcry. All rights reserved.
           </p>
 
           {/* Social Icons */}

@@ -29,7 +29,7 @@ export function KineticHeadline({ lines, accent, className, delay = 0 }: Props) 
       className={cn(
         'font-sans text-white',
         'font-bold leading-[1.08] tracking-[-0.02em]',
-        'text-[clamp(2.5rem,5vw+1rem,4.5rem)]',
+        'text-[clamp(2.5rem,5vw+1rem,4rem)]',
         className,
       )}
       style={{ fontFamily: 'var(--font-albert-sans), system-ui, sans-serif' }}

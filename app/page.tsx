@@ -13,17 +13,17 @@ const HOW_IT_WORKS = [
   {
     num: '01',
     title: 'Upload & Claim',
-    body: 'Artists upload songs and claim their city. Your music gets served to fans in your geographic zone — starting in your neighborhood.',
+    body: 'Artists upload and claim their city. Music gets served to fans in your geographic zone — starting in your neighborhood, moving outward as it earns listens.',
   },
   {
     num: '02',
     title: 'Discover Locally',
-    body: 'Fans swipe through a personalized feed of songs rising in their city. No algorithms gaming virality — just music from real artists near you.',
+    body: 'Fans swipe a personalized feed of songs rising in their city. No virality games — just what\u2019s actually playing near you.',
   },
   {
     num: '03',
     title: 'Real Listeners',
-    body: 'Growth is driven by genuine fans who chose to listen. No bots, no paid plays, no shortcuts. Music that earns its audience.',
+    body: 'Growth comes from people who chose to listen. No bots, no paid plays, no shortcuts. Music earns its audience.',
   },
 ] as const
 
@@ -131,7 +131,7 @@ export default function FanHomepage() {
                   maxWidth: '520px',
                 }}
               >
-                Songcry is where fans decide what rises. Discover music from artists in your city — before anyone else does.
+                Built for fans who hear it first, and the artists who made it in their city.
               </p>
             </SectionReveal>
             <SectionReveal delay={900}>
@@ -167,22 +167,6 @@ export default function FanHomepage() {
           </div>
         </div>
 
-        {/* Scroll chevron */}
-        <div
-          className="bounce-chevron"
-          style={{
-            position: 'absolute',
-            bottom: '32px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            zIndex: 1,
-            color: 'rgba(255,255,255,0.4)',
-            fontSize: '24px',
-          }}
-          aria-hidden="true"
-        >
-          ↓
-        </div>
       </section>
 
       {/* ─── Waveform divider (Songcry visual device) ─── */}
@@ -206,7 +190,7 @@ export default function FanHomepage() {
                 letterSpacing: '-0.01em',
               }}
             >
-              How Songcry Works
+              How it spreads.
             </h2>
           </SectionReveal>
 
@@ -298,7 +282,7 @@ export default function FanHomepage() {
                 letterSpacing: '-0.01em',
               }}
             >
-              Join early and discover what&apos;s rising near you.
+              Be first in your city.
             </h2>
           </SectionReveal>
           <SectionReveal delay={120}>
@@ -309,7 +293,7 @@ export default function FanHomepage() {
                 marginBottom: '48px',
               }}
             >
-              The beta is live. Artists can join now — fan access is coming soon.
+              Artist beta is live. Fan access rolls out city by city.
             </p>
           </SectionReveal>
 

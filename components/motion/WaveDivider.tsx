@@ -20,7 +20,7 @@ type Props = {
  */
 export function WaveDivider({
   color = '#F819C0',
-  opacity = 0.55,
+  opacity = 0.6,
   height = 24,
   className,
 }: Props) {
