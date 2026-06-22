@@ -1,6 +1,7 @@
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import Hero from '@/components/sections/home/Hero'
+import HowItWorks from '@/components/sections/home/HowItWorks'
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
       <Nav variant="home" />
       <main id="main">
         <Hero />
-        {/* How Songcry Works + Download sections mounted in subsequent Phase 2 tasks */}
+        <HowItWorks />
       </main>
       <Footer />
     </>
