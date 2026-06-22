@@ -2,6 +2,7 @@ import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import Hero from '@/components/sections/home/Hero'
 import HowItWorks from '@/components/sections/home/HowItWorks'
+import Download from '@/components/sections/home/Download'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <main id="main">
         <Hero />
         <HowItWorks />
+        <Download />
       </main>
       <Footer />
     </>
