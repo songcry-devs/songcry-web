@@ -6,7 +6,7 @@ export default function Download() {
     <section className="download-section" aria-label="Download Songcry">
       <div className="download-content">
         {/* Heading */}
-        <h2 className="download-heading">Join early and discover what's rising near you.</h2>
+        <h2 className="download-heading">Join early and discover what’s rising near you.</h2>
 
         {/* Subhead */}
         <p className="download-subhead">
@@ -42,7 +42,8 @@ export default function Download() {
 
         /* ── Content wrapper ── */
         .download-content {
-          max-width: 900px;
+          /* 900px heading usable width (matches Framer one-line heading) + 24px gutters */
+          max-width: 948px;
           margin: 0 auto;
           padding-left: 24px;
           padding-right: 24px;

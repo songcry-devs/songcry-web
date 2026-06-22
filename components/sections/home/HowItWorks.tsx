@@ -5,7 +5,10 @@ export default function HowItWorks() {
       <div className="howitworks-content">
         <h2 className="howitworks-heading">How Songcry Works</h2>
         <p className="howitworks-body">
-          Songcry is a geolocation-based music discovery app. Artists upload songs and grow their audience city by city. Fans swipe through a personalized feed of music rising in their area — driven by real listeners, not algorithms. Create your account with Google, Apple, or email to start discovering what’s next in your city.
+          Songcry is a geolocation-based music discovery app. Artists upload songs and grow their audience city by city. Fans swipe through a personalized feed of music rising in their area — driven by real listeners, not algorithms.
+        </p>
+        <p className="howitworks-body howitworks-body-2">
+          Create your account with Google, Apple, or email to start discovering what’s next in your city.
         </p>
       </div>
 
@@ -48,6 +51,10 @@ export default function HowItWorks() {
           color: var(--text-60);             /* rgba(255,255,255,0.6) */
           margin: 8px 0 0 0;
           max-width: 680px;
+        }
+        /* Framer renders the body as two paragraphs with a blank-line gap */
+        .howitworks-body-2 {
+          margin-top: 38px;
         }
 
         /* ── Tablet: 818–1199px ── */

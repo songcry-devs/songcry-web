@@ -4,3 +4,6 @@ node_modules/
 verify/
 .playwright-mcp/
 framer-*.json
+*.png
+local-*.png
+framer-*.png

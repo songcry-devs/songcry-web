@@ -123,9 +123,9 @@ export default function Hero() {
           display: flex;
           flex-direction: row;
           align-items: flex-start;
-          /* Desktop: left inset ~184px, right inset matches */
+          /* Desktop: symmetric inset ~184px (phone right edge aligns to content box) */
           padding-left: 184px;
-          padding-right: 64px;
+          padding-right: 184px;
           /* Headline top ≈ y227 — nav is fixed ~72px, add padding-top to clear it */
           padding-top: 227px;
         }
@@ -217,7 +217,7 @@ export default function Hero() {
           }
           .hero-content {
             padding-left: 159px;
-            padding-right: 48px;
+            padding-right: 159px;
             padding-top: 200px;
           }
           /* Scale down phone image on tablet */
