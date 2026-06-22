@@ -4,6 +4,7 @@ import ArtistHero from '@/components/sections/artist/ArtistHero'
 import CallingIntro from '@/components/sections/artist/CallingIntro'
 import FeatureRow from '@/components/sections/artist/FeatureRow'
 import CityBand from '@/components/sections/artist/CityBand'
+import Perks from '@/components/sections/artist/Perks'
 
 export default function ArtistPage() {
   return (
@@ -35,6 +36,7 @@ export default function ArtistPage() {
           body="No shortcuts. Just real growth driven by genuine listeners and steady momentum."
         />
         <CityBand />
+        <Perks />
       </main>
       <Footer />
     </>
