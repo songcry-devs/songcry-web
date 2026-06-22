@@ -88,7 +88,6 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
               height: '60px',
               padding: '0 24px',
               background: 'transparent',
-              display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
             }}
