@@ -1,0 +1,47 @@
+/* tokens.css — design tokens measured from the live Framer songcry.app (2026-06-22)
+ * Source of truth: getComputedStyle at Desktop 1440 / Tablet 1000 / Phone 390.
+ * Do not invent values; every token below was read off the rendered Framer site. */
+
+:root {
+  /* ---- Palette (measured) ---- */
+  --bg: rgb(8, 7, 7);                       /* body background */
+  --text: rgb(255, 255, 255);              /* primary white */
+  --text-85: rgba(255, 255, 255, 0.85);    /* hero subtext */
+  --text-60: rgba(255, 255, 255, 0.6);     /* muted body / beta line */
+  --text-muted: rgb(173, 173, 173);        /* footer links + email */
+  --text-dim: rgb(122, 122, 122);          /* footer copyright */
+  --pink: rgb(248, 25, 192);               /* brand primary */
+  --nav-pill-text: rgb(41, 41, 41);        /* "Download" text on white nav pill */
+
+  /* ---- Fonts (next/font injects these vars; see layout.tsx) ---- */
+  --font-albert: var(--font-albert-sans), system-ui, sans-serif;
+  --font-inter: var(--font-inter), system-ui, sans-serif;
+
+  /* ---- Type scale (measured: size / weight / line-height / letter-spacing) ---- */
+  /* Hero H1 */
+  --fs-hero: 84px;        --lh-hero: 84px;     --ls-hero: -1.68px;   /* -0.02em */
+  /* Section H2 ("How Songcry Works") */
+  --fs-h2: 54px;          --lh-h2: 59.4px;     --ls-h2: -1.08px;     /* -0.02em */
+  /* CTA heading ("Join early…") */
+  --fs-cta: 42px;         --lh-cta: 46.2px;    --ls-cta: -0.42px;    /* -0.01em */
+  /* Body XL (HowItWorks paragraph) */
+  --fs-body-xl: 24px;     --lh-body-xl: 38.4px; --ls-body-xl: -0.48px;
+  /* Body LG (hero subtext, beta line) */
+  --fs-body-lg: 20px;     --lh-body-lg: 30px;  --ls-body-lg: -0.4px;
+  /* Footer heading */
+  --fs-footer-h: 24px;    --lh-footer-h: 28.8px;
+  /* Footer links */
+  --fs-footer-link: 16px; --lh-footer-link: 19.2px;
+  /* App Store badge label */
+  --fs-badge: 19px;       --lh-badge: 22.8px;
+  /* Nav pill label */
+  --fs-nav: 16px;         --lh-nav: 19.2px;
+
+  /* ---- Breakpoints (Framer's) ---- */
+  --bp-tablet: 1199px;    /* Desktop >= 1200 */
+  --bp-phone: 817px;      /* Tablet 818-1199 / Phone <= 817 */
+
+  /* ---- Easing (Framer default spring/transition surrogates) ---- */
+  --ease-standard: cubic-bezier(0.44, 0, 0.56, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
