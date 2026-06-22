@@ -2,3 +2,5 @@ node_modules/
 .next/
 .vercel
 verify/
+.playwright-mcp/
+framer-*.json

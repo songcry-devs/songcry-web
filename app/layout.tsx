@@ -18,8 +18,31 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://songcry.app'),
   title: 'Songcry | Geolocation Based Music Platform',
-  description: 'Geo-based music platform empowering artists to publish, grow, and connect with real listeners in their city.',
+  description:
+    'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
+  alternates: { canonical: '/' },
+  icons: {
+    icon: '/framer/favicon.svg',
+    apple: '/framer/apple-touch-icon.png',
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://songcry.app/',
+    title: 'Songcry | Geolocation Based Music Platform',
+    description:
+      'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
+    images: ['/framer/og-image.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Songcry | Geolocation Based Music Platform',
+    description:
+      'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
+    images: ['/framer/og-image.png'],
+  },
+  robots: 'max-image-preview:large',
 }
 
 export const viewport: Viewport = {
