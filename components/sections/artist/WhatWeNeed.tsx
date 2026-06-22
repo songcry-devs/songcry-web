@@ -30,7 +30,7 @@ const CARDS = [
     body: 'Video testimonial showing real metrics',
   },
   {
-    image: '/framer/needs-card-5.png',
+    image: '/framer/needs-card-5.jpg',
     imageAlt: 'Group of artists collaborating',
     title: 'Invite 3–5 artists you respect.',
     body: 'Help us build quality, not quantity',
