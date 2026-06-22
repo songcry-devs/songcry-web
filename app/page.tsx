@@ -829,7 +829,7 @@ export default function FanHomepage() {
                   letterSpacing: '-0.015em',
                 }}
               >
-                Download Songcry.
+                Join early and discover what&apos;s rising near you.
               </h2>
             </SectionReveal>
             <SectionReveal delay={120}>
@@ -837,29 +837,15 @@ export default function FanHomepage() {
                 style={{
                   fontSize: 'clamp(1.125rem, 0.5vw + 0.875rem, 1.375rem)',
                   color: '#E7E7E7',
-                  margin: '0 auto 12px',
+                  margin: '0 auto 36px',
                   maxWidth: '520px',
                   lineHeight: 1.45,
                 }}
               >
-                Start discovering music where it&apos;s actually moving.
+                The beta is live. Artists can join now &mdash; fan access is coming soon.
               </p>
             </SectionReveal>
             <SectionReveal delay={200}>
-              <p
-                style={{
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  letterSpacing: '0.14em',
-                  color: '#F819C0',
-                  textTransform: 'uppercase',
-                  marginBottom: '36px',
-                }}
-              >
-                Available now on the App Store
-              </p>
-            </SectionReveal>
-            <SectionReveal delay={280}>
               <a
                 href={APP_STORE_URL}
                 target="_blank"

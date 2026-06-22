@@ -11,6 +11,34 @@ name/email/waitlist signups.
 
 ---
 
+## UPDATE 2026-06-22 — scope narrowed to form-only swap (TJ)
+
+TJ clarified the intent: **do not rewrite the section heading/subhead.** Keep the
+existing copy and only replace the *form* (name/email/"Join Waitlist") with an App Store
+download action.
+
+**Locked copy for the download section (both surfaces must match exactly):**
+- Heading: `Join early and discover what's rising near you.`
+- Subhead: `The beta is live. Artists can join now — fan access is coming soon.`
+- **No kicker line.**
+- App Store badge linking to the listing (new tab).
+
+This **supersedes** the original "Download Songcry." / "Start discovering music where it's
+actually moving." / "Available now on the App Store" rewrite described below.
+
+**Status:**
+- **Framer (`songcry.app`):** done on branch `update-call-actions` (form removed, badge
+  added + linked new-tab, hero + nav buttons → App Store, original heading/subhead kept,
+  kicker removed). **Not published** — held for TJ to eyeball + publish.
+- **Vercel (`songcry-web`):** `app/page.tsx` reverted to the locked minimal copy above
+  (kicker block removed, badge CTA kept). Build passes.
+
+> Goal: Vercel must be **100% identical** to the live Framer site so we can retire Framer
+> and serve `songcry.app` from this repo. This CTA section now matches in copy + structure;
+> full pixel-parity across the whole site remains the larger cutover effort.
+
+---
+
 ## ✅ Done in the Vercel version (`songcry-web`)
 
 Branch `feat/website-refresh-2026`. The waitlist CTA was replaced with an App Store
@@ -37,7 +65,12 @@ waitlist strings remaining).
 ## 🟡 TODO on the live Framer site (`songcry.app`)
 
 The live marketing site is still the **Framer** project (no repo; edited in the Framer
-editor). Apply the same change there manually. Steps:
+editor). Apply the same change there. Steps:
+
+> ⚠️ **Apply to ALL THREE breakpoints: Desktop/PC, Tablet, and Mobile.** Framer keeps
+> independent layouts per breakpoint. The waitlist→download swap, the nav button, and the
+> hero button must each be updated (and verified) in all three, or the live site will be
+> inconsistent across devices. Check each breakpoint in the editor before publishing.
 
 ### 1. Replace the waitlist section
 
