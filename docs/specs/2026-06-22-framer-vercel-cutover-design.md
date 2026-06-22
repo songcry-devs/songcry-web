@@ -77,19 +77,40 @@ Keep the existing stack (Next.js App Router, Tailwind v4, `framer-motion` + `gsa
 - **Cleanup as we go**: remove the duplicate typo route `app/legal/community-guidlines/`
   (keep the correctly-spelled `community-guidelines`), dead code, magic numbers.
 
-### Current `songcry-web` inventory (starting point)
-- Pages present: `/` (Home), `/artist`, `/legal/{terms-of-use, privacy, community-guidelines,
-  community-guidlines[typo]}`
-- Components: `layout/{nav,footer}`, `motion/{KineticHeadline, ParallaxPhone, SectionReveal,
-  WaveDivider}`
-- Assets present in `public/`: phone mockups, gallery images, avatars, logos, app-store badge,
-  social icons, hero background
-- Already done: the App Store CTA change (commit `a8e2451`) — Home download section matches the
-  current live Framer Home
+### Current `songcry-web` reality (IMPORTANT — corrected 2026-06-22)
+**`songcry-web`'s current pages are NOT a Framer clone — they are a separate, richer
+"website-refresh-2026" redesign** (Home has Fan-gallery / "How it spreads" cards /
+"Your city, not theirs" editorial / Fan-perks grid / Artist-teaser sections that do **not**
+exist on Framer). TJ reviewed it and decided **not** to ship the redesign — parts read
+cheap / AI-generated (e.g. fake listener avatars). Direction (TJ, 2026-06-22): **build a
+faithful 1:1 clone of the current Framer site now**; add new things *deliberately* later.
+
+Implications for this work:
+- **Set the redesign aside, do not delete it.** Preserve it (keep the existing
+  `feat/website-refresh-2026` branch intact; do the clone on a fresh branch). It may hold
+  reusable ideas for deliberate post-cutover enhancements.
+- The clone is built to match Framer; existing redesign page code is **replaced**, not
+  adjusted. Reuse only what genuinely matches Framer (assets in `public/`, and `Nav`/`Footer`
+  *only if* they already match Framer — verify; otherwise rebuild to match).
+- Existing pieces that may be reusable as tools: `public/` assets, the motion-component
+  scaffolding (`SectionReveal` etc.), Tailwind setup.
+- Components present today (redesign): `layout/{nav,footer}`, `motion/{KineticHeadline,
+  ParallaxPhone, SectionReveal, WaveDivider}`.
+- The Home **download section** already matches the current live Framer Home (App Store CTA,
+  commit `a8e2451`) — that one section is a valid reference for the clone.
+
+### Bug-fix policy (TJ, 2026-06-22)
+Clone the Framer **design** faithfully, but **fix clear layout bugs as we go and flag each
+one** for TJ's approval — an obvious breakage is not "the design." Known example to fix:
+on **`/artist` (mobile)** the footer "Contact Us" text **overlaps the Songcry logo lockup**
+("yours, not theirs") instead of stacking with spacing. Each such fix is logged in the parity
+report.
 
 ## 5. Phased execution plan
 
-- **Phase 0 — Foundation**: extract design tokens + fonts + asset inventory from live Framer;
+- **Phase 0 — Foundation**: create a fresh clone branch (preserving the redesign on
+  `feat/website-refresh-2026`); audit which existing `public/` assets + `Nav`/`Footer`
+  actually match Framer; extract design tokens + fonts + asset inventory from live Framer;
   stand up the side-by-side screenshot verification harness (Framer vs Vercel preview at the
   three breakpoints).
 - **Phase 1 — Shared chrome**: Nav + Footer to pixel-parity (on every page → first).
