@@ -5,6 +5,7 @@ import CallingIntro from '@/components/sections/artist/CallingIntro'
 import FeatureRow from '@/components/sections/artist/FeatureRow'
 import CityBand from '@/components/sections/artist/CityBand'
 import Perks from '@/components/sections/artist/Perks'
+import WhatWeNeed from '@/components/sections/artist/WhatWeNeed'
 
 export default function ArtistPage() {
   return (
@@ -37,6 +38,7 @@ export default function ArtistPage() {
         />
         <CityBand />
         <Perks />
+        <WhatWeNeed />
       </main>
       <Footer />
     </>
