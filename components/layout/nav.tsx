@@ -35,8 +35,10 @@ export default function Nav() {
           <Image src="/logo/songcry-flame-circle.svg" alt="Songcry" width={36} height={36} priority />
           <span style={{ fontFamily: 'var(--font-albert-sans), system-ui, sans-serif', fontWeight: 600, fontSize: '18px', color: '#FFFFFF', letterSpacing: '-0.01em' }}>Songcry</span>
         </Link>
-        <Link
-          href="#waitlist"
+        <a
+          href="https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             background: '#FFFFFF',
             color: '#080707',
@@ -60,8 +62,8 @@ export default function Nav() {
             e.currentTarget.style.transform = 'scale(1)'
           }}
         >
-          Get Early Access
-        </Link>
+          Download
+        </a>
       </div>
     </nav>
   )

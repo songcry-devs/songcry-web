@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -22,6 +21,9 @@ import { ParallaxPhone } from '@/components/motion/ParallaxPhone'
 // ─────────────────────────────────────────────────────────────
 // Data
 // ─────────────────────────────────────────────────────────────
+
+const APP_STORE_URL =
+  'https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416'
 
 const HOW_IT_SPREADS = [
   {
@@ -92,35 +94,6 @@ const GALLERY_ITEMS = [
 // ─────────────────────────────────────────────────────────────
 
 export default function FanHomepage() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [website, setWebsite] = useState('') // honeypot
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
-  const formRef = useRef<HTMLFormElement>(null)
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    if (website) return // honeypot triggered — silent ignore
-    if (!name.trim() || !email.trim()) return
-
-    setStatus('loading')
-    setErrorMsg('')
-
-    try {
-      const res = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), email: email.trim() }),
-      })
-      if (!res.ok) throw new Error('Server error')
-      setStatus('success')
-    } catch {
-      setStatus('error')
-      setErrorMsg('Something went wrong. Try again.')
-    }
-  }
-
   return (
     <div style={{ background: '#080707', minHeight: '100vh' }}>
       <a href="#main" className="skip-link">Skip to content</a>
@@ -235,7 +208,9 @@ export default function FanHomepage() {
                 <SectionReveal delay={900}>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', alignItems: 'center' }}>
                     <a
-                      href="#waitlist"
+                      href={APP_STORE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="hero-cta"
                       style={{
                         display: 'inline-flex',
@@ -251,7 +226,7 @@ export default function FanHomepage() {
                         textDecoration: 'none',
                       }}
                     >
-                      Get Early Access
+                      Download on the App Store
                       <Image src="/icons/arrow-right.svg" alt="" width={16} height={16} />
                     </a>
                     <Link
@@ -826,9 +801,9 @@ export default function FanHomepage() {
           </div>
         </section>
 
-        {/* ─── Waitlist ─── */}
+        {/* ─── Download ─── */}
         <section
-          id="waitlist"
+          id="download"
           style={{
             padding: '96px 0 112px',
             background:
@@ -854,136 +829,66 @@ export default function FanHomepage() {
                   letterSpacing: '-0.015em',
                 }}
               >
-                Be first in your city.
+                Download Songcry.
               </h2>
             </SectionReveal>
             <SectionReveal delay={120}>
               <p
                 style={{
-                  fontSize: 'clamp(1rem, 0.5vw + 0.875rem, 1.125rem)',
-                  color: '#ABABAB',
-                  marginBottom: '40px',
-                  lineHeight: 1.6,
+                  fontSize: 'clamp(1.125rem, 0.5vw + 0.875rem, 1.375rem)',
+                  color: '#E7E7E7',
+                  margin: '0 auto 12px',
+                  maxWidth: '520px',
+                  lineHeight: 1.45,
                 }}
               >
-                Artist beta is live. Fan access rolls out city by city.
+                Start discovering music where it&apos;s actually moving.
               </p>
             </SectionReveal>
-
-            {status === 'success' ? (
-              <SectionReveal>
-                <div
-                  style={{
-                    maxWidth: '480px',
-                    margin: '0 auto',
-                    padding: '32px',
-                    background: 'rgba(248,25,192,0.08)',
-                    border: '1px solid rgba(248,25,192,0.28)',
-                    borderRadius: '18px',
-                    color: '#FFFFFF',
-                    boxShadow: '0 0 0 1px rgba(248,25,192,0.06), 0 20px 60px rgba(248,25,192,0.08)',
-                  }}
-                >
-                  <div style={{ fontSize: '32px', marginBottom: '12px' }}>🎵</div>
-                  <p style={{ fontWeight: 600, fontSize: '18px', marginBottom: '8px' }}>
-                    You&apos;re on the list.
-                  </p>
-                  <p style={{ color: '#ABABAB', fontSize: '15px' }}>
-                    We&apos;ll reach out when fan access opens in your city.
-                  </p>
-                </div>
-              </SectionReveal>
-            ) : (
-              <SectionReveal delay={200}>
-                <div
-                  style={{
-                    maxWidth: '480px',
-                    margin: '0 auto',
-                    padding: '28px',
-                    background: 'rgba(12,12,12,0.85)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: '20px',
-                    boxShadow: '0 20px 60px rgba(0,0,0,0.35)',
-                  }}
-                >
-                  <form
-                    ref={formRef}
-                    onSubmit={handleSubmit}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '14px',
-                    }}
-                  >
-                    {/* Honeypot */}
-                    <input
-                      type="text"
-                      name="website"
-                      value={website}
-                      onChange={(e) => setWebsite(e.target.value)}
-                      tabIndex={-1}
-                      aria-hidden="true"
-                      autoComplete="off"
-                      style={{
-                        position: 'absolute',
-                        left: '-9999px',
-                        opacity: 0,
-                        height: 0,
-                      }}
-                    />
-
-                    <input
-                      className="field-input"
-                      type="text"
-                      placeholder="Your name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                      aria-label="Your name"
-                    />
-
-                    <input
-                      className="field-input"
-                      type="email"
-                      placeholder="Your email address"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      aria-label="Your email address"
-                    />
-
-                    {errorMsg && (
-                      <p
-                        role="alert"
-                        style={{ color: '#F34655', fontSize: '14px', textAlign: 'left' }}
-                      >
-                        {errorMsg}
-                      </p>
-                    )}
-
-                    <button
-                      type="submit"
-                      className="cta-button"
-                      disabled={status === 'loading'}
-                      style={{ marginTop: '4px' }}
-                    >
-                      {status === 'loading' ? 'Joining…' : 'Join Waitlist'}
-                    </button>
-                  </form>
-
-                  <p
-                    style={{
-                      fontSize: '12px',
-                      color: '#8A8A8A',
-                      marginTop: '14px',
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    No spam, no sold lists. One email when your city opens.
-                  </p>
-                </div>
-              </SectionReveal>
-            )}
+            <SectionReveal delay={200}>
+              <p
+                style={{
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  letterSpacing: '0.14em',
+                  color: '#F819C0',
+                  textTransform: 'uppercase',
+                  marginBottom: '36px',
+                }}
+              >
+                Available now on the App Store
+              </p>
+            </SectionReveal>
+            <SectionReveal delay={280}>
+              <a
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Download Songcry on the App Store"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'opacity 250ms, transform 250ms',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = '0.85'
+                  e.currentTarget.style.transform = 'scale(1.02)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = '1'
+                  e.currentTarget.style.transform = 'scale(1)'
+                }}
+              >
+                <Image
+                  src="/icons/app-store-badge.svg"
+                  alt="Download on the App Store"
+                  width={168}
+                  height={56}
+                  priority
+                />
+              </a>
+            </SectionReveal>
           </div>
         </section>
       </main>
