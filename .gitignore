@@ -3,8 +3,10 @@ node_modules/
 .vercel
 verify/
 .playwright-mcp/
-framer-*.json
-*.png
-local-*.png
-framer-*.png
-framer-*.txt
+# root-level scratch screenshots / measurement dumps (keep public/framer/*.png tracked)
+/framer-*.json
+/framer-*.txt
+/*-framer*.png
+/*-local*.png
+/local-*.png
+/framer-*.png
