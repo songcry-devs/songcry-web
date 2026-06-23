@@ -18,8 +18,18 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+// Resolve absolute URLs (OG/Twitter image, canonical) to the right host:
+// production → songcry.app; Vercel previews → the deployment URL (so shared
+// preview links show the card); local → localhost.
+const baseUrl =
+  process.env.VERCEL_ENV === 'production'
+    ? 'https://songcry.app'
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000'
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://songcry.app'),
+  metadataBase: new URL(baseUrl),
   title: 'Songcry | Geolocation Based Music Platform',
   description:
     'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
@@ -34,14 +44,14 @@ export const metadata: Metadata = {
     title: 'Songcry | Geolocation Based Music Platform',
     description:
       'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
-    images: ['/framer/og-image.png'],
+    images: [{ url: '/framer/og-card.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Songcry | Geolocation Based Music Platform',
     description:
       'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
-    images: ['/framer/og-image.png'],
+    images: ['/framer/og-card.png'],
   },
   robots: 'max-image-preview:large',
 }
