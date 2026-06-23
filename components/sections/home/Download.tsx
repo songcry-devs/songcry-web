@@ -68,9 +68,11 @@ export default function Download() {
           height: 780px;
           z-index: 0;
           pointer-events: none;
+          /* Purer, dimmer magenta (R close to B, low green) so it is not blown
+             out and the grid shows through — matches Framer peak rgb(54,7,53). */
           background:
-            radial-gradient(58% 120% at 50% 100%, rgba(210, 52, 194, 0.36), rgba(186, 48, 202, 0.14) 54%, transparent 88%),
-            radial-gradient(40% 104% at 22% 100%, rgba(190, 46, 202, 0.18), transparent 80%);
+            radial-gradient(58% 120% at 50% 100%, rgba(200, 14, 194, 0.25), rgba(168, 22, 190, 0.09) 54%, transparent 88%),
+            radial-gradient(40% 104% at 22% 100%, rgba(176, 18, 196, 0.12), transparent 80%);
           -webkit-mask: linear-gradient(to top, #000 0%, #000 6%, transparent 100%);
           mask: linear-gradient(to top, #000 0%, #000 6%, transparent 100%);
         }
@@ -100,8 +102,8 @@ export default function Download() {
           transform-origin: 50% 100%;
           transform: rotateX(74deg);
           background:
-            repeating-linear-gradient(0deg, rgba(232, 96, 212, 0.32) 0 1.5px, transparent 1.5px 46px),
-            repeating-linear-gradient(90deg, rgba(228, 92, 210, 0.26) 0 1.5px, transparent 1.5px 46px);
+            repeating-linear-gradient(0deg, rgba(236, 150, 224, 0.26) 0 1px, transparent 1px 46px),
+            repeating-linear-gradient(90deg, rgba(236, 150, 224, 0.2) 0 1px, transparent 1px 46px);
         }
 
         /* ── Content wrapper ── */
