@@ -125,13 +125,15 @@ export default function WhatWeNeed() {
         /* ── Card grid — 3 columns desktop, last row 2 cards centered ── */
         /* FLAG: Centering the last row (2 of 5 cards) is achieved with
            justify-content:center so the 2-card final row is center-aligned.
-           This matches Framer's visual output. */
+           This matches Framer visual output. */
         .wwn-grid {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
           gap: 48px;
-          max-width: 1032px;
+          /* 1036px content (1084 - 48 gutters) fits 3x312 + 2x48 with slack,
+             landing the top row at Framer x=204/564/924. */
+          max-width: 1084px;
           margin: 0 auto;
           padding-left: 24px;
           padding-right: 24px;

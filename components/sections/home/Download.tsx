@@ -42,8 +42,8 @@ export default function Download() {
       <style>{`
         /* ── Section shell ── */
         .download-section {
-          /* Magenta glow rising from the section's base into the footer —
-             matches Framer's measured peak ~rgb(50,7,50) over the dark bg. */
+          /* Magenta glow rising from the section base into the footer —
+             matches Framer measured peak ~rgb(50,7,50) over the dark bg. */
           background:
             radial-gradient(60% 75% at 50% 122%, rgba(216, 22, 205, 0.30), transparent 60%),
             rgb(8, 7, 7);

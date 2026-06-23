@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Albert_Sans, Inter } from 'next/font/google'
 import './tokens.css'
 import './globals.css'
+import MotionProvider from '@/components/motion/MotionProvider'
 
 const albertSans = Albert_Sans({
   subsets: ['latin'],
@@ -59,7 +60,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${albertSans.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   )
 }
