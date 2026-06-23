@@ -48,4 +48,6 @@ Each page was rebuilt section-by-section from computed values read off the live 
 
 ## Notes
 
+- **`/artist` "Drop exclusives" card reuses the Home hero image on purpose.** The live Framer site serves the same asset (`6J1yMzrqFCfyGZIh2XtzvpI.png`) for both the Home hero background and this card; the clone reuses `/framer/hero-bg.png` accordingly — faithful, not a duplication bug.
 - Dev-only: Next's image optimizer can 400 on first cold load of large images (resolves once warm); validate clean on the Vercel production build (Phase 7).
+- Asset-tracking note: an early blanket `*.png` gitignore rule had silently excluded the `/artist` PNG assets from git; fixed (scoped to root scratch) so all `public/framer` assets ship. Verify images render on the Vercel preview.
