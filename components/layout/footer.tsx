@@ -144,10 +144,10 @@ export default function Footer() {
              subtle purple/pink wash (concentrated low-centre + softly behind the
              logo), over a gentle vertical lift to #101010. */
           background:
-            repeating-linear-gradient(0deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 64px),
-            repeating-linear-gradient(90deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 64px),
-            radial-gradient(50% 70% at 50% 102%, rgba(196, 44, 176, 0.22), transparent 60%),
-            radial-gradient(40% 60% at 16% 96%, rgba(190, 48, 175, 0.14), transparent 60%),
+            repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 64px),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 64px),
+            radial-gradient(55% 75% at 50% 96%, rgba(196, 44, 176, 0.2), transparent 60%),
+            radial-gradient(40% 60% at 16% 92%, rgba(190, 48, 175, 0.12), transparent 60%),
             linear-gradient(0deg, rgb(8, 7, 7) 0%, rgb(16, 16, 16) 100%);
           padding: 64px 64px 24px;
         }

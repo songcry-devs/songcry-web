@@ -23,13 +23,15 @@ export default function FeatureRow({ heading, body, image, imageAlt, imageSide }
         <div className="fr-image-col">
           <Reveal delay={0.1} y={36}>
             <div className="fr-card">
-              <Image
-                src={image}
-                alt={imageAlt}
-                width={398}
-                height={865}
-                style={{ display: 'block', borderRadius: '24px', margin: '0 auto' }}
-              />
+              <div className="fr-img-wrap">
+                <Image
+                  src={image}
+                  alt={imageAlt}
+                  width={398}
+                  height={865}
+                  className="fr-img"
+                />
+              </div>
             </div>
           </Reveal>
         </div>
@@ -103,12 +105,33 @@ export default function FeatureRow({ heading, body, image, imageAlt, imageSide }
           flex-shrink: 0;
         }
 
+        /* Fixed-height gray frame (matches Framer 585x455); the screenshot is
+           centered inside it both ways with equal padding. */
         .fr-card {
           background: rgb(20, 20, 20);
           border-radius: 18px;
-          padding: 50px 50px 0;
-          overflow: hidden;
+          padding: 50px;
           width: 585px;
+          height: 455px;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+        .fr-img-wrap {
+          width: 398px;
+          height: 100%;
+          border-radius: 24px;
+          overflow: hidden;
+          flex-shrink: 0;
+        }
+        .fr-img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover;
+          object-position: center top;
+          display: block;
         }
 
         /* ── Tablet: 818–1199px ── */
@@ -120,7 +143,11 @@ export default function FeatureRow({ heading, body, image, imageAlt, imageSide }
 
           .fr-card {
             width: 460px;
-            padding: 40px 40px 0;
+            height: 400px;
+            padding: 40px;
+          }
+          .fr-img-wrap {
+            width: 320px;
           }
 
           .fr-heading {
@@ -168,14 +195,12 @@ export default function FeatureRow({ heading, body, image, imageAlt, imageSide }
 
           .fr-card {
             width: 100%;
-            padding: 32px 32px 0;
-            box-sizing: border-box;
+            height: 380px;
+            padding: 32px;
           }
-
-          .fr-card img {
-            width: 80% !important;
-            height: auto !important;
-            margin: 0 auto;
+          .fr-img-wrap {
+            width: 72%;
+            max-width: 300px;
           }
         }
       `}</style>

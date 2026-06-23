@@ -42,9 +42,13 @@ export default function Download() {
       <style>{`
         /* ── Section shell ── */
         .download-section {
-          /* Subtle magenta glow rising from the section base into the footer. */
+          /* Grid + subtle purple that RISE up from the section base and fade out
+             toward the top (the top-down dark overlay reveals them only low). */
           background:
-            radial-gradient(64% 90% at 50% 128%, rgba(196, 40, 178, 0.22), transparent 64%),
+            linear-gradient(to bottom, rgb(8, 7, 7) 18%, rgba(8, 7, 7, 0.82) 46%, transparent 86%),
+            repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 64px),
+            repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 64px),
+            radial-gradient(62% 80% at 50% 132%, rgba(196, 44, 176, 0.2), transparent 64%),
             rgb(8, 7, 7);
           padding-top: 96px;
           padding-bottom: 64px;
