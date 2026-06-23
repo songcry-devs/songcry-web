@@ -81,8 +81,9 @@ export default function ArtistHero() {
           position: relative;
           width: 100%;
           background: rgb(8, 7, 7);
-          padding-top: 150px;
-          padding-bottom: 80px;
+          /* Match Framer: script lands ~y286, headline ~y406, section ~800 tall */
+          padding-top: 280px;
+          padding-bottom: 206px;
           overflow: hidden;
         }
 
@@ -110,32 +111,32 @@ export default function ArtistHero() {
         /* ── Animated purple globe (sphere) ── */
         .artist-globe {
           position: absolute;
-          top: 62px;
+          top: 197px;
           left: 50%;
           transform: translateX(-50%);
-          width: 410px;
-          height: 410px;
+          width: 406px;
+          height: 406px;
           z-index: 0;
           pointer-events: none;
         }
-        /* the sphere body: dark core, purple atmosphere, bright rim + outer halo */
+        /* the sphere body: dark core, soft purple atmosphere, gentle rim + halo */
         .globe-sphere {
           position: absolute;
           inset: 0;
           border-radius: 50%;
           overflow: hidden;
           background: radial-gradient(
-            circle at 50% 40%,
-            #0d0a18 0%,
-            #1b1430 44%,
-            rgba(120, 60, 185, 0.5) 72%,
-            rgba(186, 104, 240, 0.72) 88%,
-            rgba(120, 60, 190, 0) 100%
+            circle at 50% 42%,
+            #0c0a14 0%,
+            #161026 46%,
+            rgba(96, 50, 150, 0.4) 74%,
+            rgba(150, 86, 206, 0.5) 90%,
+            rgba(110, 56, 176, 0) 100%
           );
           box-shadow:
-            0 0 140px 26px rgba(140, 70, 215, 0.42),
-            inset 0 -26px 80px rgba(0, 0, 0, 0.6),
-            inset 0 22px 60px rgba(150, 90, 220, 0.25);
+            0 0 110px 16px rgba(120, 62, 190, 0.3),
+            inset 0 -28px 80px rgba(0, 0, 0, 0.66),
+            inset 0 22px 56px rgba(130, 80, 200, 0.16);
         }
         /* rotating swirl bands across the sphere surface */
         .globe-ring {
@@ -153,18 +154,18 @@ export default function ArtistHero() {
           );
         }
         .globe-ring-1 {
-          width: 460px;
-          height: 460px;
-          margin: -230px 0 0 -230px;
-          opacity: 0.55;
-          animation: globe-spin 24s linear infinite;
+          width: 456px;
+          height: 456px;
+          margin: -228px 0 0 -228px;
+          opacity: 0.42;
+          animation: globe-spin 26s linear infinite;
         }
         .globe-ring-2 {
-          width: 360px;
-          height: 360px;
-          margin: -180px 0 0 -180px;
-          opacity: 0.4;
-          animation: globe-spin 17s linear infinite reverse;
+          width: 356px;
+          height: 356px;
+          margin: -178px 0 0 -178px;
+          opacity: 0.3;
+          animation: globe-spin 19s linear infinite reverse;
         }
         /* darken the centre so the white copy stays readable */
         .globe-shade {
@@ -262,16 +263,16 @@ export default function ArtistHero() {
         /* ── Phone: max-width 817px ── */
         @media (max-width: 817px) {
           .artist-hero-section {
-            padding-top: 130px;
-            padding-bottom: 60px;
+            padding-top: 190px;
+            padding-bottom: 120px;
           }
           .artist-globe {
-            width: 340px;
-            height: 340px;
-            top: 96px;
+            width: 320px;
+            height: 320px;
+            top: 150px;
           }
-          .globe-ring-1 { width: 340px; height: 340px; margin: -170px 0 0 -170px; }
-          .globe-ring-2 { width: 250px; height: 250px; margin: -125px 0 0 -125px; }
+          .globe-ring-1 { width: 356px; height: 356px; margin: -178px 0 0 -178px; }
+          .globe-ring-2 { width: 256px; height: 256px; margin: -128px 0 0 -128px; }
           .artist-hero-headline {
             font-size: 48px !important;
             line-height: 52.8px !important;

@@ -28,7 +28,7 @@ export default function FeatureRow({ heading, body, image, imageAlt, imageSide }
                 alt={imageAlt}
                 width={398}
                 height={865}
-                style={{ display: 'block', borderRadius: '24px' }}
+                style={{ display: 'block', borderRadius: '24px', margin: '0 auto' }}
               />
             </div>
           </Reveal>

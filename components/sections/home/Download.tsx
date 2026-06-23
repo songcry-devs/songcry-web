@@ -42,9 +42,9 @@ export default function Download() {
       <style>{`
         /* ── Section shell ── */
         .download-section {
-          /* Strong magenta glow rising from the section base into the footer. */
+          /* Subtle magenta glow rising from the section base into the footer. */
           background:
-            radial-gradient(70% 95% at 50% 124%, rgba(234, 30, 206, 0.55), rgba(150, 46, 212, 0.24) 46%, transparent 72%),
+            radial-gradient(64% 90% at 50% 128%, rgba(196, 40, 178, 0.22), transparent 64%),
             rgb(8, 7, 7);
           padding-top: 96px;
           padding-bottom: 64px;
@@ -70,7 +70,7 @@ export default function Download() {
           color: #fff;
           margin: 0 auto;
           max-width: 900px;
-          /* balance the wrap so it never leaves a lone "you." on line 2 */
+          /* balance the wrap so it never leaves a lone word on line 2 */
           text-wrap: balance;
         }
 

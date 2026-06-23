@@ -140,16 +140,15 @@ export default function Footer() {
       {/* Scoped CSS — server-safe (no JS required) */}
       <style>{`
         .site-footer {
-          /* Rich, multi-source magenta wash (bottom-left behind the logo +
-             centre-top continuing the Download glow + a right purple lobe) over
-             a faint tile grid and a vertical lift to #121212 — matches Framer. */
+          /* Framer look: a clean, VISIBLE grid/tile pattern with a CONTROLLED,
+             subtle purple/pink wash (concentrated low-centre + softly behind the
+             logo), over a gentle vertical lift to #101010. */
           background:
-            repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 70px),
-            repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 70px),
-            radial-gradient(46% 78% at 17% 88%, rgba(236, 32, 208, 0.46), transparent 62%),
-            radial-gradient(58% 85% at 52% -12%, rgba(234, 30, 206, 0.52), rgba(150, 46, 212, 0.22) 45%, transparent 66%),
-            radial-gradient(42% 64% at 86% 74%, rgba(176, 64, 224, 0.32), transparent 60%),
-            linear-gradient(0deg, rgb(8, 7, 7) 0%, rgb(18, 18, 18) 100%);
+            repeating-linear-gradient(0deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 64px),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.055) 0 1px, transparent 1px 64px),
+            radial-gradient(50% 70% at 50% 102%, rgba(196, 44, 176, 0.22), transparent 60%),
+            radial-gradient(40% 60% at 16% 96%, rgba(190, 48, 175, 0.14), transparent 60%),
+            linear-gradient(0deg, rgb(8, 7, 7) 0%, rgb(16, 16, 16) 100%);
           padding: 64px 64px 24px;
         }
 
