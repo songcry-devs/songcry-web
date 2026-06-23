@@ -7,13 +7,17 @@ const APP_STORE_URL = 'https://apps.apple.com/us/app/songcry-new-music-near-you/
 export default function ArtistHero() {
   return (
     <section className="artist-hero-section" aria-label="Green Room Invite">
-      {/* Animated purple swirl globe — two rotating purple-gradient rings,
-          measured off Framer (gradient stops + sizes). Sits behind the copy. */}
+      {/* Sparkle starfield (matches Framer) */}
+      <div className="artist-stars" aria-hidden="true" />
+
+      {/* Animated purple globe — a glowing sphere (dark core + purple atmosphere
+          rim) with rotating swirl bands on its surface. Sits behind the copy. */}
       <div className="artist-globe" aria-hidden="true">
-        <div className="globe-ring globe-ring-1" />
-        <div className="globe-ring globe-ring-2" />
-        <div className="globe-disc" />
-        <div className="globe-core" />
+        <div className="globe-sphere">
+          <div className="globe-ring globe-ring-1" />
+          <div className="globe-ring globe-ring-2" />
+          <div className="globe-shade" />
+        </div>
       </div>
 
       {/* Content column */}
@@ -58,7 +62,7 @@ export default function ArtistHero() {
               <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="17.5" cy="17.5" r="17.5" fill="#ffffff" />
                 <path
-                  d="M11.5 17.5H23M18 12.5L23 17.5L18 22.5"
+                  d="M13 22L22 13M22 13H15.5M22 13V19.5"
                   stroke="#0a0a0a"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -82,37 +86,64 @@ export default function ArtistHero() {
           overflow: hidden;
         }
 
-        /* ── Animated swirl globe ── */
-        .artist-globe {
+        /* ── Sparkle starfield ── */
+        .artist-stars {
           position: absolute;
-          top: 70px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 460px;
-          height: 460px;
+          inset: 0;
           z-index: 0;
           pointer-events: none;
-          /* soft outer purple halo around the globe */
-          filter: drop-shadow(0 0 90px rgba(150, 70, 220, 0.45));
+          background-image:
+            radial-gradient(1.4px 1.4px at 8% 22%, rgba(255,255,255,0.6), transparent),
+            radial-gradient(1.2px 1.2px at 17% 64%, rgba(255,255,255,0.45), transparent),
+            radial-gradient(1.5px 1.5px at 24% 38%, rgba(255,255,255,0.5), transparent),
+            radial-gradient(1.1px 1.1px at 33% 80%, rgba(255,255,255,0.4), transparent),
+            radial-gradient(1.3px 1.3px at 44% 16%, rgba(255,255,255,0.5), transparent),
+            radial-gradient(1.2px 1.2px at 58% 72%, rgba(255,255,255,0.45), transparent),
+            radial-gradient(1.5px 1.5px at 67% 30%, rgba(255,255,255,0.55), transparent),
+            radial-gradient(1.1px 1.1px at 76% 60%, rgba(255,255,255,0.4), transparent),
+            radial-gradient(1.4px 1.4px at 84% 24%, rgba(255,255,255,0.5), transparent),
+            radial-gradient(1.2px 1.2px at 91% 70%, rgba(255,255,255,0.45), transparent),
+            radial-gradient(1.1px 1.1px at 50% 90%, rgba(255,255,255,0.4), transparent),
+            radial-gradient(1.3px 1.3px at 38% 54%, rgba(255,255,255,0.35), transparent);
         }
-        /* feathered disc gives the rings a soft glowing-sphere edge */
-        .globe-disc {
+
+        /* ── Animated purple globe (sphere) ── */
+        .artist-globe {
           position: absolute;
-          inset: 26px;
-          border-radius: 50%;
-          -webkit-mask: radial-gradient(circle at 50% 50%, #000 58%, transparent 78%);
-          mask: radial-gradient(circle at 50% 50%, #000 58%, transparent 78%);
-          box-shadow: inset 0 0 60px 10px rgba(8, 7, 7, 0.55);
+          top: 62px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 410px;
+          height: 410px;
+          z-index: 0;
           pointer-events: none;
         }
+        /* the sphere body: dark core, purple atmosphere, bright rim + outer halo */
+        .globe-sphere {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          overflow: hidden;
+          background: radial-gradient(
+            circle at 50% 40%,
+            #0d0a18 0%,
+            #1b1430 44%,
+            rgba(120, 60, 185, 0.5) 72%,
+            rgba(186, 104, 240, 0.72) 88%,
+            rgba(120, 60, 190, 0) 100%
+          );
+          box-shadow:
+            0 0 140px 26px rgba(140, 70, 215, 0.42),
+            inset 0 -26px 80px rgba(0, 0, 0, 0.6),
+            inset 0 22px 60px rgba(150, 90, 220, 0.25);
+        }
+        /* rotating swirl bands across the sphere surface */
         .globe-ring {
           position: absolute;
-          border-radius: 50%;
           left: 50%;
           top: 50%;
-          /* feather edges */
-          -webkit-mask: radial-gradient(circle at 50% 50%, #000 56%, transparent 80%);
-          mask: radial-gradient(circle at 50% 50%, #000 56%, transparent 80%);
+          border-radius: 50%;
+          mix-blend-mode: screen;
           background: linear-gradient(
             229deg,
             rgb(223, 122, 254) 13%,
@@ -125,21 +156,23 @@ export default function ArtistHero() {
           width: 460px;
           height: 460px;
           margin: -230px 0 0 -230px;
-          animation: globe-spin 22s linear infinite;
+          opacity: 0.55;
+          animation: globe-spin 24s linear infinite;
         }
         .globe-ring-2 {
-          width: 340px;
-          height: 340px;
-          margin: -170px 0 0 -170px;
-          opacity: 0.85;
-          animation: globe-spin 16s linear infinite reverse;
+          width: 360px;
+          height: 360px;
+          margin: -180px 0 0 -180px;
+          opacity: 0.4;
+          animation: globe-spin 17s linear infinite reverse;
         }
-        /* dark center so the copy stays readable */
-        .globe-core {
+        /* darken the centre so the white copy stays readable */
+        .globe-shade {
           position: absolute;
-          inset: 90px;
+          inset: 0;
           border-radius: 50%;
-          background: radial-gradient(circle at 50% 45%, rgba(8,7,7,0) 30%, rgba(8,7,7,0.85) 70%);
+          background: radial-gradient(circle at 50% 44%, rgba(8, 7, 7, 0.72) 30%, rgba(8, 7, 7, 0) 64%);
+          pointer-events: none;
         }
         @keyframes globe-spin {
           to { transform: rotate(360deg); }

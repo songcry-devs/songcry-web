@@ -140,12 +140,15 @@ export default function Footer() {
       {/* Scoped CSS — server-safe (no JS required) */}
       <style>{`
         .site-footer {
-          /* Strong magenta glow descending from the top edge (continues the
-             Download glow) + a faint tile grid, over a vertical lift to #121212. */
+          /* Rich, multi-source magenta wash (bottom-left behind the logo +
+             centre-top continuing the Download glow + a right purple lobe) over
+             a faint tile grid and a vertical lift to #121212 — matches Framer. */
           background:
-            repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 72px),
-            repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 72px),
-            radial-gradient(78% 92% at 50% -14%, rgba(234, 30, 206, 0.5), rgba(150, 46, 212, 0.2) 46%, transparent 68%),
+            repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 70px),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 70px),
+            radial-gradient(46% 78% at 17% 88%, rgba(236, 32, 208, 0.46), transparent 62%),
+            radial-gradient(58% 85% at 52% -12%, rgba(234, 30, 206, 0.52), rgba(150, 46, 212, 0.22) 45%, transparent 66%),
+            radial-gradient(42% 64% at 86% 74%, rgba(176, 64, 224, 0.32), transparent 60%),
             linear-gradient(0deg, rgb(8, 7, 7) 0%, rgb(18, 18, 18) 100%);
           padding: 64px 64px 24px;
         }

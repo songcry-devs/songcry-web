@@ -68,8 +68,10 @@ export default function Download() {
           line-height: var(--lh-cta);         /* 46.2px */
           letter-spacing: var(--ls-cta);      /* -0.42px */
           color: #fff;
-          margin: 0;
+          margin: 0 auto;
           max-width: 900px;
+          /* balance the wrap so it never leaves a lone "you." on line 2 */
+          text-wrap: balance;
         }
 
         /* ── Subhead ── */
