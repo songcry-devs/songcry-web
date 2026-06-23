@@ -102,8 +102,8 @@ export default function Download() {
           transform-origin: 50% 100%;
           transform: rotateX(74deg);
           background:
-            repeating-linear-gradient(0deg, rgba(236, 150, 224, 0.26) 0 1px, transparent 1px 46px),
-            repeating-linear-gradient(90deg, rgba(236, 150, 224, 0.2) 0 1px, transparent 1px 46px);
+            repeating-linear-gradient(0deg, rgba(244, 196, 236, 0.5) 0 1px, transparent 1px 46px),
+            repeating-linear-gradient(90deg, rgba(244, 196, 236, 0.42) 0 1px, transparent 1px 46px);
         }
 
         /* ── Content wrapper ── */

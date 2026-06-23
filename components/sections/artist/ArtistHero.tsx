@@ -94,18 +94,25 @@ export default function ArtistHero() {
           z-index: 0;
           pointer-events: none;
           background-image:
-            radial-gradient(1.4px 1.4px at 8% 22%, rgba(255,255,255,0.6), transparent),
-            radial-gradient(1.2px 1.2px at 17% 64%, rgba(255,255,255,0.45), transparent),
-            radial-gradient(1.5px 1.5px at 24% 38%, rgba(255,255,255,0.5), transparent),
-            radial-gradient(1.1px 1.1px at 33% 80%, rgba(255,255,255,0.4), transparent),
-            radial-gradient(1.3px 1.3px at 44% 16%, rgba(255,255,255,0.5), transparent),
-            radial-gradient(1.2px 1.2px at 58% 72%, rgba(255,255,255,0.45), transparent),
-            radial-gradient(1.5px 1.5px at 67% 30%, rgba(255,255,255,0.55), transparent),
-            radial-gradient(1.1px 1.1px at 76% 60%, rgba(255,255,255,0.4), transparent),
-            radial-gradient(1.4px 1.4px at 84% 24%, rgba(255,255,255,0.5), transparent),
-            radial-gradient(1.2px 1.2px at 91% 70%, rgba(255,255,255,0.45), transparent),
-            radial-gradient(1.1px 1.1px at 50% 90%, rgba(255,255,255,0.4), transparent),
-            radial-gradient(1.3px 1.3px at 38% 54%, rgba(255,255,255,0.35), transparent);
+            radial-gradient(2px 2px at 7% 20%, rgba(255,255,255,0.95), transparent),
+            radial-gradient(1.6px 1.6px at 13% 52%, rgba(255,255,255,0.75), transparent),
+            radial-gradient(1.8px 1.8px at 19% 78%, rgba(255,255,255,0.85), transparent),
+            radial-gradient(1.5px 1.5px at 24% 34%, rgba(255,255,255,0.7), transparent),
+            radial-gradient(2.1px 2.1px at 30% 62%, rgba(255,255,255,0.9), transparent),
+            radial-gradient(1.5px 1.5px at 36% 14%, rgba(255,255,255,0.7), transparent),
+            radial-gradient(1.7px 1.7px at 41% 86%, rgba(255,255,255,0.8), transparent),
+            radial-gradient(1.5px 1.5px at 47% 44%, rgba(255,255,255,0.6), transparent),
+            radial-gradient(2px 2px at 55% 24%, rgba(255,255,255,0.9), transparent),
+            radial-gradient(1.6px 1.6px at 60% 70%, rgba(255,255,255,0.75), transparent),
+            radial-gradient(1.8px 1.8px at 66% 40%, rgba(255,255,255,0.85), transparent),
+            radial-gradient(1.5px 1.5px at 72% 84%, rgba(255,255,255,0.7), transparent),
+            radial-gradient(2.1px 2.1px at 78% 28%, rgba(255,255,255,0.95), transparent),
+            radial-gradient(1.6px 1.6px at 83% 58%, rgba(255,255,255,0.75), transparent),
+            radial-gradient(1.8px 1.8px at 88% 80%, rgba(255,255,255,0.85), transparent),
+            radial-gradient(1.5px 1.5px at 93% 36%, rgba(255,255,255,0.7), transparent),
+            radial-gradient(1.7px 1.7px at 50% 90%, rgba(255,255,255,0.8), transparent),
+            radial-gradient(1.5px 1.5px at 4% 66%, rgba(255,255,255,0.65), transparent),
+            radial-gradient(1.6px 1.6px at 96% 16%, rgba(255,255,255,0.8), transparent);
         }
 
         /* ── Animated purple globe (sphere) ── */
