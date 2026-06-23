@@ -48,28 +48,31 @@ export default function Download() {
       {/* Scoped responsive styles — follows Hero.tsx / HowItWorks.tsx pattern */}
       <style>{`
         /* ── Section shell ── */
+        /* overflow visible so the tall purple glow can RISE up out of this
+           section into the area above (matches Framer, where the purple
+           reaches ~500px above the footer boundary). */
         .download-section {
           position: relative;
-          overflow: hidden;
           background: rgb(8, 7, 7);
           padding-top: 96px;
           padding-bottom: 64px;
         }
 
-        /* Purple/pink glow rising from the very bottom (footer boundary). */
+        /* Tall purple/pink glow that rises ~520px from the footer boundary up
+           into the section above, fading gradually (measured off Framer). */
         .download-glow {
           position: absolute;
           left: 0;
           right: 0;
           bottom: 0;
-          height: 70%;
+          height: 780px;
           z-index: 0;
           pointer-events: none;
           background:
-            radial-gradient(48% 70% at 50% 100%, rgba(214, 52, 196, 0.34), transparent 66%),
-            radial-gradient(34% 56% at 20% 100%, rgba(196, 48, 200, 0.2), transparent 64%);
-          -webkit-mask: linear-gradient(to top, #000 0%, transparent 92%);
-          mask: linear-gradient(to top, #000 0%, transparent 92%);
+            radial-gradient(58% 120% at 50% 100%, rgba(210, 52, 194, 0.36), rgba(186, 48, 202, 0.14) 54%, transparent 88%),
+            radial-gradient(40% 104% at 22% 100%, rgba(190, 46, 202, 0.18), transparent 80%);
+          -webkit-mask: linear-gradient(to top, #000 0%, #000 6%, transparent 100%);
+          mask: linear-gradient(to top, #000 0%, #000 6%, transparent 100%);
         }
 
         /* Perspective floor: a grid tilted away from the viewer so it recedes
@@ -79,13 +82,14 @@ export default function Download() {
           left: 0;
           right: 0;
           bottom: 0;
-          height: 300px;
+          height: 360px;
           z-index: 0;
           pointer-events: none;
-          perspective: 380px;
+          overflow: hidden;
+          perspective: 420px;
           perspective-origin: 50% 100%;
-          -webkit-mask: linear-gradient(to top, #000 8%, transparent 78%);
-          mask: linear-gradient(to top, #000 8%, transparent 78%);
+          -webkit-mask: linear-gradient(to top, #000 6%, transparent 82%);
+          mask: linear-gradient(to top, #000 6%, transparent 82%);
         }
         .download-floor-grid {
           position: absolute;
