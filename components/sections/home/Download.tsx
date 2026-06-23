@@ -86,7 +86,7 @@ export default function Download() {
           line-height: var(--lh-body-lg);     /* 30px */
           letter-spacing: var(--ls-body-lg);  /* -0.4px */
           color: var(--text-60);              /* rgba(255,255,255,0.6) */
-          margin: 24px 0 0 0;
+          margin: 24px auto 0;                /* auto = keep the max-width block centered */
           max-width: 728px;
         }
 

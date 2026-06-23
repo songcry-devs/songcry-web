@@ -237,11 +237,7 @@ export default function ArtistHero() {
           padding: 10px 11px 10px 21px;
           margin-top: 24px;
           text-decoration: none;
-          transition: opacity 180ms ease-out, transform 180ms ease-out;
-        }
-        .artist-hero-cta-pill:hover {
-          opacity: 0.88;
-          transform: scale(1.02);
+          transition: background 220ms ease;
         }
         .artist-hero-cta-label {
           font-family: var(--font-albert);
@@ -250,7 +246,15 @@ export default function ArtistHero() {
           line-height: 22.8px;
           color: #fff;
           white-space: nowrap;
+          transition: color 220ms ease;
         }
+        /* Reverse on hover (matches Framer) */
+        .artist-hero-cta-icon svg circle { transition: fill 220ms ease; }
+        .artist-hero-cta-icon svg path { transition: stroke 220ms ease; }
+        .artist-hero-cta-pill:hover { background: #ffffff; }
+        .artist-hero-cta-pill:hover .artist-hero-cta-label { color: #0a0a0a; }
+        .artist-hero-cta-pill:hover .artist-hero-cta-icon svg circle { fill: #141414; }
+        .artist-hero-cta-pill:hover .artist-hero-cta-icon svg path { stroke: #ffffff; }
         .artist-hero-cta-icon {
           display: flex;
           align-items: center;
