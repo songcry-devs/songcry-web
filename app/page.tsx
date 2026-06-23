@@ -14,7 +14,7 @@ export default function Home() {
         <HowItWorks />
         <Download />
       </main>
-      <Footer home />
+      <Footer />
     </>
   )
 }

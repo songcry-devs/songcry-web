@@ -44,12 +44,12 @@ export default function Hero() {
               aria-label="Download on the App Store"
             >
               <span className="hero-cta-label">Download on the App Store</span>
-              {/* White circle + dark right-arrow — matches Framer */}
+              {/* White circle + dark up-right (NE) arrow — matches Framer */}
               <span className="hero-cta-icon" aria-hidden="true">
                 <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="17.5" cy="17.5" r="17.5" fill="#ffffff" />
                   <path
-                    d="M11.5 17.5H23M18 12.5L23 17.5L18 22.5"
+                    d="M13 22L22 13M22 13H15.5M22 13V19.5"
                     stroke="#0a0a0a"
                     strokeWidth="2"
                     strokeLinecap="round"

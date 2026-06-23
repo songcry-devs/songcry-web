@@ -5,6 +5,13 @@ import Reveal from '@/components/motion/Reveal'
 export default function Download() {
   return (
     <section className="download-section" aria-label="Download Songcry">
+      {/* Purple/pink glow + perspective floor grid that RISE from the footer
+          boundary up into the section (the footer panel itself stays clean). */}
+      <div className="download-glow" aria-hidden="true" />
+      <div className="download-floor" aria-hidden="true">
+        <div className="download-floor-grid" />
+      </div>
+
       <div className="download-content">
         {/* Heading */}
         <Reveal delay={0}>
@@ -42,20 +49,61 @@ export default function Download() {
       <style>{`
         /* ── Section shell ── */
         .download-section {
-          /* Grid + subtle purple that RISE up from the section base and fade out
-             toward the top (the top-down dark overlay reveals them only low). */
-          background:
-            linear-gradient(to bottom, rgb(8, 7, 7) 18%, rgba(8, 7, 7, 0.82) 46%, transparent 86%),
-            repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 64px),
-            repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 64px),
-            radial-gradient(62% 80% at 50% 132%, rgba(196, 44, 176, 0.2), transparent 64%),
-            rgb(8, 7, 7);
+          position: relative;
+          overflow: hidden;
+          background: rgb(8, 7, 7);
           padding-top: 96px;
           padding-bottom: 64px;
         }
 
+        /* Purple/pink glow rising from the very bottom (footer boundary). */
+        .download-glow {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 70%;
+          z-index: 0;
+          pointer-events: none;
+          background:
+            radial-gradient(48% 70% at 50% 100%, rgba(214, 52, 196, 0.34), transparent 66%),
+            radial-gradient(34% 56% at 20% 100%, rgba(196, 48, 200, 0.2), transparent 64%);
+          -webkit-mask: linear-gradient(to top, #000 0%, transparent 92%);
+          mask: linear-gradient(to top, #000 0%, transparent 92%);
+        }
+
+        /* Perspective floor: a grid tilted away from the viewer so it recedes
+           UPWARD from the footer boundary (angled tiles, not flat squares). */
+        .download-floor {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 300px;
+          z-index: 0;
+          pointer-events: none;
+          perspective: 380px;
+          perspective-origin: 50% 100%;
+          -webkit-mask: linear-gradient(to top, #000 8%, transparent 78%);
+          mask: linear-gradient(to top, #000 8%, transparent 78%);
+        }
+        .download-floor-grid {
+          position: absolute;
+          left: -60%;
+          right: -60%;
+          bottom: 0;
+          height: 600px;
+          transform-origin: 50% 100%;
+          transform: rotateX(74deg);
+          background:
+            repeating-linear-gradient(0deg, rgba(232, 96, 212, 0.32) 0 1.5px, transparent 1.5px 46px),
+            repeating-linear-gradient(90deg, rgba(228, 92, 210, 0.26) 0 1.5px, transparent 1.5px 46px);
+        }
+
         /* ── Content wrapper ── */
         .download-content {
+          position: relative;
+          z-index: 1;
           /* 900px heading usable width (matches Framer one-line heading) + 24px gutters */
           max-width: 948px;
           margin: 0 auto;

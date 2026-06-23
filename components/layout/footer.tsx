@@ -59,11 +59,11 @@ const socialLinks = [
 ]
 
 // Server component — hovers handled entirely via CSS classes (no JS event handlers needed)
-// `home` adds the grid + purple bottom treatment (the live Framer ARTIST footer
-// is plain — just the dark lift — so only the Home footer gets the grid/glow).
-export default function Footer({ home = false }: { home?: boolean }) {
+// The footer panel stays clean (matches Framer); the grid/purple bottom treatment
+// lives ABOVE it, in the home Download section, rising up from this boundary.
+export default function Footer() {
   return (
-    <footer className={`site-footer${home ? ' site-footer-home' : ''}`}>
+    <footer className="site-footer">
       {/* ── Zone A: Columns row ── */}
       <div className="footer-columns">
         {/* Left: logo lockup */}
@@ -141,23 +141,10 @@ export default function Footer({ home = false }: { home?: boolean }) {
 
       {/* Scoped CSS — server-safe (no JS required) */}
       <style>{`
-        /* Base (used on /artist too): just the gentle dark lift — matches Framer. */
+        /* Clean footer panel (matches Framer — no grid/glow inside it). */
         .site-footer {
           background: linear-gradient(0deg, rgb(8, 7, 7) 0%, rgb(18, 18, 18) 100%);
           padding: 64px 64px 24px;
-        }
-        /* Home only: a SUBTLE grid + controlled purple that fade in toward the
-           bottom (the top-down dark overlay keeps them low/sleek, not a full block). */
-        .site-footer-home {
-          background:
-            /* fade the grid out at the very bottom so it RISES from the upper
-               footer up into the section, instead of covering the bottom */
-            linear-gradient(to top, rgb(8, 7, 7) 6%, rgba(8, 7, 7, 0.5) 34%, transparent 72%),
-            repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 64px),
-            repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 64px),
-            radial-gradient(56% 72% at 50% 96%, rgba(196, 44, 176, 0.2), transparent 60%),
-            radial-gradient(40% 58% at 16% 92%, rgba(190, 48, 175, 0.12), transparent 60%),
-            linear-gradient(0deg, rgb(8, 7, 7) 0%, rgb(18, 18, 18) 100%);
         }
 
         /* ── Columns row ── */
