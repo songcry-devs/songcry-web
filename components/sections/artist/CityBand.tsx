@@ -1,11 +1,12 @@
 import Image from 'next/image'
+import Reveal from '@/components/motion/Reveal'
 
 // Server component — decorative city-skyline band
 export default function CityBand() {
   return (
     <section className="cb-section" aria-label="City photography">
       <div className="cb-container">
-        <div className="cb-image-wrap">
+        <Reveal delay={0} className="cb-image-wrap">
           <Image
             src="/framer/artist-band-2.png"
             alt="City skyline"
@@ -13,8 +14,8 @@ export default function CityBand() {
             height={282}
             style={{ borderRadius: '18px', objectFit: 'cover', display: 'block', width: '100%', height: '100%' }}
           />
-        </div>
-        <div className="cb-image-wrap">
+        </Reveal>
+        <Reveal delay={0.1} className="cb-image-wrap">
           <Image
             src="/framer/artist-band-1.png"
             alt="City skyline"
@@ -22,7 +23,7 @@ export default function CityBand() {
             height={282}
             style={{ borderRadius: '18px', objectFit: 'cover', display: 'block', width: '100%', height: '100%' }}
           />
-        </div>
+        </Reveal>
       </div>
 
       <style>{`

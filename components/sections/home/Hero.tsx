@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Reveal from '@/components/motion/Reveal'
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416'
 
@@ -24,53 +25,61 @@ export default function Hero() {
       <div className="hero-content">
         {/* Text column */}
         <div className="hero-text">
-          <h1 className="hero-headline">Music spreads through fans</h1>
-          <p className="hero-sub">
-            Songcry is where fans decide what rises — and artists see momentum by city.
-          </p>
+          <Reveal delay={0}>
+            <h1 className="hero-headline">Music spreads through fans</h1>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="hero-sub">
+              Songcry is where fans decide what rises — and artists see momentum by city.
+            </p>
+          </Reveal>
 
           {/* CTA pill */}
-          <a
-            href={APP_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hero-cta-pill"
-            aria-label="Download on the App Store"
-          >
-            <span className="hero-cta-label">Download on the App Store</span>
-            {/* Arrow circle icon — FLAG: exact circle/arrow styling is approximate */}
-            <span className="hero-cta-icon" aria-hidden="true">
-              <svg
-                width="35"
-                height="35"
-                viewBox="0 0 35 35"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="17.5" cy="17.5" r="17.5" fill="rgba(255,255,255,0.18)" />
-                {/* Up-right arrow (↗) */}
-                <path
-                  d="M12 23L23 12M23 12H15M23 12V20"
-                  stroke="#ffffff"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </a>
+          <Reveal delay={0.16}>
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-cta-pill"
+              aria-label="Download on the App Store"
+            >
+              <span className="hero-cta-label">Download on the App Store</span>
+              {/* Arrow circle icon — FLAG: exact circle/arrow styling is approximate */}
+              <span className="hero-cta-icon" aria-hidden="true">
+                <svg
+                  width="35"
+                  height="35"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="17.5" cy="17.5" r="17.5" fill="rgba(255,255,255,0.18)" />
+                  {/* Up-right arrow (↗) */}
+                  <path
+                    d="M12 23L23 12M23 12H15M23 12V20"
+                    stroke="#ffffff"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </a>
+          </Reveal>
         </div>
 
         {/* Phone mockup — hidden on phone breakpoint here; shown separately below on phone */}
         <div className="hero-phone-desktop">
-          <Image
-            src="/framer/hero-phone.png"
-            alt="Songcry app on iPhone"
-            width={307}
-            height={595}
-            priority
-            style={{ display: 'block' }}
-          />
+          <Reveal delay={0.12}>
+            <Image
+              src="/framer/hero-phone.png"
+              alt="Songcry app on iPhone"
+              width={307}
+              height={595}
+              priority
+              style={{ display: 'block' }}
+            />
+          </Reveal>
         </div>
       </div>
 

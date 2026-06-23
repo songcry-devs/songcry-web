@@ -1,4 +1,5 @@
 import { Building2, Star, Crown, Phone, Network, TrendingUp } from 'lucide-react'
+import Reveal from '@/components/motion/Reveal'
 
 // Server component — icons from lucide-react (static render, no interactivity)
 const PERKS = [
@@ -38,21 +39,23 @@ export default function Perks() {
   return (
     <section className="perks-section" aria-label="Green Room Perks">
       {/* Section header */}
-      <div className="perks-header">
-        <h2 className="perks-heading">Green Room Perks</h2>
-        <p className="perks-subtitle">Your city&rsquo;s music is calling for change. Be the first.</p>
-      </div>
+      <Reveal delay={0}>
+        <div className="perks-header">
+          <h2 className="perks-heading">Green Room Perks</h2>
+          <p className="perks-subtitle">Your city&rsquo;s music is calling for change. Be the first.</p>
+        </div>
+      </Reveal>
 
       {/* Perk card grid */}
       <div className="perks-grid">
-        {PERKS.map(({ Icon, title, body }) => (
-          <div key={title} className="perk-card">
+        {PERKS.map(({ Icon, title, body }, i) => (
+          <Reveal key={title} delay={i * 0.08} className="perk-card">
             <span className="perk-icon" aria-hidden="true">
               <Icon size={32} color="rgb(248,25,192)" strokeWidth={1.8} />
             </span>
             <h3 className="perk-title">{title}</h3>
             <p className="perk-body">{body}</p>
-          </div>
+          </Reveal>
         ))}
       </div>
 

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Reveal from '@/components/motion/Reveal'
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416'
 
@@ -12,54 +13,62 @@ export default function ArtistHero() {
       {/* Content column */}
       <div className="artist-hero-content">
         {/* Script image — "yours, not theirs" cursive, sits above headline */}
-        <div className="artist-hero-script">
-          <Image
-            src="/framer/artist-script.png"
-            alt="yours, not theirs"
-            width={327}
-            height={121}
-            priority
-          />
-        </div>
+        <Reveal delay={0}>
+          <div className="artist-hero-script">
+            <Image
+              src="/framer/artist-script.png"
+              alt="yours, not theirs"
+              width={327}
+              height={121}
+              priority
+            />
+          </div>
+        </Reveal>
 
         {/* Headline */}
-        <h1 className="artist-hero-headline">Green Room Invite</h1>
+        <Reveal delay={0.08}>
+          <h1 className="artist-hero-headline">Green Room Invite</h1>
+        </Reveal>
 
         {/* Tagline */}
-        <p className="artist-hero-tagline">
-          MUSIC ARTISTS: BECOME A PART OF MUSIC HISTORY WITH SONGCRY
-        </p>
+        <Reveal delay={0.16}>
+          <p className="artist-hero-tagline">
+            MUSIC ARTISTS: BECOME A PART OF MUSIC HISTORY WITH SONGCRY
+          </p>
+        </Reveal>
 
         {/* CTA pill — FLAG: Framer links to /#form; we point to App Store (TJ to confirm) */}
-        <a
-          href={APP_STORE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="artist-hero-cta-pill"
-          aria-label="Get Early Access on the App Store"
-        >
-          <span className="artist-hero-cta-label">Get Early Access</span>
-          {/* Arrow circle icon — same SVG as Home Hero */}
-          <span className="artist-hero-cta-icon" aria-hidden="true">
-            <svg
-              width="35"
-              height="35"
-              viewBox="0 0 35 35"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="17.5" cy="17.5" r="17.5" fill="rgba(255,255,255,0.18)" />
-              {/* Up-right arrow (↗) */}
-              <path
-                d="M12 23L23 12M23 12H15M23 12V20"
-                stroke="#ffffff"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </a>
+        <Reveal delay={0.24}>
+          <a
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="artist-hero-cta-pill"
+            aria-label="Get Early Access on the App Store"
+          >
+            <span className="artist-hero-cta-label">Get Early Access</span>
+            {/* Arrow circle icon — same SVG as Home Hero */}
+            <span className="artist-hero-cta-icon" aria-hidden="true">
+              <svg
+                width="35"
+                height="35"
+                viewBox="0 0 35 35"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="17.5" cy="17.5" r="17.5" fill="rgba(255,255,255,0.18)" />
+                {/* Up-right arrow (↗) */}
+                <path
+                  d="M12 23L23 12M23 12H15M23 12V20"
+                  stroke="#ffffff"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+        </Reveal>
       </div>
 
       {/* Scoped responsive styles — follows Hero.tsx / HowItWorks.tsx pattern */}

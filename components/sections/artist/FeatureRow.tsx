@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Reveal from '@/components/motion/Reveal'
 
 interface FeatureRowProps {
   heading: string
@@ -20,21 +21,25 @@ export default function FeatureRow({ heading, body, image, imageAlt, imageSide }
       <div className="fr-container">
         {/* Image card column */}
         <div className="fr-image-col">
-          <div className="fr-card">
-            <Image
-              src={image}
-              alt={imageAlt}
-              width={398}
-              height={865}
-              style={{ display: 'block', borderRadius: '24px' }}
-            />
-          </div>
+          <Reveal delay={0.1} y={36}>
+            <div className="fr-card">
+              <Image
+                src={image}
+                alt={imageAlt}
+                width={398}
+                height={865}
+                style={{ display: 'block', borderRadius: '24px' }}
+              />
+            </div>
+          </Reveal>
         </div>
 
         {/* Text column */}
         <div className="fr-text-col">
-          <h2 className="fr-heading">{heading}</h2>
-          <p className="fr-body">{body}</p>
+          <Reveal delay={0} y={36}>
+            <h2 className="fr-heading">{heading}</h2>
+            <p className="fr-body">{body}</p>
+          </Reveal>
         </div>
       </div>
 

@@ -1,15 +1,21 @@
+import Reveal from '@/components/motion/Reveal'
+
 // Server component — text-only centered section, no interactivity
 export default function HowItWorks() {
   return (
     <section className="howitworks-section" aria-label="How Songcry Works">
       <div className="howitworks-content">
-        <h2 className="howitworks-heading">How Songcry Works</h2>
-        <p className="howitworks-body">
-          Songcry is a geolocation-based music discovery app. Artists upload songs and grow their audience city by city. Fans swipe through a personalized feed of music rising in their area — driven by real listeners, not algorithms.
-        </p>
-        <p className="howitworks-body howitworks-body-2">
-          Create your account with Google, Apple, or email to start discovering what’s next in your city.
-        </p>
+        <Reveal delay={0}>
+          <h2 className="howitworks-heading">How Songcry Works</h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="howitworks-body">
+            Songcry is a geolocation-based music discovery app. Artists upload songs and grow their audience city by city. Fans swipe through a personalized feed of music rising in their area — driven by real listeners, not algorithms.
+          </p>
+          <p className="howitworks-body howitworks-body-2">
+            Create your account with Google, Apple, or email to start discovering what&apos;s next in your city.
+          </p>
+        </Reveal>
       </div>
 
       {/* Scoped responsive styles — follows Hero.tsx pattern */}

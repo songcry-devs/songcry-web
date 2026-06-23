@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Reveal from '@/components/motion/Reveal'
 
 // Server component — centered CTA section with App Store badge
 export default function Download() {
@@ -6,36 +7,46 @@ export default function Download() {
     <section className="download-section" aria-label="Download Songcry">
       <div className="download-content">
         {/* Heading */}
-        <h2 className="download-heading">Join early and discover what’s rising near you.</h2>
+        <Reveal delay={0}>
+          <h2 className="download-heading">Join early and discover what&apos;s rising near you.</h2>
+        </Reveal>
 
         {/* Subhead */}
-        <p className="download-subhead">
-          The beta is live. Artists can join now — fan access is coming soon.
-        </p>
+        <Reveal delay={0.08}>
+          <p className="download-subhead">
+            The beta is live. Artists can join now — fan access is coming soon.
+          </p>
+        </Reveal>
 
         {/* App Store badge link */}
-        <a
-          href="https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="download-badge-link"
-          aria-label="Download Songcry on the App Store"
-        >
-          <Image
-            src="/framer/appstore-badge.svg"
-            alt="Download on the App Store"
-            width={162}
-            height={54}
-            style={{ display: 'block' }}
-          />
-        </a>
+        <Reveal delay={0.16}>
+          <a
+            href="https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="download-badge-link"
+            aria-label="Download Songcry on the App Store"
+          >
+            <Image
+              src="/framer/appstore-badge.svg"
+              alt="Download on the App Store"
+              width={162}
+              height={54}
+              style={{ display: 'block' }}
+            />
+          </a>
+        </Reveal>
       </div>
 
       {/* Scoped responsive styles — follows Hero.tsx / HowItWorks.tsx pattern */}
       <style>{`
         /* ── Section shell ── */
         .download-section {
-          background: rgb(8, 7, 7);
+          /* Magenta glow rising from the section's base into the footer —
+             matches Framer's measured peak ~rgb(50,7,50) over the dark bg. */
+          background:
+            radial-gradient(60% 75% at 50% 122%, rgba(216, 22, 205, 0.30), transparent 60%),
+            rgb(8, 7, 7);
           padding-top: 96px;
           padding-bottom: 64px;
         }

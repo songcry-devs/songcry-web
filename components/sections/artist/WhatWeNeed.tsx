@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Reveal from '@/components/motion/Reveal'
 
 // Server component — no client interactivity needed
 // NOTE: Card 3 title "Drop exclusives" is the corrected spelling;
@@ -41,26 +42,28 @@ export default function WhatWeNeed() {
   return (
     <section className="wwn-section" aria-label="What We Need From You">
       {/* Section header */}
-      <div className="wwn-header">
-        {/* Pink Songcry wordmark graphic */}
-        <div className="wwn-graphic-wrap" aria-hidden="true">
-          <Image
-            src="/framer/artist-needs-graphic.png"
-            alt="Songcry wordmark"
-            width={339}
-            height={72}
-            style={{ display: 'block' }}
-          />
-        </div>
+      <Reveal delay={0}>
+        <div className="wwn-header">
+          {/* Pink Songcry wordmark graphic */}
+          <div className="wwn-graphic-wrap" aria-hidden="true">
+            <Image
+              src="/framer/artist-needs-graphic.png"
+              alt="Songcry wordmark"
+              width={339}
+              height={72}
+              style={{ display: 'block' }}
+            />
+          </div>
 
-        <h2 className="wwn-heading">What We Need From You</h2>
-        <p className="wwn-subtitle">We bring the platform and audience. You bring the energy.</p>
-      </div>
+          <h2 className="wwn-heading">What We Need From You</h2>
+          <p className="wwn-subtitle">We bring the platform and audience. You bring the energy.</p>
+        </div>
+      </Reveal>
 
       {/* Card grid */}
       <div className="wwn-grid">
-        {CARDS.map(({ image, imageAlt, title, body }) => (
-          <div key={title} className="wwn-card">
+        {CARDS.map(({ image, imageAlt, title, body }, i) => (
+          <Reveal key={title} delay={i * 0.08} className="wwn-card">
             <Image
               src={image}
               alt={imageAlt}
@@ -71,7 +74,7 @@ export default function WhatWeNeed() {
             />
             <h3 className="wwn-card-title">{title}</h3>
             <p className="wwn-card-body">{body}</p>
-          </div>
+          </Reveal>
         ))}
       </div>
 

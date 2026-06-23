@@ -1,15 +1,21 @@
+import Reveal from '@/components/motion/Reveal'
+
 // Server component — centered "Calling All Music Artists" intro section
 export default function CallingIntro() {
   return (
     <section className="calling-section" aria-label="Calling All Music Artists">
       <div className="calling-content">
         {/* Heading */}
-        <h2 className="calling-heading">Calling All Music Artists</h2>
+        <Reveal delay={0}>
+          <h2 className="calling-heading">Calling All Music Artists</h2>
+        </Reveal>
 
         {/* Subtitle — brand casing normalized to "Songcry" (FLAG: live Framer renders "SongCry" — brand typo, fixed here) */}
-        <p className="calling-subtitle">
-          Songcry is the only platform that helps you build a real fanbase in your city and beyond.
-        </p>
+        <Reveal delay={0.1}>
+          <p className="calling-subtitle">
+            Songcry is the only platform that helps you build a real fanbase in your city and beyond.
+          </p>
+        </Reveal>
       </div>
 
       {/* Scoped responsive styles — follows Hero.tsx / HowItWorks.tsx pattern */}
