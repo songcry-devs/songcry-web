@@ -11,6 +11,7 @@ interface LegalLayoutProps {
 export default function LegalLayout({ heading, updated, children }: LegalLayoutProps) {
   return (
     <div style={{ background: '#080707', minHeight: '100vh' }}>
+      <a href="#main" className="skip-link">Skip to content</a>
       <Nav variant="home" />
 
       <main id="main">

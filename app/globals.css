@@ -67,42 +67,6 @@ body {
   outline-offset: 2px;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(-8px); }
-  50% { transform: translateY(8px); }
-}
-
-.float-animation {
-  animation: float 4s ease-in-out infinite;
-}
-
-@keyframes bounce-chevron {
-  0%, 100% { transform: translateY(0); opacity: 0.3; }
-  50% { transform: translateY(6px); opacity: 0.6; }
-}
-
-.bounce-chevron {
-  animation: bounce-chevron 2s ease-in-out infinite;
-}
-
-/* Fan gallery marquee — horizontal infinite scroll */
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  animation: marquee-scroll 48s linear infinite;
-  will-change: transform;
-}
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none !important;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -131,57 +95,3 @@ body {
   top: 12px;
 }
 
-/* Primary CTA on hero and forms */
-.hero-cta,
-.cta-button {
-  transition: transform 180ms ease-out, opacity 180ms ease-out, box-shadow 220ms ease-out;
-  will-change: transform;
-}
-.hero-cta:hover,
-.cta-button:hover:not(:disabled) {
-  transform: translateY(-1px);
-  opacity: 0.92;
-  box-shadow: 0 10px 30px rgba(248, 25, 192, 0.18);
-}
-.hero-cta:active,
-.cta-button:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.cta-button {
-  background: #FFFFFF;
-  color: #080707;
-  font-weight: 600;
-  font-size: 16px;
-  height: 52px;
-  border-radius: 9999px;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-}
-.cta-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Waitlist inputs */
-.field-input {
-  background: #1E1E1E;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  height: 52px;
-  padding: 0 16px;
-  font-size: 16px;
-  color: #FFFFFF;
-  width: 100%;
-  outline: none;
-  font-family: inherit;
-  transition: border-color 200ms ease-out, box-shadow 200ms ease-out;
-}
-.field-input::placeholder {
-  color: rgba(255, 255, 255, 0.45);
-}
-.field-input:focus {
-  border-color: #F819C0;
-  box-shadow: 0 0 0 3px rgba(248, 25, 192, 0.16);
-}

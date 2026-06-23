@@ -23,7 +23,6 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
 
       {/* ── Pill nav (Desktop + Tablet + Phone "home") ── */}
       <div
-        aria-hidden={variant === 'artist' ? undefined : undefined}
         style={{
           position: 'fixed',
           top: '16px',
@@ -70,7 +69,7 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
           </Link>
 
           {/* Right: Download button */}
-          <DownloadButton size="default" />
+          <DownloadButton />
         </div>
       </div>
 
@@ -214,7 +213,7 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
   )
 }
 
-function DownloadButton({ size }: { size: 'default' | 'small' }) {
+function DownloadButton() {
   return (
     <a
       href={APP_STORE_URL}
@@ -227,7 +226,7 @@ function DownloadButton({ size }: { size: 'default' | 'small' }) {
         display: 'flex',
         alignItems: 'center',
         gap: '8px',
-        padding: size === 'small' ? '6px 8px' : '8px 16px',
+        padding: '8px 16px',
         textDecoration: 'none',
         transition: 'opacity 180ms ease-out, transform 180ms ease-out',
       }}
@@ -251,7 +250,7 @@ function DownloadButton({ size }: { size: 'default' | 'small' }) {
       >
         Download
       </span>
-      <ArrowRight size={16} color="rgb(41, 41, 41)" />
+      <ArrowRight size={16} color="var(--nav-pill-text, rgb(41, 41, 41))" />
     </a>
   )
 }
