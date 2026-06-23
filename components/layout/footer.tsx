@@ -140,7 +140,14 @@ export default function Footer() {
       {/* Scoped CSS — server-safe (no JS required) */}
       <style>{`
         .site-footer {
-          background: transparent;
+          /* Measured off Framer: vertical lift to #121212 at the top edge,
+             fading to the page bg #080707 at the bottom. The faint magenta
+             radials approximate Framer's subtle pink wash near the footer
+             (no exact CSS source exists on Framer — APPROXIMATE). */
+          background:
+            radial-gradient(55% 70% at 12% 100%, rgba(219, 68, 152, 0.10), transparent 72%),
+            radial-gradient(50% 65% at 88% 92%, rgba(150, 60, 200, 0.08), transparent 72%),
+            linear-gradient(0deg, rgb(8, 7, 7) 0%, rgb(18, 18, 18) 100%);
           padding: 64px 64px 24px;
         }
 

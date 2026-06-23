@@ -56,8 +56,16 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
           }}
           className="nav-pill-inner"
         >
-          {/* Left: logo */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          {/* Left: flame icon + wordmark */}
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+            <Image
+              src="/framer/nav-flame.svg"
+              alt=""
+              width={36}
+              height={29}
+              priority
+              style={{ height: '29px', width: 'auto' }}
+            />
             <Image
               src="/framer/nav-logo.png"
               alt="Songcry"
@@ -92,7 +100,15 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
             }}
             className="artist-phone-bar"
           >
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+              <Image
+                src="/framer/nav-flame.svg"
+                alt=""
+                width={36}
+                height={29}
+                priority
+                style={{ height: '29px', width: 'auto' }}
+              />
               <Image
                 src="/framer/nav-logo.png"
                 alt="Songcry"
