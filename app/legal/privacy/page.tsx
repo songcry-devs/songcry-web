@@ -1,8 +1,7 @@
-import Nav from '@/components/layout/nav'
-import Footer from '@/components/layout/footer'
+import LegalLayout from '@/components/legal/LegalLayout'
 
 export const metadata = {
-  title: 'Privacy Policy | Songcry',
+  title: 'Privacy Policy - Songcry',
   description: 'How Songcry collects, uses, and protects your information.',
 }
 
@@ -131,116 +130,32 @@ Designated Agent: Legal Department (DMCA Agent), 2360 Shasta Way, Unit G, Simi V
 
 export default function PrivacyPage() {
   return (
-    <div style={{ background: '#080707', minHeight: '100vh' }}>
-      <Nav />
-
-      <main style={{ maxWidth: '800px', margin: '0 auto', padding: '96px 24px 80px' }}>
-        <h1
-          style={{
-            fontSize: 'clamp(2.25rem, 3vw + 1.25rem, 3.5rem)',
-            fontWeight: 600,
-            color: '#FFFFFF',
-            marginBottom: '12px',
-          }}
-        >
-          Privacy Policy (BETA)
-        </h1>
-        <p style={{ fontSize: '15px', color: '#6B6B6B', marginBottom: '64px' }}>
-          Last Updated: March 30, 2026
-        </p>
-
-        {sections.map(section => (
-          <div key={section.heading} style={{ marginBottom: '48px' }}>
-            <h2
-              style={{
-                fontSize: 'clamp(1.375rem, 1vw + 1rem, 1.75rem)',
-                fontWeight: 600,
-                color: '#FFFFFF',
-                marginBottom: '16px',
-              }}
-            >
-              {section.heading}
-            </h2>
-
-            {section.body && (
-              <p
-                style={{
-                  fontSize: '17px',
-                  color: '#ABABAB',
-                  lineHeight: 1.75,
-                  marginBottom: section.items || section.subsections ? '16px' : 0,
-                  whiteSpace: 'pre-line',
-                }}
-              >
-                {section.body}
-              </p>
-            )}
-
-            {section.items && (
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {section.items.map(item => (
-                  <li
-                    key={item}
-                    style={{
-                      fontSize: '17px',
-                      color: '#ABABAB',
-                      lineHeight: 1.7,
-                      paddingLeft: '24px',
-                      position: 'relative',
-                    }}
-                  >
-                    <span
-                      style={{
-                        position: 'absolute',
-                        left: 0,
-                        color: '#F819C0',
-                        fontWeight: 700,
-                      }}
-                    >
-                      •
-                    </span>
-                    {item}
-                  </li>
+    <LegalLayout heading="Privacy Policy (BETA)" updated="Last Updated: March 30, 2026">
+      {sections.map(section => (
+        <div key={section.heading}>
+          <h2>{section.heading}</h2>
+          {section.body && (
+            <p style={{ whiteSpace: 'pre-line' }}>{section.body}</p>
+          )}
+          {section.items && (
+            <ul>
+              {section.items.map(item => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          )}
+          {section.subsections?.map(sub => (
+            <div key={sub.heading}>
+              <h3>{sub.heading}</h3>
+              <ul>
+                {sub.items.map(item => (
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
-            )}
-
-            {section.subsections?.map(sub => (
-              <div key={sub.heading} style={{ marginTop: '24px' }}>
-                <h3
-                  style={{
-                    fontSize: '17px',
-                    fontWeight: 600,
-                    color: '#FFFFFF',
-                    marginBottom: '12px',
-                  }}
-                >
-                  {sub.heading}
-                </h3>
-                <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  {sub.items.map(item => (
-                    <li
-                      key={item}
-                      style={{
-                        fontSize: '17px',
-                        color: '#ABABAB',
-                        lineHeight: 1.7,
-                        paddingLeft: '24px',
-                        position: 'relative',
-                      }}
-                    >
-                      <span style={{ position: 'absolute', left: 0, color: '#F819C0', fontWeight: 700 }}>•</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        ))}
-      </main>
-
-      <Footer />
-    </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </LegalLayout>
   )
 }

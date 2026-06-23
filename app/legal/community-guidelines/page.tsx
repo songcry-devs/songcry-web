@@ -1,8 +1,7 @@
-import Nav from '@/components/layout/nav'
-import Footer from '@/components/layout/footer'
+import LegalLayout from '@/components/legal/LegalLayout'
 
 export const metadata = {
-  title: 'Community Guidelines | Songcry',
+  title: 'Community Guidelines - Songcry',
   description: 'Songcry community guidelines for artists and fans.',
 }
 
@@ -66,117 +65,39 @@ const guidelines = [
 
 export default function CommunityGuidelinesPage() {
   return (
-    <div style={{ background: '#080707', minHeight: '100vh' }}>
-      <Nav />
+    <LegalLayout heading="Community Guidelines (BETA)" updated="Last updated: March 9, 2026">
+      <p>
+        Songcry is a fan-first app that helps you discover new music and emerging artists near you.
+        By using Songcry, you agree to follow these Community Guidelines.
+      </p>
 
-      <main style={{ maxWidth: '800px', margin: '0 auto', padding: '96px 24px 80px' }}>
-        <h1
-          style={{
-            fontSize: 'clamp(2.25rem, 3vw + 1.25rem, 3.5rem)',
-            fontWeight: 600,
-            color: '#FFFFFF',
-            marginBottom: '12px',
-          }}
-        >
-          Community Guidelines (BETA)
-        </h1>
-        <p style={{ fontSize: '15px', color: '#6B6B6B', marginBottom: '16px' }}>
-          Last updated: March 9, 2026
-        </p>
-        <p
-          style={{
-            fontSize: '17px',
-            color: '#ABABAB',
-            lineHeight: 1.7,
-            marginBottom: '64px',
-          }}
-        >
-          Songcry is a fan-first app that helps you discover new music and emerging artists near you.
-          By using Songcry, you agree to follow these Community Guidelines.
-        </p>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-          {guidelines.map(g => (
-            <div
-              key={g.num}
-              style={{
-                display: 'flex',
-                gap: '24px',
-              }}
-            >
-              <div
-                style={{
-                  flexShrink: 0,
-                  width: '32px',
-                  height: '32px',
-                  borderRadius: '50%',
-                  background: 'rgba(248,25,192,0.12)',
-                  border: '1px solid rgba(248,25,192,0.24)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  color: '#F819C0',
-                  marginTop: '2px',
-                }}
-              >
-                {g.num}
-              </div>
-              <div>
-                <h2
-                  style={{
-                    fontSize: '19px',
-                    fontWeight: 600,
-                    color: '#FFFFFF',
-                    marginBottom: '8px',
-                  }}
-                >
-                  {g.title}
-                </h2>
-                <p
-                  style={{
-                    fontSize: '17px',
-                    color: '#ABABAB',
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {g.body}
-                </p>
-              </div>
-            </div>
-          ))}
+      {guidelines.map(g => (
+        <div key={g.num}>
+          <h2>{g.num}. {g.title}</h2>
+          <p>{g.body}</p>
         </div>
+      ))}
 
-        <div
-          style={{
-            marginTop: '64px',
-            padding: '24px 32px',
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '12px',
-          }}
-        >
-          <p style={{ fontSize: '15px', color: '#ABABAB' }}>
-            Contact:{' '}
-            <a
-              href="mailto:support@songcry.app"
-              style={{ color: '#F819C0', textDecoration: 'none' }}
-            >
-              support@songcry.app
-            </a>
-            {' '}· Copyright and DMCA notices:{' '}
-            <a
-              href="mailto:support@songcry.app"
-              style={{ color: '#F819C0', textDecoration: 'none' }}
-            >
-              support@songcry.app
-            </a>
-          </p>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+      <div
+        style={{
+          marginTop: '48px',
+          padding: '24px 32px',
+          background: 'rgba(255,255,255,0.03)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: '12px',
+        }}
+      >
+        <p style={{ marginBottom: 0 }}>
+          Contact:{' '}
+          <a href="mailto:support@songcry.app" style={{ color: '#F819C0', textDecoration: 'none' }}>
+            support@songcry.app
+          </a>
+          {' '}· Copyright and DMCA notices:{' '}
+          <a href="mailto:support@songcry.app" style={{ color: '#F819C0', textDecoration: 'none' }}>
+            support@songcry.app
+          </a>
+        </p>
+      </div>
+    </LegalLayout>
   )
 }
