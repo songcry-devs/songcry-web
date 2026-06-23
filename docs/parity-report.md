@@ -36,7 +36,7 @@ Each page was rebuilt section-by-section from computed values read off the live 
 ## Approximations / open items for TJ
 
 - **`/artist` hero purple glow + sparkles** — approximated with a CSS radial-gradient; exact Framer geometry not reproduced.
-- **Home & `/artist` scroll-reveal animations** — Framer fades sections in on scroll; the clone renders them static (always visible). Deferred enhancement.
+- **Home & `/artist` scroll-reveal animations (ADDED 2026-06-22 follow-up).** A `Reveal` component (framer-motion `whileInView`: fade + 28px rise, 0.6s, staggered for cards) now animates sections in on scroll across Home + /artist, matching Framer's feel. GPU-only (opacity/transform), respects `prefers-reduced-motion` via `MotionConfig reducedMotion="user"`, SSR-safe.
 - **Hero CTA circle-arrow icon + hero→bg bottom gradient** (Home & `/artist`) — approximated.
 - **Footer treatment (FIXED 2026-06-22 follow-up).** Framer's footer uses a measured vertical gradient `#080707`→`#121212`; the clone now applies it, plus a faint magenta wash (approximate — Framer has no pink radial in CSS; its pink reads from the footer's pink Songcry logo).
 - **"Get Early Access" CTA (`/artist` hero)** links to the App Store; live Framer links to `/#form`. Confirm intended destination.
