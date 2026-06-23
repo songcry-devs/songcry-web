@@ -38,13 +38,13 @@ Each page was rebuilt section-by-section from computed values read off the live 
 - **`/artist` hero purple glow + sparkles** — approximated with a CSS radial-gradient; exact Framer geometry not reproduced.
 - **Home & `/artist` scroll-reveal animations** — Framer fades sections in on scroll; the clone renders them static (always visible). Deferred enhancement.
 - **Hero CTA circle-arrow icon + hero→bg bottom gradient** (Home & `/artist`) — approximated.
-- **Home Download/Footer ambient glow** — Framer has a faint purple radial glow there; clone is flat `rgb(8,7,7)`. Not yet replicated.
+- **Footer treatment (FIXED 2026-06-22 follow-up).** Framer's footer uses a measured vertical gradient `#080707`→`#121212`; the clone now applies it, plus a faint magenta wash (approximate — Framer has no pink radial in CSS; its pink reads from the footer's pink Songcry logo).
 - **"Get Early Access" CTA (`/artist` hero)** links to the App Store; live Framer links to `/#form`. Confirm intended destination.
 - **`/youtube` and `/x` redirects** infer the `@songcrymusic` handle (matching IG/TikTok). Confirm these channels exist or drop the stubs. `/tiktok` uses the known footer URL.
 - **`/artist` hamburger menu** — live Framer hamburger appears non-functional; clone implements a minimal accessible menu with an App Store link. Confirm intended contents.
 - **`/artist` "needs" card image radius** — set to 12px (approximate).
 - **Legal content** — content substance matches Framer; section numbering matched per page (terms/privacy unnumbered, community numbered). Minor wording/curly-quote differences may remain in long legal text.
-- **Nav logo left-inset** — local logo sits ~44px less inset than Framer at desktop (minor).
+- **Nav logo (FIXED 2026-06-22 follow-up).** The nav was rendering the "Songcry" wordmark only — Framer's nav is a flame **icon** (`nav-flame.svg`, exact Framer asset) + the wordmark. The flame is now added on both the desktop pill and the `/artist` mobile bar, which also resolves the prior ~44px logo left-inset near-miss.
 
 ## Notes
 
