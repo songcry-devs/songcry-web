@@ -140,11 +140,12 @@ export default function Footer() {
       {/* Scoped CSS — server-safe (no JS required) */}
       <style>{`
         .site-footer {
-          /* Measured off Framer: a magenta glow descends from the top edge
-             (continuation of the Download section glow, peak ~rgb(50,7,50)),
-             over a vertical lift #121212 → #080707. */
+          /* Strong magenta glow descending from the top edge (continues the
+             Download glow) + a faint tile grid, over a vertical lift to #121212. */
           background:
-            radial-gradient(62% 75% at 50% -22%, rgba(216, 22, 205, 0.24), transparent 60%),
+            repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 72px),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 72px),
+            radial-gradient(78% 92% at 50% -14%, rgba(234, 30, 206, 0.5), rgba(150, 46, 212, 0.2) 46%, transparent 68%),
             linear-gradient(0deg, rgb(8, 7, 7) 0%, rgb(18, 18, 18) 100%);
           padding: 64px 64px 24px;
         }

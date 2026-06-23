@@ -44,21 +44,14 @@ export default function Hero() {
               aria-label="Download on the App Store"
             >
               <span className="hero-cta-label">Download on the App Store</span>
-              {/* Arrow circle icon — FLAG: exact circle/arrow styling is approximate */}
+              {/* White circle + dark right-arrow — matches Framer */}
               <span className="hero-cta-icon" aria-hidden="true">
-                <svg
-                  width="35"
-                  height="35"
-                  viewBox="0 0 35 35"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="17.5" cy="17.5" r="17.5" fill="rgba(255,255,255,0.18)" />
-                  {/* Up-right arrow (↗) */}
+                <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="17.5" cy="17.5" r="17.5" fill="#ffffff" />
                   <path
-                    d="M12 23L23 12M23 12H15M23 12V20"
-                    stroke="#ffffff"
-                    strokeWidth="1.8"
+                    d="M11.5 17.5H23M18 12.5L23 17.5L18 22.5"
+                    stroke="#0a0a0a"
+                    strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -212,6 +205,8 @@ export default function Hero() {
           margin-left: auto;
           /* Align so left edge ≈ x949 at 1440 → relative right-column positioning */
           padding-left: 40px;
+          /* Framer places the phone higher than the text (top ≈ y95 vs text y227) */
+          margin-top: -132px;
         }
 
         /* Phone breakpoint version hidden by default */

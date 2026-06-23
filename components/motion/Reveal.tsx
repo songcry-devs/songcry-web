@@ -20,7 +20,7 @@ import type { ReactNode } from 'react'
 export default function Reveal({
   children,
   delay = 0,
-  y = 28,
+  y = 40,
   amount = 0.2,
   className,
   style,
@@ -39,7 +39,7 @@ export default function Reveal({
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount, margin: '0px 0px -8% 0px' }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </motion.div>
