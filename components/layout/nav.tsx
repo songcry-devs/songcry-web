@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Menu, X } from 'lucide-react'
 
-const APP_STORE_URL = 'https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416'
+import { APP_STORE_URL, trackAppStoreClick } from '@/lib/appstore'
 
 export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -161,7 +161,7 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
                 href={APP_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => setMenuOpen(false)}
+                onClick={() => { trackAppStoreClick('nav-mobile'); setMenuOpen(false) }}
                 style={{
                   color: '#ffffff',
                   fontFamily: 'var(--font-albert-sans), system-ui, sans-serif',
@@ -233,6 +233,7 @@ function DownloadButton() {
   return (
     <a
       href={APP_STORE_URL}
+      onClick={() => trackAppStoreClick('nav-desktop')}
       target="_blank"
       rel="noopener noreferrer"
       className="nav-dl-btn"
