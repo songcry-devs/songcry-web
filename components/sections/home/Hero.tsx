@@ -1,7 +1,7 @@
 import Image from 'next/image'
+import AppStoreLink from '@/components/ui/AppStoreLink'
 import Reveal from '@/components/motion/Reveal'
 
-const APP_STORE_URL = 'https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416'
 
 // Server component — no client interactivity needed; hover via CSS class
 export default function Hero() {
@@ -36,12 +36,10 @@ export default function Hero() {
 
           {/* CTA pill */}
           <Reveal delay={0.16}>
-            <a
-              href={APP_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <AppStoreLink
+              placement="home-hero"
               className="hero-cta-pill"
-              aria-label="Download on the App Store"
+              ariaLabel="Download on the App Store"
             >
               <span className="hero-cta-label">Download on the App Store</span>
               {/* White circle + dark up-right (NE) arrow — matches Framer */}
@@ -57,7 +55,7 @@ export default function Hero() {
                   />
                 </svg>
               </span>
-            </a>
+            </AppStoreLink>
           </Reveal>
         </div>
 
