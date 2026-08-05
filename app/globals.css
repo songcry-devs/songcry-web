@@ -12,7 +12,7 @@
   --color-songcry-error: #F34655;
   --color-songcry-text-primary: #FFFFFF;
   --color-songcry-text-secondary: #ABABAB;
-  --color-songcry-text-tertiary: #6B6B6B;
+  --color-songcry-text-tertiary: #8A8A8A;
   --font-sans: var(--font-albert-sans), system-ui, sans-serif;
   --border-radius-compact: 8px;
   --border-radius-standard: 12px;
@@ -29,7 +29,7 @@
   --surface-500: #292929;
   --text-primary: #FFFFFF;
   --text-secondary: #ABABAB;
-  --text-tertiary: #6B6B6B;
+  --text-tertiary: #8A8A8A;
   --accent: #F819C0;
   --accent-dark: #D907A4;
   --border: rgba(255, 255, 255, 0.12);
@@ -67,23 +67,6 @@ body {
   outline-offset: 2px;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(-8px); }
-  50% { transform: translateY(8px); }
-}
-
-.float-animation {
-  animation: float 4s ease-in-out infinite;
-}
-
-@keyframes bounce-chevron {
-  0%, 100% { transform: translateY(0); opacity: 0.3; }
-  50% { transform: translateY(6px); opacity: 0.6; }
-}
-
-.bounce-chevron {
-  animation: bounce-chevron 2s ease-in-out infinite;
-}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -91,5 +74,52 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -120px;
+  left: 12px;
+  z-index: 200;
+  background: #F819C0;
+  color: #080707;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 200ms ease;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+
+/* ── Tap targets (2026-08-04) ─────────────────────────────────────────────
+   Measured on the live preview at 390px: footer links rendered 29-31px tall
+   against Apple's 44px minimum, and the mobile menu button was 32x32. Small
+   targets cost real conversions on exactly the traffic ads will send us.
+
+   Height comes from padding rather than a fixed height so the hit area grows
+   without moving the glyph — the link looks identical, it is just easier to
+   hit. Applied only where a pointer is coarse, so desktop layout is untouched. */
+@media (pointer: coarse) {
+  .footer-link,
+  .footer-email {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 6px;
+  }
+
+  /* Icon-only controls need width as well as height. */
+  .nav-menu-button,
+  .footer-socials a {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }

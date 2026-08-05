@@ -1,2 +1,13 @@
 node_modules/
 .next/
+.vercel
+verify/
+.playwright-mcp/
+# root-level scratch screenshots / measurement dumps (keep public/framer/*.png tracked)
+/framer-*.json
+/framer-*.txt
+/*-framer*.png
+/*-local*.png
+/local-*.png
+/framer-*.png
+/preview-*.png

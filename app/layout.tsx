@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
-import { Albert_Sans } from 'next/font/google'
+import { Albert_Sans, Inter } from 'next/font/google'
+import './tokens.css'
 import './globals.css'
+import MotionProvider from '@/components/motion/MotionProvider'
 
 const albertSans = Albert_Sans({
   subsets: ['latin'],
@@ -9,9 +11,49 @@ const albertSans = Albert_Sans({
   variable: '--font-albert-sans',
 })
 
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
+  variable: '--font-inter',
+})
+
+// Resolve absolute URLs (OG/Twitter image, canonical) to the right host:
+// production → songcry.app; Vercel previews → the deployment URL (so shared
+// preview links show the card); local → localhost.
+const baseUrl =
+  process.env.VERCEL_ENV === 'production'
+    ? 'https://songcry.app'
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: 'Songcry | Geolocation Based Music Platform',
-  description: 'Geo-based music platform empowering artists to publish, grow, and connect with real listeners in their city.',
+  description:
+    'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
+  alternates: { canonical: '/' },
+  icons: {
+    icon: '/framer/favicon.svg',
+    apple: '/framer/apple-touch-icon.png',
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://songcry.app/',
+    title: 'Songcry | Geolocation Based Music Platform',
+    description:
+      'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
+    images: [{ url: '/framer/og-card.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Songcry | Geolocation Based Music Platform',
+    description:
+      'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
+    images: ['/framer/og-card.png'],
+  },
+  robots: 'max-image-preview:large',
 }
 
 export const viewport: Viewport = {
@@ -27,8 +69,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={albertSans.variable}>
-      <body>{children}</body>
+    <html lang="en" className={`${albertSans.variable} ${inter.variable}`}>
+      <body>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   )
 }
