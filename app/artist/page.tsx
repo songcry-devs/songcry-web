@@ -7,7 +7,29 @@ import CityBand from '@/components/sections/artist/CityBand'
 import Perks from '@/components/sections/artist/Perks'
 import WhatWeNeed from '@/components/sections/artist/WhatWeNeed'
 
-export const metadata = { alternates: { canonical: '/artist' } }
+// Title and description are the page's own, not the homepage's. /artist is the destination
+// Reggie's Google campaigns and our Meta ads point at, so its title is the line that shows in
+// a search result and in a shared link. Inheriting "Songcry | Geolocation Based Music Platform"
+// told an artist nothing about why the page was for them.
+//
+// Wording follows the page: it leads on "Calling All Music Artists" and the Green Room Invite,
+// and the artist-intent keywords Reggie's research surfaced are "get heard" and "get
+// discovered". Brand rules applied: Songcry never SongCry, no dashes as punctuation, and
+// "local" never appears even though the product is geolocation based.
+export const metadata = {
+  title: 'For Artists | Songcry',
+  description:
+    'Get heard by real listeners near you. Songcry is a geolocation music platform where '
+    + 'independent artists get discovered by the people close enough to show up.',
+  alternates: { canonical: '/artist' },
+  openGraph: {
+    title: 'For Artists | Songcry',
+    description:
+      'Get heard by real listeners near you. Songcry is a geolocation music platform where '
+      + 'independent artists get discovered by the people close enough to show up.',
+    url: 'https://songcry.app/artist',
+  },
+}
 
 export default function ArtistPage() {
   return (
