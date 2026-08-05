@@ -110,6 +110,15 @@ export default function Footer() {
                     Community Guidelines
                   </Link>
                 </li>
+                {/* THE artist funnel entry point. Until 2026-08-04 neither the live Framer site
+                    nor this replacement linked to artists.songcry.app even once, so the request
+                    form, the 39 city+genre pages and the whole acquisition path were unreachable
+                    from our main domain — and inherited none of its SEO value. */}
+                <li>
+                  <a href="https://artists.songcry.app" className="footer-link">
+                    For Artists
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
@@ -118,8 +127,9 @@ export default function Footer() {
 
       {/* ── Zone B: Bottom bar ── */}
       <div className="footer-bottom">
+        {/* Derived, never hardcoded — the live Framer site still says 2025 in August 2026. */}
         <p className="footer-copyright">
-          Copyright 2025 Songcry. All rights reserved
+          Copyright {new Date().getFullYear()} Songcry, Inc. All rights reserved
         </p>
 
         {/* Social icons */}
