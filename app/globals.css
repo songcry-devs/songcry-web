@@ -95,3 +95,31 @@ body {
   top: 12px;
 }
 
+
+/* ── Tap targets (2026-08-04) ─────────────────────────────────────────────
+   Measured on the live preview at 390px: footer links rendered 29-31px tall
+   against Apple's 44px minimum, and the mobile menu button was 32x32. Small
+   targets cost real conversions on exactly the traffic ads will send us.
+
+   Height comes from padding rather than a fixed height so the hit area grows
+   without moving the glyph — the link looks identical, it is just easier to
+   hit. Applied only where a pointer is coarse, so desktop layout is untouched. */
+@media (pointer: coarse) {
+  .footer-link,
+  .footer-email {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 6px;
+  }
+
+  /* Icon-only controls need width as well as height. */
+  .nav-menu-button,
+  .footer-socials a {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
