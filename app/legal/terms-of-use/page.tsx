@@ -1,6 +1,7 @@
 import LegalLayout from '@/components/legal/LegalLayout'
 
 export const metadata = {
+  alternates: { canonical: '/legal/terms-of-use' },
   title: 'Terms of use - Songcry | Music spreads through fans',
   description: 'Terms and conditions for using Songcry.',
 }

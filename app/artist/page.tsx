@@ -7,6 +7,8 @@ import CityBand from '@/components/sections/artist/CityBand'
 import Perks from '@/components/sections/artist/Perks'
 import WhatWeNeed from '@/components/sections/artist/WhatWeNeed'
 
+export const metadata = { alternates: { canonical: '/artist' } }
+
 export default function ArtistPage() {
   return (
     <>

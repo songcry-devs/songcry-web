@@ -34,7 +34,12 @@ export const metadata: Metadata = {
   title: 'Songcry | Geolocation Based Music Platform',
   description:
     'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
-  alternates: { canonical: '/' },
+  // NO canonical here. Root-layout metadata is INHERITED by every page, so a canonical
+  // set here made /artist and all three legal pages declare the HOMEPAGE as their
+  // canonical URL — telling Google they are duplicates of / and should be dropped from
+  // the index. The live Framer site self-canonicalises correctly, so shipping this would
+  // have been a real SEO REGRESSION at cutover, on the artist funnel entry point.
+  // Each page declares its own canonical instead.
   icons: {
     icon: '/framer/favicon.svg',
     apple: '/framer/apple-touch-icon.png',
