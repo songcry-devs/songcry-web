@@ -12,7 +12,7 @@ import WhatWeNeed from '@/components/sections/artist/WhatWeNeed'
 // a search result and in a shared link. Inheriting "Songcry | Geolocation Based Music Platform"
 // told an artist nothing about why the page was for them.
 //
-// Wording follows the page: it leads on "Calling All Music Artists" and the Green Room Invite,
+// Wording follows the page: it leads on "Calling All Music Artists" and artist early access,
 // and the artist-intent keywords Reggie's research surfaced are "get heard" and "get
 // discovered". Brand rules applied: Songcry never SongCry, no dashes as punctuation, and
 // "local" never appears even though the product is geolocation based.
