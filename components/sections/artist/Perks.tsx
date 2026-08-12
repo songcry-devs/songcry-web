@@ -1,4 +1,4 @@
-import { Building2, Star, Crown, Phone, Network, TrendingUp } from 'lucide-react'
+import { Building2, Star, ShieldCheck, Phone, Network, TrendingUp } from 'lucide-react'
 import Reveal from '@/components/motion/Reveal'
 
 // Server component — icons from lucide-react (static render, no interactivity)
@@ -14,9 +14,9 @@ const PERKS = [
     body: 'Priority in discovery feeds and city pages',
   },
   {
-    Icon: Crown,
-    title: 'Unlimited Premium Tier',
-    body: 'Free forever for new artists on Songcry',
+    Icon: ShieldCheck,
+    title: 'Zero pay-to-play. Ever.',
+    body: 'Nobody pays to be heard, and ranking is not for sale',
   },
   {
     Icon: Phone,
@@ -37,11 +37,11 @@ const PERKS = [
 
 export default function Perks() {
   return (
-    <section className="perks-section" aria-label="Green Room Perks">
+    <section className="perks-section" aria-label="Early Access Perks">
       {/* Section header */}
       <Reveal delay={0}>
         <div className="perks-header">
-          <h2 className="perks-heading">Green Room Perks</h2>
+          <h2 className="perks-heading">Early Access Perks</h2>
           <p className="perks-subtitle">Your city&rsquo;s music is calling for change. Be the first.</p>
         </div>
       </Reveal>

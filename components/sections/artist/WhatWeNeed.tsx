@@ -33,8 +33,8 @@ const CARDS = [
   {
     image: '/framer/needs-card-5.jpg',
     imageAlt: 'Group of artists collaborating',
-    title: 'Invite 3–5 artists you respect.',
-    body: 'Help us build quality, not quantity',
+    title: 'Put your city on.',
+    body: 'Songcry grows city by city. Tell the artists and fans around you',
   },
 ]
 
