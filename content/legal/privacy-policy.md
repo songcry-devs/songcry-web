@@ -57,9 +57,9 @@ We do not currently offer direct messaging between users.
 
 Location is central to how Songcry works, so we describe our practices here in detail.
 
-**What we collect.** With your permission, the App collects precise location (latitude and longitude) from your device. Location permission is required for the location-based parts of the Services to function.
+**What we collect.** With your permission, the App collects precise location (latitude and longitude) from your device, including when you open the App. Location permission is required for the location-based parts of the Services to function.
 
-**How it is stored.** We store your most recent location reading on your account record, and we use it to assign you to a geographic zone. Each new reading replaces the previous one; we do not build or retain a location history or movement trail from these readings.
+**How it is stored.** We store your most recent location reading on your account record, and we use it to assign you to an approximate geographic zone (roughly 1.7 miles across) for content discovery. Each new reading replaces the previous one; we do not build or retain a location history or movement trail from these readings.
 
 **How we use it.** We use location to: deliver the discovery feed, which surfaces content based on your geographic zone; operate the distribution radius through which songs travel between listeners; resolve your area to a city for discovery purposes; produce approximate city- or region-level listener analytics for artists; and protect platform integrity, including detecting fraud, artificial engagement, and location spoofing.
 
