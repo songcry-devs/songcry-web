@@ -3,10 +3,10 @@ import AppStoreLink from '@/components/ui/AppStoreLink'
 import Reveal from '@/components/motion/Reveal'
 
 
-// Server component — centered dark hero for the /artist (Green Room) page
+// Server component — centered dark hero for the /artist early-access page
 export default function ArtistHero() {
   return (
-    <section className="artist-hero-section" aria-label="Green Room Invite">
+    <section className="artist-hero-section" aria-label="Early Access for Artists">
       {/* Sparkle starfield (matches Framer) */}
       <div className="artist-stars" aria-hidden="true" />
 
@@ -37,7 +37,7 @@ export default function ArtistHero() {
 
         {/* Headline */}
         <Reveal delay={0.08}>
-          <h1 className="artist-hero-headline">Green Room Invite</h1>
+          <h1 className="artist-hero-headline">Early Access for Artists</h1>
         </Reveal>
 
         {/* Tagline */}
