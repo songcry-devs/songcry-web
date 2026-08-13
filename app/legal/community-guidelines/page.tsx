@@ -1,6 +1,7 @@
 import LegalLayout from '@/components/legal/LegalLayout'
 
 export const metadata = {
+  alternates: { canonical: '/legal/community-guidelines' },
   title: 'Community Guidelines - Songcry',
   description: 'Songcry community guidelines for artists and fans.',
 }

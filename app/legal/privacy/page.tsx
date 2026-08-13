@@ -1,6 +1,7 @@
 import LegalLayout from '@/components/legal/LegalLayout'
 
 export const metadata = {
+  alternates: { canonical: '/legal/privacy' },
   title: 'Privacy Policy - Songcry',
   description: 'How Songcry collects, uses, and protects your information.',
 }

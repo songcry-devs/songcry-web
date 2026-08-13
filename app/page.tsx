@@ -4,6 +4,8 @@ import Hero from '@/components/sections/home/Hero'
 import HowItWorks from '@/components/sections/home/HowItWorks'
 import Download from '@/components/sections/home/Download'
 
+export const metadata = { alternates: { canonical: '/' } }
+
 export default function Home() {
   return (
     <>
