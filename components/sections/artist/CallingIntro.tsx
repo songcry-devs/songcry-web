@@ -13,7 +13,7 @@ export default function CallingIntro() {
         {/* Subtitle — brand casing normalized to "Songcry" (FLAG: live Framer renders "SongCry" — brand typo, fixed here) */}
         <Reveal delay={0.1}>
           <p className="calling-subtitle">
-            Songcry is the only platform that helps you build a real fanbase in your city and beyond.
+            Songcry helps you build a real fanbase in your city and beyond.
           </p>
         </Reveal>
       </div>
