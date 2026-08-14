@@ -31,7 +31,7 @@ For clarity, an artist account can typically access fan features, but fan accoun
 
 ## Beta Program Notice
 
-The App is in beta and provided for evaluation only. Features may change, may be limited, and may be disabled or withdrawn without notice. The beta is currently closed and invite-only; access is granted at Songcry's sole discretion.
+The App is in beta and provided for evaluation only. Features may change, may be limited, and may be disabled or withdrawn without notice. Artists may sign up and submit a profile for review; fan access is not yet open and fans may join a waitlist. Access, review outcomes, and publication are granted at Songcry's sole discretion.
 
 We may collect additional diagnostics, crash data, and performance information to improve reliability and user experience during beta.
 
@@ -91,7 +91,7 @@ For details about what location information is collected, how it is used, and th
 
 You retain ownership of content you submit to the App. However, because Songcry operates by hosting and streaming user-uploaded audio/video, you grant us a license as described below.
 
-Upload eligibility and formats. Only artist accounts may upload content to the App. Fan accounts are listener-only and do not have upload functionality. Audio uploads are currently limited to .WAV format. Video uploads are also supported.
+Upload eligibility and formats. Only artist accounts may upload content to the App. Fan accounts are listener-only and do not have upload functionality. Audio uploads are currently limited to WAV and MP3 formats. Video uploads are also supported.
 
 License grant: You grant us a worldwide, non-exclusive, royalty-free, sublicensable license to host, store, cache, reproduce, transmit, stream, publicly perform, display, distribute, and otherwise make available your content as necessary to operate, provide, maintain, improve, and promote the App and the services.
 
