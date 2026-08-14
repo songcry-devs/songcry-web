@@ -110,7 +110,7 @@ We use information to:
 
 We may create de-identified or aggregated information for analytics and reporting and do not attempt to re-identify such information except as permitted by law.
 
-We do not use date of birth, age, or age-range information for analytics, audience insights, artist dashboards, advertising targeting, or product personalization.
+We collect date of birth to confirm that you are 18 or older. We do not use it for advertising targeting, and we do not sell it.
 
 ## How We Share Information
 

@@ -1,7 +1,8 @@
 ---
 title: Community Guidelines (BETA)
-version: 2026-03-09
-lastUpdated: March 9, 2026
+version: 2026-08-13
+lastUpdated: August 13, 2026
+supersedes: 2026-03-09
 ---
 
 Songcry is a fan-first app that helps you discover new music and emerging artists near you. By using Songcry, you agree to follow these Community Guidelines.
