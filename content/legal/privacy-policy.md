@@ -110,7 +110,7 @@ We use information to:
 
 We may create de-identified or aggregated information for analytics and reporting and do not attempt to re-identify such information except as permitted by law.
 
-We do not use date of birth or age information for advertising targeting, and we do not sell it. We may use age in grouped, aggregated form to show artists anonymized insights about their audience, such as the distribution of their listeners across age ranges. Where we do, we apply a minimum group size so that a displayed group is never small enough to identify an individual listener, and artists are never shown which individual listener falls into any group.
+We collect date of birth to confirm that you are 18 or older. We do not use it for advertising targeting, and we do not sell it.
 
 ## How We Share Information
 
