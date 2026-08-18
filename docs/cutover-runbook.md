@@ -1,6 +1,6 @@
 # Cutover Runbook — Framer → Vercel for `songcry.app`
 
-**Status: execute when TJ is ready. Not yet performed.** This flips `songcry.app` from the live Framer site to this Vercel project (`songcry-web`, Vercel project `prj_d5MbiXQnkuBX5NUU3GoBDl01E7Zd`).
+**Status: ✅ PERFORMED 2026-08-17.** TJ made the GoDaddy edit (apex A 31.43.161.6/31.43.160.6 → single A 76.76.21.21; www CNAME sites.framer.app → A 76.76.21.21; TTL 600; nothing else touched — verified by zone-export diff). Gotcha hit: Vercel did not auto-issue the TLS cert (~25 min HTTPS down while port 80 served) — fixed instantly with `vercel certs issue songcry.app www.songcry.app`. Full route + content verification passed same day (all routes 200, misspelled slug 301s, 2026-08-13 legal docs live, false-GPS sentence gone). Rollback window: keep Framer published until ~2026-09-01. Original runbook below kept for the record. This flips `songcry.app` from the live Framer site to this Vercel project (`songcry-web`, Vercel project `prj_d5MbiXQnkuBX5NUU3GoBDl01E7Zd`).
 
 Pre-req: the `feat/framer-clone-cutover` branch is reviewed and merged to `main` (Vercel auto-deploys `main` to production), and the production deploy has been smoke-tested at all three breakpoints (see Phase 7.1 preview validation + `docs/parity-report.md`).
 
