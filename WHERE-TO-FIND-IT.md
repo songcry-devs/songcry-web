@@ -18,6 +18,8 @@ _Created 2026-08-17 (workspace-wide filing pass)._
 | Session notes | `docs/sessions/` | `session-notes-YYYY-MM-DD.md`, one per date, append |
 | Superseded docs | `docs/_archive/` | move + rewrite every reference |
 
-**Reality note:** the live marketing site at songcry.app is a **Framer site** (no repo);
-this repo is the eventual custom-code replacement and auto-deploys to Vercel on push to
-`main` — a merge here is a deploy.
+**Reality note:** **songcry.app IS this repo** since the 2026-08-17 Framer→Vercel cutover
+(see `docs/cutover-runbook.md` for the record; the old Framer site stays published, unedited,
+as rollback insurance until ~2026-09-01). A merge to `main` deploys the LIVE marketing site.
+The `staging` branch is the sandbox: every push to it deploys a full preview at
+`songcry-web-git-staging-tjsongcrys-projects.vercel.app` without touching production.
