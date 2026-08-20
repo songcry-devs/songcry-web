@@ -81,7 +81,9 @@ Artists applying for a verified Songcry profile may choose to connect accounts t
 
 We use this information solely to verify that you own or control the YouTube channel you claim and to allow our review team to view the correct public channel page. We do not access your subscriptions, watch history, playlists, private videos, or any other YouTube data; we do not make ongoing or background requests to your account; and we do not store your Google or YouTube passwords or OAuth tokens on our servers.
 
-Channel identity information is retained until you disconnect the channel in the App or delete your Songcry account, whichever comes first, and is never sold or shared with third parties. You can disconnect your YouTube channel at any time in the App, and you can also revoke Songcry's access through your Google Account security settings at https://myaccount.google.com/permissions.
+Channel identity information is retained until you disconnect the channel in the App or delete your Songcry account, whichever comes first, and is never sold or shared with third parties. You can disconnect your YouTube channel at any time in the App, and you can also revoke Songcry's access at any time through the [Google security settings page](https://security.google.com/settings/security/permissions).
+
+Songcry's YouTube integration is provided using YouTube API Services. By connecting a YouTube channel you agree to the [YouTube Terms of Service](https://www.youtube.com/t/terms), and information Google receives is handled in accordance with the [Google Privacy Policy](http://www.google.com/policies/privacy).
 
 Songcry's use of information received from Google APIs adheres to the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), including the Limited Use requirements.
 

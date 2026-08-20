@@ -59,7 +59,7 @@ This license terminates automatically if you breach these Terms.
 
 Single Sign-On: You may sign in using Apple or Google (or other sign-in providers we make available).
 
-Connected accounts for artist verification: You may connect a YouTube, TikTok, or X account you control so that we can verify an artist profile. We receive limited public identity information from that service for verification purposes only, as described in our Privacy Policy (songcry.app/legal/privacy). Songcry's use of information received from Google APIs adheres to the Google API Services User Data Policy, including the Limited Use requirements.
+Connected accounts for artist verification: You may connect a YouTube, TikTok, or X account you control so that we can verify an artist profile. We receive limited public identity information from that service for verification purposes only, as described in our Privacy Policy (songcry.app/legal/privacy). Songcry's YouTube integration uses YouTube API Services, and by connecting a YouTube channel you agree to be bound by the [YouTube Terms of Service](https://www.youtube.com/t/terms). Songcry's use of information received from Google APIs adheres to the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), including the Limited Use requirements.
 
 You may revoke permissions at any time through your device settings, the App settings, or the third-party service. Revoking permissions may limit or disable certain features.
 
