@@ -16,7 +16,7 @@ Read any relevant skill before writing code in its domain.
 
 **songcry-web** — The Songcry marketing/landing site prototype built on Vercel + Next.js.
 
-- **Live Framer site** (separate): https://songcry.app — built in Framer, edited via Framer API (no repo)
+- **songcry.app IS THIS PROJECT since 2026-08-17** — the Framer→Vercel DNS cutover was performed (apex+www → 76.76.21.21 at GoDaddy). A push to `main` deploys the live marketing site. The old Framer site stays published, unedited, as rollback insurance until ~2026-09-01.
 - **This project:** Next.js/Vercel version. Early prototype pass to mirror the Framer design as code. Intended as the eventual custom-code landing page when we outgrow Framer.
 
 ## Tech Stack
