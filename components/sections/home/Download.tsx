@@ -21,7 +21,7 @@ export default function Download() {
         {/* Subhead */}
         <Reveal delay={0.08}>
           <p className="download-subhead">
-            The beta is live. Artists can join now — fan access is coming soon.
+            The beta is live. Artists can join now, and fan access is coming soon.
           </p>
         </Reveal>
 

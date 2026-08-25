@@ -30,7 +30,7 @@ export default function Hero() {
           </Reveal>
           <Reveal delay={0.08}>
             <p className="hero-sub">
-              Songcry is where fans decide what rises — and artists see momentum by city.
+              Songcry is where fans decide what rises, and artists see momentum by city.
             </p>
           </Reveal>
 
