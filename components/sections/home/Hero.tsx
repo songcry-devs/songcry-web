@@ -146,12 +146,14 @@ export default function Hero() {
         }
 
         /* ── Signup form card in the hero ── */
-        /* Capped at 440px so it reads as a card next to the phone on desktop;
+        /* Capped at 372px to visually MATCH the artists.songcry.app card (measured 366px
+           live; TJ 2026-08-25: the 440px version read oversized next to it). Card next to
+           the phone on desktop;
            on phones the column is narrower than the cap, so the card is
            naturally full width inside the 24px page margins. */
         .hero-form {
           width: 100%;
-          max-width: 440px;
+          max-width: 372px;
           margin-top: 40px;
         }
 
