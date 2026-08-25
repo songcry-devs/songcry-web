@@ -9,6 +9,12 @@ const IG_RE = /^[A-Za-z0-9._]{1,30}$/
 
 const GENERIC_ERROR = 'Something went wrong on our end. Please try again.'
 
+// TJ 2026-08-24: the artist thank-you IS the artists-site thank-you — one approved
+// page, one conversion surface (its Meta pixel Lead + Google Ads label are already
+// live there, keyed to the same `lead-` eid this action mints; a direct visit with
+// no eid fires nothing). songcry-web keeps only the fan thank-you.
+const ARTIST_THANKS = 'https://artists.songcry.app/thanks'
+
 export type JoinState = { error?: string }
 
 /**
@@ -79,7 +85,7 @@ export async function submitArtist(
 ): Promise<JoinState> {
   // Honeypot: silently pretend success. No eid in the redirect, so the thanks
   // page renders but no conversion event fires for bot traffic.
-  if (honeypotTripped(formData)) redirect('/join/thanks-artist')
+  if (honeypotTripped(formData)) redirect(ARTIST_THANKS)
 
   const artistName = String(formData.get('artist_name') ?? '').trim()
   const email = String(formData.get('email') ?? '').trim()
@@ -141,7 +147,7 @@ export async function submitArtist(
     return { error: GENERIC_ERROR }
   }
 
-  redirect(`/join/thanks-artist?eid=${encodeURIComponent(`lead-${randomUUID()}`)}`)
+  redirect(`${ARTIST_THANKS}?eid=${encodeURIComponent(`lead-${randomUUID()}`)}`)
 }
 
 /**
