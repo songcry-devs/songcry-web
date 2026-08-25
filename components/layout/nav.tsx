@@ -194,7 +194,9 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
           }
         }
 
-        /* Phone: <=817px. TJ 2026-08-25: the pill was cramped and the Download
+        /* Phone: up to 817px. NEVER use raw < or > inside this style template:
+           React SSR escapes it, browsers do not decode entities in <style>, and the
+           hydration mismatch makes React discard the whole server render. TJ 2026-08-25: the pill was cramped and the Download
            button could sit over the wordmark / the hero copy scrolling beneath the
            translucent pill. Solid-er background, guaranteed gap, smaller wordmark. */
         @media (max-width: 817px) {
