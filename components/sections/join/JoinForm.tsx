@@ -145,10 +145,26 @@ export default function JoinForm() {
         </p>
       )}
 
+      {/* Trust line — sibling of the artists.songcry.app form's reassurance. */}
+      <p className="join-trust">
+        {isArtist
+          ? "Invite-only. We'll only use this to reach you. No spam."
+          : "We'll only use this to reach you. No spam."}
+      </p>
+
       {/* Scoped responsive styles — follows Hero.tsx / nav.tsx pattern */}
       <style>{`
+        /* ── Card — mirrors the artists.songcry.app form card (24px radius,
+               hairline border, raised surface, clamp padding) using this
+               site's own surface values. Controls inside sit on the page
+               black so they read inset against the card, the same
+               card/field relationship the artists form has. ── */
         .join-form {
           width: 100%;
+          background: #121212;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 24px;
+          padding: clamp(1.75rem, 4vw, 2.5rem);
         }
 
         /* ── Segmented toggle ── */
@@ -156,7 +172,7 @@ export default function JoinForm() {
           display: flex;
           gap: 4px;
           padding: 4px;
-          background: #121212;
+          background: rgb(8, 7, 7);
           border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 999px;
         }
@@ -204,7 +220,7 @@ export default function JoinForm() {
           width: 100%;
           height: 52px;
           padding: 0 16px;
-          background: #121212;
+          background: rgb(8, 7, 7);
           border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 12px;
           color: #ffffff;
@@ -230,28 +246,29 @@ export default function JoinForm() {
           overflow: hidden;
         }
 
-        /* ── Submit ── */
+        /* ── Submit — brand pink, press feedback matching the artists
+               "Request access" button (transform-only transition, scale
+               down on :active, dimmed while pending; no hover shift). ── */
         .join-submit {
           width: 100%;
           height: 52px;
           margin-top: 28px;
           border: none;
           border-radius: 999px;
-          background: #ffffff;
-          color: rgb(41, 41, 41);
+          background: var(--pink);
+          color: #ffffff;
           font-family: var(--font-albert);
           font-size: 17px;
           font-weight: 600;
           cursor: pointer;
-          transition: opacity 180ms ease-out, transform 180ms ease-out;
+          transition: transform 160ms ease-out, opacity 180ms ease-out;
         }
-        .join-submit:hover:not(:disabled) {
-          opacity: 0.88;
-          transform: scale(1.01);
+        .join-submit:active:not(:disabled) {
+          transform: scale(0.975);
         }
         .join-submit:disabled {
-          opacity: 0.6;
-          cursor: default;
+          opacity: 0.7;
+          cursor: progress;
         }
 
         /* ── Inline error ── */
@@ -261,6 +278,15 @@ export default function JoinForm() {
           font-size: 15px;
           line-height: 1.5;
           color: #F34655;
+        }
+
+        /* ── Trust line ── */
+        .join-trust {
+          margin: 16px 0 0;
+          font-family: var(--font-albert);
+          font-size: 13px;
+          line-height: 1.5;
+          color: var(--text-dim);
         }
       `}</style>
     </form>
