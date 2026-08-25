@@ -194,7 +194,11 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
           }
         }
 
-        /* Phone: <=817px. TJ 2026-08-25: the pill was cramped and the Download
+        /* Phone: 817px and below. TJ 2026-08-25: the pill was cramped and the Download
+           NOTE: this style string must stay free of apostrophes, quotes, ampersands
+           and angle brackets (even in comments) — React escapes them during SSR,
+           browsers do not decode entities inside style elements, and the resulting
+           text mismatch makes React throw away the whole server-rendered document.
            button could sit over the wordmark / the hero copy scrolling beneath the
            translucent pill. Solid-er background, guaranteed gap, smaller wordmark. */
         @media (max-width: 817px) {
