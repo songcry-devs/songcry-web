@@ -60,6 +60,15 @@ export const metadata: Metadata = {
     images: ['/framer/og-card.png'],
   },
   robots: 'max-image-preview:large',
+  // Google Search Console ownership proof for https://songcry.app.
+  // Required before Google will verify the OAuth consent-screen branding on
+  // the songcry-prod project, which in turn gates the youtube.readonly
+  // sensitive-scope submission (Cap F). Google's instruction is explicit:
+  // do NOT remove this once verification succeeds, or ownership lapses.
+  // A second, independent proof lives at public/google3bf5d0550e3da16a.html.
+  verification: {
+    google: 'h71pdPN-HjX8GvPTFtJcWGu2W0h5JWjs1d2IwE7Hm2M',
+  },
 }
 
 export const viewport: Viewport = {
