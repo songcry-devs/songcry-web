@@ -1,10 +1,9 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import AppStoreLink from '@/components/ui/AppStoreLink'
 import Reveal from '@/components/motion/Reveal'
+import JoinForm from '@/components/sections/join/JoinForm'
 
 
-// Server component — no client interactivity needed; hover via CSS class
+// Server component shell; interactivity lives in JoinForm (client).
 export default function Hero() {
   return (
     <section className="hero-section" aria-label="Hero">
@@ -35,36 +34,12 @@ export default function Hero() {
             </p>
           </Reveal>
 
-          {/* CTA pill */}
+          {/* Primary CTA: the signup form, embedded like the artists site
+              embeds its form card. The download path lives in the nav. */}
           <Reveal delay={0.16}>
-            <AppStoreLink
-              placement="home-hero"
-              className="hero-cta-pill"
-              ariaLabel="Download on the App Store"
-            >
-              <span className="hero-cta-label">Download on the App Store</span>
-              {/* White circle + dark up-right (NE) arrow — matches Framer */}
-              <span className="hero-cta-icon" aria-hidden="true">
-                <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="17.5" cy="17.5" r="17.5" fill="#ffffff" />
-                  <path
-                    d="M13 22L22 13M22 13H15.5M22 13V19.5"
-                    stroke="#0a0a0a"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </AppStoreLink>
-          </Reveal>
-
-          {/* Secondary CTA — signup form for artists and fans. Quiet on purpose:
-              the App Store pill above stays the primary action. */}
-          <Reveal delay={0.24}>
-            <Link href="/join" className="hero-join-link">
-              Or sign up as an artist or fan &rarr;
-            </Link>
+            <div className="hero-form">
+              <JoinForm compact />
+            </div>
           </Reveal>
         </div>
 
@@ -72,10 +47,10 @@ export default function Hero() {
         <div className="hero-phone-desktop">
           <Reveal delay={0.12}>
             <Image
-              src="/framer/hero-phone.png"
-              alt="Songcry app on iPhone"
+              src="/framer/hero-phone-feed.png"
+              alt="Songcry feed"
               width={307}
-              height={595}
+              height={592}
               priority
               style={{ display: 'block' }}
             />
@@ -83,13 +58,13 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Phone mockup — phone breakpoint only, below CTA */}
+      {/* Phone mockup — phone breakpoint only, below the form */}
       <div className="hero-phone-mobile">
         <Image
-          src="/framer/hero-phone.png"
-          alt="Songcry app on iPhone"
+          src="/framer/hero-phone-feed.png"
+          alt="Songcry feed"
           width={200}
-          height={380}
+          height={386}
           priority
           style={{ display: 'block' }}
         />
@@ -170,63 +145,14 @@ export default function Hero() {
           max-width: 663px;
         }
 
-        /* ── CTA pill ── */
-        .hero-cta-pill {
-          display: inline-flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 20px;
-          background: rgb(77, 77, 77);
-          border-radius: 100px;
-          padding: 10px 11px 10px 21px;
+        /* ── Signup form card in the hero ── */
+        /* Capped at 440px so it reads as a card next to the phone on desktop;
+           on phones the column is narrower than the cap, so the card is
+           naturally full width inside the 24px page margins. */
+        .hero-form {
+          width: 100%;
+          max-width: 440px;
           margin-top: 40px;
-          text-decoration: none;
-          transition: background 220ms ease;
-        }
-        /* Reverse on hover (matches Framer): pill turns white, label dark,
-           arrow circle dark, arrow white. */
-        .hero-cta-label {
-          font-family: var(--font-albert);
-          font-size: var(--fs-badge);          /* 19px */
-          font-weight: 500;
-          line-height: var(--lh-badge);        /* 22.8px */
-          color: #fff;
-          white-space: nowrap;
-          transition: color 220ms ease;
-        }
-        .hero-cta-icon svg circle { transition: fill 220ms ease; }
-        .hero-cta-icon svg path { transition: stroke 220ms ease; }
-        .hero-cta-pill:hover { background: #ffffff; }
-        .hero-cta-pill:hover .hero-cta-label { color: #0a0a0a; }
-        .hero-cta-pill:hover .hero-cta-icon svg circle { fill: #141414; }
-        .hero-cta-pill:hover .hero-cta-icon svg path { stroke: #ffffff; }
-
-        .hero-cta-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          width: 35px;
-          height: 35px;
-        }
-
-        /* ── Secondary CTA: /join link under the pill ── */
-        /* padding-block grows the tap target toward 44px without moving the
-           glyphs much (same trick as the footer links in globals.css). */
-        .hero-join-link {
-          display: inline-block;
-          margin-top: 8px;
-          padding: 10px 0;
-          font-family: var(--font-albert);
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 1.3;
-          color: var(--text-60);
-          text-decoration: none;
-          transition: color 180ms ease-out;
-        }
-        .hero-join-link:hover {
-          color: #ffffff;
         }
 
         /* ── Phone mockup — desktop/tablet (right column) ── */
@@ -250,14 +176,17 @@ export default function Hero() {
             min-height: 638px;
           }
           .hero-content {
-            padding-left: 159px;
-            padding-right: 159px;
+            /* Was a fixed 159px per side; the form needs more column width
+               than the old pill did, so the inset now eases down with the
+               viewport instead of squeezing the card. */
+            padding-left: clamp(48px, 8vw, 120px);
+            padding-right: clamp(48px, 8vw, 120px);
             padding-top: 200px;
           }
           /* Scale down phone image on tablet */
           .hero-phone-desktop img {
             width: 263px !important;
-            height: 510px !important;
+            height: 507px !important;
           }
         }
 
@@ -281,6 +210,9 @@ export default function Hero() {
             font-size: 15px !important;
             line-height: 24px !important;
             letter-spacing: -0.3px !important;
+          }
+          .hero-form {
+            margin-top: 32px;
           }
           /* Hide the desktop phone image */
           .hero-phone-desktop {

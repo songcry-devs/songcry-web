@@ -12,8 +12,11 @@ const INITIAL: JoinState = {}
  * Each path has its own server action and its own error state, so switching
  * the toggle never shows the other path's error. The email input stays mounted
  * across the switch so a typed address survives changing your mind.
+ *
+ * `compact` tightens paddings and control heights so the card sits well
+ * inside the homepage hero. Default (false) keeps the /join page look.
  */
-export default function JoinForm() {
+export default function JoinForm({ compact = false }: { compact?: boolean }) {
   const [mode, setMode] = useState<'artist' | 'fan'>('artist')
   const [artistState, artistAction] = useFormState(submitArtist, INITIAL)
   const [fanState, fanAction] = useFormState(submitFan, INITIAL)
@@ -29,7 +32,10 @@ export default function JoinForm() {
   const error = isArtist ? artistState.error : fanState.error
 
   return (
-    <form action={isArtist ? artistAction : fanAction} className="join-form">
+    <form
+      action={isArtist ? artistAction : fanAction}
+      className={compact ? 'join-form join-form--compact' : 'join-form'}
+    >
       {/* ── Segmented toggle ── */}
       <div className="join-toggle" role="group" aria-label="I am joining as">
         <button
@@ -156,9 +162,13 @@ export default function JoinForm() {
       <style>{`
         /* ── Card — mirrors the artists.songcry.app form card (24px radius,
                hairline border, raised surface, clamp padding) using this
-               site's own surface values. Controls inside sit on the page
+               site surface values. Controls inside sit on the page
                black so they read inset against the card, the same
-               card/field relationship the artists form has. ── */
+               card/field relationship the artists form has.
+               NOTE: keep this whole style string free of apostrophes,
+               quotes, ampersands and angle brackets. React escapes them
+               during SSR but browsers do not decode entities inside
+               style elements, which breaks hydration. ── */
         .join-form {
           width: 100%;
           background: #121212;
@@ -192,11 +202,11 @@ export default function JoinForm() {
         .join-toggle button:hover {
           color: #ffffff;
         }
-        .join-toggle button[aria-pressed="true"] {
+        .join-toggle button[aria-pressed=true] {
           background: #ffffff;
           color: rgb(41, 41, 41);
         }
-        .join-toggle button[aria-pressed="true"]:hover {
+        .join-toggle button[aria-pressed=true]:hover {
           color: rgb(41, 41, 41);
         }
 
@@ -247,7 +257,7 @@ export default function JoinForm() {
         }
 
         /* ── Submit — brand pink, press feedback matching the artists
-               "Request access" button (transform-only transition, scale
+               Request-access button (transform-only transition, scale
                down on :active, dimmed while pending; no hover shift). ── */
         .join-submit {
           width: 100%;
@@ -287,6 +297,40 @@ export default function JoinForm() {
           font-size: 13px;
           line-height: 1.5;
           color: var(--text-dim);
+        }
+
+        /* ── Compact variant (homepage hero) ── */
+        /* Tighter card padding and shorter controls; input font stays 16px
+           so iOS Safari does not zoom the page on focus. */
+        .join-form--compact {
+          padding: clamp(1.25rem, 2.5vw, 1.75rem);
+        }
+        .join-form--compact .join-toggle button {
+          min-height: 40px;
+          font-size: 15px;
+        }
+        .join-form--compact .join-field {
+          margin-top: 14px;
+        }
+        .join-form--compact .join-label {
+          font-size: 13px;
+          margin-bottom: 6px;
+        }
+        .join-form--compact .join-input {
+          height: 46px;
+        }
+        .join-form--compact .join-submit {
+          height: 48px;
+          margin-top: 22px;
+          font-size: 16px;
+        }
+        .join-form--compact .join-error {
+          margin-top: 12px;
+          font-size: 14px;
+        }
+        .join-form--compact .join-trust {
+          margin-top: 12px;
+          font-size: 12px;
         }
       `}</style>
     </form>
