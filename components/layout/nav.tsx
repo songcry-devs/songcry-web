@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 import { APP_STORE_URL, trackAppStoreClick } from '@/lib/appstore'
 
@@ -72,6 +72,7 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
               width={84}
               height={24}
               priority
+              className="nav-wordmark"
               style={{ height: '24px', width: 'auto' }}
             />
           </Link>
@@ -193,15 +194,23 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
           }
         }
 
-        /* Phone: ≤817px */
+        /* Phone: <=817px. TJ 2026-08-25: the pill was cramped and the Download
+           button could sit over the wordmark / the hero copy scrolling beneath the
+           translucent pill. Solid-er background, guaranteed gap, smaller wordmark. */
         @media (max-width: 817px) {
           .nav-pill-wrapper {
             padding-left: 12px;
             padding-right: 12px;
           }
           .nav-pill-inner {
-            height: 56px !important;
-            padding: 12px 24px !important;
+            height: 52px !important;
+            padding: 10px 10px 10px 16px !important;
+            gap: 12px;
+            flex-wrap: nowrap;
+            background: rgba(0, 0, 0, 0.85) !important;
+          }
+          .nav-wordmark {
+            height: 20px !important;
           }
 
           /* On artist variant, hide the pill nav on phone */
@@ -209,9 +218,13 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
             display: none;
           }
 
-          /* Download button: smaller on phone */
+          /* Download button: compact but tappable */
           .nav-dl-btn {
-            padding: 6px 8px !important;
+            padding: 8px 14px !important;
+            flex-shrink: 0;
+          }
+          .nav-dl-btn span {
+            font-size: 15px !important;
           }
         }
 
@@ -267,7 +280,6 @@ function DownloadButton() {
       >
         Download
       </span>
-      <ArrowRight size={16} color="var(--nav-pill-text, rgb(41, 41, 41))" />
     </a>
   )
 }
