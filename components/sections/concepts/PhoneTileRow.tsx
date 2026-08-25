@@ -169,6 +169,13 @@ export default function PhoneTileRow({
           }
         }
 
+        /* globals.css already zeroes animation and transition DURATION
+        site-wide under reduced motion, with !important. What it cannot do
+        is remove a positional change: a hover lift still happens, just
+        instantly. An instant 6px jump is still movement to someone with
+        vestibular sensitivity, so the transform is dropped here. The
+        duration lines below are deliberate belt-and-braces in case the
+        global reset is ever narrowed. */
         @media (prefers-reduced-motion: reduce) {
           .ptr-tile {
             transition: none;
