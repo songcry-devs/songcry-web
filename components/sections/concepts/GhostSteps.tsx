@@ -145,6 +145,12 @@ export default function GhostSteps() {
             grid-column: 1;
           }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+          .gs-step {
+            transition: none;
+          }
+        }
       `}</style>
     </section>
   )

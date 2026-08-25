@@ -80,6 +80,24 @@ export default function CtaBand({ placement }: { placement: string }) {
           color: rgba(255, 255, 255, 0.65);
         }
 
+        .ctab-btn:focus-visible,
+        .ctab-store:focus-visible {
+          outline: 2px solid var(--pink);
+          outline-offset: 3px;
+          border-radius: 999px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .ctab-btn,
+          .ctab-store {
+            transition: none;
+          }
+          .ctab-btn:hover,
+          .ctab-btn:active {
+            transform: none;
+          }
+        }
+
         @media (max-width: 817px) {
           .ctab-section {
             margin-top: 64px;

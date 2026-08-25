@@ -19,8 +19,17 @@ import GhostSteps from '@/components/sections/concepts/GhostSteps'
  * Design-concept preview for TJ — never indexed.
  */
 export const metadata: Metadata = {
-  title: 'Songcry concept B',
+  title: 'Songcry concept B · City first',
+  description: 'A live city ticker, then the city line as the hero. The city is the organizing idea all the way down the page.',
   robots: { index: false, follow: false },
+  // Each concept overrides the inherited root openGraph. Without this all four
+  // unfurl as the identical homepage card, so a link pasted into Slack gives no
+  // clue which concept it points at. These are review aids on a noindex page.
+  openGraph: {
+    type: 'website',
+    title: 'Songcry concept B · City first',
+    description: 'A live city ticker, then the city line as the hero. The city is the organizing idea all the way down the page.',
+  },
 }
 
 const CITIES = [

@@ -21,8 +21,17 @@ import CtaBand from '@/components/sections/concepts/CtaBand'
  * Design-concept preview for TJ — never indexed.
  */
 export const metadata: Metadata = {
-  title: 'Songcry concept D',
+  title: 'Songcry concept D · The wall',
+  description: 'A floating panel over a drifting wall of framed phones. The most atmospheric of the four.',
   robots: { index: false, follow: false },
+  // Each concept overrides the inherited root openGraph. Without this all four
+  // unfurl as the identical homepage card, so a link pasted into Slack gives no
+  // clue which concept it points at. These are review aids on a noindex page.
+  openGraph: {
+    type: 'website',
+    title: 'Songcry concept D · The wall',
+    description: 'A floating panel over a drifting wall of framed phones. The most atmospheric of the four.',
+  },
 }
 
 const WALL_COL_A = [

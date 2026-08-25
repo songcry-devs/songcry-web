@@ -26,8 +26,17 @@ const APP_STORE_URL =
  * Design-concept preview for TJ — never indexed.
  */
 export const metadata: Metadata = {
-  title: 'Songcry concept C',
+  title: 'Songcry concept C · Product forward',
+  description: 'The app leads. A complete framed phone as the hero, then the gallery, then the manifesto.',
   robots: { index: false, follow: false },
+  // Each concept overrides the inherited root openGraph. Without this all four
+  // unfurl as the identical homepage card, so a link pasted into Slack gives no
+  // clue which concept it points at. These are review aids on a noindex page.
+  openGraph: {
+    type: 'website',
+    title: 'Songcry concept C · Product forward',
+    description: 'The app leads. A complete framed phone as the hero, then the gallery, then the manifesto.',
+  },
 }
 
 const GALLERY = [
@@ -406,6 +415,25 @@ export default function ConceptC() {
             }
             .cc-band {
               padding: 72px 0;
+            }
+          }
+
+          .cc-btn-pink:focus-visible,
+          .cc-btn-ghost:focus-visible {
+            outline: 2px solid var(--pink);
+            outline-offset: 3px;
+            border-radius: 999px;
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .cc-btn-pink,
+            .cc-btn-ghost,
+            .cc-cell,
+            .cc-tile {
+              transition: none;
+            }
+            .cc-btn-pink:hover {
+              transform: none;
             }
           }
         `}</style>

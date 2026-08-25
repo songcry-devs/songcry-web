@@ -20,8 +20,17 @@ import CtaBand from '@/components/sections/concepts/CtaBand'
  * Design-concept preview for TJ — never indexed.
  */
 export const metadata: Metadata = {
-  title: 'Songcry concept A',
+  title: 'Songcry concept A · Sharpen',
+  description: 'The homepage you have now, tightened. Editorial split hero with the copy and form on the left, the phone on the right.',
   robots: { index: false, follow: false },
+  // Each concept overrides the inherited root openGraph. Without this all four
+  // unfurl as the identical homepage card, so a link pasted into Slack gives no
+  // clue which concept it points at. These are review aids on a noindex page.
+  openGraph: {
+    type: 'website',
+    title: 'Songcry concept A · Sharpen',
+    description: 'The homepage you have now, tightened. Editorial split hero with the copy and form on the left, the phone on the right.',
+  },
 }
 
 const TILES = [

@@ -168,6 +168,15 @@ export default function PhoneTileRow({
             box-shadow: none;
           }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+          .ptr-tile {
+            transition: none;
+          }
+          .ptr-tile:hover {
+            transform: none;
+          }
+        }
       `}</style>
     </section>
   )
