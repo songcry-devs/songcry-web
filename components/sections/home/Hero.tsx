@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import AppStoreLink from '@/components/ui/AppStoreLink'
 import Reveal from '@/components/motion/Reveal'
 
@@ -56,6 +57,14 @@ export default function Hero() {
                 </svg>
               </span>
             </AppStoreLink>
+          </Reveal>
+
+          {/* Secondary CTA — signup form for artists and fans. Quiet on purpose:
+              the App Store pill above stays the primary action. */}
+          <Reveal delay={0.24}>
+            <Link href="/join" className="hero-join-link">
+              Or sign up as an artist or fan &rarr;
+            </Link>
           </Reveal>
         </div>
 
@@ -199,6 +208,25 @@ export default function Hero() {
           flex-shrink: 0;
           width: 35px;
           height: 35px;
+        }
+
+        /* ── Secondary CTA: /join link under the pill ── */
+        /* padding-block grows the tap target toward 44px without moving the
+           glyphs much (same trick as the footer links in globals.css). */
+        .hero-join-link {
+          display: inline-block;
+          margin-top: 8px;
+          padding: 10px 0;
+          font-family: var(--font-albert);
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1.3;
+          color: var(--text-60);
+          text-decoration: none;
+          transition: color 180ms ease-out;
+        }
+        .hero-join-link:hover {
+          color: #ffffff;
         }
 
         /* ── Phone mockup — desktop/tablet (right column) ── */
