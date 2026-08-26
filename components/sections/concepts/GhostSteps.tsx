@@ -1,5 +1,9 @@
 /**
- * Ghost-numeral how-it-works rows, shared by concepts A, B and D.
+ * Ghost-numeral how-it-works rows, shared by concepts A and B.
+ *
+ * D used these too until it forked its body on 2026-08-25. The ghost numerals are
+ * the editorial read and belong to A; D stages the same three beats as a descent
+ * in WallSteps.
  *
  * The 01/02/03 numbering is justified structure, not decoration: the three
  * beats are a real sequence (upload, listeners decide, the song travels), so

@@ -1,7 +1,11 @@
 import Image from 'next/image'
 
 /**
- * A strip of app-screen tiles, shared by concepts A and D.
+ * A strip of app-screen tiles. Concept A only.
+ *
+ * Was shared with D until D forked its body on 2026-08-25. D already shows eight
+ * phones in its hero wall, so a second phone strip showed the same thing twice;
+ * CrowdBand carries that slot there instead.
  *
  * TJ ruling (concept A): the phones must be COMPLETE — the tile grows to fit
  * the full framed screenshot instead of cropping it at a fixed height. Every

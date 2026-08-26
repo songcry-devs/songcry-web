@@ -3,7 +3,10 @@
 import { APP_STORE_URL, trackAppStoreClick } from '@/lib/appstore'
 
 /**
- * Closing CTA band, shared by concepts A and D.
+ * Closing CTA band. Concept A only.
+ *
+ * Was shared with D until D forked its body on 2026-08-25; D closes on WallClose
+ * instead, which reprises its hero wall behind the same approved copy.
  *
  * Client component so the App Store link reports through the one tracked
  * handler in lib/appstore (same reason the nav Download button is tracked).
