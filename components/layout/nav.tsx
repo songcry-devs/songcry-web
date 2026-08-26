@@ -194,11 +194,16 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
           }
         }
 
-        /* Phone: up to 817px. NEVER use raw < or > inside this style template:
-           React SSR escapes it, browsers do not decode entities in <style>, and the
-           hydration mismatch makes React discard the whole server render. TJ 2026-08-25: the pill was cramped and the Download
+        /* Phone: 817px and below. TJ 2026-08-25: the pill was cramped and the Download
            button could sit over the wordmark / the hero copy scrolling beneath the
-           translucent pill. Solid-er background, guaranteed gap, smaller wordmark. */
+           translucent pill. Solid-er background, guaranteed gap, smaller wordmark.
+
+           NOTE: this style string must stay free of apostrophes, quotes, ampersands
+           and angle brackets, even inside comments. React escapes them during SSR,
+           browsers do not decode entities inside style elements, and the resulting
+           text mismatch makes React throw away the whole server-rendered document.
+           The previous version of this very comment spelled out the forbidden
+           characters literally and so caused the bug it was warning about. */
         @media (max-width: 817px) {
           .nav-pill-wrapper {
             padding-left: 12px;

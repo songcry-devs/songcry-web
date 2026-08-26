@@ -4,8 +4,9 @@
   "private": false,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "node scripts/check-style-literals.mjs && next build",
+    "start": "next start",
+    "check:styles": "node scripts/check-style-literals.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.2",
