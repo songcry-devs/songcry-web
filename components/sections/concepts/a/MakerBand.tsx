@@ -26,8 +26,8 @@ export default function MakerBand() {
             <Image
               src="/framer/needs-card-4.jpg"
               alt="An independent artist working at a home studio setup"
-              width={2912}
-              height={1632}
+              width={1080}
+              height={720}
               sizes="(max-width: 980px) 100vw, 56vw"
             />
           </figure>

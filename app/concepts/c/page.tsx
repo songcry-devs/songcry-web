@@ -7,11 +7,6 @@ import JoinForm from '@/components/sections/join/JoinForm'
 import Reveal from '@/components/motion/Reveal'
 import ProductGallery, { type GalleryItem } from '@/components/sections/concepts/c/ProductGallery'
 
-// Server component: hardcoded like the home Download section (lib/appstore is
-// a client module, so its export cannot be read from a server component).
-const APP_STORE_URL =
-  'https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416'
-
 /**
  * Concept C — Product forward. The app itself is the hero: a complete framed
  * phone over a soft pink glow, then a staggered gallery of complete phones
@@ -80,8 +75,8 @@ const GALLERY: GalleryItem[] = [
     caption: 'Bring your song to life',
   },
   {
-    src: '/concepts/feed-who-am-i.png',
-    alt: 'Song title and lyric caption in the feed',
+    src: '/concepts/feed-comments.png',
+    alt: 'The comment sheet on a song, showing fan comments and replies',
     caption: 'Hear what fans think',
   },
 ]
@@ -119,14 +114,6 @@ export default function ConceptC() {
           <Reveal y={22} delay={0.16}>
             <div className="cc-cta-row">
               <a className="cc-btn-pink" href="#join">Join the beta</a>
-              <a
-                className="cc-btn-ghost"
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download
-              </a>
             </div>
           </Reveal>
         </section>
@@ -219,15 +206,18 @@ export default function ConceptC() {
             justify-content: center;
             flex-wrap: wrap;
           }
+          /* The only call to action in this hero, so it is sized as one.
+             Download was removed 2026-08-26 (TJ): it stays in the nav. */
           .cc-btn-pink {
             display: inline-block;
             background: var(--pink);
             color: #ffffff;
             border-radius: 999px;
-            padding: 14px 34px;
+            padding: 17px 48px;
             font-family: var(--font-albert);
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
+            letter-spacing: -0.01em;
             text-decoration: none;
             transition: transform 160ms ease, filter 160ms ease;
           }
@@ -237,22 +227,6 @@ export default function ConceptC() {
           }
           .cc-btn-pink:active {
             transform: scale(0.975);
-          }
-          .cc-btn-ghost {
-            display: inline-block;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 999px;
-            padding: 14px 34px;
-            font-family: var(--font-albert);
-            font-size: 15px;
-            font-weight: 700;
-            color: #ffffff;
-            text-decoration: none;
-            transition: border-color 160ms ease, background 160ms ease;
-          }
-          .cc-btn-ghost:hover {
-            border-color: rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.04);
           }
 
           /* ── Manifesto ── */
@@ -351,8 +325,7 @@ export default function ConceptC() {
             }
           }
 
-          .cc-btn-pink:focus-visible,
-          .cc-btn-ghost:focus-visible {
+          .cc-btn-pink:focus-visible {
             outline: 2px solid var(--pink);
             outline-offset: 3px;
             border-radius: 999px;
@@ -366,8 +339,7 @@ export default function ConceptC() {
           duration lines below are deliberate belt-and-braces in case the
           global reset is ever narrowed. */
           @media (prefers-reduced-motion: reduce) {
-            .cc-btn-pink,
-            .cc-btn-ghost {
+            .cc-btn-pink {
               transition: none;
             }
             .cc-btn-pink:hover {
