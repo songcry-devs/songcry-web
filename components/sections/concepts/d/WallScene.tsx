@@ -86,14 +86,15 @@ export default function WallScene() {
 
       <div className="cd-fade cd-fade-t" aria-hidden="true" />
       <div className="cd-fade cd-fade-b" aria-hidden="true" />
+      <div className="cd-edge-r" aria-hidden="true" />
 
       <style>{`
         .cd-scene {
           position: absolute;
-          top: -160px;
+          top: -70px;
           right: -24px;
           width: 62%;
-          height: calc(100% + 320px);
+          height: calc(100% + 210px);
           z-index: 0;
         }
         .cd-wall-scale {
@@ -121,7 +122,7 @@ export default function WallScene() {
           animation: cd-drift-a 18s ease-in-out infinite;
         }
         .cd-col-b {
-          margin-top: -170px;
+          margin-top: -110px;
           animation: cd-drift-b 23s ease-in-out infinite;
         }
         @keyframes cd-drift-a {
@@ -172,8 +173,20 @@ export default function WallScene() {
         }
         .cd-fade-t {
           top: 0;
-          height: 120px;
-          background: linear-gradient(rgb(8, 7, 7), transparent);
+          height: 300px;
+          background: linear-gradient(rgb(8, 7, 7) 32%, rgba(8, 7, 7, 0.72) 62%, transparent);
+        }
+        /* The wall runs off the right edge by design, but a hard slice through a
+           phone frame reads as a bug, so that edge dissolves too. */
+        .cd-edge-r {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          width: 120px;
+          pointer-events: none;
+          z-index: 1;
+          background: linear-gradient(to left, rgb(8, 7, 7) 8%, transparent);
         }
         .cd-fade-b {
           bottom: 0;
@@ -214,6 +227,9 @@ export default function WallScene() {
             margin-top: -120px;
           }
           .cd-fade-t {
+            display: none;
+          }
+          .cd-edge-r {
             display: none;
           }
           .cd-fade-b {

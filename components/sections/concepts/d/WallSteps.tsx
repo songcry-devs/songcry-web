@@ -8,8 +8,14 @@ import Reveal from '@/components/motion/Reveal'
  * now belong to concept A, which is the editorial read. D is the atmospheric
  * one, so the same three beats are staged instead as a staircase: each step
  * indents further and hangs off a thin rule, with the performer photograph
- * behind at low opacity so the section continues the hero room rather than
- * resetting to a card stack.
+ * behind.
+ *
+ * Spacing pass (TJ, 2026-08-25): the first cut set the step measure at 520px
+ * inside an 1160px container, so the staircase only crossed half the section
+ * and the right side read as dead space. The measure and the indents now scale
+ * with the container, so the descent actually travels across it, the bodies sit
+ * on one line each instead of orphaning a word, and the rules come out the same
+ * height. Section padding is symmetric and the gap between beats is constant.
  *
  * Copy is claims-locked and identical to GhostSteps, character for character.
  * Do not edit these lines without a copy ruling.
@@ -72,31 +78,33 @@ export default function WallSteps() {
         .ws-section {
           position: relative;
           overflow: hidden;
-          padding: 128px 0 120px;
+          padding: 120px 0;
           background: rgb(8, 7, 7);
         }
         .ws-photo {
           position: absolute;
-          top: 0;
-          right: 0;
-          width: 74%;
-          height: 100%;
-          opacity: 0.52;
+          inset: 0;
+          opacity: 0.5;
           pointer-events: none;
-          -webkit-mask-image: linear-gradient(to left, black 26%, transparent 96%);
-          mask-image: linear-gradient(to left, black 26%, transparent 96%);
+          -webkit-mask-image: linear-gradient(to left, black 22%, transparent 94%);
+          mask-image: linear-gradient(to left, black 22%, transparent 94%);
         }
         .ws-photo img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: 60% 40%;
+          object-position: 62% 38%;
         }
+        /* Two jobs: keep the section edges reading as one dark room, and hold a
+           dark floor under the copy column so the staircase stays legible as it
+           travels right into the brighter part of the frame. */
         .ws-scrim {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, rgb(8, 7, 7), transparent 22%, transparent 78%, rgb(8, 7, 7));
           pointer-events: none;
+          background:
+            linear-gradient(to right, rgb(8, 7, 7) 10%, rgba(8, 7, 7, 0.55) 48%, transparent 76%),
+            linear-gradient(to bottom, rgb(8, 7, 7), transparent 20%, transparent 80%, rgb(8, 7, 7));
         }
         .ws-wrap {
           position: relative;
@@ -111,25 +119,28 @@ export default function WallSteps() {
           font-weight: 700;
           letter-spacing: -0.02em;
           color: #ffffff;
-          margin: 0 0 56px;
+          margin: 0 0 64px;
         }
         .ws-step {
           position: relative;
-          padding: 0 0 0 28px;
-          margin-bottom: 56px;
-          max-width: 520px;
+          padding: 4px 0 4px 28px;
+          margin-bottom: 52px;
+          max-width: 660px;
           border-left: 1px solid rgba(248, 25, 192, 0.45);
           transition: border-color 300ms ease;
         }
         .ws-step:hover {
           border-left-color: rgba(248, 25, 192, 0.95);
         }
-        /* The descent: each beat steps further into the room. */
+        /* The descent: each beat steps further into the room. The indents are
+           percentages of the container so the staircase crosses the full width
+           at every desktop size instead of stopping halfway. */
         .ws-step-02 {
-          margin-left: 12%;
+          margin-left: 16%;
         }
         .ws-step-03 {
-          margin-left: 24%;
+          margin-left: 32%;
+          margin-bottom: 0;
         }
         .ws-marker {
           font-family: var(--font-albert);
@@ -142,24 +153,42 @@ export default function WallSteps() {
         }
         .ws-title {
           font-family: var(--font-albert);
-          font-size: clamp(26px, 2.8vw, 34px);
+          font-size: clamp(28px, 2.8vw, 38px);
           font-weight: 700;
           letter-spacing: -0.02em;
-          line-height: 1.1;
+          line-height: 1.08;
           color: #ffffff;
-          margin: 0 0 12px;
+          margin: 0 0 14px;
         }
         .ws-body {
           font-family: var(--font-albert);
-          font-size: 17px;
-          line-height: 1.55;
-          color: rgba(255, 255, 255, 0.65);
+          font-size: 18px;
+          line-height: 1.5;
+          color: rgba(255, 255, 255, 0.68);
           margin: 0;
         }
 
         @media (max-width: 1199px) {
           .ws-wrap {
             padding: 0 48px;
+          }
+          .ws-step {
+            max-width: 600px;
+          }
+          .ws-step-02 {
+            margin-left: 12%;
+          }
+          .ws-step-03 {
+            margin-left: 24%;
+          }
+        }
+        @media (max-width: 980px) {
+          .ws-section {
+            padding: 96px 0;
+          }
+          .ws-step {
+            max-width: 560px;
+            margin-bottom: 44px;
           }
           .ws-step-02 {
             margin-left: 8%;
@@ -170,22 +199,25 @@ export default function WallSteps() {
         }
         @media (max-width: 817px) {
           .ws-section {
-            padding: 88px 0 80px;
+            padding: 80px 0;
           }
           .ws-wrap {
             padding: 0 24px;
           }
           .ws-heading {
-            margin-bottom: 36px;
+            margin-bottom: 40px;
           }
           .ws-photo {
-            width: 100%;
             opacity: 0.34;
-            -webkit-mask-image: linear-gradient(to top, black 20%, transparent 92%);
-            mask-image: linear-gradient(to top, black 20%, transparent 92%);
+            -webkit-mask-image: linear-gradient(to top, black 18%, transparent 94%);
+            mask-image: linear-gradient(to top, black 18%, transparent 94%);
+          }
+          .ws-scrim {
+            background: linear-gradient(to bottom, rgb(8, 7, 7), transparent 18%, transparent 78%, rgb(8, 7, 7));
           }
           .ws-step {
-            margin-bottom: 40px;
+            max-width: none;
+            margin-bottom: 36px;
             padding-left: 20px;
           }
           .ws-step-02, .ws-step-03 {

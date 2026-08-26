@@ -10,12 +10,16 @@ import Reveal from '@/components/motion/Reveal'
  * hero cannot show, so this band is a full-bleed crowd photograph instead, and
  * PhoneTileRow now belongs to concept A.
  *
- * Copy: every line here is an approved anchor line from the brand voice canon,
- * checked against the NEVER SAY list. No counts, no guarantees, no pricing.
- * The heading and claim three are anchor lines verbatim; claim one is the
- * approved replacement for the retired fan-powered line; claim two states the
- * host mechanic, which is live. Deliberately does NOT reuse the step-02 title,
- * which WallSteps already carries as locked copy.
+ * COPY RULE, do not undo: the word local never appears on this site, even
+ * though the product is geolocation based. The rule is recorded on
+ * app/artist/page.tsx next to the Songcry capitalisation rule. The brand voice
+ * bank does carry an anchor line using that word; the bank is a resource, and
+ * TJ is the arbiter. He ruled against it here on 2026-08-25 because local
+ * artist reads as small time. The city is the brand word, not local.
+ *
+ * The remaining lines are approved anchor lines checked against the NEVER SAY
+ * list. No counts, no guarantees, no pricing. Deliberately does not reuse the
+ * step-02 title, which WallSteps already carries as locked copy.
  *
  * NOTE: the style string below must stay free of apostrophes, quotes, ampersands
  * and angle brackets, comments included. See scripts/check-style-literals.mjs.
@@ -45,9 +49,9 @@ export default function CrowdBand() {
         <Reveal y={28}>
           <p className="cb2-eyebrow">The people who carry it</p>
           <h2 className="cb2-heading">
-            Music taste is local.
+            Discovery starts with the people
             <br />
-            Now discovery is too.
+            close enough to show up.
           </h2>
         </Reveal>
 
@@ -66,9 +70,9 @@ export default function CrowdBand() {
         .cb2-section {
           position: relative;
           overflow: hidden;
-          min-height: 620px;
+          min-height: 560px;
           display: flex;
-          align-items: flex-end;
+          align-items: center;
           background: rgb(8, 7, 7);
         }
         .cb2-photo {
@@ -87,8 +91,8 @@ export default function CrowdBand() {
           inset: 0;
           pointer-events: none;
           background:
-            linear-gradient(to top, rgba(8, 7, 7, 0.96) 12%, rgba(8, 7, 7, 0.55) 55%, rgba(8, 7, 7, 0.85)),
-            radial-gradient(900px 500px at 20% 80%, rgba(248, 25, 192, 0.12), transparent 70%);
+            linear-gradient(to top, rgba(8, 7, 7, 0.96) 6%, rgba(8, 7, 7, 0.5) 50%, rgba(8, 7, 7, 0.9)),
+            radial-gradient(900px 500px at 20% 70%, rgba(248, 25, 192, 0.12), transparent 70%);
         }
         .cb2-wrap {
           position: relative;
@@ -96,7 +100,7 @@ export default function CrowdBand() {
           width: 100%;
           max-width: 1240px;
           margin: 0 auto;
-          padding: 120px 40px 72px;
+          padding: 104px 40px;
         }
         .cb2-eyebrow {
           font-family: var(--font-albert);
@@ -109,43 +113,48 @@ export default function CrowdBand() {
         }
         .cb2-heading {
           font-family: var(--font-albert);
-          font-size: clamp(38px, 4.6vw, 64px);
+          font-size: clamp(34px, 4vw, 56px);
           font-weight: 700;
           letter-spacing: -0.03em;
-          line-height: 1.04;
+          line-height: 1.06;
           color: #ffffff;
-          margin: 0 0 48px;
+          margin: 0 0 56px;
         }
+        /* Three even columns under one rule. No vertical dividers: the claims
+           set different line counts, so dividers rendered as ragged stubs. */
         .cb2-claims {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 0;
+          column-gap: 48px;
+          row-gap: 20px;
           list-style: none;
           margin: 0;
-          padding: 0;
-          border-top: 1px solid rgba(255, 255, 255, 0.18);
+          padding: 28px 0 0;
+          border-top: 1px solid rgba(255, 255, 255, 0.22);
         }
         .cb2-claim {
           font-family: var(--font-albert);
-          font-size: 16px;
+          font-size: 17px;
           font-weight: 600;
           line-height: 1.45;
           letter-spacing: -0.01em;
-          color: rgba(255, 255, 255, 0.85);
-          padding: 24px 32px 0 0;
-          border-right: 1px solid rgba(255, 255, 255, 0.12);
-        }
-        .cb2-claim:not(:first-child) {
-          padding-left: 32px;
-        }
-        .cb2-claim:last-child {
-          border-right: none;
-          padding-right: 0;
+          color: rgba(255, 255, 255, 0.88);
+          margin: 0;
+          max-width: 30ch;
         }
 
         @media (max-width: 1199px) {
           .cb2-wrap {
-            padding: 112px 48px 64px;
+            padding: 96px 48px;
+          }
+          .cb2-claims {
+            column-gap: 32px;
+          }
+        }
+        @media (max-width: 980px) {
+          .cb2-claims {
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 24px;
           }
         }
         @media (max-width: 817px) {
@@ -153,28 +162,21 @@ export default function CrowdBand() {
             min-height: 0;
           }
           .cb2-wrap {
-            padding: 88px 24px 56px;
+            padding: 80px 24px;
           }
           .cb2-heading {
-            margin-bottom: 32px;
+            margin-bottom: 36px;
           }
           .cb2-photo img {
             object-position: 50% 35%;
           }
           .cb2-claims {
             grid-template-columns: 1fr;
+            row-gap: 18px;
+            padding-top: 22px;
           }
           .cb2-claim {
-            padding: 18px 0;
-            border-right: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-          }
-          .cb2-claim:not(:first-child) {
-            padding-left: 0;
-          }
-          .cb2-claim:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
+            max-width: none;
           }
         }
       `}</style>
