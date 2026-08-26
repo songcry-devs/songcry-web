@@ -19,9 +19,10 @@ import Reveal from '@/components/motion/Reveal'
  *
  * Two deliberate deviations from the concept A original:
  *   1. Explicit background, matching Hero and Download, so there is no seam.
- *   2. 96px vertical padding rather than 120px, which lines up with the
- *      padding-top Download already uses. The concept page had a different
- *      neighbour above it.
+ *   2. 96px top padding rather than 120px. Bottom padding is 64px, NOT 96px:
+ *      section padding stacks, so a matching 96px here plus Download 96px put
+ *      192px of air above the Join early block against 64px below it. See the
+ *      centering note in Download.tsx.
  *
  * Copy is claims-locked and identical, character for character, to the version in
  * all four concepts. Do not edit these lines without a copy ruling.
@@ -89,7 +90,7 @@ export default function HowItWorksSteps() {
       <style>{`
         .hiw-section {
           background: rgb(8, 7, 7);
-          padding: 96px 0;
+          padding: 96px 0 64px;
         }
         .hiw-wrap {
           max-width: 1240px;
@@ -153,7 +154,7 @@ export default function HowItWorksSteps() {
         }
         @media (max-width: 980px) {
           .hiw-section {
-            padding: 88px 0;
+            padding: 88px 0 64px;
           }
           .hiw-step {
             grid-template-columns: 110px 1fr;
@@ -169,7 +170,7 @@ export default function HowItWorksSteps() {
         }
         @media (max-width: 817px) {
           .hiw-section {
-            padding: 72px 0;
+            padding: 72px 0 56px;
           }
           .hiw-wrap {
             padding: 0 24px;

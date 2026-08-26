@@ -51,11 +51,18 @@ export default function Download() {
         /* overflow visible so the tall purple glow can RISE up out of this
            section into the area above (matches Framer, where the purple
            reaches ~500px above the footer boundary). */
+        /* Vertical centering, TJ 2026-08-26. The space a reader SEES above this
+           content is not this section padding alone, it is this padding plus the
+           bottom padding of the section above. At 96px and 96px that read as
+           192px above against 64px below, so the block sat low in its own band.
+           These values put 128px above and 128px below at desktop, measured from
+           the rule at the end of the steps down to the top of the footer.
+           If the section above changes, re-measure. */
         .download-section {
           position: relative;
           background: rgb(8, 7, 7);
-          padding-top: 96px;
-          padding-bottom: 64px;
+          padding-top: 64px;
+          padding-bottom: 128px;
         }
 
         /* Tall purple/pink glow that rises ~520px from the footer boundary up
@@ -162,6 +169,12 @@ export default function Download() {
 
         /* ── Phone: ≤817px ── */
         @media (max-width: 817px) {
+          /* Same balance on phones: 56px here plus 56px from the steps section
+             gives 112px above, matched by 112px below. */
+          .download-section {
+            padding-top: 56px;
+            padding-bottom: 112px;
+          }
           .download-heading {
             font-size: 24px !important;
             line-height: 28.8px !important;
