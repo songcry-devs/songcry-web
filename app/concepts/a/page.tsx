@@ -8,7 +8,7 @@ import Reveal from '@/components/motion/Reveal'
 import GhostSteps from '@/components/sections/concepts/GhostSteps'
 import PhoneTileRow from '@/components/sections/concepts/PhoneTileRow'
 import CtaBand from '@/components/sections/concepts/CtaBand'
-import MakerBand from '@/components/sections/concepts/a/MakerBand'
+import QuoteBand from '@/components/sections/concepts/a/QuoteBand'
 
 /**
  * Concept A — Sharpen. Editorial split hero (copy + form left, glowing phone
@@ -224,7 +224,7 @@ export default function ConceptA() {
         </section>
 
         <PhoneTileRow tiles={TILES} />
-        <MakerBand />
+        <QuoteBand />
         <GhostSteps />
         <CtaBand placement="concept-a-cta" />
       </main>
