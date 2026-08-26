@@ -4,9 +4,11 @@ import Image from 'next/image'
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import JoinForm from '@/components/sections/join/JoinForm'
+import Reveal from '@/components/motion/Reveal'
 import GhostSteps from '@/components/sections/concepts/GhostSteps'
 import PhoneTileRow from '@/components/sections/concepts/PhoneTileRow'
 import CtaBand from '@/components/sections/concepts/CtaBand'
+import MakerBand from '@/components/sections/concepts/a/MakerBand'
 
 /**
  * Concept A — Sharpen. Editorial split hero (copy + form left, glowing phone
@@ -76,15 +78,21 @@ export default function ConceptA() {
 
           <div className="ca-hero-wrap">
             <div className="ca-hero-copy">
-              <p className="ca-eyebrow">Invite-only beta</p>
-              <h1 className="ca-h1">Music spreads through fans</h1>
-              <p className="ca-sub">
-                Songcry is where fans decide what rises, and artists see momentum by city.
-              </p>
+              <Reveal y={22}>
+                <p className="ca-eyebrow">Invite-only beta</p>
+                <h1 className="ca-h1">Music spreads through fans</h1>
+              </Reveal>
+              <Reveal y={22} delay={0.08}>
+                <p className="ca-sub">
+                  Songcry is where fans decide what rises, and artists see momentum by city.
+                </p>
+              </Reveal>
 
-              <div className="ca-form" id="join">
-                <JoinForm compact />
-              </div>
+              <Reveal y={22} delay={0.16}>
+                <div className="ca-form" id="join">
+                  <JoinForm compact />
+                </div>
+              </Reveal>
             </div>
 
             <div className="ca-hero-phone">
@@ -216,6 +224,7 @@ export default function ConceptA() {
         </section>
 
         <PhoneTileRow tiles={TILES} />
+        <MakerBand />
         <GhostSteps />
         <CtaBand placement="concept-a-cta" />
       </main>

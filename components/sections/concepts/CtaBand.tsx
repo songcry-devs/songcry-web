@@ -36,9 +36,8 @@ export default function CtaBand({ placement }: { placement: string }) {
         .ctab-section {
           background: #121212;
           border-top: 1px solid rgba(255, 255, 255, 0.07);
-          margin-top: 96px;
           text-align: center;
-          padding: 96px 40px;
+          padding: 120px 40px;
         }
         .ctab-heading {
           font-family: var(--font-albert);
@@ -110,8 +109,7 @@ export default function CtaBand({ placement }: { placement: string }) {
 
         @media (max-width: 817px) {
           .ctab-section {
-            margin-top: 64px;
-            padding: 72px 24px;
+            padding: 80px 24px;
           }
         }
       `}</style>

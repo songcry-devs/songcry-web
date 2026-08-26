@@ -4,7 +4,8 @@ import Image from 'next/image'
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import JoinForm from '@/components/sections/join/JoinForm'
-import GhostSteps from '@/components/sections/concepts/GhostSteps'
+import Reveal from '@/components/motion/Reveal'
+import CitySteps from '@/components/sections/concepts/b/CitySteps'
 
 /**
  * Concept B — City first. Live city ticker, the big centered hero and form,
@@ -43,6 +44,18 @@ const CITIES = [
   'Boise ID',
 ]
 
+/** The typographic wall. Sizes are deliberately mixed so it reads as a wall, not a list. */
+const WALL = [
+  { name: 'Los Angeles', cls: 'cb-s1' },
+  { name: 'Atlanta', cls: 'cb-s2' },
+  { name: 'Oakland', cls: 'cb-s1 cb-hotname' },
+  { name: 'Portland ME', cls: 'cb-s3' },
+  { name: 'Baltimore', cls: 'cb-s1' },
+  { name: 'Boston', cls: 'cb-s2' },
+  { name: 'Philadelphia', cls: 'cb-s2' },
+  { name: 'Boise', cls: 'cb-s3' },
+]
+
 /** One full pass of the city list; the track renders it twice for a seamless loop. */
 function TickerSeq() {
   return (
@@ -75,67 +88,89 @@ export default function ConceptB() {
         {/* ── Hero ── */}
         <section className="cb-hero" aria-label="Hero">
           <div className="cb-hero-light" aria-hidden="true" />
-          <h1 className="cb-h1">
-            Your city
-            <br />
-            hears you first
-          </h1>
-          <p className="cb-sub">Your music starts in your city. Real listeners carry it further.</p>
+          <Reveal y={24}>
+            <h1 className="cb-h1">
+              Your city
+              <br />
+              hears you first
+            </h1>
+          </Reveal>
+          <Reveal y={24} delay={0.08}>
+            <p className="cb-sub">Your music starts in your city. Real listeners carry it further.</p>
+          </Reveal>
 
-          <div className="cb-form" id="join">
-            <JoinForm />
-          </div>
+          <Reveal y={24} delay={0.16}>
+            <div className="cb-form" id="join">
+              <JoinForm />
+            </div>
+          </Reveal>
         </section>
 
         {/* ── How it works (replaces the deleted dual panels) ── */}
-        <GhostSteps />
+        <CitySteps />
 
         {/* ── Three-phone angled collage ── */}
         <section className="cb-collage" aria-label="Inside the app">
-          <div className="cb-collage-inner">
-            <Image
-              className="cb-ph cb-ph-l"
-              src="/concepts/filter-sheet.png"
-              alt="The filter sheet with city and genre chips"
-              width={380}
-              height={732}
-              sizes="(max-width: 980px) 240px, 320px"
-            />
-            <Image
-              className="cb-ph cb-ph-c"
-              src="/concepts/feed-thank-you.png"
-              alt="The Songcry feed playing Thank You by Pseudo Black"
-              width={380}
-              height={732}
-              sizes="(max-width: 980px) 240px, 320px"
-            />
-            <Image
-              className="cb-ph cb-ph-r"
-              src="/concepts/feed-baltimore.png"
-              alt="The Baltimore feed playing Space Jam by BRM Stuntin"
-              width={380}
-              height={732}
-              sizes="(max-width: 980px) 240px, 320px"
-            />
-            <div className="cb-chip cb-chip-l">Filter by city and genre</div>
-            <div className="cb-chip cb-chip-c">Your music starts in your city</div>
-            <div className="cb-chip cb-chip-r">Every city has its own feed</div>
-          </div>
+          <Reveal y={32}>
+            <div className="cb-collage-inner">
+              <div className="cb-stage">
+                <div className="cb-phones">
+                  <Image
+                    className="cb-ph cb-ph-l"
+                    src="/concepts/filter-sheet.png"
+                    alt="The filter sheet with city and genre chips"
+                    width={380}
+                    height={732}
+                    sizes="(max-width: 980px) 240px, 320px"
+                  />
+                  <Image
+                    className="cb-ph cb-ph-c"
+                    src="/concepts/feed-thank-you.png"
+                    alt="The Songcry feed playing Thank You by Pseudo Black"
+                    width={380}
+                    height={732}
+                    sizes="(max-width: 980px) 240px, 320px"
+                  />
+                  <Image
+                    className="cb-ph cb-ph-r"
+                    src="/concepts/feed-baltimore.png"
+                    alt="The Baltimore feed playing Space Jam by BRM Stuntin"
+                    width={380}
+                    height={732}
+                    sizes="(max-width: 980px) 240px, 320px"
+                  />
+                </div>
+                <div className="cb-chip cb-chip-l">Filter by city and genre</div>
+                <div className="cb-chip cb-chip-c">Your music starts in your city</div>
+                <div className="cb-chip cb-chip-r">Every city has its own feed</div>
+              </div>
+            </div>
+          </Reveal>
         </section>
 
         {/* ── Typographic city wall ── */}
         <section className="cb-wall" aria-label="Cities in the feed">
+          <div className="cb-wall-photo" aria-hidden="true">
+            <Image
+              src="/framer/artist-band-1.png"
+              alt=""
+              width={3366}
+              height={1886}
+              sizes="100vw"
+            />
+          </div>
+          <div className="cb-wall-scrim" aria-hidden="true" />
+
           <div className="cb-wall-wrap">
-            <p className="cb-eyebrow">In the feed</p>
+            <Reveal y={20}>
+              <p className="cb-eyebrow">In the feed</p>
+            </Reveal>
             <div className="cb-names">
-              <span className="cb-s1">Los Angeles</span>
-              <span className="cb-s2">Atlanta</span>
-              <span className="cb-s1 cb-hotname">Oakland</span>
-              <span className="cb-s3">Portland ME</span>
-              <span className="cb-s1">Baltimore</span>
-              <span className="cb-s2">Boston</span>
-              <span className="cb-s2">Philadelphia</span>
-              <span className="cb-s3">Boise</span>
+              {WALL.map((c, i) => (
+                <Reveal className="cb-name" key={c.name} y={18} amount={0.05} delay={0.07 * i}>
+                  <span className={c.cls}>{c.name}</span>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
@@ -189,7 +224,7 @@ export default function ConceptB() {
           .cb-hero {
             position: relative;
             text-align: center;
-            padding: 88px 24px 96px;
+            padding: 96px 24px 112px;
           }
           .cb-hero-light {
             position: absolute;
@@ -226,11 +261,23 @@ export default function ConceptB() {
 
           /* ── Collage ── */
           .cb-collage {
-            padding: 96px 0 128px;
+            padding: 120px 0;
             overflow: hidden;
           }
           .cb-collage-inner {
+            display: flex;
+            justify-content: center;
+            padding: 0 40px;
+          }
+          /* The chips hang off the phone cluster, so they anchor to this stage
+             rather than to the middle of the viewport. Anchored to the viewport
+             they drifted out into empty space as the window got wider. */
+          .cb-stage {
             position: relative;
+            width: 100%;
+            max-width: 940px;
+          }
+          .cb-phones {
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -273,20 +320,48 @@ export default function ConceptB() {
             border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
           }
-          .cb-chip-l { left: calc(50% - 480px); top: 96px; }
-          .cb-chip-c { left: 50%; transform: translateX(-50%); bottom: 40px; }
+          .cb-chip-l { left: 0; top: 88px; }
+          .cb-chip-c { left: 50%; transform: translateX(-50%); bottom: 32px; }
           .cb-chip-c:hover { transform: translateX(-50%) translateY(-2px); }
-          .cb-chip-r { right: calc(50% - 470px); top: 200px; }
+          .cb-chip-r { right: 0; top: 196px; }
 
           /* ── City wall ── */
           .cb-wall {
+            position: relative;
+            overflow: hidden;
             border-top: 1px solid rgba(255, 255, 255, 0.07);
-            padding: 96px 0 112px;
+            padding: 120px 0;
+          }
+          /* B photography: the skyline sits under the city wall, the one place
+             on this page where the picture and the typography say the same
+             thing. Each concept places its photograph differently on purpose. */
+          .cb-wall-photo {
+            position: absolute;
+            inset: 0;
+            opacity: 0.42;
+            pointer-events: none;
+          }
+          .cb-wall-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 64%;
+          }
+          .cb-wall-scrim {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(to bottom, rgb(8, 7, 7) 3%, rgba(8, 7, 7, 0.6) 46%, rgb(8, 7, 7) 97%);
           }
           .cb-wall-wrap {
+            position: relative;
+            z-index: 1;
             max-width: 1240px;
             margin: 0 auto;
             padding: 0 40px;
+          }
+          .cb-name {
+            display: block;
           }
           .cb-eyebrow {
             font-family: var(--font-albert);
@@ -333,14 +408,16 @@ export default function ConceptB() {
           @media (max-width: 817px) {
             .cb-hero { padding: 64px 24px 80px; }
             .cb-sub { margin-bottom: 40px; }
-            .cb-collage { padding: 64px 0 104px; }
+            .cb-collage { padding: 80px 0; }
+            .cb-collage-inner { padding: 0 24px; }
             .cb-ph { width: 180px; }
             .cb-ph-l { margin-right: -64px; transform: rotate(-6deg) translateY(28px); }
             .cb-ph-r { margin-left: -64px; transform: rotate(5deg) translateY(40px); }
             .cb-chip { font-size: 12px; padding: 8px 13px; }
             .cb-chip-c { bottom: 24px; }
             .cb-ticker { margin-top: 88px; }
-            .cb-wall { padding: 72px 0 88px; }
+            .cb-wall { padding: 80px 0; }
+            .cb-wall-photo { opacity: 0.34; }
             .cb-wall-wrap { padding: 0 24px; }
           }
         `}</style>

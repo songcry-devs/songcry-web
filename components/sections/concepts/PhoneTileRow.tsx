@@ -1,4 +1,8 @@
+'use client'
+
 import Image from 'next/image'
+import { motion, type Variants } from 'framer-motion'
+import Reveal from '@/components/motion/Reveal'
 
 /**
  * A strip of app-screen tiles. Concept A only.
@@ -15,11 +19,37 @@ import Image from 'next/image'
  * At the phone breakpoint the grid becomes a swipeable overflow-x row with
  * scroll snap (global critique: 390w tiles swipe, never squeeze).
  *
+ * Structure note: the reveal wrapper is the grid and flex child, so it carries
+ * the track sizing and the snap alignment, and the article inside stays an
+ * article. Putting the reveal on the tile itself would have silently turned
+ * every tile into a plain div.
+ *
+ * The stagger is driven by the CONTAINER, not by each tile watching itself.
+ * Measured 2026-08-26: with a per-tile whileInView, the tiles sitting off-screen
+ * inside the horizontal swipe row at 390 and 768 never intersected the viewport,
+ * so they never fired and stayed at opacity 0. Invisible content, waiting on a
+ * gesture. Parent-driven variants animate every child when the ROW enters view,
+ * whatever its horizontal scroll position.
+ *
  * Captions are claims-locked tile captions from the approved comps.
  *
  * NOTE: keep the style string free of apostrophes, quotes, ampersands and
  * angle brackets (see JoinForm.tsx).
  */
+
+/** Parent owns the timing so off-screen children in the swipe row still fire. */
+const ROW: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07 } },
+}
+// The tuple cast is load-bearing: as a standalone const the bezier widens to
+// number[] and framer-motion Easing will not accept it. Reveal.tsx gets away
+// with the same array because inline in JSX it is contextually typed.
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
+const CELL: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
+}
 
 export type PhoneTile = {
   src: string
@@ -39,32 +69,42 @@ export default function PhoneTileRow({
   return (
     <section className="ptr-section" aria-label={eyebrow}>
       <div className="ptr-wrap">
-        <div className="ptr-head">
-          <p className="ptr-eyebrow">{eyebrow}</p>
-          <p className="ptr-note">{note}</p>
-        </div>
+        <Reveal y={24}>
+          <div className="ptr-head">
+            <p className="ptr-eyebrow">{eyebrow}</p>
+            <p className="ptr-note">{note}</p>
+          </div>
+        </Reveal>
 
-        <div className="ptr-tiles">
+        <motion.div
+          className="ptr-tiles"
+          variants={ROW}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {tiles.map((t) => (
-            <article className="ptr-tile" key={t.src}>
-              <h3 className="ptr-caption">{t.caption}</h3>
-              <div className="ptr-phone">
-                <Image
-                  src={t.src}
-                  alt={t.alt}
-                  width={380}
-                  height={732}
-                  sizes="(max-width: 817px) 66vw, (max-width: 1199px) 40vw, 280px"
-                />
-              </div>
-            </article>
+            <motion.div className="ptr-cell" key={t.src} variants={CELL}>
+              <article className="ptr-tile">
+                <h3 className="ptr-caption">{t.caption}</h3>
+                <div className="ptr-phone">
+                  <Image
+                    src={t.src}
+                    alt={t.alt}
+                    width={380}
+                    height={732}
+                    sizes="(max-width: 817px) 66vw, (max-width: 1199px) 40vw, 280px"
+                  />
+                </div>
+              </article>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <style>{`
         .ptr-section {
-          padding: 96px 0 8px;
+          padding: 120px 0;
         }
         .ptr-wrap {
           max-width: 1240px;
@@ -76,7 +116,7 @@ export default function PhoneTileRow({
           align-items: baseline;
           justify-content: space-between;
           gap: 16px;
-          margin-bottom: 32px;
+          margin-bottom: 40px;
         }
         .ptr-eyebrow {
           font-family: var(--font-albert);
@@ -98,7 +138,12 @@ export default function PhoneTileRow({
           grid-template-columns: repeat(4, 1fr);
           gap: 20px;
         }
+        .ptr-cell {
+          height: 100%;
+        }
         .ptr-tile {
+          height: 100%;
+          box-sizing: border-box;
           background: #121212;
           border: 1px solid rgba(255, 255, 255, 0.07);
           border-radius: 24px;
@@ -138,7 +183,7 @@ export default function PhoneTileRow({
         }
         @media (max-width: 817px) {
           .ptr-section {
-            padding: 64px 0 8px;
+            padding: 80px 0;
           }
           .ptr-wrap {
             padding: 0 24px;
@@ -162,7 +207,7 @@ export default function PhoneTileRow({
           .ptr-tiles::-webkit-scrollbar {
             display: none;
           }
-          .ptr-tile {
+          .ptr-cell {
             flex: 0 0 66%;
             max-width: 280px;
             scroll-snap-align: center;
@@ -174,7 +219,7 @@ export default function PhoneTileRow({
         }
 
         /* globals.css already zeroes animation and transition DURATION
-        site-wide under reduced motion, with !important. What it cannot do
+        site-wide under reduced motion, with a priority flag. What it cannot do
         is remove a positional change: a hover lift still happens, just
         instantly. An instant 6px jump is still movement to someone with
         vestibular sensitivity, so the transform is dropped here. The

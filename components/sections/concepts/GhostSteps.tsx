@@ -1,9 +1,25 @@
+'use client'
+
+import { useRef } from 'react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import Reveal from '@/components/motion/Reveal'
+
 /**
- * Ghost-numeral how-it-works rows, shared by concepts A and B.
+ * Ghost-numeral how-it-works rows. Concept A only.
  *
- * D used these too until it forked its body on 2026-08-25. The ghost numerals are
- * the editorial read and belong to A; D stages the same three beats as a descent
- * in WallSteps.
+ * B and D used these too until the concepts were forked. D stages the same three
+ * beats as a descent in its own WallSteps; B lays them across the page in
+ * CitySteps. The ghost numerals are the editorial read, so they stayed with A.
+ *
+ * Concept A signature motion: each ghost numeral drifts against its own row as
+ * that row crosses the viewport. It is the one editorial move on the page, the
+ * counterpart to D wall answering the scroll, and it is per-row rather than
+ * per-section, which is why each row owns its own scroll tracking in a child
+ * component. Hooks cannot run in a loop, hence GhostStep.
+ *
+ * Reduced motion: a scroll binding is a direct style write, so the MotionConfig
+ * in the root layout does not neutralise it. useReducedMotion collapses the
+ * drift to zero instead, and the render tree is identical either way.
  *
  * The 01/02/03 numbering is justified structure, not decoration: the three
  * beats are a real sequence (upload, listeners decide, the song travels), so
@@ -11,8 +27,8 @@
  * approved concept comps — do not edit lines here without a copy ruling.
  *
  * NOTE: the style string below must stay free of apostrophes, quotes,
- * ampersands and angle brackets — React escapes them during SSR and browsers
- * do not decode entities inside style elements (see JoinForm.tsx).
+ * ampersands and angle brackets, comments included. See
+ * scripts/check-style-literals.mjs.
  */
 
 const STEPS = [
@@ -33,26 +49,40 @@ const STEPS = [
   },
 ]
 
+function GhostStep({ n, title, body }: { n: string; title: string; body: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const reduced = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const drift = reduced ? 0 : 30
+  const y = useTransform(scrollYProgress, [0, 1], [drift, -drift])
+
+  return (
+    <div className="gs-step" ref={ref}>
+      <motion.div className="gs-num" aria-hidden="true" style={{ y }}>
+        {n}
+      </motion.div>
+      <h3 className="gs-title">{title}</h3>
+      <p className="gs-body">{body}</p>
+    </div>
+  )
+}
+
 export default function GhostSteps() {
   return (
     <section className="gs-section" aria-label="How Songcry works">
       <div className="gs-wrap">
-        <h2 className="gs-heading">How it works</h2>
+        <Reveal y={24}>
+          <h2 className="gs-heading">How it works</h2>
+        </Reveal>
 
         {STEPS.map((s) => (
-          <div className="gs-step" key={s.n}>
-            <div className="gs-num" aria-hidden="true">
-              {s.n}
-            </div>
-            <h3 className="gs-title">{s.title}</h3>
-            <p className="gs-body">{s.body}</p>
-          </div>
+          <GhostStep key={s.n} n={s.n} title={s.title} body={s.body} />
         ))}
       </div>
 
       <style>{`
         .gs-section {
-          padding: 104px 0 48px;
+          padding: 120px 0;
         }
         .gs-wrap {
           max-width: 1240px;
@@ -65,7 +95,7 @@ export default function GhostSteps() {
           font-weight: 700;
           letter-spacing: -0.02em;
           color: #ffffff;
-          margin: 0 0 48px;
+          margin: 0 0 56px;
         }
         .gs-step {
           display: grid;
@@ -73,7 +103,7 @@ export default function GhostSteps() {
           gap: 32px;
           align-items: center;
           border-top: 1px solid rgba(255, 255, 255, 0.07);
-          padding: 44px 0;
+          padding: 48px 0;
         }
         .gs-step:last-child {
           border-bottom: 1px solid rgba(255, 255, 255, 0.07);
@@ -87,6 +117,7 @@ export default function GhostSteps() {
           color: rgba(255, 255, 255, 0.08);
           user-select: none;
           transition: color 260ms ease;
+          will-change: transform;
         }
         .gs-step:hover .gs-num {
           color: rgba(248, 25, 192, 0.22);
@@ -114,6 +145,9 @@ export default function GhostSteps() {
           }
         }
         @media (max-width: 980px) {
+          .gs-section {
+            padding: 96px 0;
+          }
           .gs-step {
             grid-template-columns: 110px 1fr;
             row-gap: 8px;
@@ -128,18 +162,18 @@ export default function GhostSteps() {
         }
         @media (max-width: 817px) {
           .gs-section {
-            padding: 72px 0 32px;
+            padding: 80px 0;
           }
           .gs-wrap {
             padding: 0 24px;
           }
           .gs-heading {
-            margin-bottom: 32px;
+            margin-bottom: 36px;
           }
           .gs-step {
             grid-template-columns: 1fr;
             gap: 10px;
-            padding: 32px 0;
+            padding: 36px 0;
           }
           .gs-num {
             font-size: 64px;
@@ -151,7 +185,7 @@ export default function GhostSteps() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .gs-step {
+          .gs-num {
             transition: none;
           }
         }
