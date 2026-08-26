@@ -111,6 +111,9 @@ export default function ConceptB() {
 
         {/* ── Three-phone angled collage ── */}
         <section className="cb-collage" aria-label="Inside the app">
+          <Reveal y={20}>
+            <p className="cb-eyebrow cb-collage-eyebrow">Inside the app</p>
+          </Reveal>
           <Reveal y={32}>
             <div className="cb-collage-inner">
               <div className="cb-stage">
@@ -140,11 +143,15 @@ export default function ConceptB() {
                     sizes="(max-width: 980px) 240px, 320px"
                   />
                 </div>
-                <div className="cb-chip cb-chip-l">Filter by city and genre</div>
-                <div className="cb-chip cb-chip-c">Your music starts in your city</div>
-                <div className="cb-chip cb-chip-r">Every city has its own feed</div>
               </div>
             </div>
+          </Reveal>
+          <Reveal y={20} delay={0.1}>
+            <ul className="cb-caps">
+              <li>Filter by city and genre</li>
+              <li>Your music starts in your city</li>
+              <li>Every city has its own feed</li>
+            </ul>
           </Reveal>
         </section>
 
@@ -276,6 +283,11 @@ export default function ConceptB() {
             position: relative;
             width: 100%;
             max-width: 940px;
+            /* The outer phones are rotated and pushed down, and a transform does
+               not grow the layout box, so they hang 77px below it at desktop.
+               Measured, not guessed. Without this the caption row lands on top
+               of the phones, which is the bug it was meant to fix. */
+            padding-bottom: 84px;
           }
           .cb-phones {
             display: flex;
@@ -300,30 +312,39 @@ export default function ConceptB() {
             margin-left: -72px;
             z-index: 2;
           }
-          .cb-chip {
-            position: absolute;
-            background: #161616;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 999px;
-            padding: 9px 16px;
+          /* The labels used to be pills floating ON the phones. TJ, 2026-08-26:
+             ugly and placed weird. They were: the middle one sat over the centre
+             phone screen and the outer two clipped their own phones, so the
+             product screenshots were being covered by their own captions. They
+             are a caption row underneath now, which also suits B being the
+             typographic concept. */
+          .cb-collage-eyebrow {
+            max-width: 1240px;
+            margin: 0 auto 44px;
+            padding: 0 40px;
+            text-align: center;
+          }
+          .cb-caps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            list-style: none;
+            width: 100%;
+            max-width: 940px;
+            margin: 24px auto 0;
+            padding: 22px 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            box-sizing: border-box;
+          }
+          .cb-caps li {
             font-family: var(--font-albert);
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 600;
             letter-spacing: -0.01em;
-            color: #ffffff;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
-            white-space: nowrap;
-            z-index: 4;
-            transition: border-color 200ms ease, transform 200ms ease;
+            line-height: 1.45;
+            color: rgba(255, 255, 255, 0.72);
+            text-align: center;
           }
-          .cb-chip:hover {
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-          }
-          .cb-chip-l { left: 0; top: 88px; }
-          .cb-chip-c { left: 50%; transform: translateX(-50%); bottom: 32px; }
-          .cb-chip-c:hover { transform: translateX(-50%) translateY(-2px); }
-          .cb-chip-r { right: 0; top: 196px; }
 
           /* ── City wall ── */
           .cb-wall {
@@ -402,8 +423,7 @@ export default function ConceptB() {
             .cb-ph { width: 240px; }
             .cb-ph-l { margin-right: -56px; }
             .cb-ph-r { margin-left: -56px; }
-            .cb-chip-l { left: 8px; top: 48px; }
-            .cb-chip-r { right: 8px; top: 140px; }
+            .cb-caps { gap: 16px; }
           }
           @media (max-width: 817px) {
             .cb-hero { padding: 64px 24px 80px; }
@@ -413,8 +433,15 @@ export default function ConceptB() {
             .cb-ph { width: 180px; }
             .cb-ph-l { margin-right: -64px; transform: rotate(-6deg) translateY(28px); }
             .cb-ph-r { margin-left: -64px; transform: rotate(5deg) translateY(40px); }
-            .cb-chip { font-size: 12px; padding: 8px 13px; }
-            .cb-chip-c { bottom: 24px; }
+            .cb-collage-eyebrow { margin-bottom: 32px; padding: 0 24px; }
+            .cb-stage { padding-bottom: 48px; }
+            .cb-caps {
+              grid-template-columns: 1fr;
+              gap: 12px;
+              margin-top: 20px;
+              padding: 20px 24px 0;
+            }
+            .cb-caps li { font-size: 14px; }
             .cb-ticker { margin-top: 88px; }
             .cb-wall { padding: 80px 0; }
             .cb-wall-photo { opacity: 0.34; }
