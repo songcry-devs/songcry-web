@@ -21,8 +21,10 @@ import ProductGallery, { type GalleryItem } from '@/components/sections/concepts
  * all. Its h1 was the screen-reader-only word Songcry, so a sighted visitor met
  * a phone and a subline and nothing telling them what they were looking at.
  * That is a conversion problem, not a style choice. The phone still leads
- * visually; the headline is sized under it on purpose. Wording is pending TJ
- * sign-off, as all outward copy is.
+ * visually; the headline is sized under it on purpose. Wording chosen by TJ
+ * on 2026-08-26: it asks for the action the page is already showing you, which
+ * suits the product-forward concept better than describing the app. An earlier
+ * draft read Full songs from your city; he rejected it as flat.
  *
  * TJ critiques fixed earlier:
  * - No cropped or zoomed UI fragments anywhere — the gallery uses complete
@@ -104,7 +106,7 @@ export default function ConceptC() {
           </div>
 
           <Reveal y={22}>
-            <h1 className="cc-h1">Full songs from your city.</h1>
+            <h1 className="cc-h1">Press play on your city.</h1>
           </Reveal>
           <Reveal y={22} delay={0.08}>
             <p className="cc-sub">
