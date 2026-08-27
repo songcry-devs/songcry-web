@@ -12,6 +12,12 @@ import type { Metadata } from 'next'
  * in them. That is what the live links are for, and the page says so rather than
  * letting the captures quietly misrepresent the pages.
  *
+ * CONCEPT E IS A FILMSTRIP, not a full-page shot. E pins a section and changes the
+ * content under you, so a tall screenshot of it came out as one beat followed by
+ * thousands of pixels of empty track. That is not a worse preview, it is a wrong
+ * one. Its six frames are captured at chosen scroll positions and stacked with
+ * ffmpeg, and the caption says so.
+ *
  * Captures: scripted with Playwright against the DEPLOYED staging preview, not
  * localhost, which sidesteps the stale-dev-server trap entirely. The script scrolls
  * the whole page first so every whileInView Reveal has fired, otherwise a full-page
@@ -30,12 +36,12 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Songcry homepage concepts · review',
-  description: 'Four finished homepage directions, side by side, with desktop previews and live links.',
+  description: 'Four homepage directions plus a craft pass, side by side, with desktop previews and live links.',
   robots: { index: false, follow: false },
   openGraph: {
     type: 'website',
     title: 'Songcry homepage concepts · review',
-    description: 'Four finished homepage directions, side by side, with desktop previews and live links.',
+    description: 'Four homepage directions plus a craft pass, side by side, with desktop previews and live links.',
   },
 }
 
@@ -47,14 +53,16 @@ const CONCEPTS = [
     name: 'Sharpen',
     line: 'Editorial and typographic. Ghost numerals drift against their rows as you scroll. No photography anywhere.',
     w: 2880,
-    h: 8402,
+    h: 8324,
+    film: false,
   },
   {
     key: 'b',
     name: 'City First',
     line: 'The city is the headline. A wall of city names lights up one at a time over a skyline.',
     w: 2880,
-    h: 7360,
+    h: 7330,
+    film: false,
   },
   {
     key: 'c',
@@ -62,13 +70,23 @@ const CONCEPTS = [
     line: 'The app is the argument. Gallery columns travel at three different rates. No photography, on purpose.',
     w: 2880,
     h: 8818,
+    film: false,
   },
   {
     key: 'd',
     name: 'The Wall',
     line: 'The most atmospheric. A wall of phones answers the scroll, with a performer and a crowd carrying the page.',
     w: 2880,
-    h: 6118,
+    h: 6022,
+    film: false,
+  },
+  {
+    key: 'e',
+    name: 'The Craft Pass',
+    line: 'The live homepage words, rebuilt with the devices measured off Apple. The page stops and the content advances, one beat at a time.',
+    w: 2880,
+    h: 10800,
+    film: true,
   },
 ]
 
@@ -80,10 +98,12 @@ export default function Review() {
       <main id="main" className="rv">
         <header className="rv-head">
           <p className="rv-eyebrow">Songcry homepage · design review</p>
-          <h1 className="rv-h1">Four directions. One of them becomes the homepage.</h1>
+          <h1 className="rv-h1">Four directions, and one craft pass.</h1>
           <p className="rv-lead">
-            All four are real working pages, not mockups. Nothing is shared between them any
-            more, so this is a real choice rather than one page wearing four hats.
+            All five are real working pages, not mockups. Nothing is shared between them any
+            more, so this is a real choice rather than one page wearing four hats. A, B, C and D
+            were also given a craft pass on 2026-08-27, so the type, the spacing and the colour
+            are corrected on every one of them.
           </p>
           <p className="rv-lead">
             Every preview below is the <strong>desktop</strong> version, captured at full width,
@@ -93,6 +113,17 @@ export default function Review() {
             live page for that.
           </p>
         </header>
+
+        <section className="rv-note" aria-label="About concept E">
+          <h2 className="rv-note-h">E is the odd one out, on purpose</h2>
+          <p className="rv-note-p">
+            A, B, C and D are four different directions. E is not a fifth direction, it is the
+            live homepage words rebuilt with better craft, after Jack said our pages read as
+            recycled. Its preview is six frames from a single scroll rather than one tall
+            screenshot, because the page pins in place and changes under you, which a still
+            cannot show. Worth opening live.
+          </p>
+        </section>
 
         <section className="rv-note" aria-label="About the imagery">
           <h2 className="rv-note-h">Before you judge the pictures</h2>
@@ -137,7 +168,11 @@ export default function Review() {
                     alt={`Full desktop homepage for concept ${c.key.toUpperCase()}, ${c.name}`}
                   />
                 </div>
-                <p className="rv-hint">Scroll inside the frame to move down the page</p>
+                <p className="rv-hint">
+                  {c.film
+                    ? 'Six frames from one scroll, top to bottom. This page holds you in place and changes what you are looking at, so a single screenshot cannot show it. Open the live page.'
+                    : 'Scroll inside the frame to move down the page'}
+                </p>
               </div>
 
               <div className="rv-actions">
@@ -155,7 +190,7 @@ export default function Review() {
         <section className="rv-ask" aria-label="What we need back">
           <h2 className="rv-ask-h">What would help most</h2>
           <ul className="rv-ul">
-            <li>Pick the one that feels most like Songcry, and say why in a sentence.</li>
+            <li>Pick the direction that feels most like Songcry, and say why in a sentence.</li>
             <li>
               Notes on a single section are just as useful as a verdict on the whole page. If two
               are close, say what you would take from the one that loses.
