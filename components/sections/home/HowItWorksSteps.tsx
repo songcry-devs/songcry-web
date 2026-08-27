@@ -30,6 +30,16 @@ import Reveal from '@/components/motion/Reveal'
  * The 01/02/03 numbering is justified structure, not decoration: the three beats
  * are a real sequence, so the numerals encode order the reader needs.
  *
+ * Type, corrected 2026-08-27 against the measured Apple ladder in
+ * docs/research/2026-08-27-high-end-web-craft-teardown.md. Both headings shipped
+ * with NO line-height, so they inherited the body 1.5 and carried half a line of
+ * air inside them, which is the single clearest tell of untouched defaults. The
+ * heading also sat 4px from the Download headline, close enough to read as noise
+ * rather than hierarchy. Now 32px at 1.12 and 24px at 1.16, both weight 600.
+ *
+ * The ghost numeral stays at weight 700 on purpose. It is a graphic element where
+ * weight reads as mass, not a piece of text in the hierarchy.
+ *
  * Reduced motion: a scroll binding is a direct style write, so the MotionConfig in
  * the root layout does not neutralise it. useReducedMotion collapses the drift to
  * zero instead, and the render tree is identical either way.
@@ -99,8 +109,9 @@ export default function HowItWorksSteps() {
         }
         .hiw-heading {
           font-family: var(--font-albert);
-          font-size: clamp(30px, 3vw, 38px);
-          font-weight: 700;
+          font-size: clamp(26px, 2.4vw, 32px);
+          font-weight: 600;
+          line-height: 1.12;
           letter-spacing: -0.02em;
           color: #ffffff;
           margin: 0 0 56px;
@@ -132,8 +143,9 @@ export default function HowItWorksSteps() {
         }
         .hiw-title {
           font-family: var(--font-albert);
-          font-size: 26px;
-          font-weight: 700;
+          font-size: 24px;
+          font-weight: 600;
+          line-height: 1.16;
           letter-spacing: -0.02em;
           color: #ffffff;
           margin: 0;
