@@ -122,7 +122,18 @@ for (const url of urls) {
       const a = secs[i - 1].getBoundingClientRect(), b = secs[i].getBoundingClientRect()
       gaps.push({ gap: Math.round(b.top - a.bottom), after: secs[i - 1].getAttribute('aria-label') || '?' })
     }
-    const grounds = secs.map((s) => getComputedStyle(s).backgroundColor)
+    // Ground = colour OR image. Concept D changes its floor with photography, and
+    // reading backgroundColor alone reported it as one flat field, which was wrong.
+    // A checker that reports a correct page as broken gets ignored.
+    const grounds = secs.map((s) => {
+      const c = getComputedStyle(s)
+      const img = c.backgroundImage && c.backgroundImage !== 'none'
+      const inner = [...s.querySelectorAll(':scope > div, :scope > picture, :scope > img')].some((k) => {
+        const kc = getComputedStyle(k)
+        return (kc.backgroundImage && kc.backgroundImage !== 'none') || k.tagName === 'IMG' || k.tagName === 'PICTURE'
+      })
+      return img || inner ? `media:${s.getAttribute('aria-label') || Math.random()}` : c.backgroundColor
+    })
 
     return {
       heads, accentText, twoTone, gradient, sizes, gaps, grounds,
