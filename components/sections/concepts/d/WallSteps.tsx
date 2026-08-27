@@ -1,5 +1,7 @@
+'use client'
+
 import Image from 'next/image'
-import Reveal from '@/components/motion/Reveal'
+import PinnedTrack from '@/components/craft/PinnedTrack'
 
 /**
  * Concept D how-it-works: the three beats as a descent through the room.
@@ -56,34 +58,91 @@ export default function WallSteps() {
       </div>
       <div className="ws-scrim" aria-hidden="true" />
 
-      <div className="ws-wrap">
-        <Reveal y={24}>
-          <h2 className="ws-heading">How it works</h2>
-        </Reveal>
+      <PinnedTrack count={STEPS.length} track="320vh" className="ws-pin">
+        {({ active, reduced }) => (
+          <>
+            <p className="ws-heading">How it works</p>
 
-        {STEPS.map((s, i) => (
-          <Reveal key={s.n} y={32} delay={0.06 * i}>
-            <div className={`ws-step ws-step-${s.n}`}>
-              <p className="ws-marker" aria-hidden="true">
-                Step {s.n}
-              </p>
-              <h3 className="ws-title">{s.title}</h3>
-              <p className="ws-body">{s.body}</p>
+            <div className={reduced ? 'ws-stage ws-stage-static' : 'ws-stage'}>
+              {STEPS.map((s, i) => (
+                <div
+                  key={s.n}
+                  className={
+                    reduced
+                      ? 'ws-step ws-step-static'
+                      : `ws-step ws-step-${s.n}${i === active ? ' is-active' : ''}`
+                  }
+                >
+                  <p className="ws-marker" aria-hidden="true">
+                    Step {s.n}
+                  </p>
+                  <h3 className="ws-title">{s.title}</h3>
+                  <p className="ws-body">{s.body}</p>
+                </div>
+              ))}
             </div>
-          </Reveal>
-        ))}
-      </div>
+          </>
+        )}
+      </PinnedTrack>
 
       <style>{`
+        .ws-pin {
+          position: relative;
+          z-index: 1;
+        }
+        .ws-stage {
+          position: relative;
+          min-height: 300px;
+        }
+        .ws-stage-static {
+          min-height: 0;
+        }
+        .ws-step {
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          transform: translateY(26px);
+          transition: opacity 640ms cubic-bezier(0.16, 1, 0.3, 1),
+            transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
+          pointer-events: none;
+          max-width: 760px;
+        }
+        .ws-step.is-active {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+        .ws-step-static {
+          position: relative;
+          inset: auto;
+          opacity: 1;
+          transform: none;
+          transition: none;
+          pointer-events: auto;
+          margin-bottom: 72px;
+        }
+        /* The descent is what D had before the pin: each beat sits further right
+           and further down the wall than the last. Kept, because it is D. */
+        .ws-step-02 { margin-left: clamp(0px, 7vw, 120px); }
+        .ws-step-03 { margin-left: clamp(0px, 14vw, 240px); }
+
         .ws-section {
           position: relative;
-          overflow: hidden;
-          padding: 120px 0;
+          /* clip, NOT hidden. overflow hidden makes this a scroll container and
+             silently kills position sticky in every descendant, which is exactly
+             what happened here: the beats advanced correctly while the pin slid
+             away to -1782px. clip does the same visual job without the side
+             effect. */
+          overflow: clip;
+          padding: 0;
           background: rgb(8, 7, 7);
         }
         .ws-photo {
-          position: absolute;
-          inset: 0;
+          position: sticky;
+          height: 100vh;
+          top: 0;
+          left: 0;
+          right: 0;
           opacity: 0.5;
           pointer-events: none;
           -webkit-mask-image: linear-gradient(to left, black 22%, transparent 94%);
@@ -99,8 +158,12 @@ export default function WallSteps() {
            dark floor under the copy column so the staircase stays legible as it
            travels right into the brighter part of the frame. */
         .ws-scrim {
-          position: absolute;
-          inset: 0;
+          position: sticky;
+          height: 100vh;
+          margin-top: -100vh;
+          top: 0;
+          left: 0;
+          right: 0;
           pointer-events: none;
           background:
             linear-gradient(to right, rgb(8, 7, 7) 10%, rgba(8, 7, 7, 0.55) 48%, transparent 76%),

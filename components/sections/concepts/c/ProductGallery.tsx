@@ -2,10 +2,16 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 
 /**
  * Concept C signature motion: the gallery columns travel at different rates.
+ *
+ * The progress value is anchored to THIS element, not the document. It used to be
+ * a bare useScroll(), which tracks whole-page scroll, so by the time a reader
+ * reached the gallery the columns were already part-way through their travel and
+ * the effect landed somewhere above the fold rather than under their eyes.
  *
  * C is the product-forward concept and the only one carrying no photography,
  * because the app IS its identity. So its one motion idea belongs to the
@@ -63,7 +69,8 @@ function Cell({
 export default function ProductGallery({ items }: { items: GalleryItem[] }) {
   const reduced = useReducedMotion()
   const [wide, setWide] = useState(false)
-  const { scrollYProgress } = useScroll()
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: wrapRef, offset: ['start end', 'end start'] })
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 818px)')
@@ -77,7 +84,7 @@ export default function ProductGallery({ items }: { items: GalleryItem[] }) {
 
   return (
     <section className="cc-gallery" aria-label="Inside the app">
-      <div className="cc-gallery-wrap">
+      <div className="cc-gallery-wrap" ref={wrapRef}>
         <div className="cc-grid">
           {items.map((g, i) => (
             <Cell key={g.src} item={g} progress={scrollYProgress} rate={live ? COL_RATE[i % 3] : 0} />

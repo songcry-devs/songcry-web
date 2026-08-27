@@ -5,6 +5,7 @@ import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import JoinForm from '@/components/sections/join/JoinForm'
 import Reveal from '@/components/motion/Reveal'
+import WordReveal from '@/components/craft/WordReveal'
 import GhostSteps from '@/components/sections/concepts/GhostSteps'
 import PhoneTileRow from '@/components/sections/concepts/PhoneTileRow'
 import CtaBand from '@/components/sections/concepts/CtaBand'
@@ -80,7 +81,9 @@ export default function ConceptA() {
             <div className="ca-hero-copy">
               <Reveal y={22}>
                 <p className="ca-eyebrow">Invite-only beta</p>
-                <h1 className="ca-h1">Music spreads through fans</h1>
+                <h1 className="ca-h1">
+                  <WordReveal text={'Music spreads through fans'} />
+                </h1>
               </Reveal>
               <Reveal y={22} delay={0.08}>
                 <p className="ca-sub">

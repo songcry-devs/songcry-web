@@ -5,6 +5,7 @@ import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import JoinForm from '@/components/sections/join/JoinForm'
 import Reveal from '@/components/motion/Reveal'
+import WordReveal from '@/components/craft/WordReveal'
 import ProductGallery, { type GalleryItem } from '@/components/sections/concepts/c/ProductGallery'
 
 /**
@@ -106,7 +107,9 @@ export default function ConceptC() {
           </div>
 
           <Reveal y={22}>
-            <h1 className="cc-h1">Press play on your city.</h1>
+            <h1 className="cc-h1">
+              <WordReveal text={'Press play on your city.'} />
+            </h1>
           </Reveal>
           <Reveal y={22} delay={0.08}>
             <p className="cc-sub">

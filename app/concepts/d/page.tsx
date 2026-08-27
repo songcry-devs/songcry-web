@@ -4,6 +4,7 @@ import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import JoinForm from '@/components/sections/join/JoinForm'
 import Reveal from '@/components/motion/Reveal'
+import WordReveal from '@/components/craft/WordReveal'
 import WallScene from '@/components/sections/concepts/d/WallScene'
 import WallSteps from '@/components/sections/concepts/d/WallSteps'
 import CrowdBand from '@/components/sections/concepts/d/CrowdBand'
@@ -54,7 +55,9 @@ export default function ConceptD() {
           <div className="cd-hero-wrap">
             <div className="cd-panel" id="join">
               <Reveal y={20}>
-                <h1 className="cd-h1">This is Songcry</h1>
+                <h1 className="cd-h1">
+                  <WordReveal text={'This is Songcry'} />
+                </h1>
                 <p className="cd-sub">Free for artists. Zero ads. No pay-to-play.</p>
               </Reveal>
               <Reveal y={20} delay={0.1}>

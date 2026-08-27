@@ -5,6 +5,7 @@ import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import JoinForm from '@/components/sections/join/JoinForm'
 import Reveal from '@/components/motion/Reveal'
+import WordReveal from '@/components/craft/WordReveal'
 import CitySteps from '@/components/sections/concepts/b/CitySteps'
 
 /**
@@ -90,9 +91,7 @@ export default function ConceptB() {
           <div className="cb-hero-light" aria-hidden="true" />
           <Reveal y={24}>
             <h1 className="cb-h1">
-              Your city
-              <br />
-              hears you first
+              <WordReveal text={'Your city\nhears you first'} />
             </h1>
           </Reveal>
           <Reveal y={24} delay={0.08}>
