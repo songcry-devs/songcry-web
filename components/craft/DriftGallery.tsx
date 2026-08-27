@@ -17,6 +17,10 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
  * These are real screens from the beta, not mockups of an imagined product. That
  * matters more than the motion does. The screens are 380x732 originals.
  *
+ * They live in public/app-screens, NOT public/concepts. The live homepage depends
+ * on them, and anything named concepts is scheduled for deletion the moment a
+ * direction is picked. A cleanup would have taken the homepage gallery with it.
+ *
  * Reduced motion collapses every rate to zero, so the columns sit still and the
  * grid is simply a grid. The tree is identical either way.
  *
@@ -26,19 +30,19 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 
 const COLUMNS: { src: string; alt: string }[][] = [
   [
-    { src: '/concepts/feed-baltimore.png', alt: 'The Songcry feed showing a song rising in Baltimore' },
-    { src: '/concepts/feed-who-am-i.png', alt: 'A full song playing in the Songcry feed' },
-    { src: '/concepts/upload-picker.png', alt: 'Choosing a track to upload in Songcry' },
+    { src: '/app-screens/feed-baltimore.png', alt: 'The Songcry feed showing a song rising in Baltimore' },
+    { src: '/app-screens/feed-who-am-i.png', alt: 'A full song playing in the Songcry feed' },
+    { src: '/app-screens/upload-picker.png', alt: 'Choosing a track to upload in Songcry' },
   ],
   [
-    { src: '/concepts/feed-la-drummer.png', alt: 'A drummer performing in the Songcry feed' },
-    { src: '/concepts/artist-profile-rose-gold.png', alt: 'An artist profile on Songcry' },
-    { src: '/concepts/feed-comments.png', alt: 'Comments on a song in the Songcry feed' },
+    { src: '/app-screens/feed-la-drummer.png', alt: 'A drummer performing in the Songcry feed' },
+    { src: '/app-screens/artist-profile-rose-gold.png', alt: 'An artist profile on Songcry' },
+    { src: '/app-screens/feed-comments.png', alt: 'Comments on a song in the Songcry feed' },
   ],
   [
-    { src: '/concepts/filter-sheet.png', alt: 'Filtering the Songcry feed by city and genre' },
-    { src: '/concepts/upload-editor.png', alt: 'The Songcry in-app editor with audio and video sync' },
-    { src: '/concepts/feed-thank-you.png', alt: 'An artist thanking listeners in the Songcry feed' },
+    { src: '/app-screens/filter-sheet.png', alt: 'Filtering the Songcry feed by city and genre' },
+    { src: '/app-screens/upload-editor.png', alt: 'The Songcry in-app editor with audio and video sync' },
+    { src: '/app-screens/feed-thank-you.png', alt: 'An artist thanking listeners in the Songcry feed' },
   ],
 ]
 

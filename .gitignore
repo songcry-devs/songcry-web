@@ -11,3 +11,6 @@ verify/
 /local-*.png
 /framer-*.png
 /preview-*.png
+
+# never commit a local node_modules symlink (mode 120000) - it points at one machine
+node_modules
