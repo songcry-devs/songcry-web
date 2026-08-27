@@ -51,23 +51,23 @@ const CONCEPTS = [
   {
     key: 'a',
     name: 'Sharpen',
-    line: 'Editorial and typographic. Ghost numerals drift against their rows as you scroll. No photography anywhere.',
+    line: 'Editorial and typographic. The page holds still and an enormous numeral becomes the stage as each beat changes against it. No photography anywhere.',
     w: 2880,
-    h: 8324,
-    film: false,
+    h: 10800,
+    film: true,
   },
   {
     key: 'b',
     name: 'City First',
-    line: 'The city is the headline. A wall of city names lights up one at a time over a skyline.',
+    line: 'The city is the headline. The page holds still and a real city stands behind each beat, so it reads as one song moving through places.',
     w: 2880,
-    h: 7330,
-    film: false,
+    h: 10800,
+    film: true,
   },
   {
     key: 'c',
     name: 'Product Forward',
-    line: 'The app is the argument. Gallery columns travel at three different rates. No photography, on purpose.',
+    line: 'The app is the argument. Deliberately the only one that does not hold you still: the product talks continuously while three gallery columns travel at different rates.',
     w: 2880,
     h: 8818,
     film: false,
@@ -75,10 +75,10 @@ const CONCEPTS = [
   {
     key: 'd',
     name: 'The Wall',
-    line: 'The most atmospheric. A wall of phones answers the scroll, with a performer and a crowd carrying the page.',
+    line: 'The most atmospheric. The performer stays behind you while the beats descend the wall, one at a time.',
     w: 2880,
-    h: 6022,
-    film: false,
+    h: 10800,
+    film: true,
   },
   {
     key: 'e',
@@ -115,13 +115,18 @@ export default function Review() {
         </header>
 
         <section className="rv-note" aria-label="About concept E">
-          <h2 className="rv-note-h">E is the odd one out, on purpose</h2>
+          <h2 className="rv-note-h">Read the previews carefully</h2>
           <p className="rv-note-p">
-            A, B, C and D are four different directions. E is not a fifth direction, it is the
-            live homepage words rebuilt with better craft, after Jack said our pages read as
-            recycled. Its preview is six frames from a single scroll rather than one tall
-            screenshot, because the page pins in place and changes under you, which a still
-            cannot show. Worth opening live.
+            A, B, D and E now hold you in place and change what you are looking at while you
+            scroll. A single screenshot of a page like that is not a worse preview, it is a
+            wrong one, so those four are shown as six frames from one scroll, top to bottom. C
+            is the exception and is a real full-page shot, because C is deliberately the one
+            concept that never stops you. All five are worth opening live.
+          </p>
+          <p className="rv-note-p">
+            E is also not a fifth direction competing with the other four. It is the live
+            homepage words rebuilt with better craft, so the only thing that changes between it
+            and songcry.app is the craft itself.
           </p>
         </section>
 
