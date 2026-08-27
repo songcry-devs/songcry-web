@@ -59,6 +59,70 @@ element above to the first below. Do not eyeball it.
 
 ---
 
+## The device catalogue: how Apple actually presents things
+
+Type and spacing are the floor. **The critique is about devices** — the mechanisms that present an
+idea. Measured across apple-music, airpods-pro, iphone-17-pro, apple-vision-pro, apple-tv-plus.
+
+### 1. Scroll IS the playhead (the signature device)
+
+Tall parent, `position: sticky` child, muted video inside. **Drive `video.currentTime` from scroll
+progress.** Measured on Vision Pro: across one pinned block the video runs 0.67s to 3.49s, linear
+with scroll. Scroll up and the film reverses. The reader is handling an object, not reading a page.
+
+- `muted`, and **never** `autoplay`. Attach on intersection or sixteen videos destroy the page.
+- Keep a **start-frame poster at opacity 0** over the first frame until the video decodes, then fade
+  it. Without it you get a flash before the video is ready.
+- Apple uses **zero canvas**. Real video, not image sequences.
+- Needs footage. Cannot be faked in CSS.
+
+### 2. The module that takes over
+
+Apple's own class is `all-access-pass`, toggling `inactive` and `activated`. A section claims the
+viewport, develops one idea over thousands of pixels, then releases. Measured parent heights up to
+**9,300px for a single module**.
+
+A normal section states a thing and hands off. An activated module **holds you**. This is the
+difference between a page that feels authored and a page that feels like a list.
+
+### 3. Named bespoke tiles on a shared chassis
+
+**This is the direct answer to the recycled-modules critique, and it is not what you would guess.**
+
+Apple Music ships `tile tile-rounded` as a shared chassis, then every instance gets its own named
+modifier: `tile-music-live`, `tile-music-sing`, `tile-shared-listening`, `tile-classical`,
+`tile-shazam`. `tile` appears **348 times** on iPhone 17 Pro.
+
+So Apple is not avoiding components. **Recycled means pouring different copy into the same
+presentation.** Keep the chassis. Give every idea its own device.
+
+### 4. Multi-rate galleries
+
+`media-gallery-item-1` through `-6`, each with its **own** scroll-driven transform so items travel
+at different rates against each other. Depth without 3D. Also real horizontal scrollers for
+browsing sets.
+
+### 5. Text as an animated material
+
+A `words` class in the scroll-driven set: display lines are **split into words** and revealed
+independently, not faded in as one block.
+
+Typography classes are **roles, not sizes**: `eyebrow`, `elevated`, `ps-headline-eyebrow`,
+`typography-ps-body`, `caption`. Name the role; let size vary per breakpoint. Raw sizes drift.
+
+### 6. Purpose-built ornament
+
+`ripple-1`, `ripple-2`, `circle`, `parallax-item float`. Hand-built graphics animated for one
+specific section. Not a library effect applied evenly across the page.
+
+### 7. The ground changes constantly
+
+`theme-dark` and `media-full-bleed` are per-tile modifiers; section backgrounds alternate
+`#f5f5f7`, `#1d1d1f`, `#000`. Rhythm comes from the floor changing under you. **One continuous dark
+field gives every section identical weight and emphasises nothing.**
+
+---
+
 ## The structural rule, which is the actual critique
 
 **Thin is what reads as recycled.** Songcry's homepage is 2,600px in three blocks: say the thing,
@@ -120,6 +184,9 @@ Stock photography is not a substitute. It was pulled from concept A for exactly 
 
 ## Before you call a page done
 
+0. **Name the devices on this page.** If the answer is "a hero, some cards and a CTA", it is
+   recycled and it will read that way no matter how good the type is. Every idea gets its own
+   device on a shared chassis.
 1. List every font size on the page. More than six, or any pair within 15%, means fix it.
 2. Check every heading's line-height against the ladder.
 3. Measure the real gap between each pair of sections in a browser at 1440 and 390.
