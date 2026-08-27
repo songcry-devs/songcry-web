@@ -210,7 +210,7 @@ export default function ConceptB() {
             color: rgba(255, 255, 255, 0.4);
           }
           .cb-hot {
-            color: var(--pink);
+            color: #ffffff;
           }
           .cb-dot {
             margin: 0 14px;
@@ -243,7 +243,7 @@ export default function ConceptB() {
             position: relative;
             font-family: var(--font-albert);
             font-size: clamp(52px, 7.2vw, 100px);
-            font-weight: 700;
+            font-weight: 600;
             line-height: 0.98;
             letter-spacing: -0.035em;
             color: #ffffff;
@@ -268,6 +268,7 @@ export default function ConceptB() {
 
           /* ── Collage ── */
           .cb-collage {
+            background: #0e0d0d;
             padding: 120px 0;
             overflow: hidden;
           }
@@ -348,6 +349,7 @@ export default function ConceptB() {
 
           /* ── City wall ── */
           .cb-wall {
+            background: #040404;
             position: relative;
             overflow: hidden;
             border-top: 1px solid rgba(255, 255, 255, 0.07);
@@ -400,7 +402,7 @@ export default function ConceptB() {
             column-gap: 36px;
             row-gap: 8px;
             font-family: var(--font-albert);
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: -0.03em;
             line-height: 1.05;
             color: rgba(255, 255, 255, 0.13);
@@ -415,8 +417,8 @@ export default function ConceptB() {
           .cb-s1 { font-size: clamp(44px, 6vw, 88px); }
           .cb-s2 { font-size: clamp(30px, 4.2vw, 60px); }
           .cb-s3 { font-size: clamp(24px, 3.2vw, 44px); }
-          .cb-hotname { color: var(--pink); }
-          .cb-names .cb-hotname:hover { color: var(--pink); }
+          .cb-hotname { color: #ffffff; }
+          .cb-names .cb-hotname:hover { color: #ffffff; }
 
           /* ── Responsive ── */
           @media (max-width: 980px) {

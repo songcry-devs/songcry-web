@@ -185,7 +185,7 @@ export default function ConceptC() {
             position: relative;
             font-family: var(--font-albert);
             font-size: clamp(32px, 3.6vw, 50px);
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: -0.03em;
             line-height: 1.04;
             color: #ffffff;
@@ -218,7 +218,7 @@ export default function ConceptC() {
             padding: 17px 48px;
             font-family: var(--font-albert);
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: -0.01em;
             text-decoration: none;
             transition: transform 160ms ease, filter 160ms ease;
@@ -233,6 +233,7 @@ export default function ConceptC() {
 
           /* ── Manifesto ── */
           .cc-manifesto {
+            background: #0e0d0d;
             padding: 120px 0;
           }
           .cc-manifesto-wrap {
@@ -273,8 +274,9 @@ export default function ConceptC() {
           }
           .cc-band-h2 {
             font-family: var(--font-albert);
-            font-size: clamp(34px, 3.6vw, 46px);
-            font-weight: 700;
+            font-size: clamp(26px, 2.6vw, 36px);
+            line-height: 1.1;
+          font-weight: 600;
             letter-spacing: -0.03em;
             color: #ffffff;
             margin: 0 0 16px;

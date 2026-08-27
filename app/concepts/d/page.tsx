@@ -95,8 +95,8 @@ export default function ConceptD() {
             }
             .cd-h1 {
               font-family: var(--font-albert);
-              font-size: clamp(36px, 3.6vw, 50px);
-              font-weight: 700;
+              font-size: clamp(42px, 4.8vw, 68px);
+              font-weight: 600;
               line-height: 1.02;
               letter-spacing: -0.03em;
               color: #ffffff;

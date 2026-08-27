@@ -60,6 +60,7 @@ export default function CitySteps() {
 
       <style>{`
         .cs-section {
+          background: #0e0d0d;
           padding: 120px 0;
           border-top: 1px solid rgba(255, 255, 255, 0.07);
         }
@@ -71,7 +72,8 @@ export default function CitySteps() {
         .cs-heading {
           font-family: var(--font-albert);
           font-size: clamp(30px, 3vw, 38px);
-          font-weight: 700;
+          line-height: 1.12;
+          font-weight: 600;
           letter-spacing: -0.02em;
           color: #ffffff;
           margin: 0 0 56px;
@@ -98,15 +100,15 @@ export default function CitySteps() {
           display: block;
           font-family: var(--font-albert);
           font-size: 12px;
-          font-weight: 700;
+          font-weight: 600;
           letter-spacing: 0.2em;
-          color: var(--pink);
+          color: rgba(255, 255, 255, 0.3);
           margin-bottom: 18px;
         }
         .cs-title {
           font-family: var(--font-albert);
           font-size: clamp(22px, 2vw, 27px);
-          font-weight: 700;
+          font-weight: 600;
           letter-spacing: -0.02em;
           line-height: 1.14;
           color: #ffffff;

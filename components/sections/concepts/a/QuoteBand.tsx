@@ -19,6 +19,13 @@ import Reveal from '@/components/motion/Reveal'
  * Copy is one approved anchor line from the brand voice canon. The word local
  * never appears on this site, see app/artist/page.tsx.
  *
+ * The turn used to be set in brand pink, which is the single clearest AI tell on
+ * the site: a two-line statement with the punchline coloured in. TJ named it
+ * 2026-08-27. Measured, Apple Music ships ZERO two-tone headings and Linear
+ * builds its whole hierarchy out of four greys. So the emphasis is now a VALUE
+ * step: the setup recedes to 42 percent white and the turn lands at full white.
+ * Same emphasis, more of it, no hue.
+ *
  * NOTE: the style string below must stay free of apostrophes, quotes, ampersands
  * and angle brackets, comments included. See scripts/check-style-literals.mjs.
  */
@@ -41,6 +48,7 @@ export default function QuoteBand() {
 
       <style>{`
         .qb-section {
+          background: #040404;
           padding: 120px 0;
           border-top: 1px solid rgba(255, 255, 255, 0.07);
           border-bottom: 1px solid rgba(255, 255, 255, 0.07);
@@ -62,16 +70,16 @@ export default function QuoteBand() {
         .qb-quote {
           font-family: var(--font-albert);
           font-size: clamp(32px, 4.4vw, 62px);
-          font-weight: 700;
+          font-weight: 600;
           letter-spacing: -0.03em;
           line-height: 1.08;
-          color: #ffffff;
+          color: rgba(255, 255, 255, 0.42);
           margin: 0;
           max-width: 20ch;
         }
         /* The turn is the whole point of the line, so it gets the emphasis. */
         .qb-turn {
-          color: var(--pink);
+          color: #ffffff;
         }
 
         @media (max-width: 1199px) {

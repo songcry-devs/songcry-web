@@ -82,6 +82,7 @@ export default function GhostSteps() {
 
       <style>{`
         .gs-section {
+          background: #0e0d0d;
           padding: 120px 0;
         }
         .gs-wrap {
@@ -92,7 +93,8 @@ export default function GhostSteps() {
         .gs-heading {
           font-family: var(--font-albert);
           font-size: clamp(30px, 3vw, 38px);
-          font-weight: 700;
+          line-height: 1.12;
+          font-weight: 600;
           letter-spacing: -0.02em;
           color: #ffffff;
           margin: 0 0 56px;
@@ -125,7 +127,8 @@ export default function GhostSteps() {
         .gs-title {
           font-family: var(--font-albert);
           font-size: 26px;
-          font-weight: 700;
+          line-height: 1.16;
+          font-weight: 600;
           letter-spacing: -0.02em;
           color: #ffffff;
           margin: 0;

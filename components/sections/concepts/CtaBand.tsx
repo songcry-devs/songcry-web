@@ -42,7 +42,8 @@ export default function CtaBand({ placement }: { placement: string }) {
         .ctab-heading {
           font-family: var(--font-albert);
           font-size: clamp(36px, 4vw, 56px);
-          font-weight: 700;
+          line-height: 1.06;
+          font-weight: 600;
           letter-spacing: -0.03em;
           color: #ffffff;
           margin: 0 0 32px;
@@ -55,7 +56,7 @@ export default function CtaBand({ placement }: { placement: string }) {
           padding: 15px 40px;
           font-family: var(--font-albert);
           font-size: 15px;
-          font-weight: 700;
+          font-weight: 600;
           letter-spacing: -0.01em;
           text-decoration: none;
           transition: transform 160ms ease, filter 160ms ease;

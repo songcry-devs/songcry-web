@@ -114,7 +114,7 @@ export default function CrowdBand() {
         .cb2-heading {
           font-family: var(--font-albert);
           font-size: clamp(34px, 4vw, 56px);
-          font-weight: 700;
+          font-weight: 600;
           letter-spacing: -0.03em;
           line-height: 1.06;
           color: #ffffff;

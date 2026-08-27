@@ -115,8 +115,9 @@ export default function WallSteps() {
         }
         .ws-heading {
           font-family: var(--font-albert);
-          font-size: clamp(30px, 3vw, 38px);
-          font-weight: 700;
+          font-size: clamp(24px, 2.2vw, 30px);
+          line-height: 1.12;
+          font-weight: 600;
           letter-spacing: -0.02em;
           color: #ffffff;
           margin: 0 0 64px;
@@ -154,7 +155,7 @@ export default function WallSteps() {
         .ws-title {
           font-family: var(--font-albert);
           font-size: clamp(28px, 2.8vw, 38px);
-          font-weight: 700;
+          font-weight: 600;
           letter-spacing: -0.02em;
           line-height: 1.08;
           color: #ffffff;

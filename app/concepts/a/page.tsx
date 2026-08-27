@@ -155,7 +155,7 @@ export default function ConceptA() {
             .ca-h1 {
               font-family: var(--font-albert);
               font-size: clamp(48px, 5.6vw, 82px);
-              font-weight: 700;
+              font-weight: 600;
               line-height: 1.0;
               letter-spacing: -0.03em;
               color: #ffffff;
