@@ -1,7 +1,7 @@
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import Hero from '@/components/sections/home/Hero'
-import Download from '@/components/sections/home/Download'
+import CloseBand from '@/components/sections/home/CloseBand'
 import WordReveal from '@/components/craft/WordReveal'
 import HoldingModule from '@/components/craft/HoldingModule'
 import DriftGallery from '@/components/craft/DriftGallery'
@@ -34,7 +34,8 @@ import DriftGallery from '@/components/craft/DriftGallery'
  * The turn below recedes its setup and lands its payoff in white. Brand pink
  * appears on this page as the progress rail and the buttons. Never in a sentence.
  *
- * KEPT DELIBERATELY: Hero and Download. Hero carries the signup form and is the
+ * KEPT DELIBERATELY: Hero. Download was replaced by CloseBand on 2026-08-27 (TJ's call).
+ * Originally:  KEPT DELIBERATELY: Hero and Download. Hero carries the signup form and is the
  * conversion surface; Download carries the App Store badge and the floor grid.
  * This is a craft pass on a page that works, not a rewrite of what it does.
  *
@@ -74,7 +75,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Download />
+        <CloseBand />
       </main>
       <Footer />
 
