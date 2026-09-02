@@ -205,7 +205,7 @@ The Services may contain links to third-party websites or services. We are not r
 
 Email: support@songcry.app
 
-Mail: Songcry, Inc., 2360 Shasta Way, Unit G, Simi Valley, CA 93065
+Mail: Songcry, Inc., 20950 Warner Center Ln, Suite A, Woodland Hills, CA 91367
 
 ## Copyright and DMCA Notices
 
@@ -215,7 +215,7 @@ Designated Agent: Legal Department (DMCA Agent)
 
 Email: support@songcry.app
 
-Address: 2360 Shasta Way, Unit G, Simi Valley, CA 93065
+Address: 20950 Warner Center Ln, Suite A, Woodland Hills, CA 91367
 
 ## Changes to This Privacy Policy
 

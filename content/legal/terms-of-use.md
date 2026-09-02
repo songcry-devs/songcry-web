@@ -126,7 +126,7 @@ If you believe that content available through the App infringes your copyright, 
 
 Designated Agent: Legal Department (DMCA Agent)
 Email: support@songcry.app
-Address: 2360 Shasta Way, Unit G, Simi Valley, CA 93065
+Address: 20950 Warner Center Ln, Suite A, Woodland Hills, CA 91367
 
 Your notice must substantially comply with the requirements of 17 U.S.C. § 512(c)(3), including sufficient information to identify the copyrighted work claimed to be infringed, the material you claim is infringing (with enough detail for us to locate it), your contact information, a statement that you have a good faith belief the use is not authorized, and a statement made under penalty of perjury that the information in your notice is accurate and that you are authorized to act on behalf of the copyright owner.
 
@@ -340,6 +340,6 @@ If you have questions about these Terms, contact us at:
 
 Songcry, Inc.
 
-2360 Shasta Way, Unit G, Simi Valley, CA 93065
+20950 Warner Center Ln, Suite A, Woodland Hills, CA 91367
 
 Email: support@songcry.app
