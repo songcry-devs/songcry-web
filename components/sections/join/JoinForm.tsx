@@ -154,7 +154,7 @@ export default function JoinForm({ compact = false }: { compact?: boolean }) {
       {/* Trust line — sibling of the artists.songcry.app form's reassurance. */}
       <p className="join-trust">
         {isArtist
-          ? "Invite-only. We'll only use this to reach you. No spam."
+          ? "Every application is reviewed. We'll only use this to reach you. No spam."
           : "We'll only use this to reach you. No spam."}
       </p>
 
