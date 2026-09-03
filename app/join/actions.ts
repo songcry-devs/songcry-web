@@ -67,6 +67,25 @@ function utmFromQs(qs: string): Record<string, string> {
   return utm
 }
 
+/**
+ * The single coarse channel name for a lead, derived from the same `utm` blob.
+ *
+ * The artist form does not need this: it writes straight into `access_requests`,
+ * where the jsonb `utm` column IS the attribution and channel_report groups on
+ * utm_source/utm_medium. The fan form posts to the Songcry backend, whose
+ * `fan_waitlist.source` is a VARCHAR(50) — one word, not a blob — so the channel
+ * has to be collapsed here. Both still travel with the full `utm` alongside.
+ *
+ * 'web' means "arrived at songcry.app carrying no campaign params at all", which
+ * is honest; it must never be reported as if the visitor came from a campaign.
+ */
+function channelFromUtm(utm: Record<string, string>): string {
+  if (utm.utm_source) return utm.utm_source.slice(0, 50)
+  if (utm.gclid) return 'google'
+  if (utm.fbclid) return 'meta'
+  return 'web'
+}
+
 /** Bots fill every field, including the visually hidden one. */
 function honeypotTripped(formData: FormData): boolean {
   return String(formData.get('website') ?? '').trim() !== ''
@@ -180,6 +199,14 @@ export async function submitFan(
   // x-forwarded-for is a comma-separated chain; the client is the first entry.
   const clientIp = headers().get('x-forwarded-for')?.split(',')[0]?.trim()
 
+  // Attribution (TJ, 2026-09-02). This form used to post only {email, name}, and
+  // the backend hardcoded source='mobile_signup' — so a fan who arrived from a
+  // Google ad was recorded as having signed up inside the app. Both fields are
+  // optional on the backend DTO, so an older deploy of this action still works;
+  // an older backend ignores them (ValidationPipe runs whitelist: true).
+  const utm = utmFromQs(String(formData.get('qs') ?? ''))
+  const source = channelFromUtm(utm)
+
   let res: Response
   try {
     res = await fetch('https://api.songcry.app/api/v1/fan-waitlist', {
@@ -188,7 +215,12 @@ export async function submitFan(
         'Content-Type': 'application/json',
         ...(clientIp ? { 'X-Forwarded-For': clientIp } : {}),
       },
-      body: JSON.stringify({ email, name }),
+      body: JSON.stringify({
+        email,
+        name,
+        source,
+        ...(Object.keys(utm).length ? { utm } : {}),
+      }),
       cache: 'no-store',
     })
   } catch (err) {

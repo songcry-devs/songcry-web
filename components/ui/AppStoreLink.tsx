@@ -1,6 +1,6 @@
 'use client'
 
-import { APP_STORE_URL, trackAppStoreClick } from '@/lib/appstore'
+import { appStoreUrl, trackAppStoreClick } from '@/lib/appstore'
 
 /**
  * A tracked App Store link.
@@ -26,7 +26,7 @@ export default function AppStoreLink({
 }) {
   return (
     <a
-      href={APP_STORE_URL}
+      href={appStoreUrl(placement)}
       target="_blank"
       rel="noopener noreferrer"
       className={className}

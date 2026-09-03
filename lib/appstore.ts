@@ -11,6 +11,35 @@
 export const APP_STORE_URL =
   'https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416'
 
+/**
+ * Apple's campaign parameters (TJ, 2026-09-02: "do we know where every signup
+ * comes from"). `pt` is the App Store Connect provider token and `ct` is a free
+ * campaign label; together they make installs show up per campaign under App
+ * Store Connect → App Analytics → Campaigns.
+ *
+ * WITHOUT `pt`, Apple ignores `ct` entirely — a ct-only URL is visible junk in a
+ * link with no upside — so this returns the URL UNCHANGED until the token is
+ * configured, and starts tagging the moment it is. Set
+ * NEXT_PUBLIC_APPLE_PROVIDER_TOKEN in the Vercel project to activate.
+ *
+ * This still never attributes a PERSON: Apple hands ct to nobody, not the app
+ * and not us. It only counts installs per campaign. The person is attributed by
+ * the request form (access_requests.utm) and, once the app sends it, by
+ * user_account.signupSource on the backend.
+ */
+export function appStoreUrl(placement: string): string {
+  const pt = process.env.NEXT_PUBLIC_APPLE_PROVIDER_TOKEN
+  if (!pt) return APP_STORE_URL
+
+  const ct = `web-${placement}`
+    .toLowerCase()
+    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/-+/g, '-')
+    .slice(0, 40)
+  const q = new URLSearchParams({ pt, ct, mt: '8' })
+  return `${APP_STORE_URL}?${q.toString()}`
+}
+
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void

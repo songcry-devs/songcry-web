@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
-import { APP_STORE_URL, trackAppStoreClick } from '@/lib/appstore'
+import { appStoreUrl, trackAppStoreClick } from '@/lib/appstore'
 
 export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -159,7 +159,7 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
               className="artist-phone-bar"
             >
               <a
-                href={APP_STORE_URL}
+                href={appStoreUrl('nav-mobile')}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => { trackAppStoreClick('nav-mobile'); setMenuOpen(false) }}
@@ -252,7 +252,7 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
 function DownloadButton() {
   return (
     <a
-      href={APP_STORE_URL}
+      href={appStoreUrl('nav-desktop')}
       onClick={() => trackAppStoreClick('nav-desktop')}
       target="_blank"
       rel="noopener noreferrer"
