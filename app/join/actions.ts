@@ -1,8 +1,9 @@
 'use server'
 
 import { randomUUID } from 'crypto'
-import { headers } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { sendCapiEvent } from '@/lib/meta-capi'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const IG_RE = /^[A-Za-z0-9._]{1,30}$/
@@ -166,7 +167,26 @@ export async function submitArtist(
     return { error: GENERIC_ERROR }
   }
 
-  redirect(`${ARTIST_THANKS}?eid=${encodeURIComponent(`lead-${randomUUID()}`)}`)
+  // Server-side conversion (TJ, 2026-09-03). The pixel on the thank-you page is blocked for a
+  // meaningful share of visitors, and the blocked share is biased toward privacy-conscious
+  // people — so Meta was learning from a skewed sample of THIS site's leads. The eid is minted
+  // here and passed to the redirect so both events carry the SAME event_id and Meta collapses
+  // them into one conversion. Awaited, not detached: a serverless function can be frozen the
+  // moment it responds. sendCapiEvent never throws and self-skips without a token.
+  const eid = `lead-${randomUUID()}`
+  const capi = await sendCapiEvent({
+    eventId: eid,
+    eventName: 'Lead',
+    email,
+    sourceUrl: headers().get('referer') ?? 'https://songcry.app/join',
+    fbclid: utm.fbclid,
+    fbp: cookies().get('_fbp')?.value,
+    clientIp: headers().get('x-forwarded-for')?.split(',')[0]?.trim(),
+    userAgent: headers().get('user-agent') ?? undefined,
+  })
+  if (!capi.startsWith('ok')) console.warn('artist capi', capi)
+
+  redirect(`${ARTIST_THANKS}?eid=${encodeURIComponent(eid)}`)
 }
 
 /**
@@ -238,5 +258,22 @@ export async function submitFan(
   }
 
   // 204 — success (or a duplicate, which is just as good). No body to read.
-  redirect(`/join/thanks-fan?eid=${encodeURIComponent(`fan-${randomUUID()}`)}`)
+  //
+  // Server-side twin of the thank-you page's fbq('trackCustom','FanWaitlist'), sharing this eid
+  // so Meta dedupes them into one. 'FanWaitlist' matches the page exactly — a mismatched
+  // event_name would not dedupe and would report as two different conversions.
+  const eid = `fan-${randomUUID()}`
+  const capi = await sendCapiEvent({
+    eventId: eid,
+    eventName: 'FanWaitlist',
+    email,
+    sourceUrl: headers().get('referer') ?? 'https://songcry.app/join',
+    fbclid: utm.fbclid,
+    fbp: cookies().get('_fbp')?.value,
+    clientIp,
+    userAgent: headers().get('user-agent') ?? undefined,
+  })
+  if (!capi.startsWith('ok')) console.warn('fan capi', capi)
+
+  redirect(`/join/thanks-fan?eid=${encodeURIComponent(eid)}`)
 }
