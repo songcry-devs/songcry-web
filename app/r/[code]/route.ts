@@ -77,9 +77,11 @@ export async function GET(req: NextRequest, ctx: { params: Promise<{ code: strin
   const { code } = await ctx.params
   const key = process.env.SUPABASE_SERVICE_KEY
 
-  // Codes are a fixed alphabet from links.py. Rejecting anything else early keeps junk and
-  // probe traffic out of the database entirely.
-  if (!/^[a-z2-9]{4,16}$/.test(code) || !key) {
+  // Deliberately WIDER than the alphabet links.py mints random codes from, for two reasons:
+  // vanity codes for human-readable surfaces use the full alphabet and can be as short as two
+  // characters ("ig"), and a code minted under an older alphabet must keep resolving forever.
+  // Rejecting anything outside this still keeps junk and probe traffic out of the database.
+  if (!/^[a-z0-9-]{2,24}$/.test(code) || !key) {
     return NextResponse.redirect(FALLBACK, 302)
   }
 
