@@ -1,8 +1,8 @@
 ---
 title: Terms of Use (BETA)
-version: 2026-08-13
-lastUpdated: August 13, 2026
-supersedes: 2026-05-29
+version: 2026-09-04
+lastUpdated: September 4, 2026
+supersedes: 2026-08-13
 ---
 
 ## Acceptance and Changes to Terms
@@ -110,6 +110,10 @@ Artist representations: If you submit an artist profile or upload music or other
 (iv) the content does not infringe any third-party rights (including copyright, trademark, neighboring rights, privacy, or publicity rights); and
 (v) to the best of your knowledge, you are not subject to any exclusive recording, distribution, publishing, management, or other agreement that prohibits you from uploading your music to Songcry, or you have obtained any required consents.
 
+Original recordings only. You may upload only original recordings of musical works that you wrote or co-wrote, or for which you otherwise control every right needed to grant the license above. Do not upload cover versions, remixes, karaoke versions, or instrumental versions of another person's song, and do not upload recordings that contain samples, interpolations, or replayed elements of another recording or composition. This applies even where the underlying work is credited. If you believe a particular upload should be an exception, ask us in writing before you upload it and wait for our written agreement.
+
+Performing rights organizations, publishers, and administrators. If you are affiliated with a performing rights organization (for example ASCAP, BMI, SESAC, GMR, PRS, or SOCAN), a collective management organization, a music publisher, or a publishing administrator (for example Songtrust, DistroKid Publishing, or CD Baby Pro), you are solely responsible for taking all steps necessary to inform them that you have licensed your works to Songcry, and for giving any notice or making any filing your agreement with them requires, within the time that agreement requires. Songcry does not make those notifications for you.
+
 Material changes to your artist profile, such as artist name, real legal name, connected verification accounts, or representation, may require you to confirm these representations again.
 
 No royalties for plays unless expressly stated. Except as expressly set out by Songcry in a separate written program or feature with additional terms, Songcry does not pay royalties, license fees, or other compensation for plays, streams, or listening activity through the App (including during beta). If Songcry introduces any creator monetization or revenue-sharing program in the future, it will be governed by separate terms that you must accept to participate.
@@ -130,7 +134,9 @@ Address: 20950 Warner Center Ln, Suite A, Woodland Hills, CA 91367
 
 Your notice must substantially comply with the requirements of 17 U.S.C. § 512(c)(3), including sufficient information to identify the copyrighted work claimed to be infringed, the material you claim is infringing (with enough detail for us to locate it), your contact information, a statement that you have a good faith belief the use is not authorized, and a statement made under penalty of perjury that the information in your notice is accurate and that you are authorized to act on behalf of the copyright owner.
 
-We may remove or disable access to allegedly infringing material and may take other actions we deem appropriate in our discretion. Songcry may terminate, in appropriate circumstances, accounts of users who are repeat infringers.
+We may remove or disable access to allegedly infringing material and may take other actions we deem appropriate in our discretion.
+
+Repeat infringer policy. We terminate the accounts of repeat infringers in appropriate circumstances. An account receives a strike each time we remove or disable content it uploaded in response to a valid notice, unless the notice is withdrawn or the content is restored following a counter notice. An account that reaches three strikes is terminated. We may terminate an account before it reaches three strikes where a single infringement is flagrant, where the account was created to evade an earlier termination, or where the law requires it. A terminated account cannot sign in and cannot upload, its content stays off the App, and we may decline to reinstate it. We keep a record of every strike, every termination, and the reason for each.
 
 Counter-notice: If we remove or disable access to content in response to a DMCA notice, you may send a counter-notice if you believe the content was removed as a result of mistake or misidentification. Your counter-notice must include: (1) your physical or electronic signature; (2) identification of the removed content and the location where it appeared before removal; (3) a statement under penalty of perjury that you have a good-faith belief the content was removed or disabled as a result of mistake or misidentification; and (4) your name, address, telephone number, and a statement that you consent to the jurisdiction of the Federal District Court for the judicial district in which your address is located (or, if outside the United States, for any judicial district in which Songcry may be found), and that you will accept service of process from the person who submitted the DMCA notice or their agent. If we receive a valid counter-notice, we may forward it to the original complaining party. Unless the original complaining party files an action seeking a court order against you within the time required by law, we may restore the removed content.
 
@@ -213,9 +219,12 @@ You agree not to:
 - Upload, post, transmit, or make available any content that is unlawful, harmful, or objectionable, including content that is obscene, pornographic, sexually explicit, or that depicts nudity, sexual violence, exploitation, or abuse.
 - Upload, post, transmit, or make available any content that is hateful or discriminatory, or that promotes violence or hatred against a person or group based on protected characteristics.
 - Upload, post, transmit, or make available any content that is harassing, threatening, defamatory, or invasive of another person's privacy or publicity rights.
+- Upload, post, transmit, or make available an intimate image or video of an identifiable person who did not consent to it being published, including a digital forgery of such an image.
 - Upload, post, transmit, or make available any content involving the sexual exploitation of minors (child sexual abuse material, or CSAM). We will report suspected CSAM to appropriate authorities.
 - Upload, post, transmit, or make available any content that promotes or facilitates illegal activity, or that promotes extremist or terrorist organizations or activities.
 - Use bots, scripts, automated tools, VPNs, spoofed locations, or other methods intended to manipulate location, plays, impressions, hosting activity, or other App metrics or functionality, or to engage in fraud or artificial engagement.
+
+Nonconsensual intimate imagery. If an intimate image or video of you was published on Songcry without your consent, you can ask us to remove it at songcry.app/legal/removing-intimate-images. We remove content within 48 hours of receiving a valid request, and we make reasonable efforts to find and remove copies of the same content elsewhere on Songcry. You do not need a Songcry account to make a request.
 
 ## Moderation and Enforcement
 
@@ -223,7 +232,7 @@ We may suspend your access, restrict features, limit visibility, remove content,
 
 We may also restrict features, limit visibility, remove content, reduce distribution, or otherwise limit account functionality (including "shadow banning" or similar measures) if we believe, in our discretion, that an account is engaged in spam, fraud, artificial engagement, botting, location spoofing, or other conduct that undermines the integrity of the App.
 
-Reporting and Complaints: If you believe content or user conduct violates these Terms, you may report it through in-App reporting tools (if available) or by emailing support@songcry.app.
+Reporting and Complaints: If you believe content or user conduct violates these Terms, you may report it through in-App reporting tools (if available) or by emailing support@songcry.app. Copyright notices go to our DMCA Designated Agent instead, and requests to remove nonconsensual intimate imagery go to takedown@songcry.app. Both of those are described in their own sections above, and both are handled on their own timelines.
 
 We may review reports and may remove content, restrict accounts, or take other action in our discretion, consistent with these Terms.
 
@@ -234,6 +243,8 @@ Upon any enforcement action, you may lose access to your account and data. We ma
 ## Termination
 
 We may terminate or suspend your access to the App (and/or delete or disable your account) at any time, with or without notice, for any reason or no reason, including if you breach these Terms, pose a security or legal risk, misuse the App, engage in conduct harmful to us or other users, or if required by law.
+
+Where we terminate an account for infringement or for a serious breach of these Terms, the termination is ours and not yours to reverse: the account cannot sign in, cannot upload, and its content is removed from the App. Creating a new account to get around a termination is itself a breach of these Terms.
 
 Upon termination, we may delete your account and data in accordance with the Privacy Policy (songcry.app/legal/privacy).
 

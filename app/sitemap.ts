@@ -19,5 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/legal/terms-of-use`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE}/legal/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE}/legal/community-guidelines`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/legal/removing-intimate-images`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ]
 }

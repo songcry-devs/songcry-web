@@ -110,6 +110,15 @@ export default function Footer() {
                     Community Guidelines
                   </Link>
                 </li>
+                {/* TAKE IT DOWN Act (Pub. L. 119-12) requires a "clear and conspicuous"
+                    notice of the removal process for nonconsensual intimate imagery. A page
+                    nobody can find does not satisfy that, so this link is not optional
+                    decoration: it is half of the compliance obligation. Do not remove it. */}
+                <li>
+                  <Link href="/legal/removing-intimate-images" className="footer-link">
+                    Removing Intimate Images
+                  </Link>
+                </li>
                 {/* THE artist funnel entry point. Until 2026-08-04 neither the live Framer site
                     nor this replacement linked to artists.songcry.app even once, so the request
                     form, the 39 city+genre pages and the whole acquisition path were unreachable
