@@ -1,8 +1,8 @@
 ---
 title: Privacy Policy (BETA)
-version: 2026-08-13
-lastUpdated: August 13, 2026
-supersedes: 2026-05-29
+version: 2026-09-04
+lastUpdated: September 4, 2026
+supersedes: 2026-08-13
 ---
 
 ## Introduction
@@ -19,7 +19,7 @@ The Services are controlled and operated from California, United States and are 
 
 At or before the point of collection, we collect the categories of personal information described under "Information We Collect" and use them for the business and commercial purposes described under "How We Use Information."
 
-We do not sell personal information, and we do not share personal information for cross-context behavioral advertising during the beta.
+We do not sell personal information. We do share a limited set of identifiers with our advertising partner to measure our advertising and to build audiences, which California law treats as sharing for cross-context behavioral advertising. What we share, from where, and how to limit it are described under "Advertising and Measurement" below.
 
 ## Information We Collect
 
@@ -119,6 +119,7 @@ We collect date of birth to confirm that you are 18 or older. We do not use it f
 We may disclose information:
 
 - To service providers that help us operate the Services, such as hosting, storage and content delivery, authentication, geocoding and mapping, abuse prevention (including a bot-detection service used during artist signup), diagnostics or crash reporting, security monitoring, copyright screening, email delivery, and customer support tools.
+- To advertising and measurement partners, so that we can tell which of our advertisements led someone to apply for access or join the waitlist, and so that those partners can show our advertisements to similar people. This is described in full under "Advertising and Measurement".
 - For legal and safety reasons, to comply with law, respond to valid legal process, enforce our Terms, and protect the rights, safety, and security of Songcry, our users, and the public.
 - In connection with a business transaction, such as financing, merger, acquisition, reorganization, or sale of assets, subject to appropriate protections.
 - With your direction, for example when you choose to connect a third-party integration or choose to share content publicly.
@@ -127,15 +128,29 @@ We may disclose information:
 
 If you choose to make content or profile information public, others may view, stream, download, or share that content consistent with your settings and the functionality of the Services.
 
-## No Sale or Targeted Advertising During Beta
+## Advertising and Measurement
 
-We do not sell personal information, and we do not share personal information for cross-context behavioral advertising during the beta.
+We do not sell personal information.
+
+We advertise Songcry on Meta, which operates Facebook and Instagram, and we measure which of those advertisements lead people to apply for artist access or join the fan waitlist. To do that, we share a limited set of identifiers with Meta:
+
+- The email address you enter on our access request or waitlist form, converted to an irreversible SHA-256 hash before it leaves our servers. Meta does not receive the address itself.
+- Advertising click and browser identifiers, such as the Meta click identifier carried in an advertisement link and the identifier stored by Meta's pixel cookie.
+- Your IP address and browser user agent.
+
+We send these two ways. Meta's pixel runs on our web pages, and our own servers send the matching event directly to Meta through its Conversions API. Both carry the same event identifier so that one action is not counted as two.
+
+We share this for two purposes: measuring which advertisements produce applications and signups, and building audiences so that Meta can show our advertisements to people who resemble the people who already applied. Under California law, the second of those is sharing for cross-context behavioral advertising.
+
+This applies to our web pages at songcry.app and artists.songcry.app. We do not use third-party advertising networks inside the mobile App.
+
+To limit this, you can use your browser's cookie and tracking controls, your device's advertising controls, or Meta's own advertising preferences at facebook.com/adpreferences. You may also contact us at support@songcry.app and we will stop sharing identifiers associated with you.
 
 ## Cookies and Similar Technologies
 
 We and our service providers may use cookies and similar technologies on our web properties and SDKs or similar tools within the mobile App to keep you signed in, remember preferences, understand usage, improve the Services, and help protect the Services.
 
-Third-Party SDKs: service providers that support analytics, crash reporting, performance monitoring, authentication, messaging, hosting, and customer support may collect device and usage information such as device identifiers, IP address, App events, and crash logs to provide services to us. We do not permit these providers to use your information for their own marketing purposes, and we do not use third-party advertising networks for cross-app targeted advertising during the beta.
+Third-Party SDKs: service providers that support analytics, crash reporting, performance monitoring, authentication, messaging, hosting, and customer support may collect device and usage information such as device identifiers, IP address, App events, and crash logs to provide services to us. We do not permit these providers to use your information for their own marketing purposes, and we do not use third-party advertising networks for cross-app targeted advertising inside the App. Advertising measurement on our web pages is described under "Advertising and Measurement".
 
 Do Not Track: some browsers transmit "Do Not Track" signals. Because there is no consistent industry standard for how to respond, we do not respond to such signals.
 
@@ -179,7 +194,7 @@ Depending on your state of residence, you may have rights regarding your persona
 
 If you are a California resident, you may have the right to request access to, deletion of, and or correction of personal information, subject to verification requirements and exceptions.
 
-Sale or sharing of personal information: We do not sell personal information, and we do not share personal information for cross-context behavioral advertising during the beta.
+Sale or sharing of personal information: We do not sell personal information. We do share the identifiers described under "Advertising and Measurement" with Meta for advertising measurement and audience building, which California law treats as sharing for cross-context behavioral advertising. You may ask us to stop by emailing support@songcry.app with the subject line "Do Not Share My Personal Information", and we will stop sharing identifiers associated with you. We do not share the personal information of anyone we know to be under 18.
 
 Data portability: you may request a copy of your data in a portable format by contacting us. Depending on the nature of the data and the request, we may provide exports in a common machine-readable format.
 
