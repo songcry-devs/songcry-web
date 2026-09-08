@@ -1,8 +1,8 @@
 ---
 title: Privacy Policy (BETA)
-version: 2026-08-13
-lastUpdated: August 13, 2026
-supersedes: 2026-05-29
+version: 2026-09-04
+lastUpdated: September 4, 2026
+supersedes: 2026-08-13
 ---
 
 ## Introduction
@@ -19,7 +19,7 @@ The Services are controlled and operated from California, United States and are 
 
 At or before the point of collection, we collect the categories of personal information described under "Information We Collect" and use them for the business and commercial purposes described under "How We Use Information."
 
-We do not sell personal information, and we do not share personal information for cross-context behavioral advertising during the beta.
+We do not sell personal information. We do share a limited set of identifiers with our advertising partner to measure our advertising and to build audiences, which California law treats as sharing for cross-context behavioral advertising. What we share, from where, and how to limit it are described under "Advertising and Measurement" below.
 
 ## Information We Collect
 
@@ -61,7 +61,7 @@ Location is central to how Songcry works, so we describe our practices here in d
 
 **What we collect.** With your permission, the App collects precise location (latitude and longitude) from your device, including when you open the App. Location permission is required for the location-based parts of the Services to function.
 
-**How it is stored.** We store your most recent location reading on your account record, and we use it to assign you to an approximate geographic zone for content discovery. Each new reading replaces the previous one on your account record. Separately, we record an approximate location together with in-app activity events (such as songs served to you, plays, likes, and hosting actions) so that we can operate and audit the discovery algorithm. We do not use this information to track your movements and we do not make any location history available to you or to other users.
+**How it is stored.** We store your most recent location reading on your account record, and we use it to assign you to an approximate geographic zone for content discovery. Each new reading replaces the previous one on your account record. Separately, we record your precise coordinates together with in-app activity events, such as plays, likes, and hosting actions, and when you begin hosting a song we record the position where you started hosting. Over time these activity records form a history of the places where you used Songcry. We use them to operate and audit the discovery algorithm and to measure how music travels between areas. We do not use them to build movement profiles, we do not sell them, and we do not make this history available to you or to other users.
 
 **How we use it.** We use location to: deliver the discovery feed, which surfaces content based on your geographic zone; operate the distribution radius through which songs travel between listeners; resolve your area to a city for discovery purposes; produce approximate city- or region-level listener analytics for artists; and protect platform integrity, including detecting fraud, artificial engagement, and location spoofing.
 
@@ -71,7 +71,7 @@ Location is central to how Songcry works, so we describe our practices here in d
 
 **Third parties.** Coordinates are sent to Google's geocoding service to convert them into a city or region for discovery purposes. Your device's own operating system (Apple on iOS, Google on Android) also processes your coordinates when the App converts a location into a place name, under that platform's privacy policy. Where the App displays a map, our mapping provider receives your IP address and the map area being viewed, but not your account's stored coordinates.
 
-**Your control.** You can enable or disable location access at any time in your device settings. Without location access, location-dependent features are limited, and you can still browse and play music by selecting a city.
+**Your control.** You can enable or disable location access at any time in your device settings. On recent versions of iOS and Android you can also turn off precise location for Songcry while keeping general location on; the App then receives only your approximate position. Without location access, location-dependent features are limited, and you can still browse and play music by selecting a city.
 
 ## Connected Accounts for Artist Verification
 
@@ -119,6 +119,7 @@ We collect date of birth to confirm that you are 18 or older. We do not use it f
 We may disclose information:
 
 - To service providers that help us operate the Services, such as hosting, storage and content delivery, authentication, geocoding and mapping, abuse prevention (including a bot-detection service used during artist signup), diagnostics or crash reporting, security monitoring, copyright screening, email delivery, and customer support tools.
+- To advertising and measurement partners, so that we can tell which of our advertisements led someone to apply for access or join the waitlist, and so that those partners can show our advertisements to similar people. This is described in full under "Advertising and Measurement".
 - For legal and safety reasons, to comply with law, respond to valid legal process, enforce our Terms, and protect the rights, safety, and security of Songcry, our users, and the public.
 - In connection with a business transaction, such as financing, merger, acquisition, reorganization, or sale of assets, subject to appropriate protections.
 - With your direction, for example when you choose to connect a third-party integration or choose to share content publicly.
@@ -127,15 +128,29 @@ We may disclose information:
 
 If you choose to make content or profile information public, others may view, stream, download, or share that content consistent with your settings and the functionality of the Services.
 
-## No Sale or Targeted Advertising During Beta
+## Advertising and Measurement
 
-We do not sell personal information, and we do not share personal information for cross-context behavioral advertising during the beta.
+We do not sell personal information.
+
+We advertise Songcry on Meta, which operates Facebook and Instagram, and we measure which of those advertisements lead people to apply for artist access or join the fan waitlist. To do that, we share a limited set of identifiers with Meta:
+
+- The email address you enter on our access request or waitlist form, converted to an irreversible SHA-256 hash before it leaves our servers. Meta does not receive the address itself.
+- Advertising click and browser identifiers, such as the Meta click identifier carried in an advertisement link and the identifier stored by Meta's pixel cookie.
+- Your IP address and browser user agent.
+
+We send these two ways. Meta's pixel runs on our web pages, and our own servers send the matching event directly to Meta through its Conversions API. Both carry the same event identifier so that one action is not counted as two.
+
+We share this for two purposes: measuring which advertisements produce applications and signups, and building audiences so that Meta can show our advertisements to people who resemble the people who already applied. Under California law, the second of those is sharing for cross-context behavioral advertising.
+
+This applies to our web pages at songcry.app and artists.songcry.app. We do not use third-party advertising networks inside the mobile App.
+
+To limit this, you can use your browser's cookie and tracking controls, your device's advertising controls, or Meta's own advertising preferences at facebook.com/adpreferences. You may also contact us at support@songcry.app and we will stop sharing identifiers associated with you.
 
 ## Cookies and Similar Technologies
 
 We and our service providers may use cookies and similar technologies on our web properties and SDKs or similar tools within the mobile App to keep you signed in, remember preferences, understand usage, improve the Services, and help protect the Services.
 
-Third-Party SDKs: service providers that support analytics, crash reporting, performance monitoring, authentication, messaging, hosting, and customer support may collect device and usage information such as device identifiers, IP address, App events, and crash logs to provide services to us. We do not permit these providers to use your information for their own marketing purposes, and we do not use third-party advertising networks for cross-app targeted advertising during the beta.
+Third-Party SDKs: service providers that support analytics, crash reporting, performance monitoring, authentication, messaging, hosting, and customer support may collect device and usage information such as device identifiers, IP address, App events, and crash logs to provide services to us. We do not permit these providers to use your information for their own marketing purposes, and we do not use third-party advertising networks for cross-app targeted advertising inside the App. Advertising measurement on our web pages is described under "Advertising and Measurement".
 
 Do Not Track: some browsers transmit "Do Not Track" signals. Because there is no consistent industry standard for how to respond, we do not respond to such signals.
 
@@ -156,7 +171,7 @@ We retain information for as long as reasonably necessary to provide the Service
 
 Specifically:
 
-- Account information, including date of birth and your most recent location reading, is retained until you delete your account.
+- Account information, including date of birth and your most recent location reading, is retained until you delete your account. Location recorded with your activity, including the positions where you hosted songs, is deleted when you delete your account.
 - Uploaded content, including audio and cover art, is retained until you delete it or delete your account.
 - Artist profile and content submission records, including the confirmations you make and the outcome of our review, are retained for as long as the account exists and for a reasonable period afterward to resolve disputes, respond to copyright complaints, and enforce our Terms.
 - Verification materials are retained to complete and evidence the verification decision. We are extending our automated deletion routines to cover these files; until that work is complete, some verification files may remain in our storage after an account is deleted. You can email support@songcry.app to request their removal.
@@ -179,7 +194,7 @@ Depending on your state of residence, you may have rights regarding your persona
 
 If you are a California resident, you may have the right to request access to, deletion of, and or correction of personal information, subject to verification requirements and exceptions.
 
-Sale or sharing of personal information: We do not sell personal information, and we do not share personal information for cross-context behavioral advertising during the beta.
+Sale or sharing of personal information: We do not sell personal information. We do share the identifiers described under "Advertising and Measurement" with Meta for advertising measurement and audience building, which California law treats as sharing for cross-context behavioral advertising. You may ask us to stop by emailing support@songcry.app with the subject line "Do Not Share My Personal Information", and we will stop sharing identifiers associated with you. We do not share the personal information of anyone we know to be under 18.
 
 Data portability: you may request a copy of your data in a portable format by contacting us. Depending on the nature of the data and the request, we may provide exports in a common machine-readable format.
 
