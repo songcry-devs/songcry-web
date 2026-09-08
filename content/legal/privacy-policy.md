@@ -61,7 +61,7 @@ Location is central to how Songcry works, so we describe our practices here in d
 
 **What we collect.** With your permission, the App collects precise location (latitude and longitude) from your device, including when you open the App. Location permission is required for the location-based parts of the Services to function.
 
-**How it is stored.** We store your most recent location reading on your account record, and we use it to assign you to an approximate geographic zone for content discovery. Each new reading replaces the previous one on your account record. Separately, we record an approximate location together with in-app activity events (such as songs served to you, plays, likes, and hosting actions) so that we can operate and audit the discovery algorithm. We do not use this information to track your movements and we do not make any location history available to you or to other users.
+**How it is stored.** We store your most recent location reading on your account record, and we use it to assign you to an approximate geographic zone for content discovery. Each new reading replaces the previous one on your account record. Separately, we record your precise coordinates together with in-app activity events, such as plays, likes, and hosting actions, and when you begin hosting a song we record the position where you started hosting. Over time these activity records form a history of the places where you used Songcry. We use them to operate and audit the discovery algorithm and to measure how music travels between areas. We do not use them to build movement profiles, we do not sell them, and we do not make this history available to you or to other users.
 
 **How we use it.** We use location to: deliver the discovery feed, which surfaces content based on your geographic zone; operate the distribution radius through which songs travel between listeners; resolve your area to a city for discovery purposes; produce approximate city- or region-level listener analytics for artists; and protect platform integrity, including detecting fraud, artificial engagement, and location spoofing.
 
@@ -71,7 +71,7 @@ Location is central to how Songcry works, so we describe our practices here in d
 
 **Third parties.** Coordinates are sent to Google's geocoding service to convert them into a city or region for discovery purposes. Your device's own operating system (Apple on iOS, Google on Android) also processes your coordinates when the App converts a location into a place name, under that platform's privacy policy. Where the App displays a map, our mapping provider receives your IP address and the map area being viewed, but not your account's stored coordinates.
 
-**Your control.** You can enable or disable location access at any time in your device settings. Without location access, location-dependent features are limited, and you can still browse and play music by selecting a city.
+**Your control.** You can enable or disable location access at any time in your device settings. On recent versions of iOS and Android you can also turn off precise location for Songcry while keeping general location on; the App then receives only your approximate position. Without location access, location-dependent features are limited, and you can still browse and play music by selecting a city.
 
 ## Connected Accounts for Artist Verification
 
@@ -171,7 +171,7 @@ We retain information for as long as reasonably necessary to provide the Service
 
 Specifically:
 
-- Account information, including date of birth and your most recent location reading, is retained until you delete your account.
+- Account information, including date of birth and your most recent location reading, is retained until you delete your account. Location recorded with your activity, including the positions where you hosted songs, is deleted when you delete your account.
 - Uploaded content, including audio and cover art, is retained until you delete it or delete your account.
 - Artist profile and content submission records, including the confirmations you make and the outcome of our review, are retained for as long as the account exists and for a reasonable period afterward to resolve disputes, respond to copyright complaints, and enforce our Terms.
 - Verification materials are retained to complete and evidence the verification decision. We are extending our automated deletion routines to cover these files; until that work is complete, some verification files may remain in our storage after an account is deleted. You can email support@songcry.app to request their removal.
