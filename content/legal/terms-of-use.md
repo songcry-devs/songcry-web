@@ -129,7 +129,7 @@ You may delete your content at any time through the App settings or by contactin
 If you believe that content available through the App infringes your copyright, you may submit a notice under the U.S. Digital Millennium Copyright Act ("DMCA") by contacting our Designated Agent at:
 
 Designated Agent: Legal Department (DMCA Agent)
-Email: support@songcry.app
+Email: dmca@songcry.app
 Address: 20950 Warner Center Ln, Suite A, Woodland Hills, CA 91367
 
 Your notice must substantially comply with the requirements of 17 U.S.C. § 512(c)(3), including sufficient information to identify the copyrighted work claimed to be infringed, the material you claim is infringing (with enough detail for us to locate it), your contact information, a statement that you have a good faith belief the use is not authorized, and a statement made under penalty of perjury that the information in your notice is accurate and that you are authorized to act on behalf of the copyright owner.
