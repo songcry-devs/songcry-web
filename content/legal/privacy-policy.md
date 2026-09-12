@@ -1,8 +1,8 @@
 ---
 title: Privacy Policy (BETA)
-version: 2026-09-04
-lastUpdated: September 4, 2026
-supersedes: 2026-08-13
+version: 2026-09-11
+lastUpdated: September 11, 2026
+supersedes: 2026-09-04
 ---
 
 ## Introduction
@@ -174,7 +174,7 @@ Specifically:
 - Account information, including date of birth and your most recent location reading, is retained until you delete your account. Location recorded with your activity, including the positions where you hosted songs, is deleted when you delete your account.
 - Uploaded content, including audio and cover art, is retained until you delete it or delete your account.
 - Artist profile and content submission records, including the confirmations you make and the outcome of our review, are retained for as long as the account exists and for a reasonable period afterward to resolve disputes, respond to copyright complaints, and enforce our Terms.
-- Verification materials are retained to complete and evidence the verification decision. We are extending our automated deletion routines to cover these files; until that work is complete, some verification files may remain in our storage after an account is deleted. You can email support@songcry.app to request their removal.
+- Verification materials are retained to complete and evidence the verification decision, and are deleted when you delete your account. A document uploaded during an artist signup that is never completed is deleted automatically 30 days after it is uploaded. You can email support@songcry.app to request removal sooner.
 - Records of your acceptance of the Terms of Use and acknowledgment of this Privacy Policy, including the version accepted and the time of acceptance, are retained for as long as the account exists and are deleted with the account.
 - A record of changes to the legal name on an artist account is retained while the account exists, so that we can evidence verification decisions.
 - If you join a waitlist, the details you submit are retained until we contact you or you ask us to remove them.
