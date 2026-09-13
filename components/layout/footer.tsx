@@ -88,6 +88,12 @@ export default function Footer() {
             >
               Support@songcry.app
             </a>
+            {/* The App Store and Google Play Support URL. Linked here so it is reachable from every page, not only from the stores. */}
+            <div>
+              <Link href="/support" className="footer-link">
+                Help and support
+              </Link>
+            </div>
           </div>
 
           {/* Company column */}
