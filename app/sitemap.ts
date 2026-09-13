@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASE, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: `${BASE}/artist`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE}/join`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/support`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/legal/terms-of-use`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE}/legal/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE}/legal/community-guidelines`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
