@@ -228,7 +228,7 @@ If you believe content available through the Services infringes your copyright, 
 
 Designated Agent: Legal Department (DMCA Agent)
 
-Email: support@songcry.app
+Email: dmca@songcry.app
 
 Address: 20950 Warner Center Ln, Suite A, Woodland Hills, CA 91367
 
