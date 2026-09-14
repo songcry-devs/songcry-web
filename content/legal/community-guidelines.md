@@ -53,4 +53,4 @@ These Guidelines may be updated over time. The latest version will be posted her
 
 Contact: support@songcry.app
 
-Copyright and DMCA notices: support@songcry.app
+Copyright and DMCA notices: dmca@songcry.app
