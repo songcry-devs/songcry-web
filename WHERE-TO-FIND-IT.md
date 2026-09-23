@@ -8,6 +8,7 @@ _Created 2026-08-17 (workspace-wide filing pass)._
 | Type | Home | Notes |
 |---|---|---|
 | Instructions | `CLAUDE.md` | Loaded every session. Nothing time-bound. |
+| Instructions for non-Claude agents | `AGENTS.md` | Codex/GPT agents. Points at CLAUDE.md and the skills, plus the unsupervised-work rules (main is production, public repo, no live form submits). |
 | Skills | `.claude/skills/` | Repo-specific; auto-activate. Listed in CLAUDE.md. |
 | Pages / routes | `app/` | Next.js 14 App Router |
 | Components | `components/` | — |
