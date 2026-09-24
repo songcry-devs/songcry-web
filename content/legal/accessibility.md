@@ -36,6 +36,8 @@ If you hit something that is not on this list, it is not that we decided it was 
 
 We test the Songcry app on iPhone with VoiceOver.
 
+Songcry is also on Android. We have **not** yet tested the Android app with TalkBack, so we cannot tell you how well it works with a screen reader there. If you use TalkBack and something blocks you, please tell us.
+
 We have **not** yet tested with Voice Control, with a Braille display, with Switch Control, or on iPad. This website has not yet been tested with a screen reader. We are telling you what we have not done rather than letting the list above imply we checked everything.
 
 ## 5. How we assessed this
