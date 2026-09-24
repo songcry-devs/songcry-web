@@ -21,5 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/legal/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE}/legal/community-guidelines`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE}/legal/removing-intimate-images`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    // Reviewed more often than the other legal pages on purpose: section 3 lists the
+    // barriers we know about, and it changes as we fix them.
+    { url: `${BASE}/legal/accessibility`, lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
   ]
 }
