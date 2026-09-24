@@ -98,7 +98,7 @@ We do not require you to provide sensitive personal information to use the Servi
 
 ## Text Messages
 
-If you give us your mobile phone number on our artist sign-up form and tick the box agreeing to receive texts, we may send you text messages about your Songcry artist profile, such as reminders to finish setting it up and updates about your review. Agreeing to receive texts is not required to sign up or to use the Services.
+If you give us your mobile phone number on our artist sign-up form and tick the box agreeing to receive texts, we may send you text messages from Songcry, including news and updates about Songcry, reminders to finish setting up your artist profile, and updates about your review. Some of these messages may be sent using automated technology. Agreeing to receive texts is not required to sign up or to use the Services.
 
 Message frequency varies. Message and data rates may apply. You can opt out at any time by replying STOP to any message, and reply HELP for help. We record when and how you agreed, including the wording you were shown.
 
