@@ -1,8 +1,8 @@
 ---
 title: Privacy Policy (BETA)
-version: 2026-09-11
-lastUpdated: September 11, 2026
-supersedes: 2026-09-04
+version: 2026-09-23
+lastUpdated: September 23, 2026
+supersedes: 2026-09-11
 ---
 
 ## Introduction
@@ -30,6 +30,7 @@ We collect information in three ways: information you provide, information colle
 - Account and profile information: email address, username or handle, profile photo, bio, and other details you choose to provide.
 - Gender: we collect a gender selection at account creation.
 - Contact and address information: a phone number and address associated with your account, where you provide them.
+- Sign-up form information: when you sign up as an artist on our website, your artist name, email address, and, if you choose to provide them, your Instagram handle and mobile phone number.
 - Date of birth: we collect your date of birth at account creation to confirm that you are 18 or older, and we retain it on your account record.
 - Name information: artists provide a public artist name and, for verification purposes, a real legal name. The real legal name is used for verification and is not displayed publicly.
 - Authentication information: password stored as a hash and other account settings.
@@ -95,6 +96,14 @@ Songcry's use of information received from Google APIs adheres to the [Google AP
 
 We do not require you to provide sensitive personal information to use the Services. If you choose to include sensitive personal information in User Content, you understand it will be processed as part of providing the Services and may become public depending on your settings.
 
+## Text Messages
+
+If you give us your mobile phone number on our artist sign-up form and tick the box agreeing to receive texts, we may send you text messages about your Songcry artist profile, such as reminders to finish setting it up and updates about your review. Agreeing to receive texts is not required to sign up or to use the Services.
+
+Message frequency varies. Message and data rates may apply. You can opt out at any time by replying STOP to any message, and reply HELP for help. We record when and how you agreed, including the wording you were shown.
+
+We do not sell your mobile phone number or your consent to receive texts, and we do not share them with third parties or affiliates for their own marketing. We share them only with the service providers that deliver our messages for us.
+
 ## How We Use Information
 
 We use information to:
@@ -118,7 +127,7 @@ We collect date of birth to confirm that you are 18 or older. We do not use it f
 
 We may disclose information:
 
-- To service providers that help us operate the Services, such as hosting, storage and content delivery, authentication, geocoding and mapping, abuse prevention (including a bot-detection service used during artist signup), diagnostics or crash reporting, security monitoring, copyright screening, email delivery, and customer support tools.
+- To service providers that help us operate the Services, such as hosting, storage and content delivery, authentication, geocoding and mapping, abuse prevention (including a bot-detection service used during artist signup), diagnostics or crash reporting, security monitoring, copyright screening, email delivery, text message delivery, and customer support tools.
 - To advertising and measurement partners, so that we can tell which of our advertisements led someone to apply for access or join the waitlist, and so that those partners can show our advertisements to similar people. This is described in full under "Advertising and Measurement".
 - For legal and safety reasons, to comply with law, respond to valid legal process, enforce our Terms, and protect the rights, safety, and security of Songcry, our users, and the public.
 - In connection with a business transaction, such as financing, merger, acquisition, reorganization, or sale of assets, subject to appropriate protections.
