@@ -92,7 +92,7 @@ export default function SupportPage() {
               <p className="support-contact-label">Email us</p>
               <a href="mailto:support@songcry.app" className="support-contact-email">support@songcry.app</a>
               <p className="support-contact-note">
-                Include the email on your account, your iPhone model, and a screenshot if something looks wrong.
+                Include the email on your account, your phone model, and a screenshot if something looks wrong.
               </p>
               <p className="support-contact-address">
                 Songcry, Inc.
@@ -139,8 +139,8 @@ export default function SupportPage() {
               </Task>
               <Task title="Where Songcry works">
                 <p>
-                  Songcry is on iPhone, running iOS 15.6 or later, in the United States. Android is on the way. You need
-                  to be 18 or older to create an account.
+                  Songcry is on iPhone, running iOS 15.6 or later, and on Android, running Android 7.0 or later, in the
+                  United States. You need to be 18 or older to create an account.
                 </p>
               </Task>
               <Task title="What it costs">
@@ -219,15 +219,17 @@ export default function SupportPage() {
               </Task>
               <Task title="Turn notifications on or off">
                 <p>
-                  Use the Allow Notifications switch in {'Account & Settings'}, or go to iPhone Settings, then Songcry,
-                  then Notifications. We send notifications about things like review decisions on your profile and songs.
+                  Use the Allow Notifications switch in {'Account & Settings'}. You can also go to iPhone Settings, then
+                  Songcry, then Notifications, or on Android to Settings, then Apps, then Songcry, then Notifications. We
+                  send notifications about things like review decisions on your profile and songs.
                 </p>
               </Task>
               <Task title="Location">
                 <p>
                   Songcry uses your location while you’re using the app, so it can show you your city’s feed. Your exact
                   location is never shown to other people. To share an approximate location instead, go to iPhone
-                  Settings, then Songcry, then Location, and turn off Precise Location.
+                  Settings, then Songcry, then Location, and turn off Precise Location. On Android 12 or later, go to
+                  Settings, then Apps, then Songcry, then Permissions, then Location, and turn off Use precise location.
                 </p>
               </Task>
               <Task id="delete-account" title="Delete your Songcry account">
@@ -356,7 +358,7 @@ export default function SupportPage() {
                 Email support@songcry.app
               </a>
               <p>
-                Tell us the email on your account, your iPhone model and iOS version, the app version, and what happened.
+                Tell us the email on your account, your phone model and its iOS or Android version, the app version, and what happened.
                 A screenshot helps.
               </p>
               <p className="support-close-links">
