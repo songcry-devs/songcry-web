@@ -363,6 +363,7 @@ export default function SupportPage() {
                 <Link href="/legal/terms-of-use">Terms of Use</Link>
                 <Link href="/legal/privacy">Privacy Policy</Link>
                 <Link href="/legal/community-guidelines">Community Guidelines</Link>
+                <Link href="/legal/accessibility">Accessibility</Link>
               </p>
             </div>
           </div>

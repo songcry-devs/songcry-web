@@ -116,6 +116,14 @@ export default function Footer() {
                     Community Guidelines
                   </Link>
                 </li>
+                {/* The accessibility statement names the barriers we already know about and
+                    gives people a way to report one. It only does that job if it is reachable
+                    from every page, so it lives in the footer rather than buried. */}
+                <li>
+                  <Link href="/legal/accessibility" className="footer-link">
+                    Accessibility
+                  </Link>
+                </li>
                 {/* TAKE IT DOWN Act (Pub. L. 119-12) requires a "clear and conspicuous"
                     notice of the removal process for nonconsensual intimate imagery. A page
                     nobody can find does not satisfy that, so this link is not optional
