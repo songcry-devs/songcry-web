@@ -50,7 +50,7 @@ It helps if you can tell us:
 - Where in the app or on the site it happened.
 - What device you were using, and whether you had a screen reader, larger text, or another assistive tool turned on.
 
-We aim to reply within five business days. If a fix will take longer than that, we will tell you what we are doing and when to expect it. If we cannot fix something quickly, we will try to help you get it done another way in the meantime.
+We read every one of these and we will get back to you. If a fix is going to take a while, we will tell you what we are doing and where it stands. If we cannot fix something quickly, we will try to help you get it done another way in the meantime.
 
 We treat these reports as a priority rather than as feedback, because a barrier means someone cannot use the product at all.
 
