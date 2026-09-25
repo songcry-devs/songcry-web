@@ -105,3 +105,45 @@ export function outboundParams(placement: string, qs: string, keys: readonly str
   out.set('utm_content', cleanToken(placement, 60))
   return out
 }
+
+/** sessionStorage key for the first campaign this tab arrived with. */
+export const FIRST_TOUCH_KEY = 'songcry.firstTouch'
+
+export type KeyValueStore = { getItem(key: string): string | null; setItem(key: string, value: string): void }
+
+/**
+ * First-touch campaign for this session (2026-09-25). A visitor who lands on /artist from an ad,
+ * clicks the logo and signs up on the homepage used to be recorded with no campaign, because
+ * the form only read the page it sat on. The first campaign a tab arrives with is kept for the
+ * session and wins over later ones. Storage can be missing or throw (private browsing, blocked
+ * site data, some in-app webviews): then the current page's params are used and nothing throws.
+ */
+export function readFirstTouch(store: KeyValueStore | null, currentSearch: string): string {
+  const current = campaignQs(currentSearch)
+  let stored = ''
+  try {
+    stored = campaignQs(store?.getItem(FIRST_TOUCH_KEY) ?? '')
+  } catch {
+    stored = ''
+  }
+  if (stored) return stored
+  if (current) {
+    try {
+      store?.setItem(FIRST_TOUCH_KEY, current)
+    } catch {
+      // Storage blocked or full: this page still attributes from its own URL.
+    }
+  }
+  return current
+}
+
+/** Append params the way link_router tag() does: '?' when the URL has none, '&' otherwise. */
+export function tagUrl(url: string, params: URLSearchParams): string {
+  const qs = params.toString()
+  if (!qs) return url
+  // The query goes before any #fragment: after it, the params never reach the server.
+  const hashAt = url.indexOf('#')
+  const base = hashAt === -1 ? url : url.slice(0, hashAt)
+  const hash = hashAt === -1 ? '' : url.slice(hashAt)
+  return `${base}${base.includes('?') ? '&' : '?'}${qs}${hash}`
+}

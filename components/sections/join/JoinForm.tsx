@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 
 import { submitArtist, submitFan, type JoinState } from '@/app/join/actions'
+import { useCampaignQs } from '@/lib/use-campaign-qs'
 
 const INITIAL: JoinState = {}
 
@@ -21,12 +22,8 @@ export default function JoinForm({ compact = false }: { compact?: boolean }) {
   const [artistState, artistAction] = useFormState(submitArtist, INITIAL)
   const [fanState, fanAction] = useFormState(submitFan, INITIAL)
 
-  // Landing-page query string, captured client-side for the hidden `qs` field
-  // so the server action can attribute the lead (utm_*, gclid, fbclid).
-  const [qs, setQs] = useState('')
-  useEffect(() => {
-    setQs(window.location.search.replace(/^\?/, ''))
-  }, [])
+  // Campaign params for the hidden qs field: the session's first touch, else this page's.
+  const qs = useCampaignQs()
 
   const isArtist = mode === 'artist'
   const state = isArtist ? artistState : fanState
