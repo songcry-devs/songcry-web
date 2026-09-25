@@ -61,7 +61,7 @@ test('a tap on either live host, apex or www, fires', () => {
   }
 })
 
-test('a tap off the live host — a Vercel preview, localhost, or a lookalike domain — sends nothing', () => {
+test('a tap off the live host (a Vercel preview, localhost, or a lookalike domain) sends nothing', () => {
   for (const host of ['songcry-web-git-x.vercel.app', 'localhost', 'songcry.app.evil.com']) {
     const calls = recordTags()
     trackStoreClick('app-store', 'home-close', host)
@@ -102,4 +102,28 @@ test('a device-aware tap off the live host sends nothing, even on a phone', () =
 test('blocked tags never break a tap, on the live host', () => {
   g.window = {}
   assert.doesNotThrow(() => trackStoreClick('google-play', 'home-close', LIVE))
+})
+
+test('a gtag that throws (a blocker stub, not just a missing tag) does not stop fbq from firing', () => {
+  const calls: Call[] = []
+  g.window = {
+    gtag: () => {
+      throw new Error('blocked')
+    },
+    fbq: (...args: unknown[]) => calls.push(['fbq', ...args]),
+  }
+  assert.doesNotThrow(() => trackStoreClick('app-store', 'home-close', LIVE))
+  assert.deepEqual(calls, [['fbq', 'trackCustom', 'AppStoreClick', { placement: 'home-close' }]])
+})
+
+test('an fbq that throws does not stop gtag from firing', () => {
+  const calls: Call[] = []
+  g.window = {
+    gtag: (...args: unknown[]) => calls.push(['gtag', ...args]),
+    fbq: () => {
+      throw new Error('blocked')
+    },
+  }
+  assert.doesNotThrow(() => trackStoreClick('app-store', 'home-close', LIVE))
+  assert.deepEqual(calls, [GADS])
 })

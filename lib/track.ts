@@ -12,7 +12,7 @@ export const STORE_CLICK_CONVERSION = 'AW-18264662044/9e3nCICO5cccEJzAooVE'
 
 /**
  * True only for the live site's own hosts. PR 1 ships before PR 3's server-side production
- * gate, and TJ taps these controls on the Vercel preview during review — a preview tap, a
+ * gate, and TJ taps these controls on the Vercel preview during review. A preview tap, a
  * localhost tap, or a lookalike domain must never record a real ad conversion. Exact match
  * only: a lookalike like songcry.app.evil.com is a DIFFERENT host that merely contains our
  * name, so it must fail this check, not pass it.
@@ -27,6 +27,22 @@ function currentHost(): string {
 }
 
 /**
+ * Calls a possibly-undefined tag function and never lets it break the caller. Each tag gets its
+ * own guard, so one platform's tag being missing, blocked, or throwing (a blocker stub commonly
+ * throws rather than being merely undefined) can never suppress or break the other platform's
+ * call. Optional chaining alone only covers "undefined"; it does nothing once a stub is defined
+ * and throws, which is why this exists instead.
+ */
+function safeCall(fn: ((...args: unknown[]) => void) | undefined, ...args: unknown[]) {
+  if (!fn) return
+  try {
+    fn(...args)
+  } catch {
+    // A blocked or broken tag must never break the tap it is attached to, or the other tag.
+  }
+}
+
+/**
  * A tap on a store link, told to both ad platforms (they share no signal). The rule, the same on
  * songcry.app and artists.songcry.app (coordinator, 2026-09-25):
  *   Google Ads  both stores fire this ONE store-click conversion, so Ads optimises on one signal.
@@ -34,9 +50,10 @@ function currentHost(): string {
  *               artists.songcry.app already fires live, so its reporting stays continuous.
  *   placement   a Google Play tap carries placement-play.
  * This is intent, not an install: no store reports an install back to a web pixel.
- * Optional chaining, so a blocked tag never breaks the link.
+ * Each platform is called through safeCall, so a blocked, missing, or throwing tag can never
+ * break the link and can never stop the other platform's call from firing.
  *
- * `host` defaults to the page's own host and is only ever overridden by a test — never send a
+ * `host` defaults to the page's own host and is only ever overridden by a test. Never send a
  * real ad conversion off the live site (controller ruling B', 2026-09-25): a Vercel preview,
  * localhost, or a lookalike domain sends nothing to either platform.
  */
@@ -46,11 +63,11 @@ export function trackStoreClick(
   host: string = currentHost(),
 ) {
   if (!isLiveHost(host)) return
-  window.gtag?.('event', 'conversion', { send_to: STORE_CLICK_CONVERSION })
+  safeCall(window.gtag, 'event', 'conversion', { send_to: STORE_CLICK_CONVERSION })
   if (store === 'google-play') {
-    window.fbq?.('trackCustom', 'PlayStoreClick', { placement: `${placement}-play` })
+    safeCall(window.fbq, 'trackCustom', 'PlayStoreClick', { placement: `${placement}-play` })
   } else {
-    window.fbq?.('trackCustom', 'AppStoreClick', { placement })
+    safeCall(window.fbq, 'trackCustom', 'AppStoreClick', { placement })
   }
 }
 
