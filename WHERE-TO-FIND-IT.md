@@ -17,10 +17,12 @@ _Created 2026-08-17 (workspace-wide filing pass)._
 | Plans | `docs/plans/` | `YYYY-MM-DD-<capability>.md` |
 | Runbooks / migrations | `docs/` | descriptive (`cutover-runbook.md`) |
 | Session notes | `docs/sessions/` | `session-notes-YYYY-MM-DD.md`, one per date, append |
-| Superseded docs | `docs/_archive/` | move + rewrite every reference |
+| Superseded docs | `docs/_archive/` | create it on first use; move + rewrite every reference |
+| Pure logic (tested) | `lib/` | attribution, store links, environment gate, seo, reveal, link-click |
+| Tests | `tests/` | `npm test`, one file per `lib/` module |
+| Scripts | `scripts/` | style-literal guard, craft checker, measure |
 
-**Reality note:** **songcry.app IS this repo** since the 2026-08-17 Framer→Vercel cutover
-(see `docs/cutover-runbook.md` for the record; the old Framer site stays published, unedited,
-as rollback insurance until ~2026-09-01). A merge to `main` deploys the LIVE marketing site.
-The `staging` branch is the sandbox: every push to it deploys a full preview at
-`songcry-web-git-staging-tjsongcrys-projects.vercel.app` without touching production.
+**Reality note:** **songcry.app IS this repo** (Framer to Vercel cutover 2026-08-17, record in
+`docs/cutover-runbook.md`; Framer cancelled 2026-09-09). A merge to `main` deploys the live site.
+The `staging` branch is an old sandbox, far out of date with main and carrying concept pages:
+never merge it.
