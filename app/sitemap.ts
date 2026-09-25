@@ -11,18 +11,19 @@ const BASE = 'https://songcry.app'
  * sitemap is worse than a missing one.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
   return [
-    { url: BASE, lastModified: now, changeFrequency: 'weekly', priority: 1 },
-    { url: `${BASE}/artist`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE}/join`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/support`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE}/legal/terms-of-use`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/legal/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/legal/community-guidelines`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/legal/removing-intimate-images`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: BASE, changeFrequency: 'weekly', priority: 1 },
+    { url: `${BASE}/artist`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE}/join`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/support`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/legal/terms-of-use`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/legal/privacy`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/legal/community-guidelines`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/legal/removing-intimate-images`, changeFrequency: 'yearly', priority: 0.3 },
     // Reviewed more often than the other legal pages on purpose: section 3 lists the
     // barriers we know about, and it changes as we fix them.
-    { url: `${BASE}/legal/accessibility`, lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${BASE}/legal/accessibility`, changeFrequency: 'monthly', priority: 0.3 },
+    // The delete-account page Google Play requires. Linked from the Play listing.
+    { url: `${BASE}/legal/delete-account`, changeFrequency: 'yearly', priority: 0.3 },
   ]
 }
