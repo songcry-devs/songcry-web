@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
@@ -9,6 +9,16 @@ import GetAppLink from '@/components/ui/GetAppLink'
 
 export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' }) {
   const [menuOpen, setMenuOpen] = useState(false)
+
+  // Escape closes the phone menu.
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
 
   return (
     <>
@@ -121,6 +131,9 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
             </Link>
 
             <button
+              type="button"
+              className="nav-menu-button"
+              aria-controls="artist-mobile-menu"
               aria-label="Menu"
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
@@ -142,6 +155,7 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
           {/* Overlay menu */}
           {menuOpen && (
             <div
+              id="artist-mobile-menu"
               style={{
                 position: 'fixed',
                 top: '60px',
