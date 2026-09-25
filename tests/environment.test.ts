@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
-import { isProduction, isProductionHost, signupGate } from '../lib/environment.ts'
+import { SIGNUP_ENV_KEYS, isProduction, isProductionHost, signupGate } from '../lib/environment.ts'
 
 const FULL = {
   OUTREACH_SUPABASE_URL: 'https://example.supabase.co/',
@@ -11,6 +11,19 @@ const FULL = {
 }
 
 const CHECK_SCRIPT = fileURLToPath(new URL('../scripts/check-production-env.ts', import.meta.url))
+
+/**
+ * A child-process env with VERCEL_ENV and every signup key removed from a copy of this
+ * process's real env, then exactly `overrides` set on top. Without this, a real
+ * OUTREACH_SUPABASE_URL / OUTREACH_SUPABASE_ANON_KEY / FAN_WAITLIST_URL / VERCEL_ENV exported on
+ * the machine running the tests would leak into the child and change what the test is actually
+ * proving (fix round 1, controller finding).
+ */
+function cleanEnv(overrides: Record<string, string>): NodeJS.ProcessEnv {
+  const base = { ...process.env }
+  for (const key of ['VERCEL_ENV', ...SIGNUP_ENV_KEYS]) delete base[key]
+  return { ...base, ...overrides }
+}
 
 test('isProduction is true only for VERCEL_ENV=production', () => {
   assert.equal(isProduction({ VERCEL_ENV: 'production' }), true)
@@ -64,6 +77,11 @@ test('isProductionHost matches only the two live hosts, case- and port-insensiti
     '',
     null,
     undefined,
+    // Fold-in, fix round 1 (controller, minor): current fail-safe behaviour, not a spec
+    // requirement — a trailing dot and a bracketed IPv6 host both fail the exact match, so
+    // both stay non-production. Pins today's behaviour; not a claim it must stay this shape.
+    'songcry.app.',
+    '[::1]:3000',
   ]) {
     assert.equal(isProductionHost(host), false, `expected ${JSON.stringify(host)} to not be a production host`)
   }
@@ -166,7 +184,7 @@ test('check-production-env.ts exits 1 on production with every key missing, nami
       'node',
       ['--experimental-strip-types', '--disable-warning=ExperimentalWarning', CHECK_SCRIPT],
       {
-        env: { ...process.env, VERCEL_ENV: 'production', PATH: process.env.PATH },
+        env: cleanEnv({ VERCEL_ENV: 'production' }),
         stdio: 'pipe',
       },
     )
@@ -186,14 +204,12 @@ test('check-production-env.ts exits 0 on production with every key present', () 
     'node',
     ['--experimental-strip-types', '--disable-warning=ExperimentalWarning', CHECK_SCRIPT],
     {
-      env: {
-        ...process.env,
-        PATH: process.env.PATH,
+      env: cleanEnv({
         VERCEL_ENV: 'production',
         OUTREACH_SUPABASE_URL: 'https://example.supabase.co',
         OUTREACH_SUPABASE_ANON_KEY: 'test-anon-key',
         FAN_WAITLIST_URL: 'https://api.example.test/api/v1/fan-waitlist',
-      },
+      }),
       stdio: 'pipe',
     },
   )
@@ -205,7 +221,7 @@ test('check-production-env.ts exits 0 off production, regardless of config', () 
     'node',
     ['--experimental-strip-types', '--disable-warning=ExperimentalWarning', CHECK_SCRIPT],
     {
-      env: { ...process.env, PATH: process.env.PATH, VERCEL_ENV: 'preview' },
+      env: cleanEnv({ VERCEL_ENV: 'preview' }),
       stdio: 'pipe',
     },
   )
