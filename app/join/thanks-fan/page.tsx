@@ -1,9 +1,8 @@
-import Image from 'next/image'
 import Script from 'next/script'
 
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
-import AppStoreLink from '@/components/ui/AppStoreLink'
+import GetAppLink from '@/components/ui/GetAppLink'
 
 export const metadata = {
   title: "You're on the waitlist | Songcry",
@@ -41,19 +40,9 @@ export default function ThanksFanPage({
               Get the app now. The artist beta is live inside it, and
               you&apos;ll be first in the door when fan access opens.
             </p>
-            <AppStoreLink
-              placement="thanks-fan"
-              className="thanks-badge-link"
-              ariaLabel="Download Songcry on the App Store"
-            >
-              <Image
-                src="/framer/appstore-badge.svg"
-                alt="Download on the App Store"
-                width={162}
-                height={54}
-                style={{ display: 'block' }}
-              />
-            </AppStoreLink>
+            <GetAppLink placement="thanks-fan" className="thanks-get">
+              Get the app
+            </GetAppLink>
           </div>
         </section>
       </main>
@@ -88,12 +77,22 @@ export default function ThanksFanPage({
           margin: 20px 0 0;
           max-width: 46ch;
         }
-        .thanks-badge-link {
-          display: inline-block;
+        .thanks-get {
+          display: inline-flex;
+          align-items: center;
+          min-height: 48px;
           margin-top: 32px;
+          padding: 12px 24px;
+          border-radius: 999px;
+          background: #ffffff;
+          color: rgb(41, 41, 41);
+          font-family: var(--font-albert);
+          font-size: 17px;
+          font-weight: 600;
+          text-decoration: none;
           transition: opacity 180ms ease-out, transform 180ms ease-out;
         }
-        .thanks-badge-link:hover {
+        .thanks-get:hover {
           opacity: 0.88;
           transform: scale(1.02);
         }
