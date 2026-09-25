@@ -1,4 +1,5 @@
 import { deviceFromUA } from './store-links.ts'
+import { isProductionHost } from './environment.ts'
 
 declare global {
   interface Window {
@@ -16,9 +17,12 @@ export const STORE_CLICK_CONVERSION = 'AW-18264662044/9e3nCICO5cccEJzAooVE'
  * localhost tap, or a lookalike domain must never record a real ad conversion. Exact match
  * only: a lookalike like songcry.app.evil.com is a DIFFERENT host that merely contains our
  * name, so it must fail this check, not pass it.
+ *
+ * Delegates to lib/environment.ts's isProductionHost (Task 3.3, controller Ruling P) so this
+ * repo has one definition of "the production host", not two that could drift apart.
  */
 export function isLiveHost(host: string): boolean {
-  return host === 'songcry.app' || host === 'www.songcry.app'
+  return isProductionHost(host)
 }
 
 /** The page's own host, or '' outside a browser, so a missing `location` never throws. */
