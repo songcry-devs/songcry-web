@@ -18,8 +18,8 @@ export const STORE_CLICK_CONVERSION = 'AW-18264662044/9e3nCICO5cccEJzAooVE'
  * only: a lookalike like songcry.app.evil.com is a DIFFERENT host that merely contains our
  * name, so it must fail this check, not pass it.
  *
- * Delegates to lib/environment.ts's isProductionHost (Task 3.3, controller Ruling P) so this
- * repo has one definition of "the production host", not two that could drift apart.
+ * Delegates to lib/environment.ts's isProductionHost so this repo has one definition of "the
+ * production host", not two that could drift apart.
  */
 export function isLiveHost(host: string): boolean {
   return isProductionHost(host)
@@ -58,8 +58,8 @@ function safeCall(fn: ((...args: unknown[]) => void) | undefined, ...args: unkno
  * break the link and can never stop the other platform's call from firing.
  *
  * `host` defaults to the page's own host and is only ever overridden by a test. Never send a
- * real ad conversion off the live site (controller ruling B', 2026-09-25): a Vercel preview,
- * localhost, or a lookalike domain sends nothing to either platform.
+ * real ad conversion off the live site: a Vercel preview, localhost, or a lookalike domain
+ * sends nothing to either platform.
  */
 export function trackStoreClick(
   store: 'app-store' | 'google-play',
