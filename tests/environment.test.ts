@@ -8,17 +8,25 @@ import { SIGNUP_ENV_KEYS, isProduction, isProductionHost, signupGate } from '../
 const FAKE_REF = 'abcdefghij'.repeat(2)
 const OTHER_REF = 'z'.repeat(20)
 
-/** A JWT shaped exactly like a Supabase key, built here so no real key is ever pasted. */
-function fakeJwt(payload: Record<string, unknown>): string {
+/**
+ * A JWT shaped exactly like a Supabase key, built here so no real key is ever pasted: a proper
+ * HS256 header, the given payload, and a signature that is 32 bytes once decoded (Buffer is fine
+ * in a test, unlike in lib/environment.ts itself).
+ */
+function fakeJwt(payload: Record<string, unknown> | null): string {
   const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url')
   const body = Buffer.from(JSON.stringify(payload)).toString('base64url')
-  return `${header}.${body}.fake-signature`
+  const signature = Buffer.alloc(32, 7).toString('base64url')
+  return `${header}.${body}.${signature}`
 }
 
 const ANON_JWT = fakeJwt({ iss: 'supabase', ref: FAKE_REF, role: 'anon' })
 const SERVICE_ROLE_JWT = fakeJwt({ iss: 'supabase', ref: FAKE_REF, role: 'service_role' })
 const OTHER_REF_JWT = fakeJwt({ iss: 'supabase', ref: OTHER_REF, role: 'anon' })
+const NULL_PAYLOAD_JWT = fakeJwt(null)
 const TRUNCATED_KEY = ANON_JWT.slice(0, Math.floor(ANON_JWT.length / 2))
+const FIRST_CHAR_DROPPED_KEY = ANON_JWT.slice(1)
+const LAST_CHAR_DROPPED_KEY = ANON_JWT.slice(0, -1)
 const PUBLISHABLE_KEY = 'sb_publishable_testkey1234567890'
 const SECRET_KEY = 'sb_secret_testkey1234567890'
 
@@ -179,9 +187,30 @@ test('an anon JWT signed for a different project ref is refused', () => {
   )
 })
 
-test('a truncated key is refused', () => {
+test('a key truncated by roughly half is refused', () => {
   assert.deepEqual(
     signupGate({ ...FULL, VERCEL_ENV: 'production', OUTREACH_SUPABASE_ANON_KEY: TRUNCATED_KEY }),
+    { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_ANON_KEY'] },
+  )
+})
+
+test('a key with its very first character dropped is refused', () => {
+  assert.deepEqual(
+    signupGate({ ...FULL, VERCEL_ENV: 'production', OUTREACH_SUPABASE_ANON_KEY: FIRST_CHAR_DROPPED_KEY }),
+    { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_ANON_KEY'] },
+  )
+})
+
+test('a key with its very last character dropped is refused', () => {
+  assert.deepEqual(
+    signupGate({ ...FULL, VERCEL_ENV: 'production', OUTREACH_SUPABASE_ANON_KEY: LAST_CHAR_DROPPED_KEY }),
+    { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_ANON_KEY'] },
+  )
+})
+
+test('a key whose payload decodes to JSON null is refused, not thrown', () => {
+  assert.deepEqual(
+    signupGate({ ...FULL, VERCEL_ENV: 'production', OUTREACH_SUPABASE_ANON_KEY: NULL_PAYLOAD_JWT }),
     { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_ANON_KEY'] },
   )
 })
@@ -204,17 +233,17 @@ test('an sb_secret_ key is refused', () => {
   )
 })
 
-test('the project URL with a path segment appended is refused, and so is the key that can no longer be checked against it', () => {
+test('the project URL with a path segment appended is refused, without also refusing the still-valid key', () => {
   assert.deepEqual(
     signupGate({ ...FULL, VERCEL_ENV: 'production', OUTREACH_SUPABASE_URL: `https://${FAKE_REF}.supabase.co/rest/v1` }),
-    { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_URL', 'OUTREACH_SUPABASE_ANON_KEY'] },
+    { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_URL'] },
   )
 })
 
-test('a non-supabase host is refused, and so is the key that can no longer be checked against it', () => {
+test('a non-supabase host is refused, without also refusing the still-valid key', () => {
   assert.deepEqual(
     signupGate({ ...FULL, VERCEL_ENV: 'production', OUTREACH_SUPABASE_URL: 'https://not-supabase.example.com' }),
-    { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_URL', 'OUTREACH_SUPABASE_ANON_KEY'] },
+    { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_URL'] },
   )
 })
 
@@ -230,10 +259,21 @@ test('a bad URL does not also refuse a publishable key, which carries no ref to 
   )
 })
 
-test('a URL with a trailing comma is refused, and so is the key that can no longer be checked against it', () => {
+test('a URL with a trailing comma is refused, without also refusing the still-valid key', () => {
   assert.deepEqual(
     signupGate({ ...FULL, VERCEL_ENV: 'production', OUTREACH_SUPABASE_URL: `https://${FAKE_REF}.supabase.co,` }),
-    { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_URL', 'OUTREACH_SUPABASE_ANON_KEY'] },
+    { mode: 'misconfigured', missing: [], invalid: ['OUTREACH_SUPABASE_URL'] },
+  )
+})
+
+test('a missing URL is refused without also refusing a still-valid anon key, so TJ is not sent to re-paste a key that was fine', () => {
+  assert.deepEqual(
+    signupGate({
+      VERCEL_ENV: 'production',
+      OUTREACH_SUPABASE_ANON_KEY: ANON_JWT,
+      FAN_WAITLIST_URL: FULL.FAN_WAITLIST_URL,
+    }),
+    { mode: 'misconfigured', missing: ['OUTREACH_SUPABASE_URL'], invalid: [] },
   )
 })
 

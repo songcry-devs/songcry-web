@@ -12,9 +12,9 @@ declare global {
 export const STORE_CLICK_CONVERSION = 'AW-18264662044/9e3nCICO5cccEJzAooVE'
 
 /**
- * True only for the live site's own hosts. PR 1 ships before PR 3's server-side production
- * gate, and TJ taps these controls on the Vercel preview during review. A preview tap, a
- * localhost tap, or a lookalike domain must never record a real ad conversion. Exact match
+ * True only for the live site's own hosts. TJ taps these controls on the Vercel preview during
+ * review. A preview tap, a localhost tap, or a lookalike domain must never record a real ad
+ * conversion. Exact match
  * only: a lookalike like songcry.app.evil.com is a DIFFERENT host that merely contains our
  * name, so it must fail this check, not pass it.
  *
@@ -48,7 +48,7 @@ function safeCall(fn: ((...args: unknown[]) => void) | undefined, ...args: unkno
 
 /**
  * A tap on a store link, told to both ad platforms (they share no signal). The rule, the same on
- * songcry.app and artists.songcry.app (coordinator, 2026-09-25):
+ * songcry.app and artists.songcry.app (decided 2026-09-25):
  *   Google Ads  both stores fire this ONE store-click conversion, so Ads optimises on one signal.
  *   Meta        App Store fires AppStoreClick; Google Play fires PlayStoreClick, the event
  *               artists.songcry.app already fires live, so its reporting stays continuous.

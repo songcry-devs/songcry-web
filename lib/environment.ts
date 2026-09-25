@@ -23,13 +23,14 @@
  *   - OUTREACH_SUPABASE_URL must be exactly https://<20-character-ref>.supabase.co, after trim
  *     and stripping a trailing slash — not wrapped in quotes, not carrying a stray `;` or `,`,
  *     no extra path, no other host.
- *   - OUTREACH_SUPABASE_ANON_KEY must either be a JWT whose payload claims role "anon" for that
- *     same project ref, or a key starting with sb_publishable_. A service_role key, a secret
- *     key, an anon key for a different project, and a key that no longer decodes (cut short or
- *     otherwise mangled) are all refused. A JWT-shaped key can never be confirmed against a
- *     project ref that does not exist, so it is refused whenever OUTREACH_SUPABASE_URL is
- *     missing or does not parse; a publishable key carries no ref claim to compare, so it is
- *     unaffected either way.
+ *   - OUTREACH_SUPABASE_ANON_KEY must either be a JWT, or a key starting with sb_publishable_.
+ *     A JWT is refused unless all three of its segments decode cleanly, its header's alg is
+ *     HS256, its signature is exactly 32 bytes once decoded, and its payload claims role "anon"
+ *     — so a key missing even one character off either end (the likeliest paste error, and the
+ *     one that would 401 every insert) is caught, not just a mangled payload. The ref claim is
+ *     checked against OUTREACH_SUPABASE_URL's ref only when that URL itself parses: a missing or
+ *     malformed URL is reported as its own problem, and does not also send TJ back to re-paste a
+ *     key that was fine. A publishable key carries no ref claim to check either way.
  *   - FAN_WAITLIST_URL must be exactly https://api.songcry.app/api/v1/fan-waitlist — that host,
  *     that path, no query string, no trailing slash.
  */
@@ -66,22 +67,31 @@ export function isProductionHost(host: string | null | undefined): boolean {
 const SUPABASE_URL_SHAPE = /^https:\/\/([a-z0-9]{20})\.supabase\.co$/
 
 /**
- * The three dot-separated, base64url segments of a JWT. This never checks the signature — that
- * cannot be done without the project's secret — only the payload's claims below.
+ * The three dot-separated, base64url segments of a JWT: header, payload, signature. This never
+ * checks the signature's cryptographic validity — that cannot be done without the project's
+ * secret — only that all three segments decode cleanly and look right, below.
  */
-const JWT_SHAPE = /^[A-Za-z0-9_-]+\.([A-Za-z0-9_-]+)\.[A-Za-z0-9_-]+$/
+const JWT_SHAPE = /^([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)$/
 
 /** A Supabase publishable key carries no claims to decode, so it is checked by shape alone. */
 const PUBLISHABLE_KEY_SHAPE = /^sb_publishable_[A-Za-z0-9_-]+$/
 
+/** Signing algorithm Supabase actually issues; anything else is not one of its keys. */
+const JWT_ALG = 'HS256'
+
+/** Byte length of the signature on a real Supabase JWT (HS256 over SHA-256 is always 32 bytes). */
+const JWT_SIGNATURE_BYTES = 32
+
 /**
- * Base64url to JSON, the way a JWT payload is encoded. atob, not Buffer, so this file keeps
- * working unchanged in the browser bundle that lib/track.ts pulls it into.
+ * Base64url to a decoded binary string, the way each JWT segment is encoded. atob, not Buffer,
+ * so this file keeps working unchanged in the browser bundle that lib/track.ts pulls it into.
+ * For the header and payload the caller still needs to JSON.parse the result; for the
+ * signature, this string's length is already the byte count.
  */
-function decodeJwtPayload(segment: string): unknown {
+function decodeBase64Url(segment: string): string {
   const base64 = segment.replace(/-/g, '+').replace(/_/g, '/')
   const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4)
-  return JSON.parse(atob(padded))
+  return atob(padded)
 }
 
 /** The 20-character project ref a valid OUTREACH_SUPABASE_URL encodes, or undefined if it does not match. */
@@ -91,10 +101,13 @@ function supabaseRef(url: string): string | undefined {
 
 /**
  * True only for a key that could actually authenticate an anon request to that project: a
- * publishable key (checked by shape only, no ref to compare), or a JWT whose payload claims
- * role "anon" for that exact project ref. `ref` is undefined whenever OUTREACH_SUPABASE_URL is
- * missing or does not parse; a JWT can never be confirmed against a ref that does not exist, so
- * it is refused in that case too.
+ * publishable key (checked by shape only, no ref to compare), or a JWT that decodes cleanly end
+ * to end — a real HS256 header, a 32-byte signature, and a payload claiming role "anon" — with
+ * one character missing off either end (the likeliest paste error) failing at least one of
+ * those. `ref` is undefined whenever OUTREACH_SUPABASE_URL is missing or does not parse; the ref
+ * claim is only compared when it is defined, so a bad URL is reported as its own problem rather
+ * than also refusing a key that may be perfectly fine. A payload that decodes to JSON `null` is
+ * refused like any other bad shape, never thrown.
  */
 function anonKeyIsValid(key: string, ref: string | undefined): boolean {
   if (key.startsWith('sb_publishable_')) return PUBLISHABLE_KEY_SHAPE.test(key)
@@ -102,13 +115,24 @@ function anonKeyIsValid(key: string, ref: string | undefined): boolean {
   const match = JWT_SHAPE.exec(key)
   if (!match) return false
 
-  let claims: { role?: unknown; ref?: unknown }
+  let header: unknown
+  let claims: unknown
+  let signatureBytes: string
   try {
-    claims = decodeJwtPayload(match[1]) as { role?: unknown; ref?: unknown }
+    header = JSON.parse(decodeBase64Url(match[1]))
+    claims = JSON.parse(decodeBase64Url(match[2]))
+    signatureBytes = decodeBase64Url(match[3])
   } catch {
     return false
   }
-  return claims.role === 'anon' && ref !== undefined && claims.ref === ref
+
+  const headerFields = header as { alg?: unknown } | null
+  const payloadFields = claims as { role?: unknown; ref?: unknown } | null
+
+  if (headerFields?.alg !== JWT_ALG) return false
+  if (signatureBytes.length !== JWT_SIGNATURE_BYTES) return false
+  if (payloadFields?.role !== 'anon') return false
+  return ref === undefined || payloadFields?.ref === ref
 }
 
 /** True only for exactly https://api.songcry.app/api/v1/fan-waitlist — no query, no trailing slash. */
