@@ -42,8 +42,8 @@ export default function CallingIntro() {
           font-family: var(--font-albert);
           font-size: 54px;
           font-weight: 600;
-          line-height: 54px;
-          letter-spacing: normal;
+          line-height: 1.08;
+          letter-spacing: -0.02em;
           color: #fff;
           margin: 0;
         }

@@ -4,18 +4,15 @@ import ArtistHero from '@/components/sections/artist/ArtistHero'
 import CallingIntro from '@/components/sections/artist/CallingIntro'
 import FeatureRow from '@/components/sections/artist/FeatureRow'
 import CityBand from '@/components/sections/artist/CityBand'
-import Perks from '@/components/sections/artist/Perks'
 import WhatWeNeed from '@/components/sections/artist/WhatWeNeed'
 
-// Title and description are the page's own, not the homepage's. /artist is the destination
-// Reggie's Google campaigns and our Meta ads point at, so its title is the line that shows in
-// a search result and in a shared link. Inheriting "Songcry | Geolocation Based Music Platform"
-// told an artist nothing about why the page was for them.
+// /artist is the "Songcry for artists" showcase (TJ, 2026-09-25). artists.songcry.app is the
+// separate sign-up funnel that outreach and paid ads point at. Never redirect one to the other.
+// Phase 6 of the web sweep rebuilds this page; Phase 1A (2026-09-25) only removed what was false
+// on it: mockups of screens and artists that are not ours, a perks list, a testimonial ask.
 //
-// Wording follows the page: it leads on "Calling All Music Artists" and artist early access,
-// and the artist-intent keywords Reggie's research surfaced are "get heard" and "get
-// discovered". Brand rules applied: Songcry never SongCry, no dashes as punctuation, and
-// "local" never appears even though the product is geolocation based.
+// Brand rules for this page's words: Songcry never SongCry, no dashes as punctuation, and the
+// word local never appears.
 export const metadata = {
   title: 'For Artists | Songcry',
   description:
@@ -39,29 +36,29 @@ export default function ArtistPage() {
       <main id="main">
         <ArtistHero />
         <CallingIntro />
+        {/* Real beta screens, the same set the homepage gallery shows, with the same alt text. */}
         <FeatureRow
           imageSide="left"
-          image="/framer/artist-phone-1.png"
-          imageAlt="Songcry city map view"
-          heading="Takeover Your City"
+          image="/app-screens/feed-baltimore.png"
+          imageAlt="The Songcry feed showing a song rising in Baltimore"
+          heading="Take Over Your City"
           body="Home is where the 🤍 is. Your city and nearby areas discover you first."
         />
         <FeatureRow
           imageSide="right"
-          image="/framer/artist-phone-2.png"
-          imageAlt="Songcry feed"
+          image="/app-screens/feed-la-drummer.png"
+          imageAlt="A drummer performing in the Songcry feed"
           heading="Rise in Your Neighborhood"
           body="Fans discover you because you’re trending where they live. Street buzz made digital."
         />
         <FeatureRow
           imageSide="left"
-          image="/framer/artist-phone-3.png"
-          imageAlt="Songcry app"
+          image="/app-screens/artist-profile-rose-gold.png"
+          imageAlt="An artist profile on Songcry"
           heading="Built From the Ground Up"
           body="No shortcuts. Just real growth driven by genuine listeners and steady momentum."
         />
         <CityBand />
-        <Perks />
         <WhatWeNeed />
       </main>
       <Footer />

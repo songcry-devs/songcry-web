@@ -10,7 +10,7 @@ const CARDS = [
     image: '/framer/needs-card-1.jpg',
     imageAlt: 'Artist performing on stage',
     title: 'Post your 3 greatest tracks',
-    body: 'Choose wisely — these are your hero songs that will shape your scene',
+    body: 'Choose wisely. These are your hero songs, and they shape your scene.',
   },
   {
     image: '/framer/needs-card-2.png',
@@ -23,12 +23,6 @@ const CARDS = [
     imageAlt: 'Live music performance with crowd',
     title: 'Drop exclusives',
     body: 'A single, demo, live recording, or unreleased track sent through Songcry before it hits other platforms',
-  },
-  {
-    image: '/framer/needs-card-4.jpg',
-    imageAlt: 'Artist sharing growth metrics on device',
-    title: 'Share your growth story after 90 days.',
-    body: 'Video testimonial showing real metrics',
   },
   {
     image: '/framer/needs-card-5.jpg',
@@ -78,7 +72,7 @@ export default function WhatWeNeed() {
         ))}
       </div>
 
-      {/* Scoped responsive styles — follows Hero.tsx / Perks.tsx pattern */}
+      {/* Scoped responsive styles — follows Hero.tsx pattern */}
       <style>{`
         /* ── Section shell ── */
         .wwn-section {
@@ -107,7 +101,8 @@ export default function WhatWeNeed() {
           font-family: var(--font-albert);
           font-size: 54px;
           font-weight: 600;
-          line-height: 54px;
+          line-height: 1.08;
+          letter-spacing: -0.02em;
           color: #fff;
           margin: 0;
         }
@@ -122,18 +117,13 @@ export default function WhatWeNeed() {
           margin: 16px 0 0 0;
         }
 
-        /* ── Card grid — 3 columns desktop, last row 2 cards centered ── */
-        /* FLAG: Centering the last row (2 of 5 cards) is achieved with
-           justify-content:center so the 2-card final row is center-aligned.
-           This matches Framer visual output. */
+        /* Four cards: two by two on desktop and tablet, one column on phones. */
         .wwn-grid {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
           gap: 48px;
-          /* 1036px content (1084 - 48 gutters) fits 3x312 + 2x48 with slack,
-             landing the top row at Framer x=204/564/924. */
-          max-width: 1084px;
+          max-width: 720px;
           margin: 0 auto;
           padding-left: 24px;
           padding-right: 24px;
@@ -171,13 +161,6 @@ export default function WhatWeNeed() {
           line-height: 28px;
           color: var(--text-60);
           margin: 8px 0 0 0;
-        }
-
-        /* ── Tablet: 818–1199px — 2 columns ── */
-        @media (max-width: 1199px) {
-          .wwn-grid {
-            max-width: 720px;
-          }
         }
 
         /* ── Phone: ≤817px — 1 column ── */

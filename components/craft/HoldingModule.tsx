@@ -48,7 +48,7 @@ const BEATS = [
   {
     n: '01',
     title: 'Upload where you are',
-    body: 'Your tracks enter your city’s feed the day you post them.',
+    body: 'Every song is reviewed first. Then it starts in your city’s feed.',
   },
   {
     n: '02',
