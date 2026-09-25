@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, type CSSProperties } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion'
 import { useEnhancedMotion } from '@/components/motion/useEnhancedMotion'
 import { useIsoLayoutEffect } from '@/components/motion/useIsoLayoutEffect'
@@ -88,11 +88,42 @@ export default function HoldingModule({ track = '340vh' }: { track?: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const motionOk = useEnhancedMotion()
   const [landedPast, setLandedPast] = useState(false)
+  const restoreY = useRef<number | null>(null)
   useIsoLayoutEffect(() => {
+    // A reload or back/forward: the browser restores an offset measured on the LAST layout,
+    // sometimes before this one exists (WebKit), clamped to the shorter static page. Reuse the
+    // last layout and put the reader back on the offset it was measured on.
+    const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
+    if (nav && (nav.type === 'reload' || nav.type === 'back_forward')) {
+      let last: { y: number; pinned: boolean } | null = null
+      try {
+        last = JSON.parse(sessionStorage.getItem(`hm-last:${location.pathname}`) ?? 'null')
+      } catch {}
+      if (last) {
+        if (!last.pinned) setLandedPast(true)
+        else restoreY.current = last.y
+        return
+      }
+    }
     const r = ref.current?.getBoundingClientRect()
     if (window.location.hash || (r && r.bottom <= 0)) setLandedPast(true)
   }, [])
   const enhanced = motionOk && !landedPast
+  useIsoLayoutEffect(() => {
+    const y = restoreY.current
+    if (!enhanced || y === null) return
+    restoreY.current = null
+    if (Math.abs(window.scrollY - y) > 1) window.scrollTo({ top: y, behavior: 'instant' })
+  }, [enhanced])
+  useEffect(() => {
+    const save = () => {
+      try {
+        sessionStorage.setItem(`hm-last:${location.pathname}`, JSON.stringify({ y: Math.round(window.scrollY), pinned: enhanced }))
+      } catch {}
+    }
+    window.addEventListener('pagehide', save)
+    return () => window.removeEventListener('pagehide', save)
+  }, [enhanced])
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const railScale = useTransform(scrollYProgress, [0, 1], [0, 1])
   const [active, setActive] = useState(0)
