@@ -1,0 +1,68 @@
+import { deviceFromUA } from './store-links.ts'
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+    fbq?: (...args: unknown[]) => void
+  }
+}
+
+/** Google Ads "store click" conversion. The same label the nav has fired since 2026-08-04. */
+export const STORE_CLICK_CONVERSION = 'AW-18264662044/9e3nCICO5cccEJzAooVE'
+
+/**
+ * True only for the live site's own hosts. PR 1 ships before PR 3's server-side production
+ * gate, and TJ taps these controls on the Vercel preview during review — a preview tap, a
+ * localhost tap, or a lookalike domain must never record a real ad conversion. Exact match
+ * only: a lookalike like songcry.app.evil.com is a DIFFERENT host that merely contains our
+ * name, so it must fail this check, not pass it.
+ */
+export function isLiveHost(host: string): boolean {
+  return host === 'songcry.app' || host === 'www.songcry.app'
+}
+
+/** The page's own host, or '' outside a browser, so a missing `location` never throws. */
+function currentHost(): string {
+  return typeof location === 'undefined' ? '' : location.hostname
+}
+
+/**
+ * A tap on a store link, told to both ad platforms (they share no signal). The rule, the same on
+ * songcry.app and artists.songcry.app (coordinator, 2026-09-25):
+ *   Google Ads  both stores fire this ONE store-click conversion, so Ads optimises on one signal.
+ *   Meta        App Store fires AppStoreClick; Google Play fires PlayStoreClick, the event
+ *               artists.songcry.app already fires live, so its reporting stays continuous.
+ *   placement   a Google Play tap carries placement-play.
+ * This is intent, not an install: no store reports an install back to a web pixel.
+ * Optional chaining, so a blocked tag never breaks the link.
+ *
+ * `host` defaults to the page's own host and is only ever overridden by a test — never send a
+ * real ad conversion off the live site (controller ruling B', 2026-09-25): a Vercel preview,
+ * localhost, or a lookalike domain sends nothing to either platform.
+ */
+export function trackStoreClick(
+  store: 'app-store' | 'google-play',
+  placement: string,
+  host: string = currentHost(),
+) {
+  if (!isLiveHost(host)) return
+  window.gtag?.('event', 'conversion', { send_to: STORE_CLICK_CONVERSION })
+  if (store === 'google-play') {
+    window.fbq?.('trackCustom', 'PlayStoreClick', { placement: `${placement}-play` })
+  } else {
+    window.fbq?.('trackCustom', 'AppStoreClick', { placement })
+  }
+}
+
+/**
+ * A tap on a device-aware control. Classified with the same rule the /get route uses, so the
+ * event names the store this device is actually sent to. A computer is sent to the badges and
+ * reports nothing here: its badge tap reports instead, so a click is never counted twice.
+ *
+ * `host` defaults to the page's own host, same live-site gate as trackStoreClick.
+ */
+export function trackGetAppClick(placement: string, host: string = currentHost()) {
+  const device = deviceFromUA(navigator.userAgent)
+  if (device === 'ios') trackStoreClick('app-store', placement, host)
+  else if (device === 'android') trackStoreClick('google-play', placement, host)
+}
