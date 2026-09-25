@@ -1,13 +1,14 @@
 import LegalLayout from '@/components/legal/LegalLayout'
 import LegalDocument from '@/components/legal/LegalDocument'
 import { loadLegalDoc } from '@/lib/legal'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata = {
-  alternates: { canonical: '/legal/delete-account' },
-  title: 'Delete Your Account - Songcry',
+export const metadata = pageMetadata({
+  title: 'Delete Your Account | Songcry',
   description:
     'How to delete your Songcry account from inside the app or by email, and what happens to your data when you do.',
-}
+  path: '/legal/delete-account',
+})
 
 export default function DeleteAccountPage() {
   const doc = loadLegalDoc('delete-account')

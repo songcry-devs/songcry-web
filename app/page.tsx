@@ -5,6 +5,7 @@ import CloseBand from '@/components/sections/home/CloseBand'
 import WordReveal from '@/components/craft/WordReveal'
 import HoldingModule from '@/components/craft/HoldingModule'
 import DriftGallery from '@/components/craft/DriftGallery'
+import { HOME_DESCRIPTION, HOME_TITLE, pageMetadata } from '@/lib/seo'
 
 /**
  * The homepage, rebuilt with the devices measured off Apple.
@@ -49,7 +50,7 @@ import DriftGallery from '@/components/craft/DriftGallery'
  * and angle brackets, comments included. See scripts/check-style-literals.mjs.
  */
 
-export const metadata = { alternates: { canonical: '/' } }
+export const metadata = pageMetadata({ title: HOME_TITLE, description: HOME_DESCRIPTION, path: '/' })
 
 export default function Home() {
   return (

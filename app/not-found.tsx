@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
+import { pageMetadata } from '@/lib/seo'
 
-// Next adds noindex to this page itself. Title and description replace the homepage ones the
-// default 404 inherited. PR 6 moves this onto lib/seo.ts.
-export const metadata = {
+// Next adds noindex to this page itself, so pageMetadata gets no path (claims no URL, per
+// lib/seo.ts) and no noindex flag (Next's own robots meta on this route already covers it).
+export const metadata = pageMetadata({
   title: 'Page not found | Songcry',
   description: 'This page isn’t here.',
-}
+})
 
 export default function NotFound() {
   return (
