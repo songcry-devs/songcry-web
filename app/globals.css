@@ -114,13 +114,28 @@ body {
   }
 
   /* Icon-only controls need width as well as height. */
-  .nav-menu-button,
   .footer-socials a {
     min-width: 44px;
     min-height: 44px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+
+  /* .nav-menu-button is the last child of a justify-content: space-between row,
+     so growing it with min-width/min-height (like the rule above) only grows it
+     leftward — the box stays pinned to the row's right edge and the icon's visible
+     centre shifts. Instead keep the real box at its original 32x32 and add an
+     invisible ::before that extends 6px past each edge (32 + 6 + 6 = 44), centred
+     on the box that is already centred on the icon. The hit area grows; the glyph
+     never moves. */
+  .nav-menu-button {
+    position: relative;
+  }
+  .nav-menu-button::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
   }
 }
 
