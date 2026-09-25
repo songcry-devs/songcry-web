@@ -16,9 +16,11 @@ import { useRevealOnScroll } from '@/components/motion/useRevealOnScroll'
  * Accessibility (2026-09-25): splitting a sentence into one span per word means a screen
  * reader can read it back as a list of single-word items instead of a sentence. The full
  * sentence is written once into a visually hidden span (Tailwind's built-in `sr-only`), and
- * every per-word span sits inside one `aria-hidden` wrapper so assistive tech skips them and
+ * every line of per-word spans is `aria-hidden` so assistive tech skips them and
  * announces only the hidden sentence. Sighted, mouse, and reduced-motion users still see and
- * read the animated words; nothing about the visible rendering changes.
+ * read the animated words; nothing about the visible rendering changes. The attribute sits on
+ * the line spans themselves, not on a `display: contents` wrapper, because older Safari drops
+ * aria-hidden from such wrappers and VoiceOver would read every heading twice.
  */
 export default function WordReveal({
   text,
@@ -41,24 +43,26 @@ export default function WordReveal({
   return (
     <span ref={ref} className={className ? `wr ${className}` : 'wr'} style={{ '--wr-y': `${y}px` } as CSSProperties}>
       <span className="sr-only">{text}</span>
-      <span aria-hidden="true" className="wr-words">
-        {lines.map((line, li) => (
-          <span key={li} className="wr-line">
-            {line.split(' ').map((word) => {
-              const i = index++
-              return (
-                <span
-                  key={`${word}-${i}`}
-                  className="wr-word"
-                  style={{ '--wr-d': `${(delay + i * stagger).toFixed(3)}s` } as CSSProperties}
-                >
-                  {word + ' '}
-                </span>
-              )
-            })}
-          </span>
-        ))}
-      </span>
+      {lines.map((line, li) => (
+        <span key={li} className="wr-line" aria-hidden="true">
+          {line.split(' ').map((word) => {
+            const i = index++
+            return (
+              <span
+                key={`${word}-${i}`}
+                className="wr-word"
+                style={
+                  {
+                    '--wr-d': `${(delay + i * stagger).toFixed(3)}s`,
+                  } as CSSProperties
+                }
+              >
+                {word + ' '}
+              </span>
+            )
+          })}
+        </span>
+      ))}
     </span>
   )
 }
