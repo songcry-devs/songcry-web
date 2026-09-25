@@ -266,7 +266,8 @@ export default function JoinForm({ compact = false }: { compact?: boolean }) {
 
         /* ── Submit — brand pink, press feedback matching the artists
                Request-access button (transform-only transition, scale
-               down on :active, dimmed while pending; no hover shift). ── */
+               down on :active, dimmed while pending; no hover shift).
+               Near-black text on brand pink is 5.64 to 1. White was 3.56 to 1 and failed AA. ── */
         .join-submit {
           width: 100%;
           height: 52px;
@@ -274,7 +275,7 @@ export default function JoinForm({ compact = false }: { compact?: boolean }) {
           border: none;
           border-radius: 999px;
           background: var(--pink);
-          color: #ffffff;
+          color: rgb(8, 7, 7);
           font-family: var(--font-albert);
           font-size: 17px;
           font-weight: 600;
