@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
@@ -9,6 +9,23 @@ import GetAppLink from '@/components/ui/GetAppLink'
 
 export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuBtnRef = useRef<HTMLButtonElement>(null)
+
+  // Escape closes the phone menu. If focus was inside the open menu, it goes back to the
+  // button that opened it, so closing never drops focus onto the document body.
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      const menu = document.getElementById('artist-mobile-menu')
+      if (menu && document.activeElement && menu.contains(document.activeElement)) {
+        menuBtnRef.current?.focus()
+      }
+      setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
 
   return (
     <>
@@ -121,6 +138,10 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
             </Link>
 
             <button
+              ref={menuBtnRef}
+              type="button"
+              className="nav-menu-button"
+              aria-controls="artist-mobile-menu"
               aria-label="Menu"
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
@@ -142,6 +163,7 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
           {/* Overlay menu */}
           {menuOpen && (
             <div
+              id="artist-mobile-menu"
               style={{
                 position: 'fixed',
                 top: '60px',

@@ -1,7 +1,9 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion'
+import { useEnhancedMotion } from '@/components/motion/useEnhancedMotion'
+import { useIsoLayoutEffect } from '@/components/motion/useIsoLayoutEffect'
 
 /**
  * The module that takes over. Apple calls its version all-access-pass and
@@ -36,9 +38,19 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform 
  * and a half viewport heights before they can reach the download is a real cost.
  * Long enough to develop the idea, short enough not to trap anyone.
  *
- * Reduced motion: scroll bindings are direct style writes, so the root
- * MotionConfig does not neutralise them. useReducedMotion collapses the motion
- * and the beats simply stack, readable without any scroll choreography.
+ * Progressive enhancement (2026-09-25): the default render is the static stack, so a reader
+ * without JavaScript or with reduced motion gets all three beats, no pinned track and no blank
+ * stretch. The pinned, one-beat-at-a-time layout applies only under .hm-on, which is added after
+ * hydration when motion is allowed. The track height is a custom property for the same reason:
+ * an inline height beat the reduced-motion media query and left about two screens of blank.
+ *
+ * Final-review fix (2026-09-25): motion being allowed is not enough on its own. A visitor who
+ * arrives already past this module, or lands straight on a hash (the nav Download tap goes
+ * through /get to /#get-the-app), must not have the track grow under them: growing from the
+ * static height to the pinned track height AFTER the browser has already started its smooth
+ * scroll to the anchor pushes that anchor down and the scroll lands short. landedPast is decided
+ * once, in a layout effect that runs before the first post-hydration paint, and it wins over
+ * motionOk. A visitor starting at the top of the page still gets the pinned version.
  *
  * NOTE: the style string below must stay free of apostrophes, quotes, ampersands
  * and angle brackets, comments included. See scripts/check-style-literals.mjs.
@@ -62,18 +74,9 @@ const BEATS = [
   },
 ]
 
-function Beat({
-  beat,
-  active,
-  reduced,
-}: {
-  beat: (typeof BEATS)[number]
-  active: boolean
-  reduced: boolean
-}) {
-  const cls = reduced ? 'hm-beat hm-beat-static' : `hm-beat${active ? ' is-active' : ''}`
+function Beat({ beat, active }: { beat: (typeof BEATS)[number]; active: boolean }) {
   return (
-    <div className={cls}>
+    <div className={active ? 'hm-beat is-active' : 'hm-beat'}>
       <span className="hm-beat-n">{beat.n}</span>
       <h3 className="hm-beat-title">{beat.title}</h3>
       <p className="hm-beat-body">{beat.body}</p>
@@ -83,7 +86,44 @@ function Beat({
 
 export default function HoldingModule({ track = '340vh' }: { track?: string }) {
   const ref = useRef<HTMLDivElement>(null)
-  const reduced = useReducedMotion() ?? false
+  const motionOk = useEnhancedMotion()
+  const [landedPast, setLandedPast] = useState(false)
+  const restoreY = useRef<number | null>(null)
+  useIsoLayoutEffect(() => {
+    // A reload or back/forward: the browser restores an offset measured on the LAST layout,
+    // sometimes before this one exists (WebKit), clamped to the shorter static page. Reuse the
+    // last layout and put the reader back on the offset it was measured on.
+    const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
+    if (nav && (nav.type === 'reload' || nav.type === 'back_forward')) {
+      let last: { y: number; pinned: boolean } | null = null
+      try {
+        last = JSON.parse(sessionStorage.getItem(`hm-last:${location.pathname}`) ?? 'null')
+      } catch {}
+      if (last) {
+        if (!last.pinned) setLandedPast(true)
+        else restoreY.current = last.y
+        return
+      }
+    }
+    const r = ref.current?.getBoundingClientRect()
+    if (window.location.hash || (r && r.bottom <= 0)) setLandedPast(true)
+  }, [])
+  const enhanced = motionOk && !landedPast
+  useIsoLayoutEffect(() => {
+    const y = restoreY.current
+    if (!enhanced || y === null) return
+    restoreY.current = null
+    if (Math.abs(window.scrollY - y) > 1) window.scrollTo({ top: y, behavior: 'instant' })
+  }, [enhanced])
+  useEffect(() => {
+    const save = () => {
+      try {
+        sessionStorage.setItem(`hm-last:${location.pathname}`, JSON.stringify({ y: Math.round(window.scrollY), pinned: enhanced }))
+      } catch {}
+    }
+    window.addEventListener('pagehide', save)
+    return () => window.removeEventListener('pagehide', save)
+  }, [enhanced])
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const railScale = useTransform(scrollYProgress, [0, 1], [0, 1])
   const [active, setActive] = useState(0)
@@ -99,23 +139,20 @@ export default function HoldingModule({ track = '340vh' }: { track?: string }) {
   })
 
   return (
-    <section className="hm-section" aria-label="How Songcry works">
-      <div className="hm-track" ref={ref} style={{ height: track }}>
+    <section className={enhanced ? 'hm-section hm-on' : 'hm-section'} aria-label="How Songcry works">
+      <div className="hm-track" ref={ref} style={{ '--hm-track': track } as CSSProperties}>
         <div className="hm-sticky">
           <div className="hm-inner">
-            <p className="hm-eyebrow">How it works</p>
+            <h2 className="hm-eyebrow">How it works</h2>
 
             <div className="hm-stage">
               {BEATS.map((b, i) => (
-                <Beat key={b.n} beat={b} active={i === active} reduced={reduced} />
+                <Beat key={b.n} beat={b} active={i === active} />
               ))}
             </div>
 
             <div className="hm-rail" aria-hidden="true">
-              <motion.div
-                className="hm-rail-fill"
-                style={reduced ? { transform: 'scaleX(1)' } : { scaleX: railScale }}
-              />
+              <motion.div className="hm-rail-fill" style={{ scaleX: railScale }} />
             </div>
           </div>
         </div>
@@ -129,12 +166,7 @@ export default function HoldingModule({ track = '340vh' }: { track?: string }) {
           position: relative;
         }
         .hm-sticky {
-          position: sticky;
-          top: 0;
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          overflow: hidden;
+          padding: 128px 0;
         }
         .hm-inner {
           width: 100%;
@@ -146,38 +178,21 @@ export default function HoldingModule({ track = '340vh' }: { track?: string }) {
           font-family: var(--font-albert);
           font-size: 12px;
           font-weight: 600;
+          line-height: 1.33;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: var(--e-t4);
+          color: var(--e-t3);
           margin: 0 0 72px;
         }
         .hm-stage {
           position: relative;
-          min-height: 320px;
         }
         .hm-beat {
-          position: absolute;
-          inset: 0;
           max-width: 900px;
-          opacity: 0;
-          transform: translateY(22px);
-          transition: opacity 620ms cubic-bezier(0.16, 1, 0.3, 1),
-            transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
-          pointer-events: none;
-        }
-        .hm-beat.is-active {
-          opacity: 1;
-          transform: translateY(0);
-          pointer-events: auto;
-        }
-        .hm-beat-static {
-          position: relative;
-          inset: auto;
-          opacity: 1;
-          transform: none;
-          transition: none;
-          pointer-events: auto;
           margin-bottom: 72px;
+        }
+        .hm-beat:last-child {
+          margin-bottom: 0;
         }
         .hm-beat-n {
           display: block;
@@ -185,7 +200,7 @@ export default function HoldingModule({ track = '340vh' }: { track?: string }) {
           font-size: 13px;
           font-weight: 600;
           letter-spacing: 0.14em;
-          color: var(--e-t4);
+          color: var(--e-t3);
           margin-bottom: 26px;
         }
         .hm-beat-title {
@@ -207,6 +222,7 @@ export default function HoldingModule({ track = '340vh' }: { track?: string }) {
           margin: 0;
         }
         .hm-rail {
+          display: none;
           margin-top: 84px;
           height: 1px;
           width: 100%;
@@ -221,6 +237,43 @@ export default function HoldingModule({ track = '340vh' }: { track?: string }) {
           background: var(--e-mark);
         }
 
+        /* Enhanced: pinned, one beat at a time. Only after hydration and only when motion
+           is allowed, so the static stack above is what a reader without JavaScript or with
+           reduced motion gets. */
+        .hm-on .hm-track {
+          height: var(--hm-track);
+        }
+        .hm-on .hm-sticky {
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+          padding: 0;
+        }
+        .hm-on .hm-stage {
+          min-height: 320px;
+        }
+        .hm-on .hm-beat {
+          position: absolute;
+          inset: 0;
+          margin: 0;
+          opacity: 0;
+          transform: translateY(22px);
+          transition: opacity 620ms cubic-bezier(0.16, 1, 0.3, 1),
+            transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+          pointer-events: none;
+        }
+        .hm-on .hm-beat.is-active {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+        .hm-on .hm-rail {
+          display: block;
+        }
+
         @media (max-width: 980px) {
           .hm-inner {
             padding: 0 28px;
@@ -228,25 +281,11 @@ export default function HoldingModule({ track = '340vh' }: { track?: string }) {
           .hm-eyebrow {
             margin-bottom: 48px;
           }
-          .hm-stage {
+          .hm-on .hm-stage {
             min-height: 360px;
           }
           .hm-rail {
             margin-top: 56px;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .hm-track {
-            height: auto;
-          }
-          .hm-sticky {
-            position: relative;
-            height: auto;
-            padding: 128px 0;
-          }
-          .hm-stage {
-            min-height: 0;
           }
         }
       `}</style>

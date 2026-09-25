@@ -114,7 +114,6 @@ body {
   }
 
   /* Icon-only controls need width as well as height. */
-  .nav-menu-button,
   .footer-socials a {
     min-width: 44px;
     min-height: 44px;
@@ -122,4 +121,47 @@ body {
     align-items: center;
     justify-content: center;
   }
+
+  /* .nav-menu-button is the last child of a justify-content: space-between row,
+     so growing it with min-width/min-height (like the rule above) only grows it
+     leftward — the box stays pinned to the row's right edge and the icon's visible
+     centre shifts. Instead keep the real box at its original 32x32 and add an
+     invisible ::before that extends 6px past each edge (32 + 6 + 6 = 44), centred
+     on the box that is already centred on the icon. The hit area grows; the glyph
+     never moves. */
+  .nav-menu-button {
+    position: relative;
+  }
+  .nav-menu-button::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+  }
+}
+
+/* ── Scroll reveals (components/motion/Reveal.tsx, components/craft/WordReveal.tsx) ──
+   Visible by default. Only [data-pending], which JavaScript adds after hydration to content
+   still below the fold, hides anything. The hide is instant; the reveal transitions. */
+.rv[data-pending] {
+  opacity: 0;
+  transform: translateY(var(--rv-y, 40px));
+}
+.rv:not([data-pending]) {
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1) var(--rv-delay, 0s),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1) var(--rv-delay, 0s);
+}
+.wr-line {
+  display: block;
+}
+.wr-word {
+  display: inline-block;
+  white-space: pre;
+}
+.wr[data-pending] .wr-word {
+  opacity: 0;
+  transform: translateY(var(--wr-y, 22px));
+}
+.wr:not([data-pending]) .wr-word {
+  transition: opacity 620ms cubic-bezier(0.16, 1, 0.3, 1) var(--wr-d, 0s),
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1) var(--wr-d, 0s);
 }

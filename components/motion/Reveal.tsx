@@ -1,21 +1,16 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { useRef, type CSSProperties, type ReactNode } from 'react'
+import { useRevealOnScroll } from './useRevealOnScroll'
 
 /**
- * Scroll-reveal wrapper matching the live Framer site's feel:
- * fade in + a gentle rise as the element enters the viewport, once.
- * GPU-friendly (opacity + transform only).
+ * Fade in and rise as the element enters the viewport, once.
  *
- * Reduced-motion is handled globally by <MotionConfig reducedMotion="user">
- * in the root layout (framer-motion then skips the transform for users who
- * prefer reduced motion). This component renders ONE consistent tree on
- * server + client to avoid hydration mismatches.
+ * Progressive enhancement (2026-09-25): server-rendered visible, never opacity 0. Only content
+ * below the fold at hydration is held back (useRevealOnScroll). Content already on screen, such
+ * as the home hero and its form, is simply there at first paint. Styles: app/globals.css.
  *
- * - `delay` staggers siblings (cards/text) in sequence.
- * - `y` overrides the rise distance (default 28px).
- * - `amount` is how much of the element must be visible before it triggers.
+ * - `delay` staggers siblings. - `y` is the rise distance. - `amount` is how much must be visible.
  */
 export default function Reveal({
   children,
@@ -30,18 +25,14 @@ export default function Reveal({
   y?: number
   amount?: number
   className?: string
-  style?: React.CSSProperties
+  style?: CSSProperties
 }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useRevealOnScroll(ref, amount)
+  const vars = { '--rv-y': `${y}px`, '--rv-delay': `${delay}s` } as CSSProperties
   return (
-    <motion.div
-      className={className}
-      style={style}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount, margin: '0px 0px -8% 0px' }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
-    >
+    <div ref={ref} className={className ? `rv ${className}` : 'rv'} style={{ ...vars, ...style }}>
       {children}
-    </motion.div>
+    </div>
   )
 }
