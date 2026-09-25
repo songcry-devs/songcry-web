@@ -43,6 +43,11 @@ const nextConfig = {
         destination: '/',
         statusCode: 301,
       },
+      // Guessable legal addresses. All three returned 404 until 2026-09-25. /legal has no
+      // index page; the Terms of Use are the governing document, so it lands there.
+      { source: '/privacy', destination: '/legal/privacy', statusCode: 301 },
+      { source: '/terms', destination: '/legal/terms-of-use', statusCode: 301 },
+      { source: '/legal', destination: '/legal/terms-of-use', statusCode: 301 },
     ]
   },
 }

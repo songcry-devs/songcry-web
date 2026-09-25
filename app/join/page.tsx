@@ -1,13 +1,14 @@
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import JoinForm from '@/components/sections/join/JoinForm'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Join Songcry',
   description:
     'Artists join the Songcry beta. Fans join the waitlist for first access when it opens.',
-  alternates: { canonical: '/join' },
-}
+  path: '/join',
+})
 
 // Server component — the interactivity lives in JoinForm.
 export default function JoinPage() {
