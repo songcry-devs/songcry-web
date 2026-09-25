@@ -27,8 +27,8 @@ export default function FeatureRow({ heading, body, image, imageAlt, imageSide }
                 <Image
                   src={image}
                   alt={imageAlt}
-                  width={398}
-                  height={865}
+                  width={380}
+                  height={732}
                   className="fr-img"
                 />
               </div>
