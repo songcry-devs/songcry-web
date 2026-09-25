@@ -101,7 +101,8 @@ export default function WhatWeNeed() {
           font-family: var(--font-albert);
           font-size: 54px;
           font-weight: 600;
-          line-height: 54px;
+          line-height: 1.08;
+          letter-spacing: -0.02em;
           color: #fff;
           margin: 0;
         }

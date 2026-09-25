@@ -83,7 +83,8 @@ export default function FeatureRow({ heading, body, image, imageAlt, imageSide }
           font-family: var(--font-albert);
           font-size: 42px;
           font-weight: 600;
-          line-height: 42px;
+          line-height: 1.12;
+          letter-spacing: -0.015em;
           color: #fff;
           margin: 0;
           text-align: left;
@@ -148,11 +149,6 @@ export default function FeatureRow({ heading, body, image, imageAlt, imageSide }
           }
           .fr-img-wrap {
             width: 320px;
-          }
-
-          .fr-heading {
-            font-size: 42px;
-            line-height: 42px;
           }
 
           .fr-body {
