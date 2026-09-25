@@ -50,7 +50,7 @@ test('guessable legal URLs redirect to the real pages', async () => {
 })
 
 test('root path sets both canonical and openGraph url', () => {
-  const m = pageMetadata({ title: 'x', path: '/' })
+  const m = pageMetadata({ title: 'x', description: 'd', path: '/' })
   assert.equal(m.alternates?.canonical, '/')
   assert.equal(m.openGraph?.url, '/')
 })
