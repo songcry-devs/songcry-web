@@ -128,6 +128,8 @@ test('tagUrl appends like link_router tag(): ? first, & after', () => {
   assert.equal(tagUrl('https://artists.songcry.app', p), 'https://artists.songcry.app?utm_source=web&utm_content=footer-for-artists')
   assert.equal(tagUrl('https://artists.songcry.app/?a=1', p), 'https://artists.songcry.app/?a=1&utm_source=web&utm_content=footer-for-artists')
   assert.equal(tagUrl('https://artists.songcry.app', new URLSearchParams()), 'https://artists.songcry.app')
+  assert.equal(tagUrl('https://artists.songcry.app/#pricing', p), 'https://artists.songcry.app/?utm_source=web&utm_content=footer-for-artists#pricing')
+  assert.equal(tagUrl('https://artists.songcry.app/?a=1#join', p), 'https://artists.songcry.app/?a=1&utm_source=web&utm_content=footer-for-artists#join')
 })
 
 test('sourcePageFromReferer accepts songcry.app hosts only', () => {

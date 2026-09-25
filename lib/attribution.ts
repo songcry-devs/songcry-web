@@ -141,5 +141,9 @@ export function readFirstTouch(store: KeyValueStore | null, currentSearch: strin
 export function tagUrl(url: string, params: URLSearchParams): string {
   const qs = params.toString()
   if (!qs) return url
-  return `${url}${url.includes('?') ? '&' : '?'}${qs}`
+  // The query goes before any #fragment: after it, the params never reach the server.
+  const hashAt = url.indexOf('#')
+  const base = hashAt === -1 ? url : url.slice(0, hashAt)
+  const hash = hashAt === -1 ? '' : url.slice(hashAt)
+  return `${base}${base.includes('?') ? '&' : '?'}${qs}${hash}`
 }
