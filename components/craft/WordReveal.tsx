@@ -1,22 +1,17 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { useRef, type CSSProperties } from 'react'
+import { useRevealOnScroll } from '@/components/motion/useRevealOnScroll'
 
 /**
- * Display text split into words so they arrive independently.
+ * Display text split into words so they arrive independently (Apple's `words` device).
  *
- * Apple does this: a class named `words` shows up in the scroll-driven set on
- * apple.com/apple-music. A headline that fades in as one block reads as a block
- * that faded in. A headline whose words arrive in sequence reads as a sentence
- * being spoken, which is the whole point of a display line.
+ * Whitespace is a real trailing space inside each span plus white-space pre, never a
+ * non-breaking space, so headlines still wrap. A literal newline in `text` forces a line.
  *
- * Whitespace is preserved with a real trailing space inside each span plus
- * white-space pre, NOT a non-breaking space. A non-breaking space would stop the
- * headline wrapping at all, which breaks it on every narrow viewport. Line breaks are honoured by splitting on a literal newline first,
- * so a caller can control the wrap instead of leaving it to the container.
- *
- * Reduced motion renders the identical tree with the animation collapsed, so
- * there is no hydration difference and no layout shift.
+ * Progressive enhancement (2026-09-25): words render visible on the server. Only a line still
+ * below the fold at hydration is held back and revealed word by word. Its CSS lives in
+ * app/globals.css, not in a style element here, so no CSS text ends up inside a heading.
  */
 export default function WordReveal({
   text,
@@ -31,45 +26,29 @@ export default function WordReveal({
   stagger?: number
   y?: number
 }) {
-  const reduced = useReducedMotion()
+  const ref = useRef<HTMLSpanElement>(null)
+  useRevealOnScroll(ref, 0.4)
   const lines = text.split('\n')
   let index = 0
 
   return (
-    <span className={className}>
+    <span ref={ref} className={className ? `wr ${className}` : 'wr'} style={{ '--wr-y': `${y}px` } as CSSProperties}>
       {lines.map((line, li) => (
         <span key={li} className="wr-line">
           {line.split(' ').map((word) => {
             const i = index++
             return (
-              <motion.span
+              <span
                 key={`${word}-${i}`}
                 className="wr-word"
-                initial={reduced ? { opacity: 1, y: 0 } : { opacity: 0, y }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{
-                  duration: reduced ? 0 : 0.62,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: reduced ? 0 : delay + i * stagger,
-                }}
+                style={{ '--wr-d': `${(delay + i * stagger).toFixed(3)}s` } as CSSProperties}
               >
                 {word + ' '}
-              </motion.span>
+              </span>
             )
           })}
         </span>
       ))}
-
-      <style>{`
-        .wr-line {
-          display: block;
-        }
-        .wr-word {
-          display: inline-block;
-          white-space: pre;
-        }
-      `}</style>
     </span>
   )
 }

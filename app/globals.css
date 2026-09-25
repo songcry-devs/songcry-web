@@ -123,3 +123,30 @@ body {
     justify-content: center;
   }
 }
+
+/* ── Scroll reveals (components/motion/Reveal.tsx, components/craft/WordReveal.tsx) ──
+   Visible by default. Only [data-pending], which JavaScript adds after hydration to content
+   still below the fold, hides anything. The hide is instant; the reveal transitions. */
+.rv[data-pending] {
+  opacity: 0;
+  transform: translateY(var(--rv-y, 40px));
+}
+.rv:not([data-pending]) {
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1) var(--rv-delay, 0s),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1) var(--rv-delay, 0s);
+}
+.wr-line {
+  display: block;
+}
+.wr-word {
+  display: inline-block;
+  white-space: pre;
+}
+.wr[data-pending] .wr-word {
+  opacity: 0;
+  transform: translateY(var(--wr-y, 22px));
+}
+.wr:not([data-pending]) .wr-word {
+  transition: opacity 620ms cubic-bezier(0.16, 1, 0.3, 1) var(--wr-d, 0s),
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1) var(--wr-d, 0s);
+}
