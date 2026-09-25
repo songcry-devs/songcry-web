@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import AppStoreLink from '@/components/ui/AppStoreLink'
+import GetAppLink from '@/components/ui/GetAppLink'
 import Reveal from '@/components/motion/Reveal'
 
 
@@ -47,13 +47,11 @@ export default function ArtistHero() {
           </p>
         </Reveal>
 
-        {/* CTA pill — FLAG: Framer links to /#form; we point to App Store (TJ to confirm) */}
+        {/* CTA pill. Device-aware since 2026-09-25: iPhone to the App Store, Android to
+            Google Play, a computer to the home band with both badges. No aria-label, so the
+            accessible name is the visible text. */}
         <Reveal delay={0.24}>
-          <AppStoreLink
-            placement="artist-hero"
-            className="artist-hero-cta-pill"
-            ariaLabel="Get Early Access on the App Store"
-          >
+          <GetAppLink placement="artist-hero" className="artist-hero-cta-pill">
             <span className="artist-hero-cta-label">Get Early Access</span>
             {/* White circle + dark right-arrow — matches Framer */}
             <span className="artist-hero-cta-icon" aria-hidden="true">
@@ -68,7 +66,7 @@ export default function ArtistHero() {
                 />
               </svg>
             </span>
-          </AppStoreLink>
+          </GetAppLink>
         </Reveal>
       </div>
 
