@@ -14,7 +14,9 @@ import { useCampaignQs } from '@/lib/use-campaign-qs'
  * what a sighted reader sees (WCAG 2.5.3).
  *
  * The Google Play art is Google official PNG, 646x250 with 41px of transparent padding. It is
- * shown at 80px tall inside a 180x54 window, so the visible badge matches the App Store badge.
+ * shown at 80px tall inside a 181x54 window, so the visible badge matches the App Store badge.
+ * 181, not 180: the visible art scales to 193.86px of the 207px render, and a 180px window
+ * clipped 0.9px off Google's right border.
  *
  * NOTE: the style string below must stay free of apostrophes, quotes, ampersands and angle
  * brackets, comments included. See scripts/check-style-literals.mjs.
@@ -40,7 +42,13 @@ export default function StoreBadges({ placement, className }: { placement: strin
         onClick={() => trackStoreClick('google-play', placement)}
       >
         <span className="store-badge-play">
-          <Image src="/badges/google-play-badge.png" alt="Get it on Google Play" width={207} height={80} />
+          <Image
+            src="/badges/google-play-badge.png"
+            alt="Get it on Google Play"
+            width={207}
+            height={80}
+            unoptimized
+          />
         </span>
       </a>
 
@@ -49,7 +57,7 @@ export default function StoreBadges({ placement, className }: { placement: strin
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          gap: 12px;
+          gap: 16px;
         }
         .store-badge {
           display: inline-block;
@@ -61,7 +69,7 @@ export default function StoreBadges({ placement, className }: { placement: strin
         }
         .store-badge-play {
           display: block;
-          width: 180px;
+          width: 181px;
           height: 54px;
           overflow: hidden;
         }

@@ -25,6 +25,17 @@ const UA = {
     'Mozilla/5.0 (Linux; Android 14; SM-S918U Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/129.0.6668.100 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/483.0.0.53.109;]',
   windowsChrome:
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
+  tiktokIphone:
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 musical_ly_2023808 JsSdk/2.0 NetType/WIFI Channel/App Store ByteLocale/en Region/US isDarkMode/0 InHouse/0 WKWebView/1',
+  tiktokAndroid:
+    'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/122.0.6261.119 Mobile Safari/537.36 musical_ly_2023808 JsSdk/2.0 NetType/WIFI Channel/googleplay AppName/musical_ly app_version/32.5.3 ByteLocale/en',
+  // Real iPad UA, NOT desktop mode. iPadOS Safari with Request Desktop Website off still says iPad.
+  ipadRealUA:
+    'Mozilla/5.0 (iPad; CPU OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1',
+  // Android tablet with Desktop site requested. Chrome sends a bare Linux desktop UA with no
+  // Android or Mobile token, the same trade-off as the iPad-in-desktop-mode case above.
+  androidTabletDesktopMode:
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
 }
 const PT = '128612241' // the live provider token, visible in every live App Store link
 
@@ -37,6 +48,13 @@ test('deviceFromUA: phones, in-app browsers, iPad in desktop mode, computers', (
   assert.equal(deviceFromUA(UA.ipadDesktopMode), 'desktop')
   assert.equal(deviceFromUA(UA.windowsChrome), 'desktop')
   assert.equal(deviceFromUA(''), 'desktop')
+  // TikTok's in-app browser keeps the underlying platform token on both OSes.
+  assert.equal(deviceFromUA(UA.tiktokIphone), 'ios')
+  assert.equal(deviceFromUA(UA.tiktokAndroid), 'android')
+  // A real iPad UA (not desktop mode) still says iPad, so it lands on the App Store, not both badges.
+  assert.equal(deviceFromUA(UA.ipadRealUA), 'ios')
+  // An Android tablet in desktop mode drops the Android token entirely, same as the iPad case.
+  assert.equal(deviceFromUA(UA.androidTabletDesktopMode), 'desktop')
 })
 
 test('webCt keeps the live ct scheme', () => {
@@ -80,6 +98,19 @@ test('getAppTarget routes each device', () => {
   assert.equal(getAppTarget({ userAgent: UA.androidChrome, search: '', pt: PT }), PLAY_STORE_URL)
   assert.equal(getAppTarget({ userAgent: UA.windowsChrome, search, pt: PT }), DESKTOP_GET_PATH)
   assert.equal(getAppTarget({ userAgent: UA.ipadDesktopMode, search, pt: PT }), DESKTOP_GET_PATH)
+  assert.equal(
+    getAppTarget({ userAgent: UA.tiktokIphone, search, pt: PT }),
+    `${APP_STORE_URL}?pt=${PT}&ct=web-nav-desktop&mt=8`,
+  )
+  assert.equal(
+    getAppTarget({ userAgent: UA.tiktokAndroid, search, pt: PT }),
+    `${PLAY_STORE_URL}&referrer=utm_source%3Dweb%26utm_content%3Dnav-desktop`,
+  )
+  assert.equal(
+    getAppTarget({ userAgent: UA.ipadRealUA, search, pt: PT }),
+    `${APP_STORE_URL}?pt=${PT}&ct=web-nav-desktop&mt=8`,
+  )
+  assert.equal(getAppTarget({ userAgent: UA.androidTabletDesktopMode, search, pt: PT }), DESKTOP_GET_PATH)
 })
 
 test('getAppTarget never takes a host from the query', () => {

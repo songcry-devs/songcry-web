@@ -16,10 +16,11 @@ import WordReveal from '@/components/craft/WordReveal'
  * The headline wraps to two lines on purpose. A 20ch measure at this size reads as
  * a statement; the single 42px line it replaces read as a caption.
  *
- * REPLACES Download.tsx, which stays in the tree unused so this is a one-line
- * revert in app/page.tsx. What goes with it: the purple glow and the floor grid.
- * That is brand furniture from the old site, and it is the one thing to put back
- * first if this ever feels too bare.
+ * REPLACES Download.tsx, which stays in the tree unused. Reverting to it is NOT a one-line
+ * swap: whatever section lands here must still carry id="get-the-app" and both store badges,
+ * or /get breaks for computers (the anchor and the Play badge vanish). What goes with a
+ * revert: the purple glow and the floor grid. That is brand furniture from the old site, and
+ * it is the one thing to put back first if this ever feels too bare.
  *
  * Copy is unchanged. Since 2026-09-25 the band shows both official store badges, each tracked
  * and tagged (the old App Store badge was a bare link that fired no conversion), and it is the
