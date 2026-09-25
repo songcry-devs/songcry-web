@@ -3,6 +3,7 @@
 import { useRef, useState, type CSSProperties } from 'react'
 import { motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion'
 import { useEnhancedMotion } from '@/components/motion/useEnhancedMotion'
+import { useIsoLayoutEffect } from '@/components/motion/useIsoLayoutEffect'
 
 /**
  * The module that takes over. Apple calls its version all-access-pass and
@@ -43,6 +44,14 @@ import { useEnhancedMotion } from '@/components/motion/useEnhancedMotion'
  * hydration when motion is allowed. The track height is a custom property for the same reason:
  * an inline height beat the reduced-motion media query and left about two screens of blank.
  *
+ * Final-review fix (2026-09-25): motion being allowed is not enough on its own. A visitor who
+ * arrives already past this module, or lands straight on a hash (the nav Download tap goes
+ * through /get to /#get-the-app), must not have the track grow under them: growing from the
+ * static height to the pinned track height AFTER the browser has already started its smooth
+ * scroll to the anchor pushes that anchor down and the scroll lands short. landedPast is decided
+ * once, in a layout effect that runs before the first post-hydration paint, and it wins over
+ * motionOk. A visitor starting at the top of the page still gets the pinned version.
+ *
  * NOTE: the style string below must stay free of apostrophes, quotes, ampersands
  * and angle brackets, comments included. See scripts/check-style-literals.mjs.
  */
@@ -77,7 +86,13 @@ function Beat({ beat, active }: { beat: (typeof BEATS)[number]; active: boolean 
 
 export default function HoldingModule({ track = '340vh' }: { track?: string }) {
   const ref = useRef<HTMLDivElement>(null)
-  const enhanced = useEnhancedMotion()
+  const motionOk = useEnhancedMotion()
+  const [landedPast, setLandedPast] = useState(false)
+  useIsoLayoutEffect(() => {
+    const r = ref.current?.getBoundingClientRect()
+    if (window.location.hash || (r && r.bottom <= 0)) setLandedPast(true)
+  }, [])
+  const enhanced = motionOk && !landedPast
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const railScale = useTransform(scrollYProgress, [0, 1], [0, 1])
   const [active, setActive] = useState(0)
