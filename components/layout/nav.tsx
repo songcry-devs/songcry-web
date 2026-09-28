@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
-import { appStoreUrl, trackAppStoreClick } from '@/lib/appstore'
+import GetAppLink from '@/components/ui/GetAppLink'
 
 export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -158,11 +158,9 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
               }}
               className="artist-phone-bar"
             >
-              <a
-                href={appStoreUrl('nav-mobile')}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => { trackAppStoreClick('nav-mobile'); setMenuOpen(false) }}
+              <GetAppLink
+                placement="nav-mobile"
+                onClick={() => setMenuOpen(false)}
                 style={{
                   color: '#ffffff',
                   fontFamily: 'var(--font-albert-sans), system-ui, sans-serif',
@@ -173,8 +171,8 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
                   borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
                 }}
               >
-                Download on the App Store
-              </a>
+                Download
+              </GetAppLink>
             </div>
           )}
         </>
@@ -251,11 +249,8 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
 
 function DownloadButton() {
   return (
-    <a
-      href={appStoreUrl('nav-desktop')}
-      onClick={() => trackAppStoreClick('nav-desktop')}
-      target="_blank"
-      rel="noopener noreferrer"
+    <GetAppLink
+      placement="nav-desktop"
       className="nav-dl-btn"
       style={{
         background: '#ffffff',
@@ -287,6 +282,6 @@ function DownloadButton() {
       >
         Download
       </span>
-    </a>
+    </GetAppLink>
   )
 }

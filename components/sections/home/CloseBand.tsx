@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import StoreBadges from '@/components/ui/StoreBadges'
 import Reveal from '@/components/motion/Reveal'
 import WordReveal from '@/components/craft/WordReveal'
 
@@ -16,13 +16,15 @@ import WordReveal from '@/components/craft/WordReveal'
  * The headline wraps to two lines on purpose. A 20ch measure at this size reads as
  * a statement; the single 42px line it replaces read as a caption.
  *
- * REPLACES Download.tsx, which stays in the tree unused so this is a one-line
- * revert in app/page.tsx. What goes with it: the purple glow and the floor grid.
- * That is brand furniture from the old site, and it is the one thing to put back
- * first if this ever feels too bare.
+ * REPLACES Download.tsx, which stays in the tree unused. Reverting to it is NOT a one-line
+ * swap: whatever section lands here must still carry id="get-the-app" and both store badges,
+ * or /get breaks for computers (the anchor and the Play badge vanish). What goes with a
+ * revert: the purple glow and the floor grid. That is brand furniture from the old site, and
+ * it is the one thing to put back first if this ever feels too bare.
  *
- * Copy is unchanged and already live. The App Store badge is the same link, so the
- * conversion path is untouched.
+ * Copy is unchanged. Since 2026-09-25 the band shows both official store badges, each tracked
+ * and tagged (the old App Store badge was a bare link that fired no conversion), and it is the
+ * #get-the-app target that /get sends computers to.
  *
  * NOTE: the style string below must stay free of apostrophes, quotes, ampersands
  * and angle brackets, comments included. See scripts/check-style-literals.mjs.
@@ -30,7 +32,7 @@ import WordReveal from '@/components/craft/WordReveal'
 
 export default function CloseBand() {
   return (
-    <section className="cbnd-section" aria-label="Join Songcry">
+    <section className="cbnd-section" id="get-the-app" aria-label="Join Songcry">
       <div className="cbnd-inner">
         <h2 className="cbnd-heading">
           <WordReveal text={'Join early and discover what’s rising near you.'} stagger={0.04} />
@@ -43,21 +45,7 @@ export default function CloseBand() {
         </Reveal>
 
         <Reveal y={16} delay={0.46}>
-          <a
-            className="cbnd-badge"
-            href="https://apps.apple.com/us/app/songcry-new-music-near-you/id6760088416"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Download Songcry on the App Store"
-          >
-            <Image
-              src="/framer/appstore-badge.svg"
-              alt="Download on the App Store"
-              width={162}
-              height={54}
-              style={{ display: 'block' }}
-            />
-          </a>
+          <StoreBadges placement="home-close" className="cbnd-badges" />
         </Reveal>
       </div>
 
@@ -95,13 +83,9 @@ export default function CloseBand() {
           max-width: 46ch;
           margin: 0 auto;
         }
-        .cbnd-badge {
-          display: inline-block;
+        .cbnd-badges {
           margin-top: 40px;
-          transition: opacity 180ms ease;
-        }
-        .cbnd-badge:hover {
-          opacity: 0.88;
+          justify-content: center;
         }
 
         @media (max-width: 980px) {
