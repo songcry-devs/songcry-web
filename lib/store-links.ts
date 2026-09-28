@@ -17,6 +17,13 @@ export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=app
 /** Where /get sends a computer: the home close band, which shows both store badges. */
 export const DESKTOP_GET_PATH = '/#get-the-app'
 
+/**
+ * The real production origin. A smart QR code encodes this on every environment, preview
+ * deployments included: a phone scanning a QR on a Vercel preview must still land on the real
+ * /get route, not a preview URL it cannot install from or that will not exist tomorrow.
+ */
+export const SITE_ORIGIN = 'https://songcry.app'
+
 export type Device = 'ios' | 'android' | 'desktop'
 
 /**
@@ -66,6 +73,18 @@ export function getHref(placement: string, qs: string): string {
   const q = new URLSearchParams({ ct: webCt(placement) })
   outboundParams(placement, qs, UTM_KEYS).forEach((v, k) => q.set(k, v))
   return `/get?${q.toString()}`
+}
+
+/**
+ * The absolute URL a smart QR code encodes for one placement (2026-09-28): songcry.app/get with
+ * that placement's own ct and utm_content, both prefixed qr- so a QR scan is attributable
+ * separately from every other "get the app" control at the same page. Built entirely from
+ * getHref with no campaign params of its own (a QR is scanned on a second device, so the
+ * visitor's own campaign on this page carries no meaning there) — it stays in lockstep with the
+ * rest of "get the app" attribution instead of inventing a second query shape.
+ */
+export function qrGetUrl(placement: string): string {
+  return `${SITE_ORIGIN}${getHref(`qr-${placement}`, '')}`
 }
 
 /**

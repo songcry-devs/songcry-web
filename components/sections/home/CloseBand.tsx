@@ -1,6 +1,8 @@
+import QrCode from '@/components/ui/QrCode'
 import StoreBadges from '@/components/ui/StoreBadges'
 import Reveal from '@/components/motion/Reveal'
 import WordReveal from '@/components/craft/WordReveal'
+import { qrGetUrl } from '@/lib/store-links'
 
 /**
  * The closing band, brought over from concept E.
@@ -26,6 +28,12 @@ import WordReveal from '@/components/craft/WordReveal'
  * and tagged (the old App Store badge was a bare link that fired no conversion), and it is the
  * #get-the-app target that /get sends computers to.
  *
+ * Smart QR (2026-09-28): a QR code sits beside the badges, computers only. It is plain
+ * server-rendered markup hidden with CSS (.cbnd-qr's own media query below) — no client
+ * JavaScript decides this, so there is no layout shift and the no-JS path is unaffected. A
+ * revert must keep this working the same way item 1 above must keep the badges: computers still
+ * need a way in that a phone's camera can read.
+ *
  * NOTE: the style string below must stay free of apostrophes, quotes, ampersands
  * and angle brackets, comments included. See scripts/check-style-literals.mjs.
  */
@@ -45,7 +53,10 @@ export default function CloseBand() {
         </Reveal>
 
         <Reveal y={16} delay={0.46}>
-          <StoreBadges placement="home-close" className="cbnd-badges" />
+          <div className="cbnd-get">
+            <StoreBadges placement="home-close" className="cbnd-badges" />
+            <QrCode value={qrGetUrl('home-close')} size={96} className="cbnd-qr" />
+          </div>
         </Reveal>
       </div>
 
@@ -83,9 +94,21 @@ export default function CloseBand() {
           max-width: 46ch;
           margin: 0 auto;
         }
-        .cbnd-badges {
+        .cbnd-get {
           margin-top: 40px;
+          display: flex;
+          align-items: center;
           justify-content: center;
+          gap: 24px;
+          flex-wrap: wrap;
+        }
+        .cbnd-badges {
+          justify-content: center;
+        }
+        .cbnd-qr {
+          background: #ffffff;
+          border-radius: 14px;
+          padding: 8px;
         }
 
         @media (max-width: 980px) {
@@ -94,6 +117,14 @@ export default function CloseBand() {
           }
           .cbnd-inner {
             padding: 0 28px;
+          }
+        }
+
+        /* Smart QR: computers only. Coarse pointer or no hover means a touch device, and a
+           phone never needs a code to scan since it already has the app store one tap away. */
+        @media (hover: none), (pointer: coarse), (max-width: 817px) {
+          .cbnd-qr {
+            display: none;
           }
         }
       `}</style>

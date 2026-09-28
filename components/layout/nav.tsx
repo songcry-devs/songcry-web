@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
+import DownloadWithQr from '@/components/ui/DownloadWithQr'
 import GetAppLink from '@/components/ui/GetAppLink'
 
 export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' }) {
@@ -271,8 +272,10 @@ export default function Nav({ variant = 'home' }: { variant?: 'home' | 'artist' 
 
 function DownloadButton() {
   return (
-    <GetAppLink
+    <DownloadWithQr
       placement="nav-desktop"
+      qrPlacement="nav"
+      align="end"
       className="nav-dl-btn"
       style={{
         background: '#ffffff',
@@ -304,6 +307,6 @@ function DownloadButton() {
       >
         Download
       </span>
-    </GetAppLink>
+    </DownloadWithQr>
   )
 }
