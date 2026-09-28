@@ -43,7 +43,7 @@ export default function ArtistHero() {
         {/* Tagline */}
         <Reveal delay={0.16}>
           <p className="artist-hero-tagline">
-            MUSIC ARTISTS: BECOME A PART OF MUSIC HISTORY WITH SONGCRY
+            Music artists: become a part of music history with Songcry
           </p>
         </Reveal>
 
@@ -223,10 +223,9 @@ export default function ArtistHero() {
           font-size: 14px;
           font-weight: 500;
           line-height: 21px;
-          letter-spacing: 2.8px;
+          letter-spacing: normal;
           color: #fff;
           margin: 12px 0 0 0;
-          text-transform: uppercase;
         }
 
         /* ── CTA pill ── */
