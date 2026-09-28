@@ -28,11 +28,12 @@ import { qrGetUrl } from '@/lib/store-links'
  * and tagged (the old App Store badge was a bare link that fired no conversion), and it is the
  * #get-the-app target that /get sends computers to.
  *
- * Smart QR (2026-09-28): a QR code sits beside the badges, computers only. It is plain
- * server-rendered markup hidden with CSS (.cbnd-qr's own media query below) — no client
- * JavaScript decides this, so there is no layout shift and the no-JS path is unaffected. A
+ * Smart QR (2026-09-28): a QR code and its caption sit beside the badges, computers only. It is
+ * plain server-rendered markup hidden with CSS (.cbnd-qr-group's own media query below) — no
+ * client JavaScript decides this, so there is no layout shift and the no-JS path is unaffected. A
  * revert must keep this working the same way item 1 above must keep the badges: computers still
- * need a way in that a phone's camera can read.
+ * need a way in that a phone's camera can read. Caption text is verbatim from the approved
+ * /artist mockup's qrclose block (review round 1 on PR #39 caught its absence here).
  *
  * NOTE: the style string below must stay free of apostrophes, quotes, ampersands
  * and angle brackets, comments included. See scripts/check-style-literals.mjs.
@@ -55,7 +56,13 @@ export default function CloseBand() {
         <Reveal y={16} delay={0.46}>
           <div className="cbnd-get">
             <StoreBadges placement="home-close" className="cbnd-badges" />
-            <QrCode value={qrGetUrl('home-close')} size={96} className="cbnd-qr" />
+            <div className="cbnd-qr-group">
+              <QrCode value={qrGetUrl('home-close')} size={120} className="cbnd-qr" />
+              <p className="cbnd-qr-caption">
+                On a computer? Scan this with your phone&apos;s camera. It opens the right store
+                for your phone.
+              </p>
+            </div>
           </div>
         </Reveal>
       </div>
@@ -105,10 +112,25 @@ export default function CloseBand() {
         .cbnd-badges {
           justify-content: center;
         }
+        .cbnd-qr-group {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          text-align: left;
+        }
         .cbnd-qr {
           background: #ffffff;
           border-radius: 14px;
           padding: 8px;
+          flex-shrink: 0;
+        }
+        .cbnd-qr-caption {
+          font-family: var(--font-albert);
+          font-size: 14px;
+          line-height: 1.5;
+          color: var(--e-t3);
+          margin: 0;
+          max-width: 30ch;
         }
 
         @media (max-width: 980px) {
@@ -123,7 +145,7 @@ export default function CloseBand() {
         /* Smart QR: computers only. Coarse pointer or no hover means a touch device, and a
            phone never needs a code to scan since it already has the app store one tap away. */
         @media (hover: none), (pointer: coarse), (max-width: 817px) {
-          .cbnd-qr {
+          .cbnd-qr-group {
             display: none;
           }
         }
