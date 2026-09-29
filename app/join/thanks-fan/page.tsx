@@ -4,11 +4,15 @@ import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import GetAppLink from '@/components/ui/GetAppLink'
 import { isProduction } from '@/lib/environment'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata = {
+// W16 (description): draft copy awaiting TJ approval.
+export const metadata = pageMetadata({
   title: "You're on the waitlist | Songcry",
-  robots: { index: false, follow: false },
-}
+  description: 'You’re on the Songcry fan waitlist. We’ll email you when fan access opens.',
+  path: '/join/thanks-fan',
+  noindex: true,
+})
 
 /**
  * Fan thank-you page. Copy is claims-locked (TJ approved) — do not reword.

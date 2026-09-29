@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import SupportIndex from '@/components/sections/support/SupportIndex'
+import { pageMetadata } from '@/lib/seo'
 
 /*
  * songcry.app/support
@@ -25,12 +26,12 @@ import SupportIndex from '@/components/sections/support/SupportIndex'
  * questions, because tasks scan faster.
  */
 
-export const metadata = {
-  alternates: { canonical: '/support' },
+export const metadata = pageMetadata({
   title: 'Songcry Support',
   description:
     'Get help with Songcry: reset your password, delete your account, check an artist review, report a song, copyright notices, and how to reach us.',
-}
+  path: '/support',
+})
 
 const sections = [
   { id: 'start', label: 'Getting started' },

@@ -5,6 +5,7 @@ import CallingIntro from '@/components/sections/artist/CallingIntro'
 import FeatureRow from '@/components/sections/artist/FeatureRow'
 import CityBand from '@/components/sections/artist/CityBand'
 import WhatWeNeed from '@/components/sections/artist/WhatWeNeed'
+import { pageMetadata } from '@/lib/seo'
 
 // /artist is the "Songcry for artists" showcase (TJ, 2026-09-25). artists.songcry.app is the
 // separate sign-up funnel that outreach and paid ads point at. Never redirect one to the other.
@@ -13,20 +14,13 @@ import WhatWeNeed from '@/components/sections/artist/WhatWeNeed'
 //
 // Brand rules for this page's words: Songcry never SongCry, no dashes as punctuation, and the
 // word local never appears.
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'For Artists | Songcry',
   description:
     'Get heard by real listeners near you. Songcry is a geolocation music platform where '
     + 'independent artists get discovered by the people close enough to show up.',
-  alternates: { canonical: '/artist' },
-  openGraph: {
-    title: 'For Artists | Songcry',
-    description:
-      'Get heard by real listeners near you. Songcry is a geolocation music platform where '
-      + 'independent artists get discovered by the people close enough to show up.',
-    url: 'https://songcry.app/artist',
-  },
-}
+  path: '/artist',
+})
 
 export default function ArtistPage() {
   return (

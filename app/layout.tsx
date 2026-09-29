@@ -5,6 +5,7 @@ import './tokens.css'
 import './globals.css'
 import MotionProvider from '@/components/motion/MotionProvider'
 import { isProduction } from '@/lib/environment'
+import { HOME_DESCRIPTION, HOME_TITLE, OG_IMAGE } from '@/lib/seo'
 
 const albertSans = Albert_Sans({
   subsets: ['latin'],
@@ -32,9 +33,8 @@ const baseUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: 'Songcry | Geolocation Based Music Platform',
-  description:
-    'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   // NO canonical here. Root-layout metadata is INHERITED by every page, so a canonical
   // set here made /artist and all three legal pages declare the HOMEPAGE as their
   // canonical URL — telling Google they are duplicates of / and should be dropped from
@@ -47,18 +47,16 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://songcry.app/',
-    title: 'Songcry | Geolocation Based Music Platform',
-    description:
-      'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
-    images: [{ url: '/framer/og-card.png', width: 1200, height: 630 }],
+    siteName: 'Songcry',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Songcry | Geolocation Based Music Platform',
-    description:
-      'Geo-based music platform empowering artists to publish, grow, and connect with real listeners intentionally.',
-    images: ['/framer/og-card.png'],
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [OG_IMAGE.url],
   },
   robots: 'max-image-preview:large',
   // Google Search Console ownership proof for https://songcry.app.

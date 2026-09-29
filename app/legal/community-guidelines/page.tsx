@@ -1,12 +1,13 @@
 import LegalLayout from '@/components/legal/LegalLayout'
 import LegalDocument from '@/components/legal/LegalDocument'
 import { loadLegalDoc } from '@/lib/legal'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata = {
-  alternates: { canonical: '/legal/community-guidelines' },
-  title: 'Community Guidelines - Songcry',
+export const metadata = pageMetadata({
+  title: 'Community Guidelines | Songcry',
   description: 'Songcry community guidelines for artists and fans.',
-}
+  path: '/legal/community-guidelines',
+})
 
 export default function CommunityGuidelinesPage() {
   const doc = loadLegalDoc('community-guidelines')

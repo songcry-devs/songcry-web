@@ -1,12 +1,13 @@
 import LegalLayout from '@/components/legal/LegalLayout'
 import LegalDocument from '@/components/legal/LegalDocument'
 import { loadLegalDoc } from '@/lib/legal'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata = {
-  alternates: { canonical: '/legal/terms-of-use' },
-  title: 'Terms of Use - Songcry',
+export const metadata = pageMetadata({
+  title: 'Terms of Use | Songcry',
   description: 'The terms that apply when you use Songcry.',
-}
+  path: '/legal/terms-of-use',
+})
 
 export default function TermsPage() {
   const doc = loadLegalDoc('terms-of-use')
