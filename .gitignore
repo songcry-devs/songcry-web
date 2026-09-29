@@ -14,3 +14,6 @@ verify/
 
 # never commit a local node_modules symlink (mode 120000) - it points at one machine
 node_modules
+
+# TypeScript incremental build info (machine-local)
+*.tsbuildinfo
