@@ -90,7 +90,6 @@ export default function Home() {
           --e-t1: #ffffff;
           --e-t2: rgba(255, 255, 255, 0.74);
           --e-t3: rgba(255, 255, 255, 0.46);
-          --e-t4: rgba(255, 255, 255, 0.3);
 
           --e-mark: #f819c0;
 

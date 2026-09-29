@@ -9,7 +9,7 @@
   --text-85: rgba(255, 255, 255, 0.85);    /* hero subtext */
   --text-60: rgba(255, 255, 255, 0.6);     /* muted body / beta line */
   --text-muted: rgb(173, 173, 173);        /* footer links + email */
-  --text-dim: rgb(122, 122, 122);          /* footer copyright */
+  --text-dim: rgb(133, 133, 133);          /* footer copyright, form trust line. Raised from 122 on 2026-09-25: 4.36 to 1 on the form card failed AA, 133 is 5.08 to 1 */
   --pink: rgb(248, 25, 192);               /* brand primary */
   --nav-pill-text: rgb(41, 41, 41);        /* "Download" text on white nav pill */
 

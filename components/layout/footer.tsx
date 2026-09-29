@@ -81,7 +81,7 @@ export default function Footer() {
         <div className="footer-right-cols">
           {/* Contact Us column */}
           <div>
-            <h3 className="footer-col-heading">Contact Us</h3>
+            <h2 className="footer-col-heading">Contact Us</h2>
             <a
               href="mailto:support@songcry.app"
               className="footer-link footer-email"
@@ -98,7 +98,7 @@ export default function Footer() {
 
           {/* Company column */}
           <div>
-            <h3 className="footer-col-heading">Company</h3>
+            <h2 className="footer-col-heading">Company</h2>
             <nav aria-label="Company links">
               <ul className="footer-company-links">
                 <li>

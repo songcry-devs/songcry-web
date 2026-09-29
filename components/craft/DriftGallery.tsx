@@ -62,7 +62,7 @@ export default function DriftGallery() {
   return (
     <section className="dg-section" aria-label="Inside the app">
       <div className="dg-wrap" ref={ref}>
-        <p className="dg-eyebrow">Real screens from the beta</p>
+        <h2 className="dg-eyebrow">Real screens from the beta</h2>
         <div className="dg-grid">
           {COLUMNS.map((col, ci) => (
             <motion.div className="dg-col" key={ci} style={{ y: ys[ci] }}>
@@ -97,9 +97,10 @@ export default function DriftGallery() {
           font-family: var(--font-albert);
           font-size: 12px;
           font-weight: 600;
+          line-height: 1.33;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: var(--e-t4);
+          color: var(--e-t3);
           margin: 0 0 56px;
         }
         .dg-grid {
