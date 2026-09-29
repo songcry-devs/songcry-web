@@ -1,6 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import {
+  FIRST_TOUCH_KEY,
   FORM_KEYS,
   UTM_KEYS,
   campaignQs,
@@ -8,7 +9,9 @@ import {
   cleanToken,
   outboundParams,
   pickCampaignParams,
+  readFirstTouch,
   sourcePageFromReferer,
+  tagUrl,
 } from '../lib/attribution.ts'
 
 // Copied from songcry-outreach/bin/attribution.py on 2026-09-25. If that file gains a key,
@@ -76,6 +79,57 @@ test('every source and medium we mint ourselves is in the attribution.py vocabul
     const medium = p.get('utm_medium')
     if (medium) assert.ok(MEDIUMS.has(medium), `medium ${medium}`)
   }
+})
+
+function memoryStore(initial: Record<string, string> = {}) {
+  const data = { ...initial }
+  return {
+    data,
+    getItem: (k: string) => (k in data ? data[k] : null),
+    setItem: (k: string, v: string) => { data[k] = v },
+  }
+}
+
+test('readFirstTouch stores the first campaign of the session and returns it', () => {
+  const s = memoryStore()
+  assert.equal(readFirstTouch(s, '?utm_source=meta&utm_medium=cpc&x=1'), 'utm_source=meta&utm_medium=cpc')
+  assert.equal(s.data[FIRST_TOUCH_KEY], 'utm_source=meta&utm_medium=cpc')
+})
+
+test('readFirstTouch keeps the first touch across internal pages and later campaigns', () => {
+  const s = memoryStore({ [FIRST_TOUCH_KEY]: 'utm_source=meta&utm_medium=cpc' })
+  assert.equal(readFirstTouch(s, ''), 'utm_source=meta&utm_medium=cpc')
+  assert.equal(readFirstTouch(s, '?utm_source=google&utm_medium=cpc'), 'utm_source=meta&utm_medium=cpc')
+  assert.equal(s.data[FIRST_TOUCH_KEY], 'utm_source=meta&utm_medium=cpc')
+})
+
+test('readFirstTouch stores nothing for a visit with no campaign', () => {
+  const s = memoryStore()
+  assert.equal(readFirstTouch(s, '?ref=x'), '')
+  assert.equal(FIRST_TOUCH_KEY in s.data, false)
+})
+
+test('readFirstTouch ignores a stored value that is not a campaign', () => {
+  const s = memoryStore({ [FIRST_TOUCH_KEY]: 'junk=1' })
+  assert.equal(readFirstTouch(s, '?utm_source=x'), 'utm_source=x')
+})
+
+test('readFirstTouch survives a storage that throws, and no storage at all', () => {
+  const throwing = {
+    getItem: () => { throw new Error('SecurityError') },
+    setItem: () => { throw new Error('QuotaExceededError') },
+  }
+  assert.equal(readFirstTouch(throwing, '?utm_source=x&gclid=g'), 'utm_source=x&gclid=g')
+  assert.equal(readFirstTouch(null, '?utm_source=x'), 'utm_source=x')
+})
+
+test('tagUrl appends like link_router tag(): ? first, & after', () => {
+  const p = new URLSearchParams('utm_source=web&utm_content=footer-for-artists')
+  assert.equal(tagUrl('https://artists.songcry.app', p), 'https://artists.songcry.app?utm_source=web&utm_content=footer-for-artists')
+  assert.equal(tagUrl('https://artists.songcry.app/?a=1', p), 'https://artists.songcry.app/?a=1&utm_source=web&utm_content=footer-for-artists')
+  assert.equal(tagUrl('https://artists.songcry.app', new URLSearchParams()), 'https://artists.songcry.app')
+  assert.equal(tagUrl('https://artists.songcry.app/#pricing', p), 'https://artists.songcry.app/?utm_source=web&utm_content=footer-for-artists#pricing')
+  assert.equal(tagUrl('https://artists.songcry.app/?a=1#join', p), 'https://artists.songcry.app/?a=1&utm_source=web&utm_content=footer-for-artists#join')
 })
 
 test('sourcePageFromReferer accepts songcry.app hosts only', () => {

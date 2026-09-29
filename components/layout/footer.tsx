@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import CarryLink from '@/components/ui/CarryLink'
+
 // Social icon SVGs inlined so fill="currentColor" responds to CSS `color`
 function IconInstagram() {
   return (
@@ -138,9 +140,9 @@ export default function Footer() {
                     form, the 39 city+genre pages and the whole acquisition path were unreachable
                     from our main domain — and inherited none of its SEO value. */}
                 <li>
-                  <a href="https://artists.songcry.app" className="footer-link">
+                  <CarryLink href="https://artists.songcry.app" placement="footer-for-artists" className="footer-link">
                     For Artists
-                  </a>
+                  </CarryLink>
                 </li>
               </ul>
             </nav>
