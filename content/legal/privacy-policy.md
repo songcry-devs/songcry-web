@@ -45,7 +45,7 @@ The Services do not currently include a working messaging feature. No user-to-us
 ### Information Collected Automatically
 
 - Device and usage information: device type, operating system, app version, language settings, IP address, device identifiers, log data, and in-app activity.
-- Activity information: the songs you play, like, host, comment on, share, or otherwise interact with, the profiles you view, the searches you run, and the timing and approximate location context of that activity. We use this activity to operate the discovery feed and to determine how music travels between areas.
+- Activity information: the songs you play, like, host, comment on, share, or otherwise interact with, the profiles you view, the searches you run, and the timing and precise location of that activity, as described under "Location Information" below. We use this activity to operate the discovery feed and to determine how music travels between areas.
 - Push notification tokens: if you enable notifications, we store a device token so we can deliver notifications to your device. You can turn notifications off at any time in your device settings.
 - Diagnostics and performance data during beta: crash reports, diagnostics, and performance information used to improve stability and troubleshoot issues.
 - Location information: the Services are location-based. See "Location Information" below for a full description of what we collect, how it is stored, and how it is used.
@@ -127,7 +127,7 @@ We collect date of birth to confirm that you are 18 or older. We do not use it f
 
 We may disclose information:
 
-- To service providers that help us operate the Services, such as hosting, storage and content delivery, authentication, geocoding and mapping, abuse prevention (including a bot-detection service used during artist signup), diagnostics or crash reporting, security monitoring, copyright screening, email delivery, text message delivery, and customer support tools.
+- To service providers that help us operate the Services, such as hosting, storage and content delivery, authentication, geocoding and mapping, abuse prevention, diagnostics or crash reporting, security monitoring, copyright screening, image moderation, email delivery, text message delivery, and customer support tools.
 - To advertising and measurement partners, so that we can tell which of our advertisements led someone to apply for access or join the waitlist, and so that those partners can show our advertisements to similar people. This is described in full under "Advertising and Measurement".
 - For legal and safety reasons, to comply with law, respond to valid legal process, enforce our Terms, and protect the rights, safety, and security of Songcry, our users, and the public.
 - In connection with a business transaction, such as financing, merger, acquisition, reorganization, or sale of assets, subject to appropriate protections.
@@ -182,7 +182,7 @@ Specifically:
 
 - Account information, including date of birth and your most recent location reading, is retained until you delete your account. Location recorded with your activity, including the positions where you hosted songs, is deleted when you delete your account.
 - Uploaded content, including audio and cover art, is retained until you delete it or delete your account.
-- Artist profile and content submission records, including the confirmations you make and the outcome of our review, are retained for as long as the account exists and for a reasonable period afterward to resolve disputes, respond to copyright complaints, and enforce our Terms.
+- Artist profile and content submission records, including the outcome of our review, are retained for as long as the account exists and for a reasonable period afterward to resolve disputes, respond to copyright complaints, and enforce our Terms.
 - Verification materials are retained to complete and evidence the verification decision, and are deleted when you delete your account. A document uploaded during an artist signup that is never completed is deleted automatically 30 days after it is uploaded. You can email support@songcry.app to request removal sooner.
 - Records of your acceptance of the Terms of Use and acknowledgment of this Privacy Policy, including the version accepted and the time of acceptance, are retained for as long as the account exists and are deleted with the account.
 - A record of changes to the legal name on an artist account is retained while the account exists, so that we can evidence verification decisions.

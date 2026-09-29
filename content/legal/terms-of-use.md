@@ -31,7 +31,7 @@ For clarity, an artist account can typically access fan features, but fan accoun
 
 ## Beta Program Notice
 
-The App is in beta and provided for evaluation only. Features may change, may be limited, and may be disabled or withdrawn without notice. Artists may sign up and submit a profile for review; fan access is not yet open and fans may join a waitlist. Access, review outcomes, and publication are granted at Songcry's sole discretion.
+The App is in beta and provided for evaluation only. Features may change, may be limited, and may be disabled or withdrawn without notice. Fans can listen in the App, which is available in the United States. Artists apply for an artist profile, and profiles and uploaded content are reviewed before they are published. Access, review outcomes, and publication are granted at Songcry's sole discretion.
 
 We may collect additional diagnostics, crash data, and performance information to improve reliability and user experience during beta.
 
@@ -188,7 +188,7 @@ The App is in beta and Songcry may change how distribution and metrics work over
 
 Our Privacy Policy (songcry.app/legal/privacy) explains how we collect, use, disclose, and protect personal information, including location information, beta telemetry, crash data, and retention practices. It forms part of these Terms by reference.
 
-We do not conduct third-party targeted advertising in beta.
+We use third-party advertising tools on our web pages to reach prospective artists and to measure that advertising. Our Privacy Policy (songcry.app/legal/privacy) describes what is shared with those tools and how to limit it under "Advertising and Measurement".
 
 By using the App, you consent to the collection and use of information as described in the Privacy Policy (songcry.app/legal/privacy).
 
