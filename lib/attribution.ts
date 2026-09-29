@@ -65,6 +65,24 @@ export function channelFromUtm(utm: Record<string, string>): string {
 }
 
 /**
+ * Which page a sign-up came from, from the Referer. Values carry a web: prefix so songcry.app
+ * rows stay distinct from artists.songcry.app rows in the shared access_requests table. Falls
+ * back to web:join when the Referer is missing or not ours; a lead is never rejected over it.
+ */
+export function sourcePageFromReferer(referer: string | null): string {
+  const fallback = 'web:join'
+  if (!referer) return fallback
+  try {
+    const u = new URL(referer)
+    if (u.hostname !== 'songcry.app' && !u.hostname.endsWith('.songcry.app')) return fallback
+    const path = u.pathname.replace(/^\/+|\/+$/g, '')
+    return path === '' ? 'web:root' : `web:${path}`
+  } catch {
+    return fallback
+  }
+}
+
+/**
  * The params for a link that leaves this page for a store or for artists.songcry.app.
  * Carries the visitor's own campaign when they have one. Otherwise tags the hop as web plus
  * the placement, so the arrival is attributable instead of looking direct. link_router tag()

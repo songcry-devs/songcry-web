@@ -29,7 +29,8 @@ export default function JoinForm({ compact = false }: { compact?: boolean }) {
   }, [])
 
   const isArtist = mode === 'artist'
-  const error = isArtist ? artistState.error : fanState.error
+  const state = isArtist ? artistState : fanState
+  const error = state.error
 
   return (
     <form
@@ -148,6 +149,13 @@ export default function JoinForm({ compact = false }: { compact?: boolean }) {
       {error && (
         <p className="join-error" role="alert">
           {error}
+        </p>
+      )}
+
+      {/* Only ever shown on npm run dev and Vercel previews: lib/environment.ts */}
+      {state.preview && (
+        <p className="join-preview" role="status">
+          Preview: nothing was saved.
         </p>
       )}
 
@@ -288,6 +296,18 @@ export default function JoinForm({ compact = false }: { compact?: boolean }) {
           font-size: 15px;
           line-height: 1.5;
           color: #F34655;
+        }
+
+        /* ── Preview result (dev and Vercel previews only) ── */
+        .join-preview {
+          margin: 16px 0 0;
+          padding: 12px 14px;
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.08);
+          font-family: var(--font-albert);
+          font-size: 15px;
+          line-height: 1.5;
+          color: #ffffff;
         }
 
         /* ── Trust line ── */

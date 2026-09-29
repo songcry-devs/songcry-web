@@ -4,88 +4,23 @@ import { randomUUID } from 'crypto'
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { sendCapiEvent } from '@/lib/meta-capi'
+import { signupGate } from '@/lib/environment'
+import { channelFromUtm, pickCampaignParams, sourcePageFromReferer } from '@/lib/attribution'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const IG_RE = /^[A-Za-z0-9._]{1,30}$/
 
 const GENERIC_ERROR = 'Something went wrong on our end. Please try again.'
 
-// TJ 2026-08-24: the artist thank-you IS the artists-site thank-you — one approved
-// page, one conversion surface (its Meta pixel Lead + Google Ads label are already
-// live there, keyed to the same `lead-` eid this action mints; a direct visit with
-// no eid fires nothing). songcry-web keeps only the fan thank-you.
+// TJ 2026-08-24: the artist thank-you IS the artists-site thank-you (its Meta pixel Lead and
+// Google Ads label fire there, keyed to the lead- eid minted here). A direct visit with no eid
+// fires nothing.
 const ARTIST_THANKS = 'https://artists.songcry.app/thanks'
 
-export type JoinState = { error?: string }
+/** A write that takes longer than this shows the visitor an error instead of a spinner. */
+const WRITE_TIMEOUT_MS = 8000
 
-/**
- * Which page the visitor submitted from. Derived from the Referer rather than
- * hardcoded — the artists.songcry.app waitlist learned this the hard way when
- * its form spread to 39 pages and every lead claimed to come from the homepage.
- *
- * Values carry a "web:" prefix so rows from THIS site (songcry.app) stay
- * distinguishable from artists.songcry.app rows ("root-landing",
- * "hiphop/losangeles", ...) in the shared `access_requests` table. Falls back
- * to "web:join" (the only page the form ships on today) when the Referer is
- * missing or foreign — a lead is never rejected over provenance.
- */
-function sourcePageFromReferer(referer: string | null): string {
-  const fallback = 'web:join'
-  if (!referer) return fallback
-  try {
-    const u = new URL(referer)
-    // Production domain or a Vercel preview of this project.
-    if (!u.hostname.endsWith('songcry.app') && !u.hostname.endsWith('.vercel.app')) {
-      return fallback
-    }
-    const path = u.pathname.replace(/^\/+|\/+$/g, '')
-    return path === '' ? 'web:root' : `web:${path}`
-  } catch {
-    return fallback
-  }
-}
-
-/**
- * Attribution: known campaign params from the landing-page query string
- * (captured client-side into a hidden `qs` field), same pattern and key list
- * as the artists.songcry.app waitlist so the jsonb `utm` column stays uniform.
- */
-function utmFromQs(qs: string): Record<string, string> {
-  const params = new URLSearchParams(qs)
-  const utm: Record<string, string> = {}
-  for (const k of [
-    'utm_source',
-    'utm_medium',
-    'utm_campaign',
-    'utm_content',
-    'utm_term',
-    'gclid',
-    'fbclid',
-  ]) {
-    const v = params.get(k)
-    if (v) utm[k] = v
-  }
-  return utm
-}
-
-/**
- * The single coarse channel name for a lead, derived from the same `utm` blob.
- *
- * The artist form does not need this: it writes straight into `access_requests`,
- * where the jsonb `utm` column IS the attribution and channel_report groups on
- * utm_source/utm_medium. The fan form posts to the Songcry backend, whose
- * `fan_waitlist.source` is a VARCHAR(50) — one word, not a blob — so the channel
- * has to be collapsed here. Both still travel with the full `utm` alongside.
- *
- * 'web' means "arrived at songcry.app carrying no campaign params at all", which
- * is honest; it must never be reported as if the visitor came from a campaign.
- */
-function channelFromUtm(utm: Record<string, string>): string {
-  if (utm.utm_source) return utm.utm_source.slice(0, 50)
-  if (utm.gclid) return 'google'
-  if (utm.fbclid) return 'meta'
-  return 'web'
-}
+export type JoinState = { error?: string; preview?: boolean }
 
 /** Bots fill every field, including the visually hidden one. */
 function honeypotTripped(formData: FormData): boolean {
@@ -93,18 +28,22 @@ function honeypotTripped(formData: FormData): boolean {
 }
 
 /**
- * Artist submit. Validates, inserts one row into the Supabase `access_requests`
- * table (same table, project, and key as the artists.songcry.app waitlist),
- * then redirects to the artist thank-you page with a fresh event id so the
- * conversion pixels fire exactly once per real lead — a direct visit to the
- * thanks page fires nothing.
+ * The host this request was made to, as the platform actually reports it. Vercel proxies the
+ * request in front of the Function, and Next's own Server Actions CSRF check (action-handler.js)
+ * prefers x-forwarded-host over host for exactly that reason; the fallback to host covers a
+ * request that arrives with no x-forwarded-host at all (e.g. local `next start`).
  */
-export async function submitArtist(
-  _prev: JoinState,
-  formData: FormData
-): Promise<JoinState> {
-  // Honeypot: silently pretend success. No eid in the redirect, so the thanks
-  // page renders but no conversion event fires for bot traffic.
+function requestHost(): string | null {
+  return headers().get('x-forwarded-host') ?? headers().get('host')
+}
+
+/**
+ * Artist submit. Validates; on production inserts one access_requests row, reports the Lead to
+ * Meta CAPI and redirects to the artists-site thank-you with the eid. Anywhere else it stops
+ * after validation (lib/environment.ts): nothing is written, no conversion fires, and the form
+ * says "Preview: nothing was saved."
+ */
+export async function submitArtist(_prev: JoinState, formData: FormData): Promise<JoinState> {
   if (honeypotTripped(formData)) redirect(ARTIST_THANKS)
 
   const artistName = String(formData.get('artist_name') ?? '').trim()
@@ -113,36 +52,41 @@ export async function submitArtist(
     .trim()
     .replace(/^@+/, '')
 
-  if (!artistName) {
-    return { error: 'Enter your artist or band name.' }
-  }
-  if (!EMAIL_RE.test(email)) {
-    return { error: 'Enter a valid email address.' }
-  }
+  if (!artistName) return { error: 'Enter your artist or band name.' }
+  if (!EMAIL_RE.test(email)) return { error: 'Enter a valid email address.' }
   if (instagram && !IG_RE.test(instagram)) {
-    return {
-      error: 'Enter a valid Instagram handle: letters, numbers, . or _ only.',
-    }
+    return { error: 'Enter a valid Instagram handle: letters, numbers, . or _ only.' }
   }
 
-  const utm = utmFromQs(String(formData.get('qs') ?? ''))
+  const utm = pickCampaignParams(String(formData.get('qs') ?? ''))
+  const sourcePage = sourcePageFromReferer(headers().get('referer'))
 
-  // Supabase outreach project + publishable "anon" key. The anon key is public
-  // by design and restricted to INSERT-only on `access_requests` via RLS (it
-  // cannot read the table), so it is safe in source. Inlined rather than read
-  // from env to avoid a mispasted Vercel value silently breaking submissions.
-  // The key JWT is signed for this exact project ref — URL and key must match.
-  const url = 'https://rfhoabrrptakkoygrrgw.supabase.co'
-  const key =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmaG9hYnJycHRha2tveWdycmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ3NTM1NTksImV4cCI6MjEwMDMyOTU1OX0.tB4Q0G9lKlmv4k3nHBFkqy4NNxfAFYOyPHenAsJ3d2k'
+  const gate = signupGate(process.env, requestHost())
+  if (gate.mode === 'preview') {
+    // No email in the log: Vercel logs are not a place for personal data.
+    console.info(
+      `[signup-preview] nothing saved env=${process.env.VERCEL_ENV ?? 'unset'} form=artist page=${sourcePage} utm=${Object.keys(utm).join('+') || '-'}`
+    )
+    return { preview: true }
+  }
+  if (gate.mode === 'misconfigured') {
+    console.error(
+      `[signup-config-missing] form=artist missing=${gate.missing.join(',') || '-'} invalid=${gate.invalid.join(',') || '-'}`
+    )
+    return { error: GENERIC_ERROR }
+  }
+  if (gate.envMismatch) {
+    console.warn(`[signup-env-mismatch] env=${process.env.VERCEL_ENV ?? 'unset'} form=artist`)
+  }
+  const { supabaseUrl, supabaseAnonKey } = gate.config
 
   let res: Response
   try {
-    res = await fetch(`${url}/rest/v1/access_requests`, {
+    res = await fetch(`${supabaseUrl}/rest/v1/access_requests`, {
       method: 'POST',
       headers: {
-        apikey: key,
-        Authorization: `Bearer ${key}`,
+        apikey: supabaseAnonKey,
+        Authorization: `Bearer ${supabaseAnonKey}`,
         'Content-Type': 'application/json',
         Prefer: 'return=minimal',
       },
@@ -150,10 +94,11 @@ export async function submitArtist(
         email,
         artist_name: artistName,
         ...(instagram ? { instagram } : {}),
-        source_page: sourcePageFromReferer(headers().get('referer')),
+        source_page: sourcePage,
         ...(Object.keys(utm).length ? { utm } : {}),
       }),
       cache: 'no-store',
+      signal: AbortSignal.timeout(WRITE_TIMEOUT_MS),
     })
   } catch (err) {
     console.error('artist insert unreachable', String(err).slice(0, 200))
@@ -161,18 +106,13 @@ export async function submitArtist(
   }
 
   if (!res.ok) {
-    // Server log only — helps diagnose via Vercel runtime logs, not shown to user.
     const detail = await res.text().catch(() => '')
     console.error('artist insert failed', res.status, detail.slice(0, 200))
     return { error: GENERIC_ERROR }
   }
 
-  // Server-side conversion (TJ, 2026-09-03). The pixel on the thank-you page is blocked for a
-  // meaningful share of visitors, and the blocked share is biased toward privacy-conscious
-  // people — so Meta was learning from a skewed sample of THIS site's leads. The eid is minted
-  // here and passed to the redirect so both events carry the SAME event_id and Meta collapses
-  // them into one conversion. Awaited, not detached: a serverless function can be frozen the
-  // moment it responds. sendCapiEvent never throws and self-skips without a token.
+  // Server-side twin of the thank-you page pixel, same event_id so Meta dedupes the pair.
+  // Awaited: a serverless function can be frozen the moment it responds.
   const eid = `lead-${randomUUID()}`
   const capi = await sendCapiEvent({
     eventId: eid,
@@ -190,78 +130,65 @@ export async function submitArtist(
 }
 
 /**
- * Fan submit. POSTs to the public fan-waitlist endpoint on the Songcry backend
- * (no auth — intentionally), then redirects to the fan thank-you page.
- *
- * Endpoint semantics (CRITICAL):
- * - Success is HTTP 204 with NO body. Never call res.json().
- * - Duplicate emails also return 204 — that is fine, the person is on the list.
- * - 422 is a validation rejection — shown inline.
- * - X-Forwarded-For is set to the real client IP (first entry of the incoming
- *   chain) so the backend records the visitor, not Vercel's egress IP.
+ * Fan submit. On production POSTs to the public fan-waitlist endpoint (204 on success and on a
+ * duplicate, 422 on validation; never read a body), reports FanWaitlist to Meta CAPI and
+ * redirects to the fan thank-you. Anywhere else it stops after validation, like the artist path.
  */
-export async function submitFan(
-  _prev: JoinState,
-  formData: FormData
-): Promise<JoinState> {
+export async function submitFan(_prev: JoinState, formData: FormData): Promise<JoinState> {
   if (honeypotTripped(formData)) redirect('/join/thanks-fan')
 
   const name = String(formData.get('name') ?? '').trim()
   const email = String(formData.get('email') ?? '').trim()
 
-  if (!name) {
-    return { error: 'Enter your name.' }
-  }
-  if (!EMAIL_RE.test(email)) {
-    return { error: 'Enter a valid email address.' }
-  }
+  if (!name) return { error: 'Enter your name.' }
+  if (!EMAIL_RE.test(email)) return { error: 'Enter a valid email address.' }
 
-  // x-forwarded-for is a comma-separated chain; the client is the first entry.
   const clientIp = headers().get('x-forwarded-for')?.split(',')[0]?.trim()
-
-  // Attribution (TJ, 2026-09-02). This form used to post only {email, name}, and
-  // the backend hardcoded source='mobile_signup' — so a fan who arrived from a
-  // Google ad was recorded as having signed up inside the app. Both fields are
-  // optional on the backend DTO, so an older deploy of this action still works;
-  // an older backend ignores them (ValidationPipe runs whitelist: true).
-  const utm = utmFromQs(String(formData.get('qs') ?? ''))
+  const utm = pickCampaignParams(String(formData.get('qs') ?? ''))
   const source = channelFromUtm(utm)
+
+  const gate = signupGate(process.env, requestHost())
+  if (gate.mode === 'preview') {
+    console.info(
+      `[signup-preview] nothing saved env=${process.env.VERCEL_ENV ?? 'unset'} form=fan source=${source} utm=${Object.keys(utm).join('+') || '-'}`
+    )
+    return { preview: true }
+  }
+  if (gate.mode === 'misconfigured') {
+    console.error(
+      `[signup-config-missing] form=fan missing=${gate.missing.join(',') || '-'} invalid=${gate.invalid.join(',') || '-'}`
+    )
+    return { error: GENERIC_ERROR }
+  }
+  if (gate.envMismatch) {
+    console.warn(`[signup-env-mismatch] env=${process.env.VERCEL_ENV ?? 'unset'} form=fan`)
+  }
 
   let res: Response
   try {
-    res = await fetch('https://api.songcry.app/api/v1/fan-waitlist', {
+    res = await fetch(gate.config.fanWaitlistUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         ...(clientIp ? { 'X-Forwarded-For': clientIp } : {}),
       },
-      body: JSON.stringify({
-        email,
-        name,
-        source,
-        ...(Object.keys(utm).length ? { utm } : {}),
-      }),
+      body: JSON.stringify({ email, name, source, ...(Object.keys(utm).length ? { utm } : {}) }),
       cache: 'no-store',
+      signal: AbortSignal.timeout(WRITE_TIMEOUT_MS),
     })
   } catch (err) {
     console.error('fan waitlist unreachable', String(err).slice(0, 200))
     return { error: GENERIC_ERROR }
   }
 
-  if (res.status === 422) {
-    return { error: 'Check your name and email, then try again.' }
-  }
+  if (res.status === 422) return { error: 'Check your name and email, then try again.' }
   if (!res.ok) {
     const detail = await res.text().catch(() => '')
     console.error('fan waitlist failed', res.status, detail.slice(0, 200))
     return { error: GENERIC_ERROR }
   }
 
-  // 204 — success (or a duplicate, which is just as good). No body to read.
-  //
-  // Server-side twin of the thank-you page's fbq('trackCustom','FanWaitlist'), sharing this eid
-  // so Meta dedupes them into one. 'FanWaitlist' matches the page exactly — a mismatched
-  // event_name would not dedupe and would report as two different conversions.
+  // Server-side twin of the thank-you page fbq trackCustom FanWaitlist, same eid, same name.
   const eid = `fan-${randomUUID()}`
   const capi = await sendCapiEvent({
     eventId: eid,

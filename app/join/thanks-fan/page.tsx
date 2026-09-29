@@ -3,6 +3,7 @@ import Script from 'next/script'
 import Nav from '@/components/layout/nav'
 import Footer from '@/components/layout/footer'
 import GetAppLink from '@/components/ui/GetAppLink'
+import { isProduction } from '@/lib/environment'
 
 export const metadata = {
   title: "You're on the waitlist | Songcry",
@@ -124,15 +125,20 @@ export default function ThanksFanPage({
           - eventID dedupes repeat views of this page.
           - Polls because the base pixel script in the root layout and this
             script are both afterInteractive, so ordering is not guaranteed.
-            Gives up after ~5s rather than looping forever. */}
-      <Script id="fan-waitlist-conversion" strategy="afterInteractive">
-        {`(function(){var id=${JSON.stringify(eid ?? null)};if(!id||id.indexOf('fan-')!==0)return;
+            Gives up after ~5s rather than looping forever.
+          - Production only: on a preview or local dev, the root layout never loads the
+            pixel at all, so this would just poll for 5s and give up. Gated the same way
+            regardless, so there is no dependence on that timing. */}
+      {isProduction(process.env) && (
+        <Script id="fan-waitlist-conversion" strategy="afterInteractive">
+          {`(function(){var id=${JSON.stringify(eid ?? null)};if(!id||id.indexOf('fan-')!==0)return;
 var n=0;
 (function f(){
 if(window.fbq){window.fbq('trackCustom','FanWaitlist',{},{eventID:id});return;}
 if(++n<25){setTimeout(f,200);}
 })();})();`}
-      </Script>
+        </Script>
+      )}
     </>
   )
 }

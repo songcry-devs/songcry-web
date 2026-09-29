@@ -8,6 +8,7 @@ import {
   cleanToken,
   outboundParams,
   pickCampaignParams,
+  sourcePageFromReferer,
 } from '../lib/attribution.ts'
 
 // Copied from songcry-outreach/bin/attribution.py on 2026-09-25. If that file gains a key,
@@ -75,4 +76,16 @@ test('every source and medium we mint ourselves is in the attribution.py vocabul
     const medium = p.get('utm_medium')
     if (medium) assert.ok(MEDIUMS.has(medium), `medium ${medium}`)
   }
+})
+
+test('sourcePageFromReferer accepts songcry.app hosts only', () => {
+  assert.equal(sourcePageFromReferer('https://songcry.app/'), 'web:root')
+  assert.equal(sourcePageFromReferer('https://songcry.app/join'), 'web:join')
+  assert.equal(sourcePageFromReferer('https://www.songcry.app/artist/'), 'web:artist')
+  // endsWith('songcry.app') used to accept this lookalike.
+  assert.equal(sourcePageFromReferer('https://evilsongcry.app/x'), 'web:join')
+  // Previews no longer write, so a preview host is never a real source page.
+  assert.equal(sourcePageFromReferer('https://songcry-web-git-x-tjsongcrys-projects.vercel.app/join'), 'web:join')
+  assert.equal(sourcePageFromReferer(null), 'web:join')
+  assert.equal(sourcePageFromReferer('not a url'), 'web:join')
 })

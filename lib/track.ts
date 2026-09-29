@@ -1,4 +1,5 @@
 import { deviceFromUA } from './store-links.ts'
+import { isProductionHost } from './environment.ts'
 
 declare global {
   interface Window {
@@ -11,14 +12,17 @@ declare global {
 export const STORE_CLICK_CONVERSION = 'AW-18264662044/9e3nCICO5cccEJzAooVE'
 
 /**
- * True only for the live site's own hosts. PR 1 ships before PR 3's server-side production
- * gate, and TJ taps these controls on the Vercel preview during review. A preview tap, a
- * localhost tap, or a lookalike domain must never record a real ad conversion. Exact match
+ * True only for the live site's own hosts. TJ taps these controls on the Vercel preview during
+ * review. A preview tap, a localhost tap, or a lookalike domain must never record a real ad
+ * conversion. Exact match
  * only: a lookalike like songcry.app.evil.com is a DIFFERENT host that merely contains our
  * name, so it must fail this check, not pass it.
+ *
+ * Delegates to lib/environment.ts's isProductionHost so this repo has one definition of "the
+ * production host", not two that could drift apart.
  */
 export function isLiveHost(host: string): boolean {
-  return host === 'songcry.app' || host === 'www.songcry.app'
+  return isProductionHost(host)
 }
 
 /** The page's own host, or '' outside a browser, so a missing `location` never throws. */
@@ -44,7 +48,7 @@ function safeCall(fn: ((...args: unknown[]) => void) | undefined, ...args: unkno
 
 /**
  * A tap on a store link, told to both ad platforms (they share no signal). The rule, the same on
- * songcry.app and artists.songcry.app (coordinator, 2026-09-25):
+ * songcry.app and artists.songcry.app (decided 2026-09-25):
  *   Google Ads  both stores fire this ONE store-click conversion, so Ads optimises on one signal.
  *   Meta        App Store fires AppStoreClick; Google Play fires PlayStoreClick, the event
  *               artists.songcry.app already fires live, so its reporting stays continuous.
@@ -54,8 +58,8 @@ function safeCall(fn: ((...args: unknown[]) => void) | undefined, ...args: unkno
  * break the link and can never stop the other platform's call from firing.
  *
  * `host` defaults to the page's own host and is only ever overridden by a test. Never send a
- * real ad conversion off the live site (controller ruling B', 2026-09-25): a Vercel preview,
- * localhost, or a lookalike domain sends nothing to either platform.
+ * real ad conversion off the live site: a Vercel preview, localhost, or a lookalike domain
+ * sends nothing to either platform.
  */
 export function trackStoreClick(
   store: 'app-store' | 'google-play',

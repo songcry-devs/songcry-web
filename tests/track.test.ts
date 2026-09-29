@@ -37,6 +37,10 @@ test('isLiveHost is true only for the apex and www host', () => {
   assert.equal(isLiveHost(''), false)
 })
 
+test('isLiveHost delegates to isProductionHost, so it is also case-insensitive', () => {
+  assert.equal(isLiveHost('SONGCRY.APP'), true)
+})
+
 test('an App Store tap on the live host fires the store-click conversion and Meta AppStoreClick', () => {
   const calls = recordTags()
   trackStoreClick('app-store', 'home-close', LIVE)

@@ -4,6 +4,7 @@ import { Albert_Sans, Inter } from 'next/font/google'
 import './tokens.css'
 import './globals.css'
 import MotionProvider from '@/components/motion/MotionProvider'
+import { isProduction } from '@/lib/environment'
 
 const albertSans = Albert_Sans({
   subsets: ['latin'],
@@ -83,49 +84,57 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Meta pixel and Google Ads load on production only. On a preview they recorded page views,
+  // and a Download tap there fired a real Google Ads conversion.
+  const live = isProduction(process.env)
+
   return (
     <html lang="en" className={`${albertSans.variable} ${inter.variable}`}>
       <body>
         <MotionProvider>{children}</MotionProvider>
-        <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            height="1"
-            width="1"
-            alt=""
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=2360336011159400&ev=PageView&noscript=1"
-          />
-        </noscript>
+        {live && (
+          <noscript>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              height="1"
+              width="1"
+              alt=""
+              style={{ display: 'none' }}
+              src="https://www.facebook.com/tr?id=2360336011159400&ev=PageView&noscript=1"
+            />
+          </noscript>
+        )}
       </body>
 
-      {/*
-        MEASUREMENT — added 2026-08-04.
+      {live && (
+        <>
+          {/*
+            MEASUREMENT — added 2026-08-04.
 
-        songcry.app had NO analytics of any kind: no Meta pixel, no Google tag, no click
-        tracking, on the live Framer site AND on this replacement. We could not see a visit,
-        let alone an App Store click, on our primary domain. Every ad we run would have been
-        unmeasurable at the destination.
+            songcry.app had NO analytics of any kind: no Meta pixel, no Google tag, no click
+            tracking, on the live Framer site AND on this replacement. We could not see a visit,
+            let alone an App Store click, on our primary domain. Every ad we run would have been
+            unmeasurable at the destination.
 
-        Matches artists.songcry.app exactly (same pixel dataset, same Google Ads conversion
-        ID) so both properties report into one place and audiences accumulate together.
-        Meta and Google do not share signal — both tags are required.
-      */}
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=AW-18264662044"
-        strategy="afterInteractive"
-      />
-      <Script id="google-ads-gtag" strategy="afterInteractive">
-        {`window.dataLayer = window.dataLayer || [];
+            Matches artists.songcry.app exactly (same pixel dataset, same Google Ads conversion
+            ID) so both properties report into one place and audiences accumulate together.
+            Meta and Google do not share signal — both tags are required.
+          */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=AW-18264662044"
+            strategy="afterInteractive"
+          />
+          <Script id="google-ads-gtag" strategy="afterInteractive">
+            {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'AW-18264662044');`}
-      </Script>
-      {/* Meta pixel — dataset "Songcry Event Data" (2360336011159400). PageView fires here;
-          AppStoreClick is a custom event fired from the download buttons, because Meta has no
-          standard event for app-store intent from a website. */}
-      <Script id="meta-pixel" strategy="afterInteractive">
-        {`!function(f,b,e,v,n,t,s)
+          </Script>
+          {/* Meta pixel — dataset "Songcry Event Data" (2360336011159400). PageView fires here;
+              AppStoreClick is a custom event fired from the download buttons, because Meta has no
+              standard event for app-store intent from a website. */}
+          <Script id="meta-pixel" strategy="afterInteractive">
+            {`!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
@@ -135,7 +144,9 @@ s.parentNode.insertBefore(t,s)}(window,document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '2360336011159400');
 fbq('track', 'PageView');`}
-      </Script>
+          </Script>
+        </>
+      )}
     </html>
   )
 }
