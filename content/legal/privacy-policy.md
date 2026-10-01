@@ -37,16 +37,18 @@ We collect information in three ways: information you provide, information colle
 - Account type information: artist or fan. Features may vary by account type.
 - User Content: content you upload, post, or otherwise submit, such as audio, video, cover art, and related metadata such as title, tags, credits, and descriptions, and any submissions such as comments, reports, or feedback.
 - Verification materials: documents you choose to upload to support an artist verification request, and information from social or streaming accounts you connect for verification (see "Connected Accounts for Artist Verification" below).
-- Reports and complaints: information you submit when you report content or user conduct, including the details you provide, and related context needed to review the report.
+- Messages: the messages you send and receive through Songcry's direct messages, including text, photos, the songs you share, replies, and reactions. See "Direct Messages" below.
+- Reports and complaints: information you submit when you report content or user conduct, including the details you provide, and related context needed to review the report. When you report a message or a conversation, this includes a saved copy of the conversation, as described under "Direct Messages" below.
 - Support communications: the information you provide when you contact us or participate in surveys or user research.
 
-The Services do not currently include a working messaging feature. No user-to-user messages are sent, delivered, or stored. If we launch messaging, we will update this Policy before it becomes available.
+The Services include direct messages between users. What we collect when you use them, how we protect and screen them, who can see them, and how long we keep them is described under "Direct Messages" below.
 
 ### Information Collected Automatically
 
 - Device and usage information: device type, operating system, app version, language settings, IP address, device identifiers, log data, and in-app activity.
 - Activity information: the songs you play, like, host, comment on, share, or otherwise interact with, the profiles you view, the searches you run, and the timing and precise location of that activity, as described under "Location Information" below. We use this activity to operate the discovery feed and to determine how music travels between areas.
-- Push notification tokens: if you enable notifications, we store a device token so we can deliver notifications to your device. You can turn notifications off at any time in your device settings.
+- Push notification tokens: if you enable notifications, we store a device token, together with the version of the App it belongs to, so we can deliver notifications to your device. You can turn notifications off at any time in your device settings.
+- Messaging activity: who you message and who messages you, when messages are sent and read, the message requests you accept or delete, the chats you mute, pin, or delete, and the accounts you block.
 - Diagnostics and performance data during beta: crash reports, diagnostics, and performance information used to improve stability and troubleshoot issues.
 - Location information: the Services are location-based. See "Location Information" below for a full description of what we collect, how it is stored, and how it is used.
 
@@ -92,9 +94,56 @@ Songcry's use of information received from Google APIs adheres to the [Google AP
 
 **Verification documents.** If you upload a document to support artist verification, we use it only to assess that verification request. Access is restricted to personnel reviewing the request.
 
+## Direct Messages
+
+Songcry lets users send each other private messages. This section explains how that works and what happens to your messages.
+
+**Who can message whom.** Today, an artist whose profile is live on Songcry can start a conversation with any active Songcry account. If the person you message does not follow you, your message arrives in their Requests folder as a message request. You can send up to three messages until they accept, and they cannot reply until they accept. If we open messaging to other kinds of accounts, we will update this Policy first.
+
+**What we collect.** When you use direct messages, we collect and store the content of your messages, including text, photos, the songs you share, replies, and reactions; who sent each message and who received it; when it was sent; whether and when it was read; the status of message requests; and your settings for each chat, such as mute, pin, and chats you have deleted. We store messages on our servers so we can deliver them to the other person and show them on each of your devices.
+
+**Messages are not end-to-end encrypted.** Messages travel between your device and our servers over encrypted connections. They are not end-to-end encrypted, which means Songcry's systems can access their content. We limit who at Songcry can see them, as described below. Please do not use direct messages to send passwords, financial details, government ID numbers, or other information you would not want stored by Songcry.
+
+**Photos.** Before a photo leaves your phone, the App re-encodes it and removes its metadata, including its location, camera details, and the time it was taken. Our servers check again and remove any location data that remains before the photo can be viewed. Photos are kept in private storage and are shown only to the people in the conversation, through links that expire after one hour. The people you message can save photos and take screenshots, and we cannot control what they do with anything you send them.
+
+**Shared songs.** When you share a song in a message, the message points to the song on Songcry rather than copying it. If the song is later removed or becomes unavailable, the message shows that the song is not available.
+
+**Automated safety checks.** We check messages automatically before they are delivered:
+
+- Text: we compare the text of each message against a list of slurs and sexual solicitation phrases. A message that matches is not delivered and its text is not stored. We keep a technical record that your account tried to send a message that was blocked, without its content.
+- Photos: we use an automated image moderation service, operated for us by Amazon Web Services, to check each photo for explicit nudity and sexual activity, graphic violence, hate symbols, and drugs. A photo that is flagged is not delivered. It is kept, with the details of the attempt, so that our team can review it. If the check cannot finish in time, the photo is delivered and checked again shortly afterward; if it is flagged then, it is removed from the conversation and sent to our team for review.
+
+**[Drafting note, remove before publishing: photo screening must be switched on in production before this paragraph goes live.]**
+
+Automated checks make mistakes in both directions. They may block something that is allowed or miss something that is not. Use the report and block tools if you receive something that breaks our rules.
+
+**Reports.** You can report a message, a conversation, or an account. When you do, we save a copy of the reported message and up to 20 messages around it, or the last 20 messages of the conversation, including messages you sent, any photos and shared songs in them, and the public profile details (name, username, and profile photo) of both people. We keep this copy even if the messages are later deleted, so that we can review the report. We do not tell the reported account who reported it. A short alert that a report was filed, showing its category but not the message content or anyone's name, is sent to our internal team so the report is reviewed promptly.
+
+**Who at Songcry can see your messages.** We do not read your messages as a routine matter. Authorized Songcry personnel may access message content only when it is needed to: review a report or an automated flag; investigate spam, fraud, abuse, a security incident, or a threat to someone's safety; respond to a request you make to us, such as a support request about a conversation; or comply with law or valid legal process. Report review happens in our internal administrative tools, which show the saved copy described above. We restrict this access to personnel with a business need.
+
+**Deleting messages and chats.**
+
+- Delete for me hides a message from your view only. The other person still sees it.
+- Delete for everyone is available for messages you sent, with no time limit. It removes the text and shared song from the conversation for both people and shows that a message was deleted. Photos in that message are deleted from our storage, usually within a few hours, unless an open report needs them, in which case they are deleted after the report is resolved.
+- Deleting a chat hides that conversation's history from your view only. If the other person sends a new message, the chat reappears with only the new message.
+- The other person may already have read, saved, or taken a screenshot of a message before you delete it, and a notification may already have appeared on their device. Deleting a message cannot undo that.
+- Deleted information can remain in our backups for up to 30 days before the backups expire.
+
+**Blocking.** When you block someone, neither of you can send messages to, react to, or receive notifications from the other, and each of you stops following the other. The conversation stays in both of your lists. The person you blocked is not told that you blocked them, but they will see that they cannot reply. Unblocking lets you message each other again; it does not restore follows.
+
+**Notifications.** If you allow notifications, a new message in an accepted chat shows the sender's name and up to the first 100 characters of the message, or "Sent a photo" or "Shared a song". These can appear on your lock screen, depending on your device settings. A notification for a message request shows only the sender's name, never the message. Notifications are delivered through Apple Push Notification service on iOS and Firebase Cloud Messaging, a Google service, on Android, which process the notification content in order to deliver it. You can turn notifications off or hide previews in your device settings, and you can mute a chat in the App to stop its notifications.
+
+**Read status and live delivery.** The App shows "Seen" under your latest message once the other person has read it. There is currently no setting to turn this off. While the App is open, it keeps a live connection to our servers so new messages arrive instantly. We do not show typing indicators or whether you are online.
+
+**When you delete your account.** The messages you sent, including the photos in them and your reactions, are deleted, and they disappear from the other person's chats too. Messages other people sent you stay in their accounts. Report copies are kept for the period described under "Data Retention".
+
+**Legal requests.** We disclose the content of messages to a government agency only when we are legally required to, for example in response to a valid search warrant, or when the law allows us to disclose it voluntarily, such as in an emergency involving a danger of death or serious physical injury, or to report suspected child sexual exploitation to the National Center for Missing & Exploited Children. When the law requires us to preserve information, for example in response to a valid preservation request or after a report to the National Center for Missing & Exploited Children, we keep it for the period the law requires, even if it is deleted in the App.
+
 ## Sensitive Personal Information
 
 We do not require you to provide sensitive personal information to use the Services. If you choose to include sensitive personal information in User Content, you understand it will be processed as part of providing the Services and may become public depending on your settings.
+
+Some privacy laws, including California's, treat the contents of your private messages as sensitive personal information. We use the contents of your messages only to deliver them and show them to you and the people you message, to keep messaging safe and secure (including the automated checks and report reviews described under "Direct Messages"), to prevent fraud, spam, and abuse, and to comply with law. We do not use the contents of your messages for advertising, we do not sell them, and we do not use them to decide what music you see.
 
 ## Text Messages
 
@@ -113,6 +162,7 @@ We use information to:
 - Enable location-based functionality and prevent misuse of location-dependent features.
 - Review artist profiles and uploaded content before publication, including identity verification and copyright screening.
 - Communicate with you, including service, security, and administrative messages, transactional emails, push notifications, and in-App notices related to your use of the Services.
+- Deliver direct messages and message notifications, and keep messaging safe, including filtering text, screening photos, reviewing reports, enforcing block and request limits, and limiting spam, for example by limiting how many new conversations an account can start each day.
 - Improve and develop the Services, including diagnostics, crash reporting, analytics, and performance measurement.
 - Conduct testing and research during beta, including A/B testing, to evaluate and improve features, user experience, and performance.
 - Moderate content and handle reports to help keep the Services safe and enforce our Terms and Community Guidelines, including investigating suspected violations, responding to user reports, and detecting fraud, spam, or abuse. This may include manual review and automated tools.
@@ -127,9 +177,10 @@ We collect date of birth to confirm that you are 18 or older. We do not use it f
 
 We may disclose information:
 
-- To service providers that help us operate the Services, such as hosting, storage and content delivery, authentication, geocoding and mapping, abuse prevention, diagnostics or crash reporting, security monitoring, copyright screening, image moderation, email delivery, text message delivery, and customer support tools.
+- With the people you message. When you send a message, the recipient sees its content and your public profile (name, username, and profile photo), and you see when they have read it.
+- To service providers that help us operate the Services, such as hosting, storage and content delivery, authentication, geocoding and mapping, abuse prevention, diagnostics or crash reporting, security monitoring, copyright screening, image moderation (including the screening of photos sent in messages), push notification delivery, email delivery, text message delivery, and customer support tools.
 - To advertising and measurement partners, so that we can tell which of our advertisements led someone to apply for access or join the waitlist, and so that those partners can show our advertisements to similar people. This is described in full under "Advertising and Measurement".
-- For legal and safety reasons, to comply with law, respond to valid legal process, enforce our Terms, and protect the rights, safety, and security of Songcry, our users, and the public.
+- For legal and safety reasons, to comply with law, respond to valid legal process, enforce our Terms, and protect the rights, safety, and security of Songcry, our users, and the public, including reporting suspected child sexual exploitation to the National Center for Missing & Exploited Children as the law requires.
 - In connection with a business transaction, such as financing, merger, acquisition, reorganization, or sale of assets, subject to appropriate protections.
 - With your direction, for example when you choose to connect a third-party integration or choose to share content publicly.
 
@@ -172,6 +223,7 @@ Do Not Track: some browsers transmit "Do Not Track" signals. Because there is no
 - Account security: you are responsible for your credentials and activity under your account. If you suspect unauthorized access or use, contact us promptly at support@songcry.app.
 - SSO and third-party permissions: you may revoke SSO or connected-account permissions through your device settings, the App settings, or the third-party service. Revoking permissions may limit or disable certain features.
 - Reports and complaints: if you believe content or user conduct violates our Terms or Community Guidelines, you may report it through in-App reporting tools if available or by emailing support@songcry.app.
+- Direct messages: you can decline or delete message requests, block or report an account, mute or delete a chat, and delete messages you sent, as described under "Direct Messages". You can hide message previews on your lock screen in your device settings.
 - Analytics and diagnostics controls during beta: where available, you may be able to limit non-essential analytics in App settings. If in-app controls are not available, you may contact us at support@songcry.app to request limiting non-essential analytics where feasible.
 
 ## Data Retention
@@ -182,6 +234,11 @@ Specifically:
 
 - Account information, including date of birth and your most recent location reading, is retained until you delete your account. Location recorded with your activity, including the positions where you hosted songs, is deleted when you delete your account.
 - Uploaded content, including audio and cover art, is retained until you delete it or delete your account.
+- Messages and message photos are retained until they are deleted for everyone or the sender deletes their account, as described under "Direct Messages". We do not currently delete messages automatically after a set period.
+- Reports, including the saved copy of a reported conversation, are retained while the report is open and for up to one year after it is resolved, unless we need them longer to comply with law, to resolve a dispute, or to deal with a safety threat.
+
+**[Drafting note, remove before publishing: the one year period is the period the messenger design commits to. Publish it only once the job that deletes resolved reports is running. If the attorney prefers a different period, change both.]**
+- In-App activity notifications, such as new followers, likes, and comments shown in your Inbox, are deleted automatically after 90 days.
 - Artist profile and content submission records, including the outcome of our review, are retained for as long as the account exists and for a reasonable period afterward to resolve disputes, respond to copyright complaints, and enforce our Terms.
 - Verification materials are retained to complete and evidence the verification decision, and are deleted when you delete your account. A document uploaded during an artist signup that is never completed is deleted automatically 30 days after it is uploaded. You can email support@songcry.app to request removal sooner.
 - Records of your acceptance of the Terms of Use and acknowledgment of this Privacy Policy, including the version accepted and the time of acceptance, are retained for as long as the account exists and are deleted with the account.
@@ -216,6 +273,8 @@ We will not discriminate against you for exercising your privacy rights.
 ## Children's Privacy
 
 The Services are not intended for anyone under 18, and we do not knowingly collect personal information from anyone under 18. We ask for date of birth at account creation and block account creation where the date entered indicates the person is under 18. If we learn we have collected personal information from someone under 18, we will take steps to delete it.
+
+Direct messages are for adults. If you believe someone you are messaging is under 18, report the account in the App using the "Minor safety" reason, which our team treats as urgent.
 
 ## International Data Transfers
 
