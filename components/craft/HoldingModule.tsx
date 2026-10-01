@@ -65,7 +65,7 @@ const BEATS = [
   {
     n: '02',
     title: 'Real listeners decide',
-    body: 'Likes and hosts from people near you move your song up.',
+    body: 'Hosts and likes from people near you move your song up.',
   },
   {
     n: '03',
