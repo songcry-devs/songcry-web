@@ -4,14 +4,14 @@ version: 2026-09-04
 lastUpdated: September 4, 2026
 ---
 
-If an intimate image or video of you was posted on Songcry without your consent, tell us and we will remove it. You do not need a lawyer and you do not need to explain yourself.
+If an intimate image or video of you was posted on Songcry, or sent in a direct message on Songcry, without your consent, tell us and we will remove it. You do not need a lawyer and you do not need to explain yourself.
 
 ## How to tell us
 
 Email **takedown@songcry.app** with:
 
 - Your name and a way to reach you.
-- Enough detail for us to find the content. A link, a username, or a song or post title.
+- Enough detail for us to find the content. A link, a username, or a song or post title. For a direct message, the username of the account that sent it. You can also report the message from inside the conversation.
 - A statement that the image or video is of you and that you did not consent to it being posted.
 - Your signature, typed or written.
 

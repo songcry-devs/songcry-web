@@ -65,7 +65,7 @@ You may revoke permissions at any time through your device settings, the App set
 
 We are not responsible for the availability, accuracy, or security of third-party services.
 
-We rely on service providers (e.g., hosting, storage and content delivery, diagnostics, email delivery, authentication, geocoding, copyright screening, crash logging, security monitoring). We do not control third-party terms and are not responsible for their acts or omissions.
+We rely on service providers (e.g., hosting, storage and content delivery, diagnostics, email delivery, push notification delivery, authentication, geocoding, copyright screening, image moderation, crash logging, security monitoring). We do not control third-party terms and are not responsible for their acts or omissions.
 
 Your use of integrations (e.g., Apple, Google) is governed by their terms in addition to these Terms.
 
@@ -99,7 +99,7 @@ User access and interactions. By uploading or making content available through t
 
 Sharing and distribution features. You acknowledge that when you use sharing or distribution features (for example, sharing links or content within the App), your content may be viewed, streamed, or accessed by others consistent with your settings and the App's functionality.
 
-Promotion/marketing: You also grant us the right to use your content (including excerpts/clips), your username/handle, profile image, and other account/profile information you make public in connection with promoting the App and the service (including on social media, marketing materials, and within the App).
+Promotion/marketing: You also grant us the right to use your content (including excerpts/clips), your username/handle, profile image, and other account/profile information you make public in connection with promoting the App and the service (including on social media, marketing materials, and within the App). This promotion right does not cover your direct messages. We will never use the content of your direct messages, or the photos you send in them, to promote Songcry.
 
 You are responsible for your content and must ensure you have the necessary rights to submit it. Do not submit unlawful, infringing, or harmful content.
 
@@ -123,6 +123,26 @@ We reserve the right to review, remove, block, or refuse to display content that
 Content review and platform requirements. Artist profiles and uploaded songs are reviewed before they become available in the App. Review may include listening to the audio, reviewing cover art and visuals, checking connected accounts, and using copyright screening tools. Review is a risk control, not a guarantee: we do not warrant that review will detect every copyright, rights, or content issue. Songcry may reject, limit distribution of, or remove content that does not meet Songcry's platform requirements or standards (including technical requirements, formatting requirements, or other requirements we may apply from time to time), even if the content does not violate law.
 
 You may delete your content at any time through the App settings or by contacting us. Deletion is subject to the retention practices described in the Privacy Policy (songcry.app/legal/privacy).
+
+## Direct Messages
+
+Songcry includes private direct messages between users ("Messages"). These Terms apply to Messages in the same way they apply to everything else you do in the App, with the following additions.
+
+**Who can message.** Messaging is available to the account types we choose and may change during beta. Today, an artist whose profile is live on Songcry can start a conversation. If the person you message does not follow you, your message is delivered as a message request, and you can send up to three messages until they accept. We may set other limits, such as how many messages you can send or how many new conversations you can start in a day, to prevent spam and abuse. Do not try to get around these limits.
+
+**Your Messages are your responsibility.** You are responsible for the Messages you send, including any photos and links in them, and they must follow these Terms and our Community Guidelines (songcry.app/legal/community-guidelines). Messages from other users are their responsibility, not ours, and we do not endorse them.
+
+**License for Messages.** You keep ownership of your Messages. You grant us a limited license to store, process, transmit, and display your Messages, and to make copies of them, only as needed to deliver them to the people you message, show them on your devices, screen them for safety, review reports, and comply with law. This license ends when the Message is deleted for everyone or your account is deleted, except for copies we keep as described in our Privacy Policy (songcry.app/legal/privacy), for example a saved copy attached to a report.
+
+**Screening and review.** We do not monitor all Messages and have no obligation to. We do check Messages automatically before they are delivered, and a Message or photo that our checks flag may not be delivered. Authorized Songcry personnel may review Messages when they are reported, when our automated checks flag them, or as otherwise described in our Privacy Policy. We may remove any Message, and restrict or end any account's ability to send Messages, if we believe it breaks these Terms or the Community Guidelines.
+
+**Privacy of Messages.** Messages are private between the people in the conversation, but they are not end-to-end encrypted, and the people you message can save, screenshot, or share what you send them. Do not send anything you would not want the other person, or Songcry when reviewing a report, to see. The Privacy Policy (songcry.app/legal/privacy) explains how we store, screen, and delete Messages.
+
+**Deleting Messages.** You can delete Messages you sent for everyone, delete any Message for yourself, and delete a chat from your own view, as described in the Privacy Policy. Deleting a Message does not remove copies the other person has already made, and it does not recall a notification already delivered to their device.
+
+**Blocking and requests.** You can block, report, or decline a request from any account. If someone blocks you, deletes your message request, or does not accept it, do not contact them again through another account, another service, or anyone else.
+
+**Not a storage service.** Messages are provided as is, may be delayed or fail to deliver, and may be lost. Do not rely on Messages to store anything you need to keep, and do not use them for emergencies. If you or someone else is in danger, contact local emergency services.
 
 ## Copyright and DMCA Takedowns
 
@@ -223,8 +243,16 @@ You agree not to:
 - Upload, post, transmit, or make available any content involving the sexual exploitation of minors (child sexual abuse material, or CSAM). We will report suspected CSAM to appropriate authorities.
 - Upload, post, transmit, or make available any content that promotes or facilitates illegal activity, or that promotes extremist or terrorist organizations or activities.
 - Use bots, scripts, automated tools, VPNs, spoofed locations, or other methods intended to manipulate location, plays, impressions, hosting activity, or other App metrics or functionality, or to engage in fraud or artificial engagement.
+- Send unsolicited bulk or repetitive Messages, chain messages, or automated Messages, or use Messages to sell, advertise, or solicit in a way the recipient has not asked for.
+- Use Messages to send sexual content or nudity that the recipient has not asked for, to ask for sexual content, or to threaten to share intimate images of anyone (sometimes called sextortion).
+- Use Messages to contact, or attempt to contact, anyone you know or suspect to be under 18.
+- Use Messages to ask for passwords, payment details, money, gift cards, or other financial information, or to direct people to phishing or malware links.
+- Contact someone who has blocked you, or keep contacting someone who has declined your message request, including through another account.
+- Publish another person's private Messages to harass, shame, or expose them, or share personal information from a Message without the sender's permission.
 
-Nonconsensual intimate imagery. If an intimate image or video of you was published on Songcry without your consent, you can ask us to remove it at songcry.app/legal/removing-intimate-images. We remove content within 48 hours of receiving a valid request, and we make reasonable efforts to find and remove copies of the same content elsewhere on Songcry. You do not need a Songcry account to make a request.
+Songcry has no tolerance for objectionable content or abusive users. When we find content or behavior that breaks these Terms or the Community Guidelines, including in Messages, we may remove the content and suspend or terminate the account responsible.
+
+Nonconsensual intimate imagery. If an intimate image or video of you was published on Songcry, or sent in a Message, without your consent, you can ask us to remove it at songcry.app/legal/removing-intimate-images. We remove content within 48 hours of receiving a valid request, and we make reasonable efforts to find and remove copies of the same content elsewhere on Songcry. You do not need a Songcry account to make a request.
 
 ## Moderation and Enforcement
 
@@ -232,9 +260,11 @@ We may suspend your access, restrict features, limit visibility, remove content,
 
 We may also restrict features, limit visibility, remove content, reduce distribution, or otherwise limit account functionality (including "shadow banning" or similar measures) if we believe, in our discretion, that an account is engaged in spam, fraud, artificial engagement, botting, location spoofing, or other conduct that undermines the integrity of the App.
 
-Reporting and Complaints: If you believe content or user conduct violates these Terms, you may report it through in-App reporting tools (if available) or by emailing support@songcry.app. Copyright notices go to our DMCA Designated Agent instead, and requests to remove nonconsensual intimate imagery go to takedown@songcry.app. Both of those are described in their own sections above, and both are handled on their own timelines.
+Reporting and Complaints: If you believe content or user conduct violates these Terms, you may report it through in-App reporting tools (if available) or by emailing support@songcry.app. You can report a Message, a conversation, or an account from inside the conversation, and you can block an account at any time. Copyright notices go to our DMCA Designated Agent instead, and requests to remove nonconsensual intimate imagery go to takedown@songcry.app. Both of those are described in their own sections above, and both are handled on their own timelines.
 
-We may review reports and may remove content, restrict accounts, or take other action in our discretion, consistent with these Terms.
+We may review reports and may remove content, restrict accounts, or take other action in our discretion, consistent with these Terms. When you report a Message or a conversation, we save a copy of it for review as described in our Privacy Policy, and we do not tell the reported account who reported it. We aim to review reports within 24 hours, but we do not guarantee a response time or an outcome, and we do not currently tell the person who reported the outcome.
+
+Where we find content that appears to involve the sexual exploitation of a child, we report it to the National Center for Missing & Exploited Children and preserve it as the law requires, and we may terminate the account without notice.
 
 We are not required to take action in response to every report.
 
@@ -254,7 +284,7 @@ Sections that by their nature should survive termination (including ownership, i
 
 ## Communications and Consent
 
-By creating an account, you consent to receive transactional emails, push notifications (if you enable them), and in-App notices related to your use of the App (e.g., account updates, review decisions, security alerts, feature changes).
+By creating an account, you consent to receive transactional emails, push notifications (if you enable them), and in-App notices related to your use of the App (e.g., account updates, review decisions, security alerts, feature changes, new Messages and message requests, new followers, and comments on your songs). A notification for a new Message may show part of the Message, which can appear on your lock screen depending on your device settings.
 
 We may also send optional promotional or informational communications. You may opt out of these at any time through your settings or by following the unsubscribe instructions in the email.
 
